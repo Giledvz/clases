@@ -156,11 +156,44 @@ body {
   font-weight: 600;
   color: var(--txt);
 }
+.header-derecha {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .score-badge {
   font-size: 12px;
   font-weight: 600;
   color: var(--muted);
   letter-spacing: 0.05em;
+}
+.timer-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.timer-circle {
+  position: relative;
+  width: 38px; height: 38px;
+  flex-shrink: 0;
+}
+.timer-svg { transform: rotate(-90deg); }
+.timer-track { fill: none; stroke: #e8e8e4; stroke-width: 3.5; }
+.timer-fill  { fill: none; stroke-width: 3.5; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.5s; }
+.timer-num {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--txt);
+  line-height: 1;
+}
+.timer-label {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 .barra-progreso {
   height: 4px;
@@ -456,7 +489,21 @@ body {
   <div class="header-examen">
     <div class="header-top">
       <span class="pregunta-num" id="lbl-num">Pregunta 1 de 50</span>
-      <span class="score-badge" id="lbl-score">✓ 0 &nbsp;✗ 0</span>
+      <div class="header-derecha">
+        <span class="score-badge" id="lbl-score">✓ 0 &nbsp;✗ 0</span>
+        <div class="timer-wrap">
+          <div class="timer-circle">
+            <svg class="timer-svg" width="38" height="38" viewBox="0 0 38 38">
+              <circle class="timer-track" cx="19" cy="19" r="16"/>
+              <circle class="timer-fill" id="timer-arc" cx="19" cy="19" r="16"
+                stroke="#1a4f8a"
+                stroke-dasharray="100.53"
+                stroke-dashoffset="0"/>
+            </svg>
+            <span class="timer-num" id="timer-num">—</span>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="barra-progreso">
       <div class="barra-fill" id="barra" style="width:0%"></div>
@@ -908,7 +955,98 @@ function elegirPregunta() {
   return resto[Math.floor(Math.random() * resto.length)];
 }
 
-let preguntaActual = null;
+// ═══════════════════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════════════════
+const TIEMPOS = { 1: 90, 2: 150, 3: 240 }; // segundos por dificultad
+const CIRCUNF = 100.53; // 2π×16
+
+let timerInterval  = null;
+let timerSegundos  = 0;
+let timerTotal     = 0;
+let timerActivo    = false;
+
+function iniciarTimer(dif) {
+  detenerTimer();
+  timerTotal    = TIEMPOS[dif];
+  timerSegundos = timerTotal;
+  timerActivo   = true;
+  actualizarTimer();
+  timerInterval = setInterval(() => {
+    timerSegundos--;
+    actualizarTimer();
+    if (timerSegundos <= 0) {
+      detenerTimer();
+      tiempoAgotado();
+    }
+  }, 1000);
+}
+
+function detenerTimer() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  timerActivo = false;
+}
+
+function actualizarTimer() {
+  const arc = document.getElementById('timer-arc');
+  const num = document.getElementById('timer-num');
+  if (!arc || !num) return;
+
+  const pct      = timerSegundos / timerTotal;
+  const offset   = CIRCUNF * (1 - pct);
+  arc.style.strokeDashoffset = offset;
+
+  // Color: verde → naranja → rojo
+  let color;
+  if (pct > 0.5)       color = '#1a6e3c';
+  else if (pct > 0.25) color = '#b06010';
+  else                 color = '#8a1a1a';
+  arc.style.stroke = color;
+
+  const s = timerSegundos;
+  num.style.color = color;
+  num.textContent = s >= 60
+    ? `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`
+    : `${s}s`;
+}
+
+function tiempoAgotado() {
+  if (estado.respondidas >= estado.totalPreguntas) return;
+  estado.respondidas++;
+  estado.incorrectas++;
+  estado.resultados[preguntaActual.mat].t++;
+  estado.racha = Math.min(0, estado.racha) - 1;
+  if (estado.racha <= -2 && estado.dificultad > 1) {
+    estado.dificultad--;
+    estado.racha = 0;
+  }
+
+  // Marcar correcta y deshabilitar opciones
+  document.querySelectorAll('.opcion-btn').forEach(b => {
+    b.disabled = true;
+    if (parseInt(b.dataset.opIdx) === preguntaActual.ans) b.classList.add('correcta');
+  });
+
+  // Feedback de tiempo agotado
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback-box incorrecto';
+  fb.innerHTML = `<span class="feedback-icono">⏱</span> Tiempo agotado. ${preguntaActual.exp}`;
+  fb.style.display = 'block';
+
+  document.getElementById('lbl-score').innerHTML = `<span style="color:#1a6e3c;font-weight:700">✓ ${estado.correctas}</span> &nbsp;<span style="color:#8a1a1a;font-weight:700">✗ ${estado.incorrectas}</span>`;
+
+  const btnSig = document.getElementById('btn-sig');
+  btnSig.textContent = estado.respondidas >= estado.totalPreguntas ? 'Ver resultados' : 'Siguiente →';
+  btnSig.style.display = 'block';
+
+  // Resetear visual del timer
+  const arc = document.getElementById('timer-arc');
+  const num = document.getElementById('timer-num');
+  if (arc) { arc.style.strokeDashoffset = CIRCUNF; arc.style.stroke = '#8a1a1a'; }
+  if (num) { num.textContent = '0s'; num.style.color = '#8a1a1a'; }
+}
+
+
 
 function mostrarPregunta() {
   preguntaActual = elegirPregunta();
@@ -921,7 +1059,7 @@ function mostrarPregunta() {
   // Header
   const n = estado.respondidas + 1;
   document.getElementById('lbl-num').textContent = `Pregunta ${n} de ${estado.totalPreguntas}`;
-  document.getElementById('lbl-score').innerHTML = `✓ ${estado.correctas} &nbsp;✗ ${estado.incorrectas}`;
+  document.getElementById('lbl-score').innerHTML = `<span style="color:#1a6e3c;font-weight:700">✓ ${estado.correctas}</span> &nbsp;<span style="color:#8a1a1a;font-weight:700">✗ ${estado.incorrectas}</span>`;
   document.getElementById('barra').style.width = `${(estado.respondidas / estado.totalPreguntas) * 100}%`;
 
   // Tag materia y dificultad
@@ -967,9 +1105,14 @@ function mostrarPregunta() {
   // Color del botón siguiente según materia
   const btnSig = document.getElementById('btn-sig');
   btnSig.className = `btn-siguiente ${preguntaActual.mat === 'geo' ? 'geo-theme' : preguntaActual.mat === 'trig' ? 'trig-theme' : ''}`;
+
+  // Iniciar timer según dificultad
+  iniciarTimer(preguntaActual.dif);
 }
 
 function responder(opIdx, btnClickado, indices) {
+  if (!timerActivo) return; // evita doble respuesta si el tiempo ya se agotó
+  detenerTimer();
   const esCorrecta = opIdx === preguntaActual.ans;
   estado.respondidas++;
   estado.resultados[preguntaActual.mat].t++;
@@ -1009,7 +1152,7 @@ function responder(opIdx, btnClickado, indices) {
   fb.style.display = 'block';
 
   // Actualizar score en header
-  document.getElementById('lbl-score').innerHTML = `✓ ${estado.correctas} &nbsp;✗ ${estado.incorrectas}`;
+  document.getElementById('lbl-score').innerHTML = `<span style="color:#1a6e3c;font-weight:700">✓ ${estado.correctas}</span> &nbsp;<span style="color:#8a1a1a;font-weight:700">✗ ${estado.incorrectas}</span>`;
 
   // Botón siguiente o finalizar
   const btnSig = document.getElementById('btn-sig');
@@ -1027,6 +1170,12 @@ function siguientePregunta() {
 }
 
 function mostrarResultados() {
+  detenerTimer();
+  // Resetear visual del timer
+  const arc = document.getElementById('timer-arc');
+  const num = document.getElementById('timer-num');
+  if (arc) arc.style.strokeDashoffset = 0;
+  if (num) num.textContent = '—';
   document.getElementById('pantalla-examen').style.display    = 'none';
   document.getElementById('pantalla-resultados').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
