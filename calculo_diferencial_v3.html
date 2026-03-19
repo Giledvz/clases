@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Ejercicios — Cálculo Diferencial</title>
+<style>
+  :root { --borde:#d0d0cc; --gris:#f5f5f3; --muted:#777; --texto:#1a1a1a; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:Georgia,serif; color:var(--texto); background:#fff; max-width:700px; margin:0 auto; padding:1.5rem 1.1rem 4rem; line-height:1.65; }
+  .portada { margin-bottom:2rem; border-bottom:2px solid #1a4f8a; padding-bottom:1rem; }
+  .portada small { font-family:Arial,sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#1a4f8a; font-weight:700; }
+  .portada h1 { font-size:1.45rem; font-weight:normal; color:#1a4f8a; margin:.2rem 0 .5rem; }
+  .portada p { font-family:Arial,sans-serif; font-size:13px; color:var(--muted); }
+  .banner { font-family:Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#fff; padding:5px 12px; border-radius:3px; display:inline-block; margin:1.8rem 0 .9rem; }
+  .card { border:1px solid var(--borde); border-radius:6px; margin-bottom:.75rem; overflow:hidden; }
+  .card-header { display:flex; align-items:center; gap:10px; padding:.85rem 1rem; cursor:pointer; -webkit-tap-highlight-color:transparent; user-select:none; background:#fff; }
+  .card-header:active { background:var(--gris); }
+  .num { font-family:Arial,sans-serif; font-size:11px; font-weight:700; color:var(--muted); min-width:22px; flex-shrink:0; }
+  .enun { flex:1; }
+  .enun p { font-size:15px; }
+  .enun .datos { font-size:11px; color:var(--muted); margin-top:4px; border-left:2px solid var(--borde); padding-left:7px; }
+  .chip { flex-shrink:0; font-family:Arial,sans-serif; font-size:12px; font-weight:700; border:1.5px solid currentColor; border-radius:4px; padding:4px 9px; background:transparent; cursor:pointer; line-height:1.3; -webkit-tap-highlight-color:transparent; }
+  .chip:active { opacity:.6; }
+  .panel { max-height:0; overflow:hidden; transition:max-height .25s ease; }
+  .panel.open { max-height:200px; }
+  .panel-inner { border-top:1px solid var(--borde); display:flex; align-items:center; justify-content:space-between; padding:.75rem 1rem .75rem 2.5rem; }
+  .resp-pill { display:inline-flex; align-items:center; gap:9px; padding:7px 14px; border-radius:4px; color:#fff; }
+  .resp-pill .tag { font-family:Arial,sans-serif; font-size:9px; font-weight:700; opacity:.8; text-transform:uppercase; letter-spacing:.07em; }
+  .resp-pill .val { font-size:15px; font-weight:bold; }
+  .ocultar { font-family:Arial,sans-serif; font-size:11px; font-weight:700; border:none; background:none; cursor:pointer; padding:0; -webkit-tap-highlight-color:transparent; }
+  .footer { margin-top:2.5rem; padding-top:.75rem; border-top:1px solid var(--borde); font-family:Arial,sans-serif; font-size:11px; color:var(--muted); text-align:center; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <small>Ejercicios</small>
+  <h1>Cálculo Diferencial</h1>
+  <p>Resuelve cada ejercicio y toca <b>▸ R</b> para verificar tu respuesta.</p>
+</div>
+
+<div id="contenido"></div>
+<div class="footer">Cálculo Diferencial · Universidad</div>
+
+<script>
+const SECCIONES = [
+
+  // ── 1. Funciones y relaciones ─────────────────────────────────────────────
+  { titulo:"1 · Funciones y relaciones", color:"#1a4f8a", ejercicios:[
+    { n:"01", t:"Determina si la relación R = {(1,2), (2,3), (1,4), (3,5)} es una función.",
+      d:"Un valor de x no puede tener dos imágenes distintas",
+      r:"No es función — x = 1 tiene dos imágenes: 2 y 4" },
+    { n:"02", t:"Dada f(x) = 3x − 5, encuentra f(2), f(0) y f(−1).",
+      d:"Sustitución directa",
+      r:"f(2) = 1 &nbsp;·&nbsp; f(0) = −5 &nbsp;·&nbsp; f(−1) = −8" },
+    { n:"03", t:"Dadas f(x) = x² + 1 y g(x) = 2x − 3, encuentra (f∘g)(x) y (g∘f)(x).",
+      d:"Composición: sustituye una función dentro de la otra",
+      r:"(f∘g)(x) = 4x² − 12x + 10 &nbsp;·&nbsp; (g∘f)(x) = 2x² − 1" },
+    { n:"04", t:"Encuentra la función inversa de f(x) = (2x + 1) / 3.",
+      d:"Despeja x en términos de y, luego intercambia variables",
+      r:"f⁻¹(x) = (3x − 1) / 2" },
+    { n:"05", t:"Dadas f(x) = √x y g(x) = x − 3, encuentra (f∘g)(x) y su dominio.",
+      d:"(f∘g)(x) = √(x−3); el radicando debe ser ≥ 0",
+      r:"(f∘g)(x) = √(x−3) &nbsp;·&nbsp; Dom = [3, +∞)" },
+    { n:"06", t:"Encuentra la inversa de f(x) = x³ + 2.",
+      d:"Despeja x; la inversa de una cúbica es una raíz cúbica",
+      r:"f⁻¹(x) = ∛(x − 2)" },
+    { n:"07", t:"Dadas f(x) = 2x + 1 y g(x) = x² − 4, calcula (f∘g)(2) y (g∘f)(−1).",
+      d:"Evalúa primero la función interior, luego la exterior",
+      r:"(f∘g)(2) = 1 &nbsp;·&nbsp; (g∘f)(−1) = −3" },
+    { n:"08", t:"Determina si la curva x² + y² = 9 define y como función de x. Justifica.",
+      d:"¿Pasa la prueba de la línea vertical?",
+      r:"No — para cada x en (−3, 3) hay dos valores de y (positivo y negativo)" },
+    { n:"09", t:"Dada f(x) = 1/(x − 2), encuentra f(f(x)) (composición de f consigo misma).",
+      d:"Sustituye f(x) como argumento de f",
+      r:"f(f(x)) = (x − 2) / (3 − 2x)" },
+    { n:"10", t:"Si f(x) = 2x − 3 y g(x) = (x + 3)/2, muestra que f y g son inversas entre sí.",
+      d:"Verifica que (f∘g)(x) = x y (g∘f)(x) = x",
+      r:"(f∘g)(x) = 2·(x+3)/2 − 3 = x ✓ &nbsp;·&nbsp; (g∘f)(x) = (2x−3+3)/2 = x ✓" },
+  ]},
+
+  // ── 2. Dominio y rango ────────────────────────────────────────────────────
+  { titulo:"2 · Dominio y rango", color:"#5b2d8e", ejercicios:[
+    { n:"01", t:"Encuentra el dominio de f(x) = 1 / (x² − 4).",
+      d:"Denominador ≠ 0",
+      r:"Dom = ℝ − {−2, 2}" },
+    { n:"02", t:"Encuentra el dominio de f(x) = √(9 − x²).",
+      d:"Radicando ≥ 0",
+      r:"Dom = [−3, 3]" },
+    { n:"03", t:"Encuentra el dominio y rango de f(x) = |x − 2| + 1.",
+      d:"Valor absoluto — mínimo en el vértice",
+      r:"Dom = ℝ &nbsp;·&nbsp; Rango = [1, +∞)" },
+    { n:"04", t:"Determina el dominio de f(x) = ln(x² − 5x + 6).",
+      d:"Argumento del ln > 0 → factoriza x² − 5x + 6 = (x−2)(x−3)",
+      r:"Dom = (−∞, 2) ∪ (3, +∞)" },
+    { n:"05", t:"Encuentra el rango de f(x) = −x² + 4x − 1.",
+      d:"Parábola con a < 0 — el rango llega hasta el vértice",
+      r:"Rango = (−∞, 3]" },
+    { n:"06", t:"Encuentra el dominio de f(x) = √(x + 5) / (x − 2).",
+      d:"Radicando ≥ 0 y denominador ≠ 0",
+      r:"Dom = [−5, 2) ∪ (2, +∞)" },
+    { n:"07", t:"Encuentra el dominio de f(x) = arcsen(2x − 1).",
+      d:"El argumento de arcsen debe estar en [−1, 1]",
+      r:"Dom = [0, 1]" },
+    { n:"08", t:"Encuentra el rango de f(x) = 3 / (1 + e<sup>−x</sup>).",
+      d:"Función logística — analiza los límites cuando x → ±∞",
+      r:"Rango = (0, 3)" },
+    { n:"09", t:"Determina el dominio de f(x) = log<sub>2</sub>(4 − x²).",
+      d:"Argumento > 0 → 4 − x² > 0",
+      r:"Dom = (−2, 2)" },
+    { n:"10", t:"Encuentra el dominio de f(x) = √(x − 1) + √(4 − x).",
+      d:"Ambos radicandos deben ser ≥ 0 simultáneamente",
+      r:"Dom = [1, 4]" },
+  ]},
+
+  // ── 3. Límites ────────────────────────────────────────────────────────────
+  { titulo:"3 · Límites", color:"#8a1a3a", ejercicios:[
+    { n:"01", t:"Calcula: lím<sub>x→3</sub> (x² − 9) / (x − 3)",
+      d:"Forma 0/0 — factoriza el numerador",
+      r:"6" },
+    { n:"02", t:"Calcula: lím<sub>x→0</sub> sen(5x) / x",
+      d:"Límite fundamental: lím sen(kx)/x = k",
+      r:"5" },
+    { n:"03", t:"Calcula: lím<sub>x→∞</sub> (3x² − 2x + 1) / (x² + 5)",
+      d:"Divide numerador y denominador entre x² (mayor grado)",
+      r:"3" },
+    { n:"04", t:"Calcula: lím<sub>x→0</sub> (1 − cos x) / x²",
+      d:"Equivalencia infinitesimal: 1 − cos x ≈ x²/2 cuando x → 0",
+      r:"1/2" },
+    { n:"05", t:"¿Es continua f(x) = (x² − 4)/(x − 2) en x = 2? Justifica.",
+      d:"Verifica las tres condiciones de continuidad",
+      r:"No — f(2) no está definida (discontinuidad evitable en x = 2)" },
+    { n:"06", t:"Calcula: lím<sub>x→0</sub> (e<sup>x</sup> − 1) / x",
+      d:"Límite fundamental de la exponencial",
+      r:"1" },
+    { n:"07", t:"Calcula: lím<sub>x→∞</sub> (2x³ − x) / (5x³ + 4x² − 1)",
+      d:"Divide entre x³",
+      r:"2/5" },
+    { n:"08", t:"Calcula: lím<sub>x→1</sub> (x³ − 1) / (x − 1)",
+      d:"Factoriza: x³ − 1 = (x − 1)(x² + x + 1)",
+      r:"3" },
+    { n:"09", t:"Calcula: lím<sub>x→0</sub> x · ln x",
+      d:"Forma 0·(−∞) — reescribe como ln x / (1/x) y aplica L'Hôpital",
+      r:"0" },
+    { n:"10", t:"Calcula: lím<sub>x→∞</sub> (1 + 1/x)<sup>x</sup>",
+      d:"Límite fundamental de la definición de e",
+      r:"e" },
+  ]},
+
+  // ── 4. Derivadas inmediatas ───────────────────────────────────────────────
+  { titulo:"4 · Derivadas inmediatas", color:"#1a6e3c", ejercicios:[
+    { n:"01", t:"Deriva: f(x) = 5x<sup>4</sup> − 3x<sup>3</sup> + 2x − 7",
+      d:"Regla de la potencia y linealidad",
+      r:"f'(x) = 20x³ − 9x² + 2" },
+    { n:"02", t:"Deriva: f(x) = x<sup>2/3</sup> + 4√x",
+      d:"Potencias fraccionarias",
+      r:"f'(x) = (2/3)x<sup>−1/3</sup> + 2x<sup>−1/2</sup>" },
+    { n:"03", t:"Deriva: f(x) = sen x − cos x + tan x",
+      d:"Derivadas trigonométricas inmediatas",
+      r:"f'(x) = cos x + sen x + sec²x" },
+    { n:"04", t:"Deriva: f(x) = 3<sup>x</sup> + log<sub>10</sub>(x)",
+      d:"Exponencial de base a y logaritmo de base a",
+      r:"f'(x) = 3<sup>x</sup> · ln 3 + 1/(x · ln 10)" },
+    { n:"05", t:"Deriva: f(x) = arctan(x) + arcsen(x)",
+      d:"Funciones trigonométricas inversas",
+      r:"f'(x) = 1/(1+x²) + 1/√(1−x²)" },
+    { n:"06", t:"Deriva: f(x) = 7e<sup>x</sup> − 4 ln x + 5",
+      d:"Derivadas de exponencial natural y logaritmo",
+      r:"f'(x) = 7e<sup>x</sup> − 4/x" },
+    { n:"07", t:"Deriva: f(x) = csc x + sec x",
+      d:"Derivadas de cosecante y secante",
+      r:"f'(x) = −csc x · cot x + sec x · tan x" },
+    { n:"08", t:"Deriva: f(x) = x<sup>π</sup> + π<sup>x</sup>",
+      d:"Potencia con exponente constante vs. exponencial con base constante",
+      r:"f'(x) = π · x<sup>π−1</sup> + π<sup>x</sup> · ln π" },
+    { n:"09", t:"Deriva: f(x) = 5x<sup>−3</sup> + 2/x",
+      d:"Escribe todo como potencias negativas antes de derivar",
+      r:"f'(x) = −15x<sup>−4</sup> − 2x<sup>−2</sup>" },
+    { n:"10", t:"Deriva: f(x) = arccos(x) − arccot(x)",
+      d:"Derivadas de arcocoseno y arcocotangente",
+      r:"f'(x) = −1/√(1−x²) + 1/(1+x²)" },
+  ]},
+
+  // ── 5. Producto y cociente ────────────────────────────────────────────────
+  { titulo:"5 · Derivadas — producto y cociente", color:"#8a4a1a", ejercicios:[
+    { n:"01", t:"Deriva: f(x) = (x³ + 1)(2x − 5)",
+      d:"(uv)' = u'v + uv'",
+      r:"f'(x) = 8x³ − 15x² + 2" },
+    { n:"02", t:"Deriva: f(x) = x² · e<sup>x</sup>",
+      d:"Regla del producto",
+      r:"f'(x) = e<sup>x</sup>(x² + 2x)" },
+    { n:"03", t:"Deriva: f(x) = (x² + 3) / (x − 1)",
+      d:"(u/v)' = (u'v − uv') / v²",
+      r:"f'(x) = (x² − 2x − 3) / (x−1)²" },
+    { n:"04", t:"Deriva: f(x) = sen x / (1 + cos x)",
+      d:"Regla del cociente",
+      r:"f'(x) = 1 / (1 + cos x)" },
+    { n:"05", t:"Deriva: f(x) = (x · ln x) / (x + 1)",
+      d:"Cociente — el numerador requiere producto primero",
+      r:"f'(x) = (x + ln x + 1) / (x+1)²" },
+    { n:"06", t:"Deriva: f(x) = x³ · sen x",
+      d:"Regla del producto",
+      r:"f'(x) = 3x² sen x + x³ cos x" },
+    { n:"07", t:"Deriva: f(x) = e<sup>x</sup> / (x² + 1)",
+      d:"Regla del cociente",
+      r:"f'(x) = e<sup>x</sup>(x−1)² / (x²+1)²" },
+    { n:"08", t:"Deriva: f(x) = (x² − 1)(x² + 1)",
+      d:"Producto — o expande como x<sup>4</sup> − 1 antes de derivar",
+      r:"f'(x) = 4x³" },
+    { n:"09", t:"Deriva: f(x) = ln x / x²",
+      d:"Regla del cociente",
+      r:"f'(x) = (1 − 2 ln x) / x³" },
+    { n:"10", t:"Deriva: f(x) = (x + 1)(x + 2)(x + 3)",
+      d:"Aplica la regla del producto dos veces o expande el polinomio",
+      r:"f'(x) = 3x² + 12x + 11" },
+  ]},
+
+  // ── 6. Regla de la cadena ─────────────────────────────────────────────────
+  { titulo:"6 · Derivadas — regla de la cadena", color:"#1a6e6e", ejercicios:[
+    { n:"01", t:"Deriva: f(x) = (3x² + 1)<sup>5</sup>",
+      d:"n·u<sup>n−1</sup>·u'",
+      r:"f'(x) = 30x(3x²+1)<sup>4</sup>" },
+    { n:"02", t:"Deriva: f(x) = sen(x³ − 2x)",
+      d:"Cadena con función trigonométrica",
+      r:"f'(x) = cos(x³−2x) · (3x²−2)" },
+    { n:"03", t:"Deriva: f(x) = e<sup>5x²−3</sup>",
+      d:"Cadena con exponencial",
+      r:"f'(x) = 10x · e<sup>5x²−3</sup>" },
+    { n:"04", t:"Deriva: f(x) = ln(cos x)",
+      d:"Cadena con logaritmo natural",
+      r:"f'(x) = −tan x" },
+    { n:"05", t:"Deriva: f(x) = √(x² + 4x + 5)",
+      d:"Cadena con raíz cuadrada",
+      r:"f'(x) = (x+2) / √(x²+4x+5)" },
+    { n:"06", t:"Deriva: f(x) = (sen 3x)<sup>4</sup>",
+      d:"Cadena doble: potencia y trigonométrica con argumento 3x",
+      r:"f'(x) = 12 sen³(3x) · cos(3x)" },
+    { n:"07", t:"Deriva: f(x) = tan(x² + 1)",
+      d:"Cadena con tangente",
+      r:"f'(x) = 2x · sec²(x²+1)" },
+    { n:"08", t:"Deriva: f(x) = e<sup>sen x</sup>",
+      d:"Cadena: función interior es sen x",
+      r:"f'(x) = cos x · e<sup>sen x</sup>" },
+    { n:"09", t:"Deriva: f(x) = ln(x² + 3x − 1)",
+      d:"Cadena con logaritmo natural",
+      r:"f'(x) = (2x + 3) / (x²+3x−1)" },
+    { n:"10", t:"Deriva: f(x) = cos³(2x)",
+      d:"Cadena doble: potencia cúbica y coseno con argumento 2x",
+      r:"f'(x) = −6 cos²(2x) · sen(2x)" },
+  ]},
+
+  // ── 7. Derivadas implícitas ───────────────────────────────────────────────
+  { titulo:"7 · Derivadas implícitas", color:"#3a5a1a", ejercicios:[
+    { n:"01", t:"Encuentra dy/dx si x² + y² = 25.",
+      d:"Diferencia ambos lados respecto a x",
+      r:"dy/dx = −x / y" },
+    { n:"02", t:"Encuentra dy/dx si x³ + y³ = 6xy.",
+      d:"Folium de Descartes — diferencia término a término",
+      r:"dy/dx = (2y − x²) / (y² − 2x)" },
+    { n:"03", t:"Encuentra dy/dx si sen(xy) = x + y.",
+      d:"Cadena dentro de la diferenciación implícita",
+      r:"dy/dx = (1 − y·cos(xy)) / (x·cos(xy) − 1)" },
+    { n:"04", t:"Encuentra la ecuación de la recta tangente a x² + y² = 25 en el punto (3, 4).",
+      d:"Calcula dy/dx por diferenciación implícita y evalúa en (3, 4)",
+      r:"3x + 4y = 25" },
+    { n:"05", t:"Encuentra dy/dx si e<sup>y</sup> + xy = e.",
+      d:"e<sup>y</sup> requiere la regla de la cadena al diferenciar",
+      r:"dy/dx = −y / (e<sup>y</sup> + x)" },
+    { n:"06", t:"Encuentra dy/dx si x² − xy + y² = 7.",
+      d:"El término xy requiere la regla del producto",
+      r:"dy/dx = (2x − y) / (x − 2y)" },
+    { n:"07", t:"Encuentra dy/dx si ln(x + y) = x².",
+      d:"Cadena en el lado izquierdo",
+      r:"dy/dx = 2x(x+y) − 1" },
+    { n:"08", t:"Encuentra dy/dx si y² = x³ + 3x.",
+      d:"Diferenciación implícita directa — despeja dy/dx",
+      r:"dy/dx = (3x²+3) / (2y)" },
+    { n:"09", t:"Encuentra dy/dx si cos(x + y) = x.",
+      d:"Cadena en el lado izquierdo",
+      r:"dy/dx = −1/sen(x+y) − 1" },
+    { n:"10", t:"Encuentra d²y/dx² si x² + y² = r².",
+      d:"Deriva dy/dx = −x/y una segunda vez usando la regla del cociente",
+      r:"d²y/dx² = −r² / y³" },
+  ]},
+
+  // ── 8. Análisis y gráfica ─────────────────────────────────────────────────
+  { titulo:"8 · Análisis completo y gráfica", color:"#2a2a6e", ejercicios:[
+    { n:"01", t:"Analiza completamente f(x) = x³ − 6x² + 9x − 2 y esboza su gráfica.",
+      d:"f'(x) = 3x²−12x+9 = 3(x−1)(x−3) · f''(x) = 6x−12",
+      r:"Máx. (1, 2) · Mín. (3, −2) · Inflexión (2, 0) · Crece (−∞,1)∪(3,+∞) · Decrece (1,3) · Cóncava ↑ (2,+∞) · Cóncava ↓ (−∞,2) · y-intercept (0,−2)" },
+    { n:"02", t:"Analiza completamente f(x) = 2x³ − 3x² − 12x + 4 y esboza su gráfica.",
+      d:"f'(x) = 6x²−6x−12 = 6(x+1)(x−2) · f''(x) = 12x−6",
+      r:"Máx. (−1, 11) · Mín. (2, −16) · Inflexión (1/2, −5/2) · Crece (−∞,−1)∪(2,+∞) · Decrece (−1,2) · Cóncava ↑ (1/2,+∞) · Cóncava ↓ (−∞,1/2)" },
+    { n:"03", t:"Analiza completamente f(x) = −x³ + 3x² + 9x − 10 y esboza su gráfica.",
+      d:"f'(x) = −3x²+6x+9 = −3(x+1)(x−3) · f''(x) = −6x+6",
+      r:"Mín. (−1, −15) · Máx. (3, 17) · Inflexión (1, 1) · Crece (−1,3) · Decrece (−∞,−1)∪(3,+∞) · Cóncava ↑ (−∞,1) · Cóncava ↓ (1,+∞)" },
+    { n:"04", t:"Analiza completamente f(x) = x<sup>4</sup> − 8x² + 7 y esboza su gráfica.",
+      d:"f'(x) = 4x³−16x = 4x(x−2)(x+2) · f''(x) = 12x²−16",
+      r:"Máx. (0, 7) · Mín. (±2, −9) · Inflexiones (±2/√3, 1/9) · Crece (−2,0)∪(2,+∞) · Decrece (−∞,−2)∪(0,2) · Cóncava ↑ (−∞,−2/√3)∪(2/√3,+∞) · Cóncava ↓ (−2/√3, 2/√3) · simétrica respecto al eje y" },
+    { n:"05", t:"Analiza completamente f(x) = x<sup>4</sup> − 4x³ y esboza su gráfica.",
+      d:"f'(x) = 4x²(x−3) · f''(x) = 12x(x−2)",
+      r:"Mín. (3, −27) · x=0 no es extremo · Inflexiones (0, 0) y (2, −16) · Crece (3,+∞) · Decrece (−∞,3) · Cóncava ↑ (−∞,0)∪(2,+∞) · Cóncava ↓ (0,2)" },
+    { n:"06", t:"Analiza completamente f(x) = 3x<sup>4</sup> − 16x³ + 24x² − 9 y esboza su gráfica.",
+      d:"f'(x) = 12x³−48x²+48x = 12x(x−2)² · f''(x) = 36x²−96x+48 = 12(3x²−8x+4) = 12(3x−2)(x−2)",
+      r:"Mín. (0, −9) · x=2 no es extremo · Inflexiones (2/3, −5) y (2, 7) · Crece (0,+∞) · Decrece (−∞,0) · Cóncava ↑ (−∞,2/3)∪(2,+∞) · Cóncava ↓ (2/3,2)" },
+    { n:"07", t:"Analiza completamente f(x) = x<sup>5</sup> − 5x⁴ y esboza su gráfica.",
+      d:"f'(x) = 5x³(x−4) · f''(x) = 20x²(x−3)",
+      r:"Mín. (4, −256) · x=0 no es extremo · Inflexiones (0, 0) y (3, −162) · Crece (4,+∞) · Decrece (−∞,4) · Cóncava ↑ (3,+∞) · Cóncava ↓ (−∞,0)∪(0,3) · f→−∞ en −∞ · f→+∞ en +∞" },
+    { n:"08", t:"Analiza completamente f(x) = x<sup>4</sup> − 4x³ + 4x² y esboza su gráfica.",
+      d:"f'(x) = 4x³−12x²+8x = 4x(x−1)(x−2) · f''(x) = 12x²−24x+8",
+      r:"Mín. (0, 0) y (2, 0) · Máx. (1, 1) · Inflexiones ((3±√3)/3, …) ≈ (0.42, 0.48) y (1.58, 0.48) · Crece (0,1)∪(2,+∞) · Decrece (−∞,0)∪(1,2) · Cóncava ↑ fuera de (0.42, 1.58)" },
+  ]},
+
+  // ── 9. Optimización ──────────────────────────────────────────────────────
+  { titulo:"9 · Problemas de optimización", color:"#1a4f8a", ejercicios:[
+    { n:"01", t:"Una lámina cuadrada de 12 cm de lado: se cortan cuadrados iguales en las esquinas y se dobla para formar una caja sin tapa. ¿Qué tamaño deben tener los cortes para maximizar el volumen?",
+      d:"V(x) = x(12−2x)²; busca el máximo en (0, 6)",
+      r:"x = 2 cm &nbsp;→&nbsp; V<sub>max</sub> = 128 cm³" },
+    { n:"02", t:"Un granjero tiene 200 m de cerca para encerrar un área rectangular junto a un río (un lado no necesita cerca). ¿Qué dimensiones maximizan el área?",
+      d:"A = x·y con la restricción 2x + y = 200",
+      r:"x = 50 m &nbsp;·&nbsp; y = 100 m &nbsp;·&nbsp; A<sub>max</sub> = 5 000 m²" },
+    { n:"03", t:"¿Cuál es el rectángulo de área máxima que puede inscribirse en un semicírculo de radio 5?",
+      d:"Si el rectángulo tiene base 2x y altura y, con x² + y² = 25, maximiza A = 2xy",
+      r:"x = y = 5/√2 &nbsp;·&nbsp; A<sub>max</sub> = 25 m²" },
+    { n:"04", t:"Una empresa vende x unidades a precio p(x) = 50 − 0.5x. El costo total es C(x) = 10x + 200. ¿Cuántas unidades maximizan la ganancia?",
+      d:"G(x) = x·p(x) − C(x) → G'(x) = 0",
+      r:"x = 40 unidades &nbsp;·&nbsp; G<sub>max</sub> = $600" },
+    { n:"05", t:"¿Cuál es el punto sobre la recta y = 2x + 3 más cercano al origen?",
+      d:"Minimiza D² = x² + y² sujeto a y = 2x + 3",
+      r:"Punto (−6/5, 3/5) &nbsp;·&nbsp; D<sub>min</sub> = 3√5 / 5" },
+    { n:"06", t:"Un trozo de alambre de 60 cm se dobla para formar un rectángulo. ¿Qué dimensiones maximizan el área?",
+      d:"2l + 2a = 60 → A = l·a; expresa como función de una variable",
+      r:"l = a = 15 cm (cuadrado) &nbsp;·&nbsp; A<sub>max</sub> = 225 cm²" },
+    { n:"07", t:"Una lata cilíndrica debe contener 500 cm³. ¿Qué radio minimiza el material usado (superficie total)?",
+      d:"V = πr²h = 500 → h = 500/(πr²); minimiza S = 2πr² + 2πrh",
+      r:"r = ∛(250/π) ≈ 4.30 cm &nbsp;·&nbsp; h = 2r ≈ 8.60 cm" },
+    { n:"08", t:"Dos postes de 3 m y 5 m de altura están separados 4 m. ¿Dónde se debe anclar un cable al suelo entre ellos para minimizar la longitud total del cable?",
+      d:"L(x) = √(9+x²) + √(25+(4−x)²); minimiza con L'(x) = 0",
+      r:"x = 1.5 m desde el poste de 3 m &nbsp;·&nbsp; L<sub>min</sub> = √34 ≈ 5.83 m" },
+    { n:"09", t:"La suma de dos números positivos es 20. ¿Cuál es el máximo producto posible?",
+      d:"P = x(20−x); P'(x) = 0",
+      r:"x = 10 &nbsp;·&nbsp; P<sub>max</sub> = 100" },
+    { n:"10", t:"Una ventana normanda (rectángulo coronado por un semicírculo) tiene perímetro fijo de 6 m. ¿Qué dimensiones maximizan el área total?",
+      d:"Si el ancho es 2r: P = 2r + 2h + πr = 6; A = 2rh + πr²/2",
+      r:"r = 6/(π+4) m &nbsp;·&nbsp; h = r/2 &nbsp;·&nbsp; A<sub>max</sub> = 18/(π+4) m²" },
+  ]},
+
+];
+
+// ── Render ────────────────────────────────────────────────────────────────────
+const root = document.getElementById('contenido');
+
+SECCIONES.forEach(sec => {
+  const banner = document.createElement('div');
+  banner.className = 'banner';
+  banner.style.background = sec.color;
+  banner.textContent = sec.titulo;
+  root.appendChild(banner);
+
+  sec.ejercicios.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="num">${p.n}</span>
+        <div class="enun">
+          <p>${p.t}</p>
+          <p class="datos">${p.d}</p>
+        </div>
+        <button class="chip" style="color:${sec.color};border-color:${sec.color}">▸ R</button>
+      </div>
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="resp-pill" style="background:${sec.color}">
+            <span class="tag">Respuesta</span>
+            <span class="val">${p.r}</span>
+          </div>
+          <button class="ocultar" style="color:${sec.color}">▴ Ocultar</button>
+        </div>
+      </div>
+    `;
+    root.appendChild(card);
+
+    const hdr     = card.querySelector('.card-header');
+    const panel   = card.querySelector('.panel');
+    const btn     = card.querySelector('.chip');
+    const ocultar = card.querySelector('.ocultar');
+
+    function abrir()  { panel.classList.add('open');    btn.textContent = '▾ R'; }
+    function cerrar() { panel.classList.remove('open'); btn.textContent = '▸ R'; card.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+
+    hdr.addEventListener('click', e => { if (e.target===btn||e.target===ocultar) return; panel.classList.contains('open')?cerrar():abrir(); });
+    btn.addEventListener('click', e => { e.stopPropagation(); panel.classList.contains('open')?cerrar():abrir(); });
+    ocultar.addEventListener('click', cerrar);
+  });
+});
+</script>
+</body>
+</html>
