@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materiales de Clase</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --calc:  #1a4f8a;
+  --geo:   #1a6e3c;
+  --trig:  #7a3a1a;
+  --exam:  #2a2a6e;
+  --calc-l:#e8f0fa;
+  --geo-l: #e6f4ec;
+  --trig-l:#faf0e6;
+  --exam-l:#eeeef8;
+  --txt:   #1a1a1a;
+  --muted: #666;
+  --borde: #e0dfd9;
+  --bg:    #fafaf7;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.header {
+  background: var(--calc);
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+}
+.header-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.header p {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+/* ── Sección examen ── */
+.seccion-examen {
+  max-width: 700px;
+  margin: 2.5rem auto 0;
+  padding: 0 1.25rem;
+}
+
+.card-examen {
+  background: var(--exam);
+  border-radius: 14px;
+  padding: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 20px rgba(42,42,110,0.18);
+}
+.card-examen:active { transform: scale(0.98); }
+
+.exam-icono {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.exam-texto { flex: 1; }
+.exam-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 3px;
+}
+.exam-sub {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+}
+.exam-arrow {
+  color: rgba(255,255,255,0.5);
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+/* ── Secciones de materias ── */
+.seccion {
+  max-width: 700px;
+  margin: 2rem auto 0;
+  padding: 0 1.25rem;
+}
+.seccion-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+}
+.seccion-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.seccion-titulo {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.card-recurso {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: white;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  text-decoration: none;
+  color: var(--txt);
+  transition: border-color 0.12s, background 0.12s;
+  -webkit-tap-highlight-color: transparent;
+}
+.card-recurso:active { background: #f7f6f2; }
+
+.recurso-icono {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.recurso-texto { flex: 1; min-width: 0; }
+.recurso-nombre {
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+.recurso-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.recurso-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: 3rem 1.5rem 2rem;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 1rem;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">Universidad · Materiales de apoyo</div>
+  <h1>Materiales de Clase</h1>
+  <p>Ejercicios de práctica y examen adaptativo</p>
+</div>
+
+<!-- Examen -->
+<div class="seccion-examen">
+  <a class="card-examen" href="examen_adaptativo.html">
+    <div class="exam-icono">📐</div>
+    <div class="exam-texto">
+      <div class="exam-titulo">Examen Adaptativo</div>
+      <div class="exam-sub">50 preguntas · Cálculo · Geometría · Trigonometría</div>
+    </div>
+    <span class="exam-arrow">›</span>
+  </a>
+</div>
+
+<!-- Cálculo Diferencial -->
+<div class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-dot" style="background:var(--calc)"></div>
+    <span class="seccion-titulo">Cálculo Diferencial</span>
+  </div>
+  <div class="cards-grid">
+    <a class="card-recurso" href="calculo_diferencial_v3.html">
+      <div class="recurso-icono" style="background:var(--calc-l)">📝</div>
+      <div class="recurso-texto">
+        <div class="recurso-nombre">Ejercicios de práctica</div>
+        <div class="recurso-desc">90 ejercicios · 9 temas · respuestas desplegables</div>
+      </div>
+      <span class="recurso-badge" style="background:var(--calc-l);color:var(--calc)">HTML</span>
+    </a>
+    <a class="card-recurso" href="calculo_diferencial_latex.pdf">
+      <div class="recurso-icono" style="background:var(--calc-l)">📄</div>
+      <div class="recurso-texto">
+        <div class="recurso-nombre">Ejercicios con respuestas</div>
+        <div class="recurso-desc">PDF con hipervínculos · notación LaTeX</div>
+      </div>
+      <span class="recurso-badge" style="background:var(--calc-l);color:var(--calc)">PDF</span>
+    </a>
+  </div>
+</div>
+
+<!-- Geometría Analítica -->
+<div class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-dot" style="background:var(--geo)"></div>
+    <span class="seccion-titulo">Geometría Analítica</span>
+  </div>
+  <div class="cards-grid">
+    <a class="card-recurso" href="geometria_analitica.pdf">
+      <div class="recurso-icono" style="background:var(--geo-l)">📄</div>
+      <div class="recurso-texto">
+        <div class="recurso-nombre">Ejercicios con respuestas</div>
+        <div class="recurso-desc">110 ejercicios · 11 temas · PDF con hipervínculos</div>
+      </div>
+      <span class="recurso-badge" style="background:var(--geo-l);color:var(--geo)">PDF</span>
+    </a>
+  </div>
+</div>
+
+<!-- Trigonometría -->
+<div class="seccion">
+  <div class="seccion-header">
+    <div class="seccion-dot" style="background:var(--trig)"></div>
+    <span class="seccion-titulo">Trigonometría</span>
+  </div>
+  <div class="cards-grid">
+    <a class="card-recurso" href="trigonometria_con_figuras.pdf">
+      <div class="recurso-icono" style="background:var(--trig-l)">📄</div>
+      <div class="recurso-texto">
+        <div class="recurso-nombre">Ejercicios con respuestas</div>
+        <div class="recurso-desc">80 ejercicios · 8 temas · diagramas incluidos</div>
+      </div>
+      <span class="recurso-badge" style="background:var(--trig-l);color:var(--trig)">PDF</span>
+    </a>
+  </div>
+</div>
+
+<div class="footer">
+  giledvz.github.io/clases
+</div>
+
+</body>
+</html>
