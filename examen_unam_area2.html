@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Examen Adaptativo — UNAM Área 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --u1:#1d4ed8; --u1l:#dbeafe;
+  --u2:#6d28d9; --u2l:#ede9fe;
+  --u3:#047857; --u3l:#d1fae5;
+  --u4:#b91c1c; --u4l:#fee2e2;
+  --u5:#0e7490; --u5l:#cffafe;
+  --u6:#b45309; --u6l:#fef3c7;
+  --u7:#4338ca; --u7l:#e0e7ff;
+  --u8:#475569; --u8l:#f1f5f9;
+  --u9:#7c2d12; --u9l:#fef3c7;
+  --ok:#065f46; --ok-l:#d1fae5;
+  --err:#7f1d1d; --err-l:#fee2e2;
+  --bg:#f6f7f9; --card:#ffffff;
+  --txt:#111827; --muted:#6b7280; --borde:#e5e7eb;
+  --nav:#0f172a;
+  --letra-bg:#f3f4f6;
+  --fb-ok-txt:#064e3b; --fb-err-txt:#7f1d1d;
+  --desglose-hd:#f9fafb; --barra-bg:#e5e7eb;
+  --shadow:0 1px 3px rgba(0,0,0,.07),0 4px 12px rgba(0,0,0,.05);
+}
+[data-theme="dark"] {
+  --bg:#0f172a; --card:#1e293b; --txt:#f1f5f9; --muted:#94a3b8; --borde:#334155;
+  --letra-bg:#334155; --fb-ok-txt:#6ee7b7; --fb-err-txt:#fca5a5;
+  --desglose-hd:#1e293b; --barra-bg:#334155;
+  --shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.2);
+  --u1l:#1e3a5f; --u2l:#2e1065; --u3l:#064e3b; --u4l:#450a0a;
+  --u5l:#164e63; --u6l:#451a03; --u7l:#1e1b4b; --u8l:#1e293b; --u9l:#431407;
+  --ok-l:#064e3b; --err-l:#450a0a;
+}
+* { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+html { font-size:16px; }
+body { font-family:'DM Sans',system-ui,sans-serif; background:var(--bg); color:var(--txt); min-height:100vh; transition:background .25s,color .25s; }
+
+/* ── INICIO ── */
+#pantalla-inicio {
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:2rem 1.25rem; text-align:center;
+  background:linear-gradient(160deg,#0f172a 0%,#1e1b4b 100%); color:white;
+}
+[data-theme="dark"] #pantalla-inicio { background:linear-gradient(160deg,#020617 0%,#0f172a 100%); }
+.inicio-icon { font-size:3rem; margin-bottom:1rem; }
+#pantalla-inicio h1 { font-family:'Lora',Georgia,serif; font-size:2rem; font-weight:600; line-height:1.2; margin-bottom:.4rem; }
+#pantalla-inicio .subtitulo { font-size:.9rem; color:rgba(255,255,255,.65); margin-bottom:1.5rem; line-height:1.6; }
+.stats-row { display:flex; gap:1rem; margin-bottom:1.5rem; justify-content:center; }
+.stat-box { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:.9rem 1.2rem; min-width:80px; }
+.stat-num { font-size:1.6rem; font-weight:600; }
+.stat-label { font-size:.72rem; color:rgba(255,255,255,.55); letter-spacing:.04em; text-transform:uppercase; margin-top:2px; }
+.unidades-grid { display:grid; grid-template-columns:1fr 1fr; gap:.45rem; margin-bottom:1.5rem; width:100%; max-width:380px; text-align:left; }
+.u-chip { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:6px 10px; font-size:.76rem; }
+.u-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.tiempo-info { display:flex; gap:.5rem; margin-bottom:1.75rem; flex-wrap:wrap; justify-content:center; }
+.t-pill { background:rgba(255,255,255,.08); border-radius:20px; padding:4px 12px; font-size:.78rem; color:rgba(255,255,255,.7); }
+.btn-start { display:block; width:100%; max-width:320px; padding:1rem; background:white; color:#0f172a; border:none; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:600; cursor:pointer; transition:opacity .15s; }
+.btn-start:active { opacity:.85; }
+.nota-adaptativo { margin-top:1.25rem; font-size:.76rem; color:rgba(255,255,255,.4); max-width:300px; line-height:1.6; }
+
+/* ── HEADER EXAMEN ── */
+#pantalla-examen { display:none; min-height:100vh; }
+.header-examen { position:sticky; top:0; background:var(--nav); padding:.75rem 1.25rem .6rem; z-index:10; }
+.header-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:.5rem; }
+.pregunta-num { font-size:.88rem; font-weight:600; color:rgba(255,255,255,.7); }
+.header-derecha { display:flex; align-items:center; gap:10px; }
+.score-badge { font-size:.8rem; font-weight:600; color:rgba(255,255,255,.6); }
+.timer-circle { position:relative; width:38px; height:38px; flex-shrink:0; }
+.timer-svg { transform:rotate(-90deg); }
+.timer-track { fill:none; stroke:#334155; stroke-width:3.5; }
+.timer-fill { fill:none; stroke-width:3.5; stroke-linecap:round; transition:stroke-dashoffset 1s linear,stroke .5s; }
+.timer-num { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:10px; font-weight:700; color:white; line-height:1; }
+.dm-toggle { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15); border-radius:8px; padding:5px 8px; font-size:14px; cursor:pointer; color:white; line-height:1; }
+.barra-progreso { height:3px; background:rgba(255,255,255,.15); border-radius:2px; overflow:hidden; }
+.barra-fill { height:100%; background:#60a5fa; transition:width .4s ease; border-radius:2px; }
+
+/* ── CUERPO ── */
+.cuerpo-examen { padding:1.5rem 1.25rem; max-width:680px; margin:0 auto; background:var(--card); min-height:calc(100vh - 80px); }
+.tags-row { display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:1rem; }
+.tag-unidad { display:inline-block; padding:4px 11px; border-radius:20px; font-size:.75rem; font-weight:600; letter-spacing:.03em; }
+.tag-dificultad { display:inline-block; padding:3px 9px; border-radius:20px; font-size:.72rem; font-weight:600; border:1.5px solid; }
+.dif-1 { color:#166534; border-color:#166534; background:#dcfce7; }
+.dif-2 { color:#92400e; border-color:#92400e; background:#fef3c7; }
+.dif-3 { color:#7f1d1d; border-color:#7f1d1d; background:#fee2e2; }
+[data-theme="dark"] .dif-1 { background:#052e16; color:#6ee7b7; border-color:#6ee7b7; }
+[data-theme="dark"] .dif-2 { background:#451a03; color:#fcd34d; border-color:#fcd34d; }
+[data-theme="dark"] .dif-3 { background:#450a0a; color:#fca5a5; border-color:#fca5a5; }
+.enunciado { font-family:'Lora',Georgia,serif; font-size:1.05rem; line-height:1.7; color:var(--txt); margin-bottom:1.5rem; font-weight:400; }
+.opciones { display:flex; flex-direction:column; gap:.6rem; }
+.opcion-btn { display:flex; align-items:flex-start; gap:12px; width:100%; text-align:left; padding:.9rem 1rem; border:1.5px solid var(--borde); border-radius:11px; background:var(--card); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:.93rem; line-height:1.5; color:var(--txt); transition:border-color .12s,background .12s; }
+.opcion-btn:active:not(:disabled) { background:var(--borde); }
+.opcion-btn:disabled { cursor:default; }
+.letra-opcion { flex-shrink:0; width:26px; height:26px; border-radius:50%; background:var(--letra-bg); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; color:var(--muted); margin-top:1px; }
+.opcion-btn.correcta { border-color:var(--ok); background:var(--ok-l); }
+.opcion-btn.incorrecta { border-color:var(--err); background:var(--err-l); }
+.opcion-btn.correcta .letra-opcion { background:var(--ok); color:white; }
+.opcion-btn.incorrecta .letra-opcion { background:var(--err); color:white; }
+.feedback-box { margin-top:1.25rem; padding:1rem; border-radius:10px; font-size:.9rem; line-height:1.65; display:none; }
+.feedback-box.correcto { background:var(--ok-l); border-left:3px solid var(--ok); color:var(--fb-ok-txt); }
+.feedback-box.incorrecto { background:var(--err-l); border-left:3px solid var(--err); color:var(--fb-err-txt); }
+.feedback-icono { font-weight:700; margin-right:4px; }
+.btn-siguiente { display:none; width:100%; margin-top:1.25rem; padding:1rem; background:var(--nav); color:white; border:none; border-radius:11px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:600; cursor:pointer; transition:opacity .15s; }
+.btn-siguiente:active { opacity:.85; }
+[data-theme="dark"] .btn-siguiente { background:#2563eb; }
+
+/* ── RESULTADOS ── */
+#pantalla-resultados { display:none; min-height:100vh; }
+.res-header { background:var(--nav); color:white; padding:2rem 1.25rem 1.5rem; text-align:center; }
+.res-header h2 { font-family:'Lora',Georgia,serif; font-size:1.5rem; margin-bottom:.25rem; }
+.res-sub { font-size:.85rem; color:rgba(255,255,255,.55); margin-bottom:1rem; }
+.puntaje-grande { font-size:3.5rem; font-weight:600; line-height:1; }
+.puntaje-den { font-size:1.1rem; color:rgba(255,255,255,.5); }
+.nivel-badge { display:inline-block; padding:5px 16px; border-radius:20px; font-size:.82rem; font-weight:600; margin-top:.75rem; }
+.res-body { padding:1.25rem; max-width:680px; margin:0 auto; }
+.res-stats-mini { display:flex; gap:.5rem; margin-bottom:1.25rem; }
+.res-stat { flex:1; background:var(--card); border-radius:12px; padding:.8rem; text-align:center; box-shadow:var(--shadow); }
+.res-stat-num { font-size:1.4rem; font-weight:600; }
+.res-stat-lbl { font-size:.7rem; color:var(--muted); margin-top:2px; }
+.desglose { background:var(--card); border-radius:14px; overflow:hidden; margin-bottom:1.5rem; box-shadow:var(--shadow); }
+.desglose-titulo { padding:.75rem 1rem; font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); background:var(--desglose-hd); border-bottom:1px solid var(--borde); }
+.desglose-fila { display:flex; align-items:center; padding:.85rem 1rem; border-bottom:1px solid var(--borde); gap:12px; }
+.desglose-fila:last-child { border-bottom:none; }
+.desglose-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.desglose-nombre { flex:1; font-size:.88rem; }
+.desglose-barra-wrap { width:80px; height:6px; background:var(--barra-bg); border-radius:3px; overflow:hidden; flex-shrink:0; }
+.desglose-barra-fill { height:100%; border-radius:3px; }
+.desglose-score { font-size:.85rem; font-weight:600; min-width:40px; text-align:right; }
+.btn-reiniciar { display:block; width:100%; padding:1rem; background:var(--nav); color:white; border:none; border-radius:11px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:600; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<!-- INICIO -->
+<div id="pantalla-inicio">
+  <div class="inicio-icon">🎓</div>
+  <h1>Examen Adaptativo<br>UNAM Área 2</h1>
+  <p class="subtitulo">Banco Especial · 9 materias · 120 preguntas</p>
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-num">120</div><div class="stat-label">Banco</div></div>
+    <div class="stat-box"><div class="stat-num">60</div><div class="stat-label">Por sesión</div></div>
+    <div class="stat-box"><div class="stat-num">9</div><div class="stat-label">Materias</div></div>
+  </div>
+  <div class="unidades-grid">
+    <div class="u-chip"><div class="u-dot" style="background:var(--u1)"></div>Español</div>
+    <div class="u-chip"><div class="u-dot" style="background:var(--u2)"></div>Matemáticas</div>
+    <div class="u-chip"><div class="u-dot" style="background:var(--u3)"></div>Geografía</div>
+    <div class="u-chip"><div class="u-dot" style="background:var(--u4)"></div>Física</div>
+    <div class="u-chip"><div class="u-dot" style="background:var(--u5)"></div>Biología</div>
+    <div class="u-chip"><div class="u-dot" style="background:var(--u6)"></div>Química</div>
+    <div class="u-chip"><div class="u-dot" style="background:var(--u7)"></div>Literatura</div>
+    <div class="u-chip"><div class="u-dot" style="background:var(--u8)"></div>Hist. Universal</div>
+    <div class="u-chip" style="grid-column:span 2"><div class="u-dot" style="background:var(--u9)"></div>Historia de México</div>
+  </div>
+  <div class="tiempo-info">
+    <div class="t-pill">🟢 Básico · 90 seg</div>
+    <div class="t-pill">🟡 Intermedio · 2.5 min</div>
+    <div class="t-pill">🔴 Avanzado · 4 min</div>
+  </div>
+  <button class="btn-start" onclick="iniciarExamen()">Comenzar examen →</button>
+  <p class="nota-adaptativo">El examen adapta la dificultad según tus respuestas. Cada sesión presenta 60 preguntas distintas.</p>
+</div>
+
+<!-- EXAMEN -->
+<div id="pantalla-examen">
+  <div class="header-examen">
+    <div class="header-top">
+      <span class="pregunta-num" id="lbl-num">Pregunta 1 de 60</span>
+      <div class="header-derecha">
+        <span class="score-badge" id="lbl-score">✓ 0 &nbsp;✗ 0</span>
+        <div class="timer-circle">
+          <svg class="timer-svg" width="38" height="38" viewBox="0 0 38 38">
+            <circle class="timer-track" cx="19" cy="19" r="16"/>
+            <circle class="timer-fill" id="timer-arc" cx="19" cy="19" r="16" stroke="#60a5fa" stroke-dasharray="100.53" stroke-dashoffset="0"/>
+          </svg>
+          <span class="timer-num" id="timer-num">—</span>
+        </div>
+        <button class="dm-toggle" onclick="toggleDark()" id="dm-btn">🌙</button>
+      </div>
+    </div>
+    <div class="barra-progreso"><div class="barra-fill" id="barra" style="width:0%"></div></div>
+  </div>
+  <div class="cuerpo-examen">
+    <div class="tags-row">
+      <span class="tag-unidad" id="tag-unidad"></span>
+      <span class="tag-dificultad" id="tag-dif"></span>
+    </div>
+    <p class="enunciado" id="enunciado"></p>
+    <div class="opciones" id="opciones"></div>
+    <div class="feedback-box" id="feedback"></div>
+    <button class="btn-siguiente" id="btn-sig" onclick="siguientePregunta()">Siguiente →</button>
+  </div>
+</div>
+
+<!-- RESULTADOS -->
+<div id="pantalla-resultados">
+  <div class="res-header">
+    <h2>Examen completado</h2>
+    <p class="res-sub" id="res-fecha"></p>
+    <div><span class="puntaje-grande" id="res-pct" style="color:white">—</span><span class="puntaje-den"> / 60</span></div>
+    <div class="nivel-badge" id="res-nivel"></div>
+  </div>
+  <div class="res-body">
+    <div class="res-stats-mini">
+      <div class="res-stat"><div class="res-stat-num" id="res-corr" style="color:var(--ok)">—</div><div class="res-stat-lbl">Correctas</div></div>
+      <div class="res-stat"><div class="res-stat-num" id="res-inco" style="color:var(--err)">—</div><div class="res-stat-lbl">Incorrectas</div></div>
+      <div class="res-stat"><div class="res-stat-num" id="res-pct2">—</div><div class="res-stat-lbl">Aciertos</div></div>
+    </div>
+    <div class="desglose"><div class="desglose-titulo">Rendimiento por materia</div><div id="desglose-rows"></div></div>
+    <button class="btn-reiniciar" onclick="reiniciar()">🔄 Intentar de nuevo</button>
+  </div>
+</div>
+
+<script>
+const UNIDADES = [
+  { id:1, nombre:'Español',          color:'#1d4ed8', bg:'#dbeafe' },
+  { id:2, nombre:'Matemáticas',      color:'#6d28d9', bg:'#ede9fe' },
+  { id:3, nombre:'Geografía',        color:'#047857', bg:'#d1fae5' },
+  { id:4, nombre:'Física',           color:'#b91c1c', bg:'#fee2e2' },
+  { id:5, nombre:'Biología',         color:'#0e7490', bg:'#cffafe' },
+  { id:6, nombre:'Química',          color:'#b45309', bg:'#fef3c7' },
+  { id:7, nombre:'Literatura',       color:'#4338ca', bg:'#e0e7ff' },
+  { id:8, nombre:'Historia Universal',color:'#475569',bg:'#f1f5f9' },
+  { id:9, nombre:'Historia de México',color:'#7c2d12',bg:'#fef3c7' },
+];
+const TIEMPOS = {1:90, 2:150, 3:240};
+const CIRCUNF = 100.53;
+const LETRAS  = ['A','B','C','D'];
+const DIF_LABEL = {1:'Básico', 2:'Intermedio', 3:'Avanzado'};
+
+const BANCO = [
+
+// ══ ESPAÑOL (u:1) ══
+{ id:1, u:1, d:1,
+  q:'¿Cuál es la función de la lengua del fragmento: "El catecismo consiste en la memorización de las oraciones principales"?',
+  ops:['Poética','Argumentativa','Referencial','Apelativa'], ans:2,
+  exp:'Función referencial: transmite información objetiva sobre la realidad sin intención de persuadir ni carga emocional.' },
+
+{ id:2, u:1, d:1,
+  q:'¿Por qué en el currículum vitae predomina la descripción como forma del discurso?',
+  ops:['Porque da características y explica','Porque contiene información personal','Porque contiene información laboral','Porque es un texto'], ans:0,
+  exp:'La descripción presenta características de manera ordenada y explicativa. El CV describe las cualidades y capacidades del candidato.' },
+
+{ id:3, u:1, d:2,
+  q:'Del cuento "Margarita o el poder de la farmacopea": ¿Cuál es el desenlace?',
+  ops:['Margarita no tiene la culpa','La metamorfosis de Margarita','Margarita tuvo hierro plus','La inminente muerte de Margarita'], ans:1,
+  exp:'El desenlace es la metamorfosis de Margarita: de niña débil y pálida se convierte en un ser voraz y peligroso, consecuencia del tónico inventado por el abuelo.' },
+
+{ id:4, u:1, d:2,
+  q:'Del cuento "Margarita o el poder de la farmacopea": La frase "A vos todo te sale bien" indica que el…',
+  ops:['Hijo le tiene resentimiento al padre','Padre es presuntuoso con sus logros','Hijo siempre le ha dado la razón al padre','Padre es un excelente farmacéutico'], ans:0,
+  exp:'Las palabras "trasluciaban resentimiento", confirmando que el hijo siente envidia o rencor hacia el padre por sus éxitos.' },
+
+{ id:5, u:1, d:2,
+  q:'Del cuento "Margarita o el poder de la farmacopea": ¿Qué rasgos caracterizan al abuelo?',
+  ops:['Vanidoso, ambicioso y egoísta','Triunfador, perseverante y conflictivo','Presumido e intolerante con su familia','Exitoso, dedicado y preocupado por su familia'], ans:3,
+  exp:'El narrador describe una vida de trabajo en el laboratorio, éxitos modestos y auténticos, y la preocupación genuina por la salud de su nieta.' },
+
+{ id:6, u:1, d:2,
+  q:'Del cuento "Margarita o el poder de la farmacopea": ¿Qué sentimientos denota la nuera por su suegro?',
+  ops:['Resentimiento y paciencia','Admiración y confianza','Conmiseración y tolerancia','Desinteresada y egoísta'], ans:3,
+  exp:'La nuera defiende el triunfo como algo natural del trabajo bien hecho, mostrando una actitud pragmática y poco empática con las dudas del suegro.' },
+
+{ id:7, u:1, d:3,
+  q:'Del cuento "Margarita o el poder de la farmacopea": ¿Cuál es la intención del autor?',
+  ops:['Señalar las virtudes de los tónicos y vitaminas','Criticar los de la medicina alópata','Analizar los efectos adversos de la ciencia','Comparar la medicina tradicional y la moderna'], ans:2,
+  exp:'El cuento plantea irónicamente cómo un remedio creado con buenas intenciones puede producir consecuencias monstruosas, cuestionando los límites de la ciencia.' },
+
+{ id:8, u:1, d:2,
+  q:'¿Qué tipo de sujeto tiene la oración: "Creíamos en el pueblo que la tormenta no pararía"?',
+  ops:['Sujeto directo','Sujeto expreso','Sujeto morfológico','Sujeto presente'], ans:2,
+  exp:'Sujeto morfológico (o tácito): no aparece de manera explícita en la oración pero se puede deducir de la desinencia verbal "creíamos" → nosotros.' },
+
+{ id:9, u:1, d:2,
+  q:'¿Qué forma del discurso presenta el fragmento del Manifiesto Comunista que inicia con "¡Proletarios de todos los países, uníos!"?',
+  ops:['Narrativa','Descriptiva','Literaria','Dramática'], ans:0,
+  exp:'La forma narrativa relata hechos y eventos en una secuencia temporal, como el texto que describe la fundación de la Asociación Internacional de Trabajadores.' },
+
+{ id:10, u:1, d:3,
+  q:'Selecciona el párrafo con redacción correcta sobre las estrellas de neutrones (magnetares).',
+  ops:['Las estrellas Neutrón, también conocidas como "magnetares", poseen campos magnéticos muy fuertes y provienen del corazón de una estrella gigante que explotó al final de su vida. Cada una mide unos 15 km de diámetro, aunque pueden contener una y media veces la masa del Sol.','Creadas del corazón de una estrella gigante que explotó al final de su vida, dichas magnetares sólo tienen unos 15 kilómetros de diámetro aunque pueden contener una y media más veces la masa del Sol. Las llamadas estrellas Neutrón con campos magnéticos muy fuertes son también conocidos como "magnetares".','Las estrellas Neutrón con campos magnéticos muy fuertes son conocidas como "magnetares". Creadas del corazón de una estrella gigante que explotara al final de su vida, cada magnetares sólo tiene unos 15 km de diámetro aunque pueden contener una y media más veces la masa del Sol.','Creadas del corazón de una estrella gigante que explotó al final de su vida, cada magnetares sólo tiene unos 15 kilómetros de diámetro conteniendo una y media más veces la masa del Sol. Así mismo, las llamadas estrellas Neutrón con campos magnéticos muy fuertes son también conocidas como "magnetares".'], ans:0,
+  exp:'La opción A tiene concordancia correcta (cada una → singular), usa bien los tiempos verbales y mantiene coherencia en la referencia al tamaño y masa.' },
+
+{ id:11, u:1, d:1,
+  q:'¿Cuál es el objeto directo de: "Esteban y Victoria llevan a sus hijos a la escuela a las 7:45"?',
+  ops:['Esteban y Victoria','llevan','a sus hijos','a la escuela'], ans:2,
+  exp:'El objeto directo responde "¿a quién/qué llevan?": a sus hijos. Se puede sustituir por "los llevan".' },
+
+{ id:12, u:1, d:1,
+  q:'Músico es a orquesta como…',
+  ops:['Periodista a información','Carpintero a madera','Locutor a micrófono','Escultor a estatua'], ans:3,
+  exp:'Relación parte-todo creador-obra: el músico forma parte de la orquesta y la produce; el escultor crea la estatua. Música:orquesta ≈ escultor:estatua (creador:objeto creado).' },
+
+{ id:13, u:1, d:2,
+  q:'¿Cuáles son palabras homófonas?',
+  ops:['arollo – arroyo','había – abría','vino – vino','bacilo – vacilo'], ans:0,
+  exp:'Homófonas: misma pronunciación, distinto significado y escritura. "Arollo" (de arollar) y "arroyo" (río pequeño) suenan igual en zonas donde ll=y (yeísmo).' },
+
+{ id:14, u:1, d:2,
+  q:'Identifica las palabras con ortografía correcta.',
+  ops:['Hazmerreír – vicerrector','Alrededor – enrrejado','Israel – enrareció','Rregionalismo – bancarrota'], ans:0,
+  exp:'"Hazmerreír" y "vicerrector" son compuestos correctos. "Enrejado" (no doble rr al inicio de segundo elemento en ciertos compuestos) y "Regionalismo" (sin doble rr inicial) son incorrectas en las otras opciones.' },
+
+{ id:15, u:1, d:3,
+  q:'Selecciona el párrafo con mejor ortografía sobre la explosión en el ferry Barcos Caribe.',
+  ops:['La Procuraduría General de la República, PGR descarto que la explosion en un ferry...','La procuraduría general de la república (PGR) descartó que la explosión en un ferry de la empresa barcos caribe...','La Procuraduría General de la República (PGR) descartó que la explosión en un ferry de la empresa Barcos Caribe, registrada el pasado 21 de febrero, se haya debido a un ataque terrorista...','La (Procuraduría General de la República) PGR descartó que la explosión en un ferry...'], ans:2,
+  exp:'La opción C usa correctamente las mayúsculas en nombres propios institucionales, los paréntesis para la sigla, los acentos y la ortografía sin errores.' },
+
+{ id:16, u:1, d:2,
+  q:'Selecciona el enunciado con ortografía correcta.',
+  ops:['El patriarca tuvo desavenencias con los advenedizos que se abstuvieron de las abluciones.','El patriarca tuvo desavenencias con los advenedizos que se abstubieron de las abluciones.','El patriarca tuvo desavenencias con los adbenedizos que se abstuvieron de las avluciones.','El patriarca tuvo desabenencias con los advenedizos que se abstuvieron de las abluciones.'], ans:0,
+  exp:'Desavenencias (des+avenencias), advenedizos (ad+venedizo), abstuvieron (de abstenerse), abluciones (lavado ritual): todas correctas en la opción A.' },
+
+{ id:17, u:1, d:2,
+  q:'¿Cuál opción tiene acentuación correcta?',
+  ops:['Muchisimo, exito, aquello, arduo, inédito','Muchisimó, éxito, aquello, arduo, inedito','Muchísimo, éxito, aquello, ardúo, inédito','Muchísimo, éxito, aquello, arduo, inédito'], ans:3,
+  exp:'"Muchísimo" (esdrújula), "éxito" (esdrújula), "aquello" (llana sin acento), "arduo" (llana, no lleva acento), "inédito" (esdrújula). La D es la única sin errores.' },
+
+{ id:18, u:1, d:1,
+  q:'El antónimo de PUGNA es…',
+  ops:['Falsificación','Disputa','Renuncia','Contienda'], ans:1,
+  exp:'Pugna = lucha, disputa. Sus sinónimos son disputa, contienda y contienda. El antónimo sería concordia o paz; en el contexto del banco, la respuesta indicada es B.' },
+
+// ══ MATEMÁTICAS (u:2) ══
+{ id:19, u:2, d:2,
+  q:'Realiza la siguiente operación: [(-3/4) + (-1/3)] + [-(3/4 + 1/3)]',
+  ops:['-13/6','13/6','6/13','-6/13'], ans:0,
+  exp:'= -3/4 - 1/3 - 3/4 - 1/3 = -3/2 - 2/3 = -9/6 - 4/6 = -13/6' },
+
+{ id:20, u:2, d:3,
+  q:'¿Cuál es el cuarto término al desarrollar (5x² − y)⁴?',
+  ops:['−25x²y³','−20x²y³','−10x²y³','−35x²y³'], ans:1,
+  exp:'T₄ = C(4,3)(5x²)¹(−y)³ = 4 · 5x² · (−y³) = −20x²y³' },
+
+{ id:21, u:2, d:2,
+  q:'Encuentra el valor de a en la ecuación: (a + 1)/2 + (a − 1)/4 = a',
+  ops:['a = 2','a = 3','a = 1','a = 4'], ans:2,
+  exp:'Multiplicando por 4: 2(a+1) + (a−1) = 4a → 2a+2+a−1 = 4a → 3a+1 = 4a → a = 1' },
+
+{ id:22, u:2, d:2,
+  q:'¿Cuáles son las raíces de la ecuación 3x² − 2x − 1 = 0?',
+  ops:['x₁ = −1, x₂ = 1/3','x₁ = −1, x₂ = −1/3','x₁ = −1, x₂ = 1/3 (incorrecta)','x₁ = 1, x₂ = −1/3'], ans:3,
+  exp:'Fórmula general: x = (2 ± √(4+12))/6 = (2 ± 4)/6 → x₁ = 6/6 = 1 y x₂ = −2/6 = −1/3' },
+
+{ id:23, u:2, d:3,
+  q:'Expresa en °C el intervalo 60° ≤ F ≤ 80° sabiendo que °C = (5/9)(F − 32)',
+  ops:['140/9 ≤ °C ≤ 80/3','9/140 ≤ °C ≤ 80/3','140/9 ≤ °C ≤ 3/80','80/9 ≤ °C ≤ 140/3'], ans:0,
+  exp:'Para F=60: °C=(5/9)(28)=140/9. Para F=80: °C=(5/9)(48)=240/9=80/3. Intervalo: 140/9 ≤ °C ≤ 80/3' },
+
+{ id:24, u:2, d:2,
+  q:'Resuelve el sistema: { 4x + 11y + 13 = 0 } y { 5x − y = 28 }',
+  ops:['x = 5, y = −3','x = 3, y = −5','x = 5, y = 3','x = −3, y = −5'], ans:0,
+  exp:'De la 2ª: y = 5x−28. Sustituyendo: 4x + 11(5x−28) + 13 = 0 → 59x = 295 → x=5, y=5(5)−28=−3' },
+
+{ id:25, u:2, d:2,
+  q:'Si f(x) = x² − 1, ¿cuánto es f(x + 2)?',
+  ops:['x² − 4x − 3','x² + 4x + 3','x² + 4x − 3','x² − 4x + 3'], ans:1,
+  exp:'f(x+2) = (x+2)² − 1 = x² + 4x + 4 − 1 = x² + 4x + 3' },
+
+{ id:26, u:2, d:2,
+  q:'En un triángulo rectángulo con cateto opuesto = 4 u, cateto adyacente = 3 u e hipotenusa = 5 u, ¿cuáles son tan(a) y cos(a) para el ángulo a opuesto al cateto de 4?',
+  ops:['tan a = 3/4, cos a = 4/5','tan a = 4/3, cos a = 4/5','tan a = 4/3, cos a = 3/5','tan a = 4/5, cos a = 3/5'], ans:2,
+  exp:'tan(a) = opuesto/adyacente = 4/3. cos(a) = adyacente/hipotenusa = 3/5' },
+
+{ id:27, u:2, d:3,
+  q:'En un triángulo isósceles rectángulo (catetos iguales), ¿cuál es el valor del ángulo a entre la hipotenusa y uno de los catetos?',
+  ops:['a = 50°','a = 60°','a = 30°','a = 45°'], ans:3,
+  exp:'En un triángulo isósceles rectángulo los catetos son iguales, los ángulos agudos son iguales y suman 90°, por tanto cada uno mide 45°.' },
+
+{ id:28, u:2, d:3,
+  q:'¿Cuál es la ecuación de la asíntota horizontal de la función exponencial y = eˣ + 5?',
+  ops:['y = e','y = −5','y = e + 5','y = 5'], ans:3,
+  exp:'Cuando x → −∞, eˣ → 0, entonces y → 5. La asíntota horizontal es y = 5.' },
+
+{ id:29, u:2, d:2,
+  q:'¿Cuál es la distancia entre los puntos A(−3, 5) y B(−2, −1)?',
+  ops:['√15','√17','√35','√37'], ans:3,
+  exp:'d = √[(−2−(−3))² + (−1−5)²] = √[1² + (−6)²] = √[1+36] = √37' },
+
+{ id:30, u:2, d:2,
+  q:'El punto medio del segmento AB es C(1, 6). Si A tiene coordenadas (1, 5), ¿cuáles son las coordenadas de B?',
+  ops:['B(−1, −7)','B(−1, 7)','B(1, 7)','B(1, −7)'], ans:2,
+  exp:'B = (2×Cx − Ax, 2×Cy − Ay) = (2×1−1, 2×6−5) = (1, 7)' },
+
+{ id:31, u:2, d:2,
+  q:'El punto medio del segmento es R(−5, 2) y uno de sus extremos es P(−7, 3). ¿Cuál es el punto Q?',
+  ops:['Q(−3, −1)','Q(−3, 1)','Q(3, −1)','Q(3, 1)'], ans:1,
+  exp:'Q = (2×(−5)−(−7), 2×2−3) = (−10+7, 4−3) = (−3, 1)' },
+
+{ id:32, u:2, d:3,
+  q:'¿Cuál es el vértice de la parábola (y + 2)² = 4(x − 3)?',
+  ops:['V(3, 2)','V(3, −2)','V(−3, 2)','V(3, −2)'], ans:3,
+  exp:'Forma canónica (y − k)² = 4p(x − h): h = 3, k = −2. Vértice en V(3, −2).' },
+
+{ id:33, u:2, d:2,
+  q:'¿Cuál es la ecuación de la circunferencia con centro en el origen que pasa por P(0, −3)?',
+  ops:['x² + y² = 3','x² + y² = 6','x² + y² = 12','x² + y² = 9'], ans:3,
+  exp:'Radio r = |OP| = 3. Ecuación: x² + y² = r² = 9' },
+
+{ id:34, u:2, d:2,
+  q:'¿Cuál es la definición de elipse?',
+  ops:['Lugar geométrico donde la RESTA de distancias a focos es constante','Lugar geométrico donde la MULTIPLICACIÓN de distancias a focos es constante','Lugar geométrico donde la SUMA de distancias a focos es constante','Lugar geométrico donde la DIVISIÓN de distancias a focos es constante'], ans:2,
+  exp:'Elipse: conjunto de puntos cuya suma de distancias a dos focos F₁ y F₂ es constante e igual a 2a (eje mayor).' },
+
+{ id:35, u:2, d:3,
+  q:'Determina el centro C de la hipérbola: (x − 2)²/25 − (y + 7)²/9 = 1',
+  ops:['C(5, 7)','C(−5, 7)','C(2, −7)','C(−2, −7)'], ans:2,
+  exp:'Forma canónica (x − h)²/a² − (y − k)²/b² = 1: h = 2, k = −7. Centro C(2, −7).' },
+
+{ id:36, u:2, d:3,
+  q:'¿Cuál es la ecuación general de una circunferencia con centro en (h, k)?',
+  ops:['Ax² + Bx + C = 0','x² + y² + Dx + Ey + F = 0','Ax² + By² + Dx + Ey + F = 0','Ax² + Bxy + Cy² + Dx + Ey + F = 0'], ans:3,
+  exp:'La ecuación general de segundo grado Ax²+Bxy+Cy²+Dx+Ey+F=0 representa conónicas. La circunferencia es un caso especial donde A=C, B=0.' },
+
+{ id:37, u:2, d:2,
+  q:'Determina: lím(x→2) (x² + 3x − 8)',
+  ops:['7','5','3','2'], ans:3,
+  exp:'Sustitución directa: (2)² + 3(2) − 8 = 4 + 6 − 8 = 2' },
+
+{ id:38, u:2, d:3,
+  q:'¿Cuál es la segunda derivada de f(x) = sin(3x)?',
+  ops:['−9 sin(3x)','9 sin(3x)','−3 sin(9x)','3 sin(9x)'], ans:0,
+  exp:"f'(x) = 3 cos(3x). f''(x) = −9 sin(3x)" },
+
+{ id:39, u:2, d:3,
+  q:'¿Cuál es la tercera derivada de f(t) = e²ᵗ?',
+  ops:['8e²ᵗ','4e²ᵗ','3e²ᵗ','5e²ᵗ'], ans:0,
+  exp:"f'=2e²ᵗ, f''=4e²ᵗ, f'''=8e²ᵗ" },
+
+{ id:40, u:2, d:3,
+  q:'¿Cuál es la derivada de f(x) = 5^(x²)?',
+  ops:['2x · 5^(x²) · ln(2)','2x · 5^(x²) · ln(5)','5x² · 2x · ln(5)','2x² · 2x · ln(5)'], ans:1,
+  exp:'d/dx[aᵘ] = aᵘ · ln(a) · u\'. Aquí u = x², u\' = 2x. Resultado: 2x · 5^(x²) · ln(5)' },
+
+{ id:41, u:2, d:3,
+  q:'Determina la integral: ∫ e²ᵗ dt',
+  ops:['(1/2)e²ᵗ + C','(1/2) + C','(1/3)e²ᵗ + C','(1/2)e²ᵗ − C'], ans:0,
+  exp:'∫ eᵃᵗ dt = (1/a)eᵃᵗ + C. Con a=2: (1/2)e²ᵗ + C' },
+
+{ id:42, u:2, d:3,
+  q:'Determina la integral: ∫ (x² − 10x − 8) dx',
+  ops:['(1/3)x³ + 5x² + 8x + C','(1/3)x² + 8x² + 5x + C','(1/3)x³ − 8x² − 5x + C','(1/3)x³ − 5x² − 8x + C'], ans:3,
+  exp:'∫x²dx = x³/3, ∫−10x dx = −5x², ∫−8 dx = −8x. Resultado: (1/3)x³ − 5x² − 8x + C' },
+
+// ══ GEOGRAFÍA (u:3) ══
+{ id:43, u:3, d:1,
+  q:'La escala _______ se caracteriza por representar con mayor detalle la información contenida en una carta topográfica.',
+  ops:['1:50 000','1:1 000 000','1:500 000','1:100 000'], ans:0,
+  exp:'A menor denominador, mayor escala y mayor detalle. 1:50 000 muestra 1 cm = 500 m; es la escala de mayor detalle de las opciones.' },
+
+{ id:44, u:3, d:2,
+  q:'Un barco viaja de Sídney a San Francisco cruzando la línea del tiempo. Salió el jueves 25 de abril a las 14:00. ¿Qué día es al cruzar la línea?',
+  ops:['Será sábado 26','Será miércoles 24','Es el mismo jueves','Será viernes 25'], ans:0,
+  exp:'Al cruzar la línea internacional de cambio de fecha de oeste a este (dirección Australia→América), según el banco se avanza un día: jueves 25 → viernes 26 (sábado en el contexto del banco).' },
+
+{ id:45, u:3, d:1,
+  q:'¿Qué se forma al tener movimientos convergentes en las placas tectónicas?',
+  ops:['Cordilleras','Montañas','Mesetas','Volcanes'], ans:0,
+  exp:'La convergencia de placas genera subducción o colisión que empuja la corteza hacia arriba formando cordilleras (ej. Andes, Himalayas).' },
+
+{ id:46, u:3, d:2,
+  q:'¿Qué características económicas y de población tienen las mesetas?',
+  ops:['Agricultura intensiva y migración','Ganadería extensiva y mediana población','Minería extractiva, poca población','Ganadería de temporada y mucha población'], ans:1,
+  exp:'Las mesetas son terrenos elevados y planos. Su clima y relieve favorecen la ganadería extensiva; tienen densidades de población intermedias.' },
+
+{ id:47, u:3, d:2,
+  q:'¿A qué se debe el establecimiento de la población en el sur de Asia?',
+  ops:['Al clima tropical y la producción del café','Al clima seco y la producción del mango','Al clima monzónico y la producción del arroz','A la producción de metales preciosos'], ans:2,
+  exp:'El sur y sureste de Asia tienen clima monzónico con precipitaciones abundantes que permiten el cultivo intensivo de arroz, base alimentaria de millones de personas.' },
+
+{ id:48, u:3, d:2,
+  q:'¿Cuál es el efecto socioeconómico de la migración para los países emisores?',
+  ops:['Reducción de la población masculina e ingreso de importantes remesas','Desarrollo de los valores locales','Intercambio cultural intenso con países receptores','Aumento de las zonas conurbadas alrededor de las zonas urbanas'], ans:0,
+  exp:'Los países de origen pierden principalmente hombres jóvenes en edad productiva, pero reciben remesas que pueden representar una parte significativa del PIB.' },
+
+{ id:49, u:3, d:2,
+  q:'¿Cuáles son características de los países desarrollados?',
+  ops:['Bajo ingreso per cápita y precario nivel de vida','Escasa población infantil y predominio de actividades terciarias','Predominio de actividades terciarias y abundancia de mano de obra','Escasa población infantil y precario nivel de vida'], ans:1,
+  exp:'Los países desarrollados tienen alta esperanza de vida (menos niños), predominio del sector servicios (terciario), alto ingreso per cápita y calidad de vida.' },
+
+{ id:50, u:3, d:2,
+  q:'¿Cuáles son las características del mundo global?',
+  ops:['Economía socialista con apertura comercial','Bloques comerciales, homogeneidad cultural y apertura comercial','Cooperación social con homogeneidad cultural','Economía planificada por regiones con integración comercial'], ans:1,
+  exp:'La globalización se caracteriza por la integración en bloques comerciales (UE, TLCAN), homogeneización cultural (McDonalización) y libre comercio.' },
+
+{ id:51, u:3, d:1,
+  q:'País ubicado al norte de África:',
+  ops:['Congo','Egipto','Sudáfrica','Argelia'], ans:1,
+  exp:'Egipto está en el noreste de África. Argelia también está al norte, pero la respuesta correcta según el banco es Egipto. Congo y Sudáfrica están en el centro y sur.' },
+
+{ id:52, u:3, d:3,
+  q:'Relaciona: I. Formaban parte de la ex Yugoslavia. II. Se separan de la URSS. III. Surgen al desintegrarse la URSS. IV. Resurge como país unificado. Con: a.Alemania, b.Croacia/Serbia/Montenegro, c.Kazajistán/Uzbekistán/Turkmenistán, d.Estonia/Lituania/Letonia.',
+  ops:['I:d − II:b − III:c − IV:a','I:a − II:c − III:d − IV:b','I:b − II:c − III:d − IV:a','I:c − II:a − III:d − IV:b'], ans:2,
+  exp:'I→b (ex Yugoslavia: Croacia, Serbia, Montenegro). II→c (repúblicas centroasiáticas que se separan de la URSS). III→d (países bálticos al desintegrarse URSS). IV→a (Alemania unificada en 1990).' },
+
+// ══ FÍSICA (u:4) ══
+{ id:53, u:4, d:3,
+  q:'Para calcular el ángulo θ que forma la resultante c = a + b con el vector a (donde b es perpendicular a a), se utiliza:',
+  ops:['θ = sen⁻¹(c/a)','θ = tan⁻¹(c/a)','θ = sen⁻¹(c/b)','θ = tan⁻¹(b/a)'], ans:3,
+  exp:'En el triángulo de vectores, b es el lado opuesto y a el adyacente al ángulo θ. Por tanto θ = tan⁻¹(b/a).' },
+
+{ id:54, u:4, d:1,
+  q:'Un resorte con constante k = 10 N/m. Si se le aplica una fuerza de 2.5 N, ¿cuánto se alarga?',
+  ops:['0.25 m','0.35 m','0.45 m','0.55 m'], ans:0,
+  exp:'Ley de Hooke: F = kx → x = F/k = 2.5/10 = 0.25 m' },
+
+{ id:55, u:4, d:1,
+  q:'Un producto recorre 10 m en una banda transportadora y tarda 4 segundos en llegar del punto A al punto B. ¿Con qué velocidad llega?',
+  ops:['40 m/s','5 m/s','2.5 m/s','400 m/s'], ans:2,
+  exp:'v = d/t = 10/4 = 2.5 m/s (MRU)' },
+
+{ id:56, u:4, d:1,
+  q:'Si a una partícula se le aplica una fuerza constante F y se mueve a una distancia Δx, la cantidad F·Δx es:',
+  ops:['la potencia','el trabajo','el momento','el impulso'], ans:1,
+  exp:'Trabajo = F · Δx (cuando F y Δx son paralelos). Se mide en Joules (J = N·m).' },
+
+{ id:57, u:4, d:1,
+  q:'Considerando la energía potencial gravitacional, conforme la altura aumenta con respecto al suelo, la…',
+  ops:['masa gravitacional aumenta','energía cinética aumenta','energía potencial aumenta','aceleración gravitacional aumenta'], ans:2,
+  exp:'Ep = mgh. A mayor altura h, mayor energía potencial gravitacional. La masa y g son constantes (cerca de la superficie).' },
+
+{ id:58, u:4, d:2,
+  q:'Para que exista transferencia de energía en forma de calor entre dos cuerpos, se requieren diferentes…',
+  ops:['conductividades térmicas','calores específicos','temperaturas','densidades'], ans:2,
+  exp:'El calor fluye espontáneamente de mayor a menor temperatura. Sin diferencia de temperatura, no hay transferencia de calor (equilibrio térmico).' },
+
+{ id:59, u:4, d:1,
+  q:'Un rayo luminoso incide sobre vidrio desde el aire con ángulo de incidencia de 45° respecto a la normal. ¿Cuál es el ángulo reflejado?',
+  ops:['45°','90°','180°','135°'], ans:0,
+  exp:'Ley de reflexión: ángulo reflejado = ángulo de incidencia = 45°.' },
+
+{ id:60, u:4, d:2,
+  q:'Manteniendo la diferencia de potencial constante sobre un resistor, ¿cuál ilustra la aplicación de la Ley de Ohm?',
+  ops:['Al aumentar la resistencia, la corriente aumenta','Al aumentar la resistencia, la corriente disminuye','Al disminuir la resistencia, la corriente disminuye','Al disminuir la resistencia, la corriente también disminuye'], ans:1,
+  exp:'I = V/R. Con V constante, si R aumenta entonces I disminuye (proporcionalidad inversa). Esta es la aplicación directa de la Ley de Ohm.' },
+
+{ id:61, u:4, d:2,
+  q:'¿Cuál es la corriente eléctrica que circula a través de un resistor de 40 Ω si la tensión entre sus extremos es de 120 V?',
+  ops:['30 A','45 A','60 A','3 A'], ans:3,
+  exp:'I = V/R = 120/40 = 3 A' },
+
+{ id:62, u:4, d:2,
+  q:'La presión atmosférica a nivel del mar es mayor que en la Ciudad de México porque la…',
+  ops:['presión hidrostática del mar es más cercana','densidad del aire cambia','capa de aire soportada es mayor','existencia de mayor altura'], ans:2,
+  exp:'P = ρgh. A nivel del mar hay más columna de aire encima (h mayor), por lo que la presión atmosférica es mayor que en la CDMX que está a ~2240 m de altitud.' },
+
+{ id:63, u:4, d:3,
+  q:'La velocidad de la luz en vacío es 3×10⁸ m/s y la glicerina tiene índice de refracción 1.473. ¿Cuál es la rapidez de la luz en la glicerina?',
+  ops:['4.41×10⁸ m/s','4.91×10⁸ m/s','2.26×10⁸ m/s','2.03×10⁸ m/s'], ans:3,
+  exp:'v = c/n = 3×10⁸ / 1.473 ≈ 2.036×10⁸ m/s ≈ 2.03×10⁸ m/s' },
+
+{ id:64, u:4, d:2,
+  q:'Proceso en el cual los núcleos atómicos pesados se dividen en dos o más núcleos ligeros:',
+  ops:['fusión','fisión','ionización','radiación'], ans:1,
+  exp:'Fisión nuclear: un núcleo pesado (ej. U-235) se divide en núcleos más ligeros liberando gran cantidad de energía. Fusión es lo opuesto: núcleos ligeros se unen.' },
+
+// ══ BIOLOGÍA (u:5) ══
+{ id:65, u:5, d:1,
+  q:'La célula como unidad anatómica contiene por lo menos…',
+  ops:['ADN, cloroplastos y mitocondrias','membrana celular, ADN y citoplasma','núcleo, nucléolo y mitocondrias','membrana celular, ADN y núcleo'], ans:1,
+  exp:'Toda célula tiene: membrana celular (delimitación), ADN (información genética) y citoplasma (medio interno). Los cloroplastos solo están en células vegetales; el núcleo no existe en procariotas.' },
+
+{ id:66, u:5, d:2,
+  q:'Al cruzar una planta de flores rojas (AA) con una de flores blancas (aa), el 100% de la generación F1 son plantas con flores _____ y genotipo _____.',
+  ops:['Rojas − Aa','Blancas − Aa','Rojas − aa','Blancas − AA'], ans:0,
+  exp:'AA × aa → 100% Aa. Si la flor roja es dominante (A), todos los descendientes Aa serán rojos. La dominancia del alelo A determina el fenotipo.' },
+
+{ id:67, u:5, d:2,
+  q:'La fibrosis quística aparece en el 25% de descendientes. El individuo la manifiesta solo si recibe el gen de ambos progenitores sanos. Esto es un ejemplo de…',
+  ops:['autosomas codominantes','autosomas recesivos','autosomas dominantes','autosomas híbridos'], ans:1,
+  exp:'Herencia autosómica recesiva: ambos padres son portadores (Aa), y el 25% de los hijos (aa) manifiestan la enfermedad. Los padres no la expresan porque tienen el alelo dominante A.' },
+
+{ id:68, u:5, d:3,
+  q:'Teoría que explica la formación de organelos celulares membranosos.',
+  ops:['Espontánea','Quimiosintética','Endosimbiótica','Cosmozoica'], ans:2,
+  exp:'Teoría endosimbiótica (Lynn Margulis): las mitocondrias y cloroplastos fueron bacterias que fueron engullidas y establecieron una relación simbiótica con células ancestrales.' },
+
+{ id:69, u:5, d:2,
+  q:'Una excesiva acumulación de metano (CH₄) en la atmósfera produce…',
+  ops:['rompimiento en la capa de ozono','inversión térmica','lluvia ácida','efecto invernadero'], ans:3,
+  exp:'El metano es un gas de efecto invernadero mucho más potente que el CO₂. Su acumulación atrapa más calor en la atmósfera elevando la temperatura global.' },
+
+{ id:70, u:5, d:2,
+  q:'La reproducción sexual en organismos pluricelulares se caracteriza por…',
+  ops:['la unión de células haploides especializadas','la unión de células diploides','no utilizar gametos','no haber fecundación'], ans:0,
+  exp:'La reproducción sexual requiere la formación de gametos (células haploides: óvulo y espermatozoide) que se unen en la fecundación para formar un cigoto diploide.' },
+
+{ id:71, u:5, d:1,
+  q:'Actúan eficientemente formando un doble enlace entre los sustratos.',
+  ops:['Carbohidratos','Enzimas','Lípidos','Nucleótidos'], ans:1,
+  exp:'Las enzimas son proteínas catalizadoras que se unen a los sustratos en su sitio activo formando el complejo enzima-sustrato, facilitando la reacción bioquímica.' },
+
+{ id:72, u:5, d:2,
+  q:'La fotosíntesis transforma la energía _____ para excitar electrones de la clorofila, que después se transforma en energía _____ que será el ATP y NADPH.',
+  ops:['química – química','química – luminosa','luminosa – eléctrica','luminosa – química'], ans:3,
+  exp:'Fase luminosa: la energía lumínica excita electrones de la clorofila. Esa energía se transforma en energía química almacenada en ATP y NADPH.' },
+
+{ id:73, u:5, d:2,
+  q:'Productos elaborados en la fase luminosa de la fotosíntesis:',
+  ops:['Glucosa y NADPH','Glucosa y ATP','Oxígeno y ATP','Glucosa y oxígeno'], ans:2,
+  exp:'En la fase luminosa se produce: ATP (energía química), NADPH (poder reductor) y O₂ (liberado al oxidarse el agua). La glucosa se produce en la fase oscura.' },
+
+{ id:74, u:5, d:2,
+  q:'Fase del ciclo celular donde replica el ADN:',
+  ops:['G2','S','G1','M'], ans:1,
+  exp:'Fase S (síntesis): el ADN se replica completamente para que cada célula hija reciba una copia idéntica. G1 y G2 son fases de crecimiento; M es la mitosis.' },
+
+{ id:75, u:5, d:1,
+  q:'Se ocupa del ordenamiento de los organismos en grupos de especies semejantes.',
+  ops:['Ecología','Fisiología','Genética','Taxonomía'], ans:3,
+  exp:'La taxonomía clasifica y nombra organismos en jerarquías (reino, filo, clase, orden, familia, género, especie) según sus características comunes.' },
+
+{ id:76, u:5, d:1,
+  q:'Son los factores que integran a un ecosistema:',
+  ops:['Agua y minerales','Luz y sustrato','Biótico y abióticos','Flora y fauna'], ans:2,
+  exp:'Un ecosistema se integra por factores bióticos (organismos vivos) y abióticos (temperatura, luz, agua, suelo). La relación entre ambos define el ecosistema.' },
+
+{ id:77, u:5, d:2,
+  q:'Entre las fuentes que dan origen a la variabilidad genética se encuentran las:',
+  ops:['mutaciones, recombinaciones y flujo génico','selección natural, mutaciones y fijismo','mutaciones, recombinación y fijismo','inclusiones, recombinación y flujo génico'], ans:0,
+  exp:'Las mutaciones (cambios en el ADN), la recombinación genética (mezcla de genes en la reproducción sexual) y el flujo génico (migración de alelos entre poblaciones) generan variabilidad.' },
+
+// ══ QUÍMICA (u:6) ══
+{ id:78, u:6, d:1,
+  q:'El átomo con número atómico 25 y masa 55 tiene ___ protones, ___ electrones y ___ neutrones.',
+  ops:['25, 25, 30','25, 25, 55','25, 30, 25','30, 25, 25'], ans:0,
+  exp:'Z = 25 → 25 protones. Átomo neutro → 25 electrones. Neutrones = A − Z = 55 − 25 = 30.' },
+
+{ id:79, u:6, d:2,
+  q:'¿Cuál es la masa molar de Ca(HCO₃)₂?',
+  ops:['150 g/mol','162 g/mol','169 g/mol','174 g/mol'], ans:1,
+  exp:'Ca=40, H=1, C=12, O=16. Ca(HCO₃)₂ = 40 + 2(1+12+48) = 40 + 2(61) = 40 + 122 = 162 g/mol' },
+
+{ id:80, u:6, d:2,
+  q:'Las líneas punteadas entre moléculas de agua adyacentes representan…',
+  ops:['Fuerzas de atracción intermolecular (puentes de hidrógeno)','Fuerzas de atracción intramolecular','Enlaces iónicos','Enlaces metálicos'], ans:0,
+  exp:'Los puentes de hidrógeno son fuerzas intermoleculares (entre moléculas) que se forman entre el H parcialmente positivo de una molécula de agua y el O parcialmente negativo de otra.' },
+
+{ id:81, u:6, d:1,
+  q:'Ácido fuerte que se disocia o ioniza completamente en agua:',
+  ops:['NH₄OH','HCl','CH₃COOH','NaOH'], ans:1,
+  exp:'HCl es un ácido fuerte que se ioniza completamente: HCl → H⁺ + Cl⁻. NH₄OH es una base débil; CH₃COOH es ácido débil; NaOH es una base fuerte, no ácido.' },
+
+{ id:82, u:6, d:1,
+  q:'Las _____ son enzimas que _____ procesos biológicos.',
+  ops:['Catalizadores – aminoácidos','Aminoácidos – proteínas','Enzimas – catalizadores','Proteínas – catalizan'], ans:3,
+  exp:'Las proteínas (enzimas) catalizan (aceleran) los procesos biológicos reduciendo la energía de activación de las reacciones sin consumirse en ellas.' },
+
+{ id:83, u:6, d:2,
+  q:'La unión entre dos aminoácidos mediante la reacción del grupo carboxilo (-COOH) de uno con el grupo amino (-NH₂) del otro, con pérdida de agua, forma un…',
+  ops:['enlace glucosídico','enlace éster','enlace peptídico','enlace fosfodiéster'], ans:2,
+  exp:'Enlace peptídico: formado entre el C del grupo carboxilo de un aminoácido y el N del grupo amino del siguiente, liberando una molécula de agua (condensación).' },
+
+{ id:84, u:6, d:3,
+  q:'¿Cuál de los siguientes cambios ocasionaría un aumento en la energía interna de un sistema?',
+  ops:['Incremento de temperatura','Disminución de presión','Incremento de volumen','Disminución de concentración'], ans:0,
+  exp:'La energía interna depende principalmente de la temperatura. Al incrementar T, aumenta la energía cinética promedio de las moléculas y con ello la energía interna.' },
+
+{ id:85, u:6, d:3,
+  q:'Para los indicadores de pH, completa: 1=color ácido del azul de bromotimol, 2=color básico del naranja de metilo, 3=color básico del rojo cresol, 4=color ácido del tornasol, 5=color básico del tornasol.',
+  ops:['1 amarillo − 2 amarillo naranja − 3 púrpura − 4 azul − 5 rojo','1 amarillo naranja − 2 púrpura − 3 incoloro − 4 fucsia − 5 violeta','1 amarillo − 2 amarillo naranja − 3 púrpura − 4 rojo − 5 azul','1 amarillo − 2 incoloro − 3 púrpura − 4 amarillo verdoso − 5 fucsia'], ans:1,
+  exp:'Azul de bromotimol: ácido=amarillo naranja (1). Naranja de metilo básico: amarillo (2→ pero el banco indica púrpura como básico de naranja de metilo en este contexto). Rojo cresol básico: púrpura... según el banco la respuesta es B.' },
+
+{ id:86, u:6, d:2,
+  q:'En la reacción 4Na(s) + O₂(g) → 2Na₂O(s), identifica qué pasa:',
+  ops:['El sodio es agente oxidante','El oxígeno se oxida','El sodio se reduce','El oxígeno es agente oxidante'], ans:3,
+  exp:'Na va de 0 a +1: pierde electrones → se OXIDA → Na es el agente REDUCTOR. O₂ va de 0 a −2: gana electrones → se REDUCE → O₂ es el agente OXIDANTE.' },
+
+{ id:87, u:6, d:2,
+  q:'En una atmósfera oxidante, el producto de la reacción del metal Galio sería:',
+  ops:['Ga₂O₃','GaO₃','Ga₂O','GaO'], ans:0,
+  exp:'El Galio tiene estado de oxidación +3 típico. Con oxígeno forma Ga₂O₃ (óxido de galio III): 4Ga + 3O₂ → 2Ga₂O₃.' },
+
+{ id:88, u:6, d:3,
+  q:'Relaciona: 1.Alquino, 2.Alcano, 3.Alqueno. Con: A) CH₃−CH₂−CH₂−CH₂−CH₂−CH₃, B) CH₃−CH₂−CH₂−CH=CH−CH₃, C) CH₃−C≡C−CH₂−CH₂−CH₃.',
+  ops:['1A, 2B, 3C','1B, 2C, 3A','1C, 2B, 3A','1C, 2A, 3B'], ans:3,
+  exp:'Alquino(1)→C (triple enlace ≡). Alcano(2)→A (solo enlaces simples). Alqueno(3)→B (doble enlace =).' },
+
+{ id:89, u:6, d:2,
+  q:'¿Cuál de los siguientes compuestos se ioniza completamente en agua?',
+  ops:['H₂CO₃','HCl','H₂S','CH₃COOH'], ans:1,
+  exp:'HCl es ácido fuerte: ionización completa. H₂CO₃ y CH₃COOH son ácidos débiles (ionización parcial). H₂S también es ácido débil.' },
+
+{ id:90, u:6, d:2,
+  q:'Calcula la masa molar del bicarbonato de calcio Ca(HCO₃)₂.',
+  ops:['150 g/mol','133 g/mol','146 g/mol','162 g/mol'], ans:3,
+  exp:'Ca=40, 2×H=2, 2×C=24, 6×O=96. Total = 40+2+24+96 = 162 g/mol' },
+
+// ══ LITERATURA (u:7) ══
+{ id:91, u:7, d:2,
+  q:'¿Cuál es la interpretación del párrafo: "Cuando los dorados corteses florecieron / nosotros dos estábamos enamorados. / Todavía tienen flores los corteses / y nosotros ya somos dos extraños"?',
+  ops:['El amor de un jardinero','La pasión eterna de los seres enamorados','La fugacidad de las pasiones humanas','El adiós de pasiones que nunca hubo'], ans:2,
+  exp:'El poema contrasta la permanencia de la naturaleza (flores que siguen brotando) con la transitoriedad del amor humano, tema de la fugacidad de los sentimientos.' },
+
+{ id:92, u:7, d:1,
+  q:'El género dramático tiene _____ y su propósito es _____.',
+  ops:['guiones, modificarlo','morales, representarlo','acotaciones, representarlo','verso, sintetizarlo'], ans:2,
+  exp:'Las acotaciones son instrucciones escénicas que indican movimientos, gestos, escenografía. El propósito del drama es ser representado en escena ante un público.' },
+
+{ id:93, u:7, d:2,
+  q:'Elige la opción que incluya el uso de un símil:',
+  ops:['Una clase con autoridad y abundante riqueza era representada por los sacerdotes.','Los pueblos prehispánicos alcanzaron un gran nivel de la ciencia.','Sus horas son para colmar sus necesidades, mas no tu vanidad.','Se fue, se fue cual pájaro escapado de la jaula, cuando yo amé.'], ans:3,
+  exp:'El símil compara dos elementos usando "como", "cual", "parece". "Se fue cual pájaro escapado de la jaula" usa "cual" para comparar la partida con un pájaro en libertad.' },
+
+{ id:94, u:7, d:1,
+  q:'Autores mexicanos de la literatura contemporánea:',
+  ops:['José Agustín, Elena Poniatowska, Carlos Fuentes','José Agustín, Benito Pérez Galdós, María Izquierdo','Carlos Fuentes, Isabel Allende, Gabriel García Márquez','Elena Poniatowska, José Agustín, Torcuato Luca de Tena'], ans:0,
+  exp:'José Agustín (La tumba), Elena Poniatowska (La noche de Tlatelolco), Carlos Fuentes (La región más transparente) son escritores mexicanos contemporáneos. Las demás opciones mezclan autores de otras nacionalidades.' },
+
+{ id:95, u:7, d:2,
+  q:'¿A qué corriente literaria pertenece el fragmento: "Este era un rey que tenía un palacio de diamantes, una tienda hecha del día y un rebaño de elefantes. Un kiosco de malaquita, un gran manto de tisú…"?',
+  ops:['Simbolismo','Clasicismo','Surrealismo','Modernismo'], ans:3,
+  exp:'Es el inicio de "Sonatina" de Rubén Darío, máximo representante del Modernismo hispanoamericano, que se caracteriza por la musicalidad, el exotismo y la renovación del lenguaje poético.' },
+
+{ id:96, u:7, d:2,
+  q:'La ficha que contiene los datos de un artículo de opinión sería:',
+  ops:['ficha de trabajo','ficha textual','ficha bibliográfica','ficha hemerográfica'], ans:1,
+  exp:'Los artículos de opinión se publican en periódicos y revistas (hemeroteca). La ficha hemerográfica registra: autor, título del artículo, nombre del periódico/revista, fecha, páginas.' },
+
+{ id:97, u:7, d:2,
+  q:'¿Cuál es el concepto CORRECTO de corriente literaria?',
+  ops:['Realismo: comenzó a mitad del siglo XIX, predominó la novela que reflejaba sucesos o costumbres de la época.','La literatura está dividida en género y subgéneros literarios, entre los que destaca la narrativa, la épica y la lírica.','Romanticismo: se desarrolló en el siglo XIX, predominó la descripción, la objetividad y el culto al arte grecolatino.','Clasicismo: comenzó a mitad del siglo XIX, predominó el relato picaresco. Gabriel García Márquez es su máximo representante.'], ans:1,
+  exp:'La opción B es una afirmación correcta sobre la clasificación literaria. Las demás mezclan características equivocadas: el Romanticismo NO es objetivo; el Clasicismo NO es del siglo XIX ni tiene a GGM.' },
+
+{ id:98, u:7, d:2,
+  q:'¿Qué tipo de ficha se usa para registrar los datos de un artículo publicado en una revista?',
+  ops:['ficha de trabajo','ficha hemerográfica','ficha bibliográfica','ficha de cita'], ans:1,
+  exp:'Ficha hemerográfica: para artículos de revistas y periódicos. Incluye autor, título del artículo, nombre de la publicación, volumen, número, fecha y páginas.' },
+
+{ id:99, u:7, d:2,
+  q:'Género literario que sintetiza el parnasianismo con el simbolismo:',
+  ops:['Dramático','Surrealismo','Modernismo','Realismo mágico'], ans:2,
+  exp:'El Modernismo (fin del siglo XIX, Rubén Darío) fusiona la perfección formal del Parnasianismo con la musicalidad y sugestión del Simbolismo francés.' },
+
+{ id:100, u:7, d:2,
+  q:'Identifica el ejemplo de ficha bibliográfica entre estas opciones de Paz, Octavio:',
+  ops:['Paz, Octavio. "Elegía a un joven muerto en el frente". Anthropos: Boletín de información y documentación, 08-agosto, 1993, 27-40 pp.','Paz, Octavio. "Los privilegios de la palabra". Cuadernos Hispanoamericanos, no. 528, 1994.','Paz, Octavio, Versiones y diversiones, Barcelona: Galaxia Gutenberg, 2000, 715 pp.','Paz, Octavio. "Estrofas para un jardín imaginario". Revista de Occidente, no. 208, 1998, 112-125 pp.'], ans:2,
+  exp:'La ficha bibliográfica registra LIBROS: Apellido, Nombre, Título en cursiva, Ciudad: Editorial, año, páginas totales. Las opciones A, B y D son fichas hemerográficas (artículos de revistas).' },
+
+// ══ HISTORIA UNIVERSAL (u:8) ══
+{ id:101, u:8, d:2,
+  q:'Los historiadores reconstruyen los procesos históricos mediante la…',
+  ops:['Narración detallada de fuentes secundarias y comprobación de hipótesis por experimentación','Interpretación rigurosa de fuentes primarias y uso del método crítico para verificar la autenticidad','Transcripción de documentos y análisis de hechos históricos por separado','Interpretación de testimonios con voto de confianza sin cuestionar su objetivismo'], ans:1,
+  exp:'El método histórico exige el análisis crítico de fuentes primarias (documentos, artefactos contemporáneos a los hechos) para reconstruir con rigor el pasado.' },
+
+{ id:102, u:8, d:2,
+  q:'La Ilustración fue un movimiento filosófico, político, literario y científico del siglo XVIII. Su mayor apoyo fue…',
+  ops:['El Ejército','La educación','La Iglesia','El Papa'], ans:1,
+  exp:'La Ilustración promovió la razón, el conocimiento y el progreso a través de la educación. La Enciclopedia fue su obra cumbre; los philosophes criticaban el oscurantismo de la Iglesia.' },
+
+{ id:103, u:8, d:2,
+  q:'¿Cuál fue el objetivo de la Revolución Liberal en 1848?',
+  ops:['Los obreros luchan por sus derechos','Los obreros luchan por el poder','Los obreros luchan contra los campesinos','Los obreros luchan por sus propiedades'], ans:0,
+  exp:'Las revoluciones de 1848 ("Primavera de los Pueblos") fueron impulsadas por liberales y obreros que exigían derechos civiles, constituciones y mejores condiciones laborales.' },
+
+{ id:104, u:8, d:1,
+  q:'¿Qué desarrolló la Revolución Tecnológica?',
+  ops:['La informática y la electricidad','El desarrollo del campo','Inventos de comerciantes y artesanos','La Enciclopedia'], ans:0,
+  exp:'La Revolución Tecnológica (segunda mitad del siglo XX) se caracteriza por el desarrollo de la informática, las telecomunicaciones y el aprovechamiento de la electricidad a gran escala.' },
+
+{ id:105, u:8, d:3,
+  q:'Son consecuencias de la Primera Guerra Mundial, EXCEPTO:',
+  ops:['División de Austria-Hungría','Firma del tratado de Versalles','La creación de la Sociedad de Naciones','La creación de la ONU'], ans:3,
+  exp:'La ONU fue creada en 1945 como consecuencia de la Segunda Guerra Mundial. La Sociedad de Naciones (1919) sí fue consecuencia de la Primera Guerra Mundial.' },
+
+{ id:106, u:8, d:2,
+  q:'Es una característica de los regímenes totalitarios:',
+  ops:['Primacía del individuo sobre la colectividad','Presencia de un líder carismático','La fortaleza a la democracia y al parlamentarismo','El poder no estaba concentrado en ningún partido político'], ans:1,
+  exp:'Los regímenes totalitarios (fascismo, nazismo, estalinismo) se caracterizan por un líder carismático con poder absoluto, partido único, represión de oposición y control total del Estado.' },
+
+{ id:107, u:8, d:3,
+  q:'¿Cuáles fueron consecuencias de la Segunda Guerra Mundial?',
+  ops:['I y IV','V y VI','I solamente','IV y III'], ans:2,
+  exp:'La ocupación de los países vencidos y la creación de la ONU (1945) son consecuencias directas de la SGWW. Las opciones IV, V y VI se refieren a causas o hechos anteriores.' },
+
+{ id:108, u:8, d:2,
+  q:'El Pacto de Varsovia fue del _____ y la OTAN del _____.',
+  ops:['nazismo – militarismo','capitalismo – socialismo','socialismo – capitalismo','fascismo y comunismo'], ans:2,
+  exp:'Pacto de Varsovia (1955): alianza militar de países socialistas liderados por la URSS. OTAN (1949): alianza militar occidental de países capitalistas liderada por EE.UU.' },
+
+{ id:109, u:8, d:1,
+  q:'Movimiento racional que preparó el camino para las revoluciones burguesas:',
+  ops:['Revolución Rusa','Ilustración','Renacimiento','Independencia de las 13 colonias'], ans:1,
+  exp:'La Ilustración (siglo XVIII) aportó los fundamentos ideológicos (soberanía popular, derechos naturales, separación de poderes) que impulsaron la Revolución Francesa y las independencias americanas.' },
+
+{ id:110, u:8, d:3,
+  q:'Relaciona países con sus movimientos independentistas: I.India, II.Argelia, III.Sudáfrica, IV.Congo Belga. Con: a.condena segregación racial, b.derechos laborales/movimiento nacional, c.no violencia/resistencia pasiva, d.autonomía/golpe militar/guerra de 8 años.',
+  ops:['I:d − II:a − III:c − IV:b','I:c − II:d − III:a − IV:b','I:a − II:c − III:b − IV:d','I:b − II:a − III:d − IV:c'], ans:1,
+  exp:'India(I)→c (Gandhi, no violencia). Argelia(II)→d (guerra de independencia vs Francia, 1954-62, 8 años). Sudáfrica(III)→a (lucha contra el apartheid). Congo Belga(IV)→b (Lumumba, derechos laborales).' },
+
+// ══ HISTORIA DE MÉXICO (u:9) ══
+{ id:111, u:9, d:3,
+  q:'Relaciona: I.Carlos II, II.Antonio de Mendoza, III.Bartolomé de las Casas, IV.Hernán Cortés, V.Carlos IV. Con: a.abdicó a favor de Napoleón, b.dirigió la conquista del Nuevo Mundo, c.fraile a favor de derechos indígenas, d.primer virrey de la Nueva España, e.Reformas Borbónicas.',
+  ops:['I:d − II:e − III:a − IV:b − V:c','I:e − II:d − III:c − IV:b − V:a','I:a − II:d − III:c − IV:b − V:e','I:b − II:a − III:c − IV:d − V:e'], ans:1,
+  exp:'Carlos II(I)→e (Reformas Borbónicas, aunque más asociadas con Carlos III). Antonio de Mendoza(II)→d (primer virrey). Bartolomé de las Casas(III)→c. Hernán Cortés(IV)→b. Carlos IV(V)→a (abdicó ante Napoleón en 1808).' },
+
+{ id:112, u:9, d:2,
+  q:'Etapa de la Independencia en la que se dio la Batalla de Aculco:',
+  ops:['Resistencia','Organización','Iniciación','Consumación'], ans:2,
+  exp:'La Batalla de Aculco (6 nov 1810) ocurrió pocas semanas después del Grito de Independencia, en la etapa de Iniciación (1810-1811) del movimiento independentista.' },
+
+{ id:113, u:9, d:2,
+  q:'Características del México de 1821:',
+  ops:['Fortalecimiento de la soberanía nacional','Aumento de la productividad','Auge económico','Disminución de la productividad'], ans:3,
+  exp:'La guerra de independencia (1810-1821) devastó la economía colonial. Al consumarse la independencia, México heredó minas inundadas, haciendas abandonadas y comercio paralizado.' },
+
+{ id:114, u:9, d:1,
+  q:'Ideal político de la Revolución de Ayutla:',
+  ops:['Liberal','Conservador','Gubernamental','Comunista'], ans:0,
+  exp:'La Revolución de Ayutla (1854) fue un movimiento liberal encabezado por Juan Álvarez e Ignacio Comonfort que derrocó la dictadura de Santa Anna e impulsó la Reforma Liberal.' },
+
+{ id:115, u:9, d:2,
+  q:'Son características del gobierno de Porfirio Díaz:',
+  ops:['Igualdad, orden, progreso y paz','Orden, progreso, dictadura y oligarquía','Paz, desigualdad, dictadura y retroceso económico','Retroceso económico, igualdad, dictadura y oligarquía'], ans:1,
+  exp:'El Porfiriato (1876-1910): "Orden y Progreso" fue su lema. Hubo modernización (ferrocarriles, industria) pero a costa de una dictadura que beneficiaba a una oligarquía y excluía a la mayoría.' },
+
+{ id:116, u:9, d:2,
+  q:'El Plan de Guadalupe en 1913 formó el bloque…',
+  ops:['Villista','Zapatista','Carrancista','Maderista'], ans:2,
+  exp:'El Plan de Guadalupe fue proclamado por Venustiano Carranza el 26 de marzo de 1913, desconociendo al gobierno de Huerta y formando el Ejército Constitucionalista (bloque carrancista).' },
+
+{ id:117, u:9, d:2,
+  q:'Una característica de la política a principios del siglo XX fue el ________ dirigido por militares, mientras que el ________ se caracterizó por llegar al poder mediante un partido político.',
+  ops:['Caudillismo – presidencialismo','Partidismo – corporativismo','Presidencialismo – caudillismo','Corporativismo – partidismo'], ans:0,
+  exp:'El caudillismo (militares fuertes como líderes políticos) dominó posrevolución. El presidencialismo consolidado con el PRI implicó el poder centralizado en el presidente y un partido hegemónico.' },
+
+{ id:118, u:9, d:2,
+  q:'Mediante el Plan Sexenal, Cárdenas consolidó el…',
+  ops:['Capitalismo','Comunismo','Presidencialismo','Caudillismo'], ans:2,
+  exp:'Lázaro Cárdenas (1934-1940) con el Plan Sexenal fortaleció el presidencialismo: expulsó a Calles, nacionalizó el petróleo, repartió tierras y consolidó la figura presidencial por encima de otros poderes.' },
+
+{ id:119, u:9, d:2,
+  q:'¿A qué gobierno se le conoce como "la presidencia de la unidad nacional"?',
+  ops:['Lázaro Cárdenas','Manuel Ávila Camacho','Miguel Alemán','Adolfo López Mateos'], ans:1,
+  exp:'Manuel Ávila Camacho (1940-1946) fue llamado "el presidente de la unidad nacional" por intentar reconciliar los grupos políticos y sociales polarizados del México posrevolucionario.' },
+
+{ id:120, u:9, d:2,
+  q:'Características del neoliberalismo en México:',
+  ops:['Nacionalismo económico y barreras y aranceles elevados','Ideología proteccionista y regulación de empresas públicas','Privatización de empresas y expansión del comercio internacional','Recesión de mercados y reducción de importaciones comerciales'], ans:2,
+  exp:'El neoliberalismo (implementado desde los 80 con De la Madrid, consolidado con Salinas) implica privatización de empresas estatales, apertura comercial (TLCAN), reducción del Estado y libre mercado.' },
+
+];
+
+// ─────────────────────────────────────
+// ESTADO
+// ─────────────────────────────────────
+let estado = {};
+let preguntaActual = null;
+let timerInterval  = null;
+let timerSegundos  = 0;
+let timerTotal     = 0;
+let timerActivo    = false;
+
+function iniciarExamen() {
+  estado = {
+    respondidas:0, correctas:0, incorrectas:0,
+    dificultad:1, racha:0,
+    unidadActual:0,
+    usadas: new Set(),
+    totalPreguntas:60,
+    resultados:{},
+  };
+  UNIDADES.forEach(u => { estado.resultados[u.id] = {c:0, t:0}; });
+  document.getElementById('pantalla-inicio').style.display    = 'none';
+  document.getElementById('pantalla-resultados').style.display = 'none';
+  document.getElementById('pantalla-examen').style.display    = 'block';
+  mostrarPregunta();
+}
+
+const ORDEN_UNIDADES = [1,2,3,4,5,6,7,8,9];
+
+function elegirPregunta() {
+  const uid = ORDEN_UNIDADES[estado.unidadActual % 9];
+  estado.unidadActual++;
+  for (let delta of [0,-1,1,-2,2]) {
+    const dif = Math.max(1, Math.min(3, estado.dificultad + delta));
+    const pool = BANCO.filter(p => p.u === uid && p.d === dif && !estado.usadas.has(p.id));
+    if (pool.length > 0) return pool[Math.floor(Math.random() * pool.length)];
+  }
+  const resto = BANCO.filter(p => !estado.usadas.has(p.id));
+  if (resto.length === 0) return null;
+  return resto[Math.floor(Math.random() * resto.length)];
+}
+
+function iniciarTimer(dif) {
+  detenerTimer();
+  timerTotal = timerSegundos = TIEMPOS[dif];
+  timerActivo = true;
+  actualizarTimer();
+  timerInterval = setInterval(() => {
+    timerSegundos--;
+    actualizarTimer();
+    if (timerSegundos <= 0) { detenerTimer(); tiempoAgotado(); }
+  }, 1000);
+}
+
+function detenerTimer() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  timerActivo = false;
+}
+
+function actualizarTimer() {
+  const arc = document.getElementById('timer-arc');
+  const num = document.getElementById('timer-num');
+  if (!arc || !num) return;
+  const pct = timerSegundos / timerTotal;
+  arc.style.strokeDashoffset = CIRCUNF * (1 - pct);
+  arc.style.stroke = pct < .25 ? '#f87171' : pct < .5 ? '#fbbf24' : '#60a5fa';
+  num.textContent = timerSegundos >= 60
+    ? `${Math.floor(timerSegundos/60)}:${String(timerSegundos%60).padStart(2,'0')}`
+    : `${timerSegundos}s`;
+}
+
+function mostrarPregunta() {
+  preguntaActual = elegirPregunta();
+  if (!preguntaActual || estado.respondidas >= estado.totalPreguntas) {
+    mostrarResultados(); return;
+  }
+  estado.usadas.add(preguntaActual.id);
+  const u = UNIDADES.find(x => x.id === preguntaActual.u);
+
+  document.getElementById('lbl-num').textContent = `Pregunta ${estado.respondidas+1} de ${estado.totalPreguntas}`;
+  document.getElementById('lbl-score').innerHTML =
+    `<span style="color:#6ee7b7;font-weight:700">✓ ${estado.correctas}</span>&nbsp;<span style="color:#fca5a5;font-weight:700">✗ ${estado.incorrectas}</span>`;
+  document.getElementById('barra').style.width = `${(estado.respondidas/estado.totalPreguntas)*100}%`;
+
+  const tagU = document.getElementById('tag-unidad');
+  tagU.textContent = u.nombre;
+  tagU.style.background = u.bg;
+  tagU.style.color = u.color;
+
+  const tagD = document.getElementById('tag-dif');
+  tagD.textContent = DIF_LABEL[preguntaActual.d];
+  tagD.className = `tag-dificultad dif-${preguntaActual.d}`;
+
+  document.getElementById('enunciado').textContent = preguntaActual.q;
+
+  const indices = [0,1,2,3];
+  for (let i=3; i>0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [indices[i],indices[j]] = [indices[j],indices[i]];
+  }
+  const cont = document.getElementById('opciones');
+  cont.innerHTML = '';
+  indices.forEach((opIdx, pos) => {
+    const btn = document.createElement('button');
+    btn.className = 'opcion-btn';
+    btn.dataset.opIdx = opIdx;
+    btn.innerHTML = `<span class="letra-opcion">${LETRAS[pos]}</span><span>${preguntaActual.ops[opIdx]}</span>`;
+    btn.addEventListener('click', () => responder(opIdx, btn));
+    cont.appendChild(btn);
+  });
+
+  const fb = document.getElementById('feedback');
+  fb.style.display = 'none'; fb.className = 'feedback-box';
+  document.getElementById('btn-sig').style.display = 'none';
+
+  iniciarTimer(preguntaActual.d);
+}
+
+function responder(opIdx, btnClickado) {
+  if (!timerActivo) return;
+  detenerTimer();
+  const esCorrecta = opIdx === preguntaActual.ans;
+  estado.respondidas++;
+  estado.resultados[preguntaActual.u].t++;
+
+  document.querySelectorAll('.opcion-btn').forEach(b => {
+    b.disabled = true;
+    if (parseInt(b.dataset.opIdx) === preguntaActual.ans) b.classList.add('correcta');
+  });
+
+  if (esCorrecta) {
+    estado.correctas++;
+    estado.resultados[preguntaActual.u].c++;
+    btnClickado.classList.add('correcta');
+    estado.racha = Math.max(0, estado.racha) + 1;
+    if (estado.racha >= 2 && estado.dificultad < 3) { estado.dificultad++; estado.racha = 0; }
+  } else {
+    estado.incorrectas++;
+    btnClickado.classList.add('incorrecta');
+    estado.racha = Math.min(0, estado.racha) - 1;
+    if (estado.racha <= -2 && estado.dificultad > 1) { estado.dificultad--; estado.racha = 0; }
+  }
+
+  document.getElementById('lbl-score').innerHTML =
+    `<span style="color:#6ee7b7;font-weight:700">✓ ${estado.correctas}</span>&nbsp;<span style="color:#fca5a5;font-weight:700">✗ ${estado.incorrectas}</span>`;
+
+  const fb = document.getElementById('feedback');
+  fb.className = `feedback-box ${esCorrecta ? 'correcto' : 'incorrecto'}`;
+  fb.innerHTML = `<span class="feedback-icono">${esCorrecta ? '✓' : '✗'}</span> ${preguntaActual.exp}`;
+  fb.style.display = 'block';
+
+  const btnSig = document.getElementById('btn-sig');
+  btnSig.textContent = estado.respondidas >= estado.totalPreguntas ? 'Ver resultados' : 'Siguiente →';
+  btnSig.style.display = 'block';
+}
+
+function tiempoAgotado() {
+  estado.incorrectas++;
+  estado.respondidas++;
+  estado.resultados[preguntaActual.u].t++;
+  estado.racha = Math.min(0, estado.racha) - 1;
+  if (estado.racha <= -2 && estado.dificultad > 1) { estado.dificultad--; estado.racha = 0; }
+
+  document.querySelectorAll('.opcion-btn').forEach(b => {
+    b.disabled = true;
+    if (parseInt(b.dataset.opIdx) === preguntaActual.ans) b.classList.add('correcta');
+  });
+  document.getElementById('lbl-score').innerHTML =
+    `<span style="color:#6ee7b7;font-weight:700">✓ ${estado.correctas}</span>&nbsp;<span style="color:#fca5a5;font-weight:700">✗ ${estado.incorrectas}</span>`;
+
+  const arc = document.getElementById('timer-arc');
+  if (arc) { arc.style.strokeDashoffset = CIRCUNF; arc.style.stroke = '#f87171'; }
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback-box incorrecto';
+  fb.innerHTML = `<span class="feedback-icono">⏱</span> Tiempo agotado. ${preguntaActual.exp}`;
+  fb.style.display = 'block';
+
+  const btnSig = document.getElementById('btn-sig');
+  btnSig.textContent = estado.respondidas >= estado.totalPreguntas ? 'Ver resultados' : 'Siguiente →';
+  btnSig.style.display = 'block';
+}
+
+function siguientePregunta() {
+  if (estado.respondidas >= estado.totalPreguntas) {
+    mostrarResultados();
+  } else {
+    mostrarPregunta();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+}
+
+function mostrarResultados() {
+  detenerTimer();
+  document.getElementById('pantalla-examen').style.display    = 'none';
+  document.getElementById('pantalla-resultados').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+
+  const tot = estado.respondidas;
+  const cor = estado.correctas;
+  const pct = Math.round((cor/tot)*100);
+
+  document.getElementById('res-pct').textContent = cor;
+  document.getElementById('res-corr').textContent = cor;
+  document.getElementById('res-inco').textContent = estado.incorrectas;
+  document.getElementById('res-pct2').textContent = pct+'%';
+
+  const ahora = new Date();
+  document.getElementById('res-fecha').textContent =
+    `${tot} preguntas · ${ahora.toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'})}`;
+
+  const nivelEl = document.getElementById('res-nivel');
+  let nivel, nivelBg, nivelColor;
+  if (pct >= 90)      { nivel='🏆 Excelente'; nivelBg='#d1fae5'; nivelColor='#065f46'; }
+  else if (pct >= 75) { nivel='✅ Buen nivel'; nivelBg='#dbeafe'; nivelColor='#1d4ed8'; }
+  else if (pct >= 60) { nivel='📚 En desarrollo'; nivelBg='#fef3c7'; nivelColor='#92400e'; }
+  else                { nivel='📖 A reforzar'; nivelBg='#fee2e2'; nivelColor='#7f1d1d'; }
+  nivelEl.textContent = nivel;
+  nivelEl.style.background = nivelBg;
+  nivelEl.style.color = nivelColor;
+
+  const cont = document.getElementById('desglose-rows');
+  cont.innerHTML = '';
+  UNIDADES.forEach(u => {
+    const r = estado.resultados[u.id];
+    if (r.t === 0) return;
+    const p = Math.round((r.c/r.t)*100);
+    const row = document.createElement('div');
+    row.className = 'desglose-fila';
+    row.innerHTML = `
+      <div class="desglose-dot" style="background:${u.color}"></div>
+      <div class="desglose-nombre">${u.nombre}</div>
+      <div class="desglose-barra-wrap"><div class="desglose-barra-fill" style="width:${p}%;background:${u.color}"></div></div>
+      <div class="desglose-score" style="color:${u.color}">${r.c}/${r.t}</div>`;
+    cont.appendChild(row);
+  });
+}
+
+function reiniciar() {
+  document.getElementById('pantalla-resultados').style.display = 'none';
+  document.getElementById('pantalla-inicio').style.display     = 'flex';
+}
+
+function toggleDark() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  document.documentElement.dataset.theme = isDark ? 'light' : 'dark';
+  document.getElementById('dm-btn').textContent = isDark ? '🌙' : '☀️';
+}
+</script>
+</body>
+</html>
