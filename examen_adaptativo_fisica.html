@@ -223,9 +223,9 @@ body {
 <div id="pantalla-inicio">
   <div class="inicio-icon">⚛️</div>
   <h1>Examen Adaptativo<br>Física</h1>
-  <p class="subtitulo">60 preguntas · 9 unidades · dificultad en tiempo real</p>
+  <p class="subtitulo">60 preguntas por sesión · 100 en el banco · 9 unidades</p>
   <div class="stats-row">
-    <div class="stat-box"><div class="stat-num">60</div><div class="stat-label">Preguntas</div></div>
+    <div class="stat-box"><div class="stat-num">100</div><div class="stat-label">Preguntas</div></div>
     <div class="stat-box"><div class="stat-num">9</div><div class="stat-label">Unidades</div></div>
     <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">Niveles</div></div>
   </div>
@@ -530,7 +530,148 @@ const BANCO = [
   { id:60, u:9, d:3, q:"En una reacción nuclear se convierte Δm = 5×10⁻³⁰ kg en energía. ¿Cuánta energía se libera? (c = 3×10⁸ m/s)",
     ops:["4.5×10⁻¹³ J","1.5×10⁻²¹ J","9×10⁻¹⁶ J","4.5×10³⁰ J"], ans:0,
     exp:"E = Δm × c² = 5×10⁻³⁰ × 9×10¹⁶ = 4.5×10⁻¹³ J" },
+
+  // ══════════════════════════════════════
+  // PREGUNTAS TEÓRICAS
+  // ══════════════════════════════════════
+
+  // ── UNIDAD 1: CINEMÁTICA (teóricas) ──
+  { id:61, u:1, d:1, q:"¿Cuál es la diferencia entre distancia y desplazamiento?",
+    ops:["La distancia es escalar (total recorrido); el desplazamiento es vectorial (cambio de posición)","Son lo mismo","El desplazamiento siempre es mayor que la distancia","La distancia es vectorial y el desplazamiento es escalar"], ans:0,
+    exp:"Distancia = longitud total del camino recorrido (escalar). Desplazamiento = diferencia entre posición final e inicial (vectorial); puede ser menor que la distancia." },
+  { id:62, u:1, d:1, q:"Un objeto en caída libre (sin aire) cae desde el reposo. ¿Cómo cambia su velocidad con el tiempo?",
+    ops:["Aumenta de forma constante (aceleración uniforme)","Aumenta cada vez más rápido (aceleración creciente)","Es constante","Disminuye con el tiempo"], ans:0,
+    exp:"En caída libre g = 10 m/s² es constante, por lo tanto v = g·t aumenta linealmente: cada segundo la velocidad crece 10 m/s." },
+  { id:63, u:1, d:2, q:"En el movimiento de tiro vertical hacia arriba, en el punto más alto, ¿qué valores tienen la velocidad y la aceleración?",
+    ops:["Velocidad = 0; aceleración = g (hacia abajo)","Velocidad = 0; aceleración = 0","Velocidad máxima; aceleración = 0","Velocidad = 0; aceleración = g (hacia arriba)"], ans:0,
+    exp:"En h_máx la velocidad instantánea es 0 porque el objeto cambia de sentido, pero la gravedad sigue actuando: a = g = 10 m/s² hacia abajo en todo momento." },
+  { id:64, u:1, d:2, q:"¿Qué diferencia al MRU del MRUA?",
+    ops:["En MRU la velocidad es constante; en MRUA existe una aceleración constante distinta de cero","En MRU hay aceleración; en MRUA no hay aceleración","En MRU el objeto se mueve en círculos; en MRUA en línea recta","Son el mismo tipo de movimiento"], ans:0,
+    exp:"MRU (Movimiento Rectilíneo Uniforme): a = 0, velocidad constante. MRUA (Movimiento Rectilíneo Uniformemente Acelerado): a ≠ 0 constante, velocidad cambia linealmente." },
+  { id:65, u:1, d:3, q:"Un objeto se lanza hacia arriba y otro se deja caer desde la misma altura al mismo tiempo. ¿Cuál llega primero al suelo?",
+    ops:["El que cae libremente","El que se lanza hacia arriba","Llegan al mismo tiempo","Depende de la masa de cada objeto"], ans:0,
+    exp:"El que cae libremente parte con v₀ = 0 hacia abajo. El lanzado hacia arriba primero sube, frena, regresa al punto de origen con la misma v₀ pero hacia abajo, y luego cae igual que el otro — por eso el de caída libre llega antes." },
+
+  // ── UNIDAD 2: FUERZAS Y NEWTON (teóricas) ──
+  { id:66, u:2, d:1, q:"¿Qué establece la Primera Ley de Newton (Ley de Inercia)?",
+    ops:["Un objeto en reposo permanece en reposo y uno en movimiento continúa en movimiento rectilíneo uniforme, a menos que actúe una fuerza neta sobre él","Todo objeto acelera en proporción a la fuerza aplicada","A toda acción corresponde una reacción igual y opuesta","La gravedad atrae a todos los cuerpos con la misma fuerza"], ans:0,
+    exp:"La 1ª Ley de Newton define la inercia: sin fuerza neta, el estado de movimiento no cambia. Un objeto en reposo sigue en reposo; uno en movimiento sigue a velocidad y dirección constantes." },
+  { id:67, u:2, d:1, q:"¿Qué es la inercia?",
+    ops:["La tendencia de un objeto a resistir cambios en su estado de movimiento","La fuerza que ejerce la gravedad sobre un objeto","La velocidad máxima que puede alcanzar un objeto","La energía almacenada en un objeto en reposo"], ans:0,
+    exp:"La inercia es la propiedad de la materia que hace que los objetos resistan cambios en su estado de movimiento. A mayor masa, mayor inercia." },
+  { id:68, u:2, d:2, q:"¿Cuál es la diferencia entre masa y peso?",
+    ops:["La masa es la cantidad de materia (kg) y es constante; el peso es la fuerza gravitacional (N) y varía según g","La masa y el peso son la misma magnitud","El peso se mide en kg y la masa en N","La masa varía con la gravedad; el peso no"], ans:0,
+    exp:"Masa: cantidad de materia, escalar, se mide en kg, no cambia. Peso: fuerza que ejerce la gravedad sobre esa masa (W = mg), vectorial, se mide en N, varía si g cambia (ej. en la Luna)." },
+  { id:69, u:2, d:2, q:"¿Qué establece la Tercera Ley de Newton?",
+    ops:["A toda acción corresponde una reacción igual en magnitud y opuesta en dirección","La fuerza es igual a la masa por la aceleración","Un objeto en reposo permanece en reposo sin fuerza neta","La fuerza gravitacional es inversamente proporcional al cuadrado de la distancia"], ans:0,
+    exp:"3ª Ley (acción-reacción): si A ejerce una fuerza sobre B, entonces B ejerce sobre A una fuerza igual en magnitud pero opuesta en dirección. Actúan sobre cuerpos distintos, por eso no se cancelan." },
+  { id:70, u:2, d:3, q:"¿Por qué un astronauta en la Luna pesa menos que en la Tierra, aunque su masa es la misma?",
+    ops:["Porque g en la Luna es ~1.6 m/s², mucho menor que 9.8 m/s² en la Tierra, y el peso depende de g","Porque la Luna no tiene gravedad","Porque la masa disminuye fuera de la atmósfera","Porque el traje espacial reduce el peso"], ans:0,
+    exp:"W = mg. La masa del astronauta no cambia, pero g en la Luna ≈ 1.6 m/s² vs 9.8 m/s² en la Tierra. Como el peso depende directamente de g, el astronauta pesa aproximadamente 1/6 en la Luna." },
+
+  // ── UNIDAD 3: TRABAJO Y ENERGÍA (teóricas) ──
+  { id:71, u:3, d:1, q:"¿Cuándo se dice que una fuerza realiza trabajo sobre un objeto?",
+    ops:["Cuando la fuerza produce un desplazamiento en la dirección de la fuerza","Cuando la fuerza es muy grande","Cuando el objeto está en reposo","Siempre que se aplique una fuerza, independientemente del movimiento"], ans:0,
+    exp:"W = F · d · cos θ. Para que haya trabajo, debe haber desplazamiento y la fuerza debe tener componente en la dirección del movimiento. Si θ = 90° (fuerza perpendicular al movimiento), W = 0." },
+  { id:72, u:3, d:1, q:"¿Qué es la energía cinética?",
+    ops:["La energía que tiene un objeto por estar en movimiento","La energía almacenada por la posición de un objeto","La energía producida por el calor","La resistencia de un objeto al movimiento"], ans:0,
+    exp:"Energía cinética Ec = ½mv². Es la energía asociada al movimiento de un objeto: depende de su masa y del cuadrado de su velocidad." },
+  { id:73, u:3, d:2, q:"¿Qué establece el principio de conservación de la energía mecánica?",
+    ops:["En ausencia de fricción, la suma de energía cinética y potencial permanece constante","La energía siempre se pierde en forma de calor","La energía potencial siempre es mayor que la cinética","La energía mecánica aumenta con la velocidad"], ans:0,
+    exp:"Sin fuerzas disipativas (fricción, aire): Ec + Ep = cte. La energía se transforma entre cinética y potencial pero el total no cambia. Con fricción, parte se convierte en calor." },
+  { id:74, u:3, d:2, q:"En una colisión perfectamente elástica, ¿qué magnitudes se conservan?",
+    ops:["Tanto el momento lineal como la energía cinética","Solo el momento lineal","Solo la energía cinética","Ninguna de las dos se conserva"], ans:0,
+    exp:"Colisión elástica: se conservan momento lineal (p = mv) Y energía cinética. Colisión inelástica: solo se conserva el momento. Perfectamente inelástica: los cuerpos quedan pegados y la pérdida de Ec es máxima." },
+  { id:75, u:3, d:3, q:"¿Por qué un objeto lanzado verticalmente hacia arriba desacelera al subir?",
+    ops:["Porque la gravedad actúa hacia abajo, opuesta al movimiento del objeto","Porque la masa aumenta con la altura","Porque el aire empuja hacia abajo","Porque la energía cinética se convierte en calor"], ans:0,
+    exp:"La gravedad actúa siempre hacia abajo con a = −g. Al lanzar hacia arriba, la aceleración es contraria a la velocidad: v disminuye hasta 0 en h_máx. Al bajar, gravedad y movimiento coinciden: v aumenta." },
+
+  // ── UNIDAD 4: TERMODINÁMICA (teóricas) ──
+  { id:76, u:4, d:1, q:"¿Cuál es la diferencia entre calor y temperatura?",
+    ops:["La temperatura mide el estado térmico de un objeto; el calor es energía en tránsito entre objetos a diferente temperatura","Son la misma magnitud física","El calor se mide en Kelvin y la temperatura en Joules","A mayor temperatura, menor calor"], ans:0,
+    exp:"Temperatura: medida del estado térmico promedio (energía cinética media de las moléculas), se mide en °C o K. Calor: energía que se transfiere entre cuerpos por diferencia de temperatura, se mide en Joules." },
+  { id:77, u:4, d:1, q:"¿Qué establece la Ley de Boyle?",
+    ops:["A temperatura constante, la presión y el volumen de un gas son inversamente proporcionales","A presión constante, el volumen es proporcional a la temperatura","La presión es directamente proporcional a la temperatura a volumen constante","Los gases ideales no tienen volumen propio"], ans:0,
+    exp:"Ley de Boyle (isotérmica): P₁V₁ = P₂V₂. Si se comprime un gas sin cambiar su temperatura, la presión aumenta proporcionalmente. Ejemplo: una jeringa tapada." },
+  { id:78, u:4, d:2, q:"¿Por qué se usa la escala Kelvin en las leyes de los gases ideales?",
+    ops:["Porque el cero absoluto (0 K) representa ausencia total de energía cinética molecular; en Celsius el cero no tiene ese significado físico","Porque los Kelvin son más fáciles de calcular","Porque los gases no existen por debajo de 0°C","Por convención histórica sin razón física"], ans:0,
+    exp:"En las leyes de gases (V/T = cte, P/T = cte) T debe ser proporcional a la energía cinética molecular. En Kelvin, T = 0 significa energía cinética = 0. En Celsius, 0°C aún tiene energía cinética, lo que daría resultados erróneos." },
+  { id:79, u:4, d:2, q:"¿Qué proceso ocurre cuando un gas se expande sin cambio de temperatura?",
+    ops:["Proceso isotérmico — la presión disminuye al aumentar el volumen (Ley de Boyle)","Proceso isobárico — la presión aumenta","Proceso isocórico — el volumen no cambia","Proceso adiabático — no hay intercambio de calor"], ans:0,
+    exp:"Isotérmico: T = cte. Por la Ley de Boyle: P₁V₁ = P₂V₂. Si el volumen aumenta, la presión disminuye para mantener el producto constante." },
+  { id:80, u:4, d:3, q:"¿Qué establece la Segunda Ley de la Termodinámica en términos de flujo de calor?",
+    ops:["El calor fluye espontáneamente del cuerpo más caliente al más frío, nunca al revés sin trabajo externo","El calor puede fluir en cualquier dirección con la misma facilidad","El calor siempre aumenta la temperatura del cuerpo que lo recibe","La energía total de un sistema siempre aumenta"], ans:0,
+    exp:"2ª Ley: los procesos termodinámicos tienen una dirección preferida. El calor fluye espontáneamente de mayor a menor temperatura. Para invertir ese flujo (refrigerador, aire acondicionado) se necesita trabajo externo." },
+
+  // ── UNIDAD 5: ONDAS (teóricas) ──
+  { id:81, u:5, d:1, q:"¿Cuál es la diferencia entre una onda transversal y una onda longitudinal?",
+    ops:["En transversal la vibración es perpendicular a la propagación; en longitudinal es paralela","En transversal la onda viaja más rápido","En longitudinal la onda no necesita medio material","Son el mismo tipo de onda"], ans:0,
+    exp:"Transversal: la vibración ocurre perpendicularmente a la dirección de propagación (ej. ondas en una cuerda, luz). Longitudinal: la vibración es paralela a la propagación (ej. sonido, ondas en un resorte)." },
+  { id:82, u:5, d:1, q:"¿Puede el sonido propagarse en el vacío?",
+    ops:["No, el sonido necesita un medio material (sólido, líquido o gas) para propagarse","Sí, el sonido se propaga en cualquier medio incluido el vacío","Sí, pero más lentamente que en el aire","Solo en sólidos y líquidos, no en gases"], ans:0,
+    exp:"El sonido es una onda mecánica longitudinal que necesita partículas para transmitir la vibración. En el vacío no hay partículas, por lo que el sonido no puede propagarse. La luz, en cambio, sí puede viajar en el vacío." },
+  { id:83, u:5, d:2, q:"¿Qué le ocurre a la frecuencia de una onda cuando pasa de un medio a otro?",
+    ops:["La frecuencia no cambia; lo que cambia es la velocidad y la longitud de onda","La frecuencia aumenta al pasar a un medio más denso","La frecuencia disminuye al pasar a un medio menos denso","Tanto la frecuencia como la longitud de onda cambian"], ans:0,
+    exp:"Al cruzar la frontera entre medios, la frecuencia se mantiene constante (depende de la fuente). La velocidad cambia según el medio, y por v = fλ, la longitud de onda cambia proporcionalmente." },
+  { id:84, u:5, d:2, q:"¿Qué es la amplitud de una onda y qué magnitud física representa?",
+    ops:["Es el desplazamiento máximo desde la posición de equilibrio; está relacionada con la energía de la onda","Es la distancia entre dos crestas consecutivas","Es el número de ciclos por segundo","Es la velocidad máxima de la onda"], ans:0,
+    exp:"Amplitud: desplazamiento máximo de la onda respecto a su posición de equilibrio. La energía de una onda es proporcional al cuadrado de la amplitud. A mayor amplitud, onda más energética (ej. sonido más fuerte, luz más brillante)." },
+  { id:85, u:5, d:3, q:"¿Qué es el efecto Doppler?",
+    ops:["El cambio aparente en la frecuencia de una onda cuando la fuente o el observador están en movimiento relativo","El aumento de velocidad de una onda en medios más densos","La absorción de energía de una onda al atravesar un obstáculo","La reflexión de ondas en superficies planas"], ans:0,
+    exp:"Efecto Doppler: si fuente y observador se acercan, el observador percibe mayor frecuencia (tono más agudo). Si se alejan, percibe menor frecuencia (tono más grave). Ejemplo clásico: la sirena de una ambulancia al pasar." },
+
+  // ── UNIDAD 6: ELECTROMAGNETISMO (teóricas) ──
+  { id:86, u:6, d:1, q:"¿Qué es la corriente eléctrica?",
+    ops:["El flujo ordenado de cargas eléctricas (electrones) a través de un conductor","La diferencia de potencial entre dos puntos","La oposición de un material al paso de la corriente","La energía almacenada en un campo eléctrico"], ans:0,
+    exp:"Corriente eléctrica (I): movimiento ordenado de cargas eléctricas por unidad de tiempo. Se mide en Amperes (A). En metales, son los electrones libres los que se mueven." },
+  { id:87, u:6, d:1, q:"¿Qué diferencia hay entre conductores y aislantes?",
+    ops:["Los conductores permiten el flujo de electrones libres; los aislantes no tienen electrones libres y se oponen al paso de corriente","Los conductores son más densos que los aislantes","Los aislantes conducen mejor la electricidad a altas temperaturas","No hay diferencia física real entre ellos"], ans:0,
+    exp:"Conductores (metales): tienen electrones en la banda de conducción que se mueven libremente. Aislantes (plástico, madera): electrones fuertemente ligados, no conducen corriente. Hay una categoría intermedia: los semiconductores." },
+  { id:88, u:6, d:2, q:"En un circuito en paralelo, si una bombilla se funde, ¿qué ocurre con las demás?",
+    ops:["Las demás siguen funcionando porque cada rama tiene su propio camino independiente","Todas se apagan porque el circuito se interrumpe","Las demás brillan más fuerte","Las demás brillan más débil"], ans:0,
+    exp:"En paralelo, cada componente está conectado directamente a la fuente de voltaje. Si una rama se interrumpe, las demás siguen teniendo su camino completo. Por eso las instalaciones eléctricas domésticas son en paralelo." },
+  { id:89, u:6, d:2, q:"¿Qué establece la Ley de Ohm?",
+    ops:["La corriente en un conductor es directamente proporcional al voltaje e inversamente proporcional a la resistencia: I = V/R","El voltaje siempre es constante en un circuito","La resistencia aumenta con la corriente","La potencia es igual al voltaje dividido entre la corriente"], ans:0,
+    exp:"Ley de Ohm: V = IR (o I = V/R). A mayor voltaje, mayor corriente; a mayor resistencia, menor corriente. Solo aplica a materiales óhmicos donde R es constante con la temperatura." },
+  { id:90, u:6, d:3, q:"¿Por qué los cables eléctricos se calientan al pasar corriente?",
+    ops:["Por el efecto Joule: la energía eléctrica se convierte en calor cuando los electrones chocan con los átomos del conductor","Porque la corriente alterna genera vibraciones mecánicas","Porque el aislante del cable absorbe energía","Porque el campo magnético calienta el material"], ans:0,
+    exp:"Efecto Joule: P = I²R. Los electrones en movimiento chocan con los iones de la red cristalina, transfiriendo energía cinética en forma de calor. A mayor corriente o mayor resistencia, mayor calentamiento." },
+
+  // ── UNIDAD 7: FLUIDOS (teóricas) ──
+  { id:91, u:7, d:1, q:"¿Qué establece el Principio de Arquímedes?",
+    ops:["Todo cuerpo sumergido en un fluido experimenta un empuje hacia arriba igual al peso del fluido desalojado","Un objeto más denso que el fluido siempre flota","La presión de un fluido es igual en todos los puntos","El volumen de un fluido no cambia con la presión"], ans:0,
+    exp:"Arquímedes: E = ρ_fluido × V_sumergido × g. El empuje siempre es hacia arriba. Un objeto flota si E ≥ W, es decir, si ρ_objeto ≤ ρ_fluido. Un objeto se hunde si ρ_objeto > ρ_fluido." },
+  { id:92, u:7, d:1, q:"¿Por qué un barco de acero puede flotar si el acero es más denso que el agua?",
+    ops:["Porque la forma hueca del barco aumenta el volumen total desplazado, reduciendo la densidad promedio del conjunto por debajo de la del agua","Porque el acero en láminas delgadas flota naturalmente","Porque el agua salada es mucho más densa que el acero","Porque los motores generan fuerza hacia arriba"], ans:0,
+    exp:"El barco desplaza un volumen de agua cuyo peso supera al peso total del barco (acero + aire interior). La densidad promedio del conjunto (acero + aire) es menor que la del agua. Si el barco se llena de agua, se hunde." },
+  { id:93, u:7, d:2, q:"¿Qué establece el Principio de Pascal?",
+    ops:["La presión aplicada a un fluido encerrado se transmite íntegramente a todos los puntos del fluido","La presión aumenta con la profundidad del fluido","Los fluidos siempre fluyen de menor a mayor presión","La viscosidad de un fluido es constante"], ans:0,
+    exp:"Pascal: ΔP aplicada = ΔP transmitida a todos los puntos. Esto permite multiplicar fuerzas en la prensa hidráulica: F₁/A₁ = F₂/A₂. Una pequeña fuerza en un pistón pequeño genera una gran fuerza en un pistón grande." },
+  { id:94, u:7, d:2, q:"¿Por qué la presión en un fluido aumenta con la profundidad?",
+    ops:["Porque hay más columna de fluido encima que ejerce su peso: P = ρgh","Porque los fluidos son más densos en el fondo","Porque la temperatura disminuye con la profundidad","Porque la gravedad es mayor en profundidades mayores"], ans:0,
+    exp:"P_h = ρgh. A mayor profundidad h, hay más volumen de fluido encima que ejerce su peso sobre esa superficie. Por eso los buceadores sienten más presión en el oído a mayor profundidad." },
+  { id:95, u:7, d:3, q:"Según la ecuación de Bernoulli, ¿qué le ocurre a la presión de un fluido cuando su velocidad aumenta?",
+    ops:["La presión disminuye cuando la velocidad aumenta (efecto Venturi)","La presión aumenta cuando la velocidad aumenta","La presión no depende de la velocidad","La presión y la velocidad son siempre iguales"], ans:0,
+    exp:"Bernoulli: P + ½ρv² + ρgh = cte. Si v aumenta, P debe disminuir para mantener la suma constante. Esto explica la sustentación de aviones (aire más rápido sobre el ala → menor presión arriba → fuerza hacia arriba)." },
+
+  // ── UNIDAD 8: ÓPTICA (teóricas) ──
+  { id:96, u:8, d:1, q:"¿Qué es la refracción de la luz?",
+    ops:["El cambio de dirección de la luz al pasar de un medio a otro con diferente índice de refracción","El rebote de la luz en una superficie pulida","La absorción de la luz al entrar en un material","La separación de la luz en sus colores componentes"], ans:0,
+    exp:"Refracción: cuando la luz cambia de medio (ej. aire → agua), su velocidad cambia y la trayectoria se desvía. El ángulo de desviación depende del índice de refracción: n = c/v. Si entra perpendicular, no hay desviación." },
+  { id:97, u:8, d:1, q:"¿Cuál es la diferencia entre un espejo cóncavo y uno convexo?",
+    ops:["El cóncavo converge los rayos y puede formar imágenes reales; el convexo los diverge y siempre forma imágenes virtuales y más pequeñas","El cóncavo forma siempre imágenes virtuales; el convexo forma imágenes reales","No hay diferencia óptica entre ellos","El cóncavo es plano y el convexo es curvo"], ans:0,
+    exp:"Espejo cóncavo (f > 0): converge rayos, puede producir imágenes reales o virtuales según posición del objeto. Espejo convexo (f < 0): siempre diverge rayos, imagen siempre virtual, derecha y más pequeña (ej. espejos retrovisores)." },
+  { id:98, u:8, d:2, q:"¿Por qué un lápiz sumergido en agua parece doblado?",
+    ops:["Por refracción: la luz cambia de velocidad al pasar del agua al aire, desviando los rayos que llegan a nuestros ojos","Por reflexión: la superficie del agua refleja parte de la imagen","Por difracción: el agua difracta la luz alrededor del lápiz","Por interferencia entre la luz reflejada y la transmitida"], ans:0,
+    exp:"Los rayos de luz provenientes de la parte sumergida cambian de dirección al salir del agua al aire (refracción). Nuestro cerebro los proyecta en línea recta, colocando el lápiz en una posición aparente diferente a la real." },
+  { id:99, u:8, d:2, q:"¿Qué tipo de imagen produce siempre una lente divergente?",
+    ops:["Una imagen virtual, derecha y más pequeña que el objeto","Una imagen real, invertida y más grande","Una imagen real, derecha y del mismo tamaño","Depende de la posición del objeto"], ans:0,
+    exp:"Lente divergente (f < 0): siempre produce imagen virtual (del mismo lado que el objeto), derecha (no invertida) y más pequeña. No importa dónde esté el objeto: nunca forma imagen real. Ejemplo: lentes para miopía." },
+  { id:100, u:8, d:3, q:"¿Qué es la reflexión total interna y en qué condición ocurre?",
+    ops:["Ocurre cuando la luz viaja de un medio más denso a uno menos denso con ángulo mayor al ángulo crítico; toda la luz se refleja sin salir","Ocurre cuando la luz choca perpendicular a una superficie","Ocurre cuando el índice de refracción es igual a 1","Ocurre solo en espejos metálicos perfectamente pulidos"], ans:0,
+    exp:"Reflexión total interna: cuando θ_incidencia > θ_crítico y la luz va de n_mayor a n_menor (ej. agua→aire, vidrio→aire). Toda la luz regresa al medio original. Principio de la fibra óptica y del diamante brillante." },
 ];
+
 
 // ─────────────────────────────────────
 // ESTADO
