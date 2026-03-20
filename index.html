@@ -4,25 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Materiales de Clase</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --calc:  #1a4f8a;
-  --geo:   #1a6e3c;
-  --trig:  #7a3a1a;
-  --exam:  #2a2a6e;
-  --calc-l:#e8f0fa;
-  --geo-l: #e6f4ec;
-  --trig-l:#faf0e6;
-  --exam-l:#eeeef8;
-  --txt:   #1a1a1a;
-  --muted: #666;
-  --borde: #e0dfd9;
-  --bg:    #fafaf7;
+  --calc:  #1d4ed8; --calc-l:#dbeafe;
+  --geo:   #047857; --geo-l: #d1fae5;
+  --trig:  #b45309; --trig-l:#fef3c7;
+  --txt:   #111827;
+  --muted: #6b7280;
+  --borde: #e5e7eb;
+  --bg:    #f6f7f9;
+  --card:  #ffffff;
+  --shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 12px rgba(0,0,0,.05);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   background: var(--bg);
   color: var(--txt);
   min-height: 100vh;
@@ -30,161 +27,150 @@ body {
 
 /* ── Header ── */
 .header {
-  background: var(--calc);
+  background: linear-gradient(160deg, #0f172a 0%, #1e3a5f 100%);
   padding: 3rem 1.5rem 2.5rem;
   text-align: center;
 }
 .header-tag {
   display: inline-block;
-  background: rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.8);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: .12em;
   text-transform: uppercase;
   padding: 4px 12px;
   border-radius: 20px;
   margin-bottom: 1rem;
 }
 .header h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 2.2rem;
-  font-weight: 700;
+  font-weight: 600;
   color: white;
   line-height: 1.2;
-  margin-bottom: 0.5rem;
+  margin-bottom: .5rem;
 }
 .header p {
-  color: rgba(255,255,255,0.75);
-  font-size: 0.95rem;
+  color: rgba(255,255,255,.65);
+  font-size: .95rem;
   font-weight: 300;
 }
 
-/* ── Sección examen ── */
-.seccion-examen {
+/* ── Exámenes ── */
+.seccion-examenes {
   max-width: 700px;
   margin: 2.5rem auto 0;
   padding: 0 1.25rem;
 }
-
-.card-examen {
-  background: var(--exam);
-  border-radius: 14px;
-  padding: 1.75rem;
+.examenes-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .75rem;
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  text-decoration: none;
-  transition: transform 0.15s, box-shadow 0.15s;
-  box-shadow: 0 4px 20px rgba(42,42,110,0.18);
+  gap: 8px;
 }
-.card-examen:active { transform: scale(0.98); }
-
-.exam-icono {
-  width: 52px; height: 52px;
+.examenes-label::before {
+  content: '';
+  display: inline-block;
+  width: 10px; height: 10px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px;
-  flex-shrink: 0;
+  background: #60a5fa;
 }
-.exam-texto { flex: 1; }
-.exam-titulo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 3px;
+.examenes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .75rem;
 }
-.exam-sub {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.65);
-}
-.exam-arrow {
-  color: rgba(255,255,255,0.5);
-  font-size: 1.3rem;
-  flex-shrink: 0;
+@media (max-width: 480px) {
+  .examenes-grid { grid-template-columns: 1fr; }
 }
 
-/* ── Secciones de materias ── */
+.card-examen {
+  border-radius: 14px;
+  padding: 1.4rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  text-decoration: none;
+  transition: transform .15s;
+  box-shadow: 0 4px 20px rgba(15,23,42,.25);
+  position: relative;
+  overflow: hidden;
+}
+.card-examen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  pointer-events: none;
+}
+.card-examen:active { transform: scale(.97); }
+.card-examen.mate   { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); }
+.card-examen.fisica { background: linear-gradient(135deg, #0f172a 0%, #2e1065 100%); }
+
+.exam-icono  { font-size: 1.6rem; margin-bottom: .15rem; }
+.exam-titulo {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1rem; font-weight: 600;
+  color: white; line-height: 1.3;
+}
+.exam-sub { font-size: .75rem; color: rgba(255,255,255,.5); line-height: 1.4; }
+.exam-arrow {
+  position: absolute; right: 1.1rem; top: 1.2rem;
+  color: rgba(255,255,255,.25); font-size: 1.1rem;
+}
+
+/* ── Secciones ── */
 .seccion {
   max-width: 700px;
   margin: 2rem auto 0;
   padding: 0 1.25rem;
 }
 .seccion-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 0.75rem;
+  display: flex; align-items: center; gap: 10px; margin-bottom: .75rem;
 }
-.seccion-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
+.seccion-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .seccion-titulo {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
+  font-size: 11px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted);
 }
 
-.cards-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
+.cards-grid { display: flex; flex-direction: column; gap: .55rem; }
 
 .card-recurso {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: white;
-  border: 1px solid var(--borde);
-  border-radius: 10px;
-  padding: 1rem 1.1rem;
-  text-decoration: none;
-  color: var(--txt);
-  transition: border-color 0.12s, background 0.12s;
-  -webkit-tap-highlight-color: transparent;
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card); border: 1px solid var(--borde);
+  border-radius: 11px; padding: 1rem 1.1rem;
+  text-decoration: none; color: var(--txt);
+  transition: background .12s;
+  box-shadow: var(--shadow);
 }
-.card-recurso:active { background: #f7f6f2; }
+.card-recurso:active { background: #f0f4ff; }
 
 .recurso-icono {
-  width: 38px; height: 38px;
-  border-radius: 8px;
+  width: 38px; height: 38px; border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
+  font-size: 18px; flex-shrink: 0;
 }
 .recurso-texto { flex: 1; min-width: 0; }
-.recurso-nombre {
-  font-weight: 600;
-  font-size: 0.92rem;
-  line-height: 1.3;
-  margin-bottom: 2px;
-}
-.recurso-desc {
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-.recurso-badge {
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 10px;
-  flex-shrink: 0;
-  letter-spacing: 0.04em;
+.recurso-nombre { font-weight: 600; font-size: .92rem; line-height: 1.3; margin-bottom: 2px; }
+.recurso-desc   { font-size: .78rem; color: var(--muted); }
+.recurso-badge  {
+  font-size: 10px; font-weight: 600; padding: 3px 8px;
+  border-radius: 10px; flex-shrink: 0; letter-spacing: .04em;
 }
 
 /* ── Footer ── */
 .footer {
   text-align: center;
   padding: 3rem 1.5rem 2rem;
-  font-size: 12px;
-  color: var(--muted);
+  font-size: 12px; color: var(--muted);
   margin-top: 1rem;
 }
 </style>
@@ -192,21 +178,31 @@ body {
 <body>
 
 <div class="header">
-  <div class="header-tag">Universidad · Materiales de apoyo</div>
+  <div class="header-tag">Preparatoria · Materiales de apoyo</div>
   <h1>Materiales de Clase</h1>
-  <p>Ejercicios de práctica y examen adaptativo</p>
+  <p>Ejercicios de práctica y exámenes adaptativos</p>
 </div>
 
-<!-- Examen -->
-<div class="seccion-examen">
-  <a class="card-examen" href="examen_adaptativo.html">
-    <div class="exam-icono">📐</div>
-    <div class="exam-texto">
-      <div class="exam-titulo">Examen Adaptativo</div>
+<!-- Exámenes Adaptativos -->
+<div class="seccion-examenes">
+  <div class="examenes-label">Exámenes Adaptativos</div>
+  <div class="examenes-grid">
+
+    <a class="card-examen mate" href="examen_adaptativo.html">
+      <span class="exam-arrow">›</span>
+      <div class="exam-icono">📐</div>
+      <div class="exam-titulo">Matemáticas</div>
       <div class="exam-sub">50 preguntas · Cálculo · Geometría · Trigonometría</div>
-    </div>
-    <span class="exam-arrow">›</span>
-  </a>
+    </a>
+
+    <a class="card-examen fisica" href="examen_adaptativo_fisica.html">
+      <span class="exam-arrow">›</span>
+      <div class="exam-icono">⚛️</div>
+      <div class="exam-titulo">Física</div>
+      <div class="exam-sub">60 preguntas · 9 unidades · temario completo</div>
+    </a>
+
+  </div>
 </div>
 
 <!-- Cálculo Diferencial -->
@@ -271,9 +267,7 @@ body {
   </div>
 </div>
 
-<div class="footer">
-  giledvz.github.io/clases
-</div>
+<div class="footer">giledvz.github.io/clases</div>
 
 </body>
 </html>
