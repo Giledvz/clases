@@ -139,11 +139,11 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--bg); color:v
 <div id="pantalla-inicio">
   <div class="inicio-icon">🎓</div>
   <h1>Examen Adaptativo<br>UNAM Área 2</h1>
-  <p class="subtitulo">Banco Especial · 9 materias · 120 preguntas</p>
+  <p class="subtitulo">Banco Especial · 9 materias · 120 preguntas en orden</p>
   <div class="stats-row">
-    <div class="stat-box"><div class="stat-num">120</div><div class="stat-label">Banco</div></div>
-    <div class="stat-box"><div class="stat-num">60</div><div class="stat-label">Por sesión</div></div>
+    <div class="stat-box"><div class="stat-num">120</div><div class="stat-label">Preguntas</div></div>
     <div class="stat-box"><div class="stat-num">9</div><div class="stat-label">Materias</div></div>
+    <div class="stat-box"><div class="stat-num">∞</div><div class="stat-label">Opciones distintas</div></div>
   </div>
   <div class="unidades-grid">
     <div class="u-chip"><div class="u-dot" style="background:var(--u1)"></div>Español</div>
@@ -162,7 +162,7 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--bg); color:v
     <div class="t-pill">🔴 Avanzado · 4 min</div>
   </div>
   <button class="btn-start" onclick="iniciarExamen()">Comenzar examen →</button>
-  <p class="nota-adaptativo">El examen adapta la dificultad según tus respuestas. Cada sesión presenta 60 preguntas distintas.</p>
+  <p class="nota-adaptativo">Las preguntas siguen el orden del examen real: Español → Matemáticas → Geografía → Física → Biología → Química → Literatura → Historia. Las opciones se mezclan diferente cada sesión.</p>
 </div>
 
 <!-- EXAMEN -->
@@ -855,13 +855,13 @@ let timerSegundos  = 0;
 let timerTotal     = 0;
 let timerActivo    = false;
 
+// Banco ordenado por materia (u) y luego por id
+const BANCO_ORDENADO = [...BANCO].sort((a,b) => a.u !== b.u ? a.u - b.u : a.id - b.id);
+
 function iniciarExamen() {
   estado = {
     respondidas:0, correctas:0, incorrectas:0,
-    dificultad:1, racha:0,
-    unidadActual:0,
-    usadas: new Set(),
-    totalPreguntas:60,
+    totalPreguntas: BANCO_ORDENADO.length,
     resultados:{},
   };
   UNIDADES.forEach(u => { estado.resultados[u.id] = {c:0, t:0}; });
@@ -871,19 +871,9 @@ function iniciarExamen() {
   mostrarPregunta();
 }
 
-const ORDEN_UNIDADES = [1,2,3,4,5,6,7,8,9];
-
 function elegirPregunta() {
-  const uid = ORDEN_UNIDADES[estado.unidadActual % 9];
-  estado.unidadActual++;
-  for (let delta of [0,-1,1,-2,2]) {
-    const dif = Math.max(1, Math.min(3, estado.dificultad + delta));
-    const pool = BANCO.filter(p => p.u === uid && p.d === dif && !estado.usadas.has(p.id));
-    if (pool.length > 0) return pool[Math.floor(Math.random() * pool.length)];
-  }
-  const resto = BANCO.filter(p => !estado.usadas.has(p.id));
-  if (resto.length === 0) return null;
-  return resto[Math.floor(Math.random() * resto.length)];
+  if (estado.respondidas >= BANCO_ORDENADO.length) return null;
+  return BANCO_ORDENADO[estado.respondidas];
 }
 
 function iniciarTimer(dif) {
@@ -917,10 +907,9 @@ function actualizarTimer() {
 
 function mostrarPregunta() {
   preguntaActual = elegirPregunta();
-  if (!preguntaActual || estado.respondidas >= estado.totalPreguntas) {
+  if (!preguntaActual) {
     mostrarResultados(); return;
   }
-  estado.usadas.add(preguntaActual.id);
   const u = UNIDADES.find(x => x.id === preguntaActual.u);
 
   document.getElementById('lbl-num').textContent = `Pregunta ${estado.respondidas+1} de ${estado.totalPreguntas}`;
@@ -978,13 +967,9 @@ function responder(opIdx, btnClickado) {
     estado.correctas++;
     estado.resultados[preguntaActual.u].c++;
     btnClickado.classList.add('correcta');
-    estado.racha = Math.max(0, estado.racha) + 1;
-    if (estado.racha >= 2 && estado.dificultad < 3) { estado.dificultad++; estado.racha = 0; }
   } else {
     estado.incorrectas++;
     btnClickado.classList.add('incorrecta');
-    estado.racha = Math.min(0, estado.racha) - 1;
-    if (estado.racha <= -2 && estado.dificultad > 1) { estado.dificultad--; estado.racha = 0; }
   }
 
   document.getElementById('lbl-score').innerHTML =
@@ -1004,8 +989,6 @@ function tiempoAgotado() {
   estado.incorrectas++;
   estado.respondidas++;
   estado.resultados[preguntaActual.u].t++;
-  estado.racha = Math.min(0, estado.racha) - 1;
-  if (estado.racha <= -2 && estado.dificultad > 1) { estado.dificultad--; estado.racha = 0; }
 
   document.querySelectorAll('.opcion-btn').forEach(b => {
     b.disabled = true;
