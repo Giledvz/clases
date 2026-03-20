@@ -128,7 +128,11 @@ body {
 .barra-fill { height: 100%; background: #60a5fa; transition: width .4s ease; border-radius: 2px; }
 
 /* ── CUERPO EXAMEN ── */
-.cuerpo-examen { padding: 1.5rem 1.25rem; max-width: 680px; margin: 0 auto; }
+.cuerpo-examen {
+  padding: 1.5rem 1.25rem; max-width: 680px; margin: 0 auto;
+  background: var(--card); min-height: calc(100vh - 80px);
+}
+.enunciado { color: var(--txt) !important; }
 .tags-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
 .tag-unidad { display: inline-block; padding: 4px 11px; border-radius: 20px; font-size: .75rem; font-weight: 600; letter-spacing: .03em; }
 .tag-dificultad { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: .72rem; font-weight: 600; border: 1.5px solid; }
@@ -179,6 +183,7 @@ body {
   cursor: pointer; transition: opacity .15s;
 }
 .btn-siguiente:active { opacity: .85; }
+[data-theme="dark"] .btn-siguiente { background: #2563eb; }
 
 /* ── RESULTADOS ── */
 #pantalla-resultados { display: none; min-height: 100vh; }

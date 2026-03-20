@@ -3,463 +3,253 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Examen Adaptativo</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Examen Adaptativo — Matemáticas</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --calc:   #1a4f8a;
-  --geo:    #1a6e3c;
-  --trig:   #7a3a1a;
-  --calc-l: #e8f0fa;
-  --geo-l:  #e6f4ec;
-  --trig-l: #faf0e6;
-  --ok:     #1a6e3c;
-  --err:    #8a1a1a;
-  --ok-l:   #e6f4ec;
-  --err-l:  #faf0ea;
-  --txt:    #1a1a1a;
-  --muted:  #666;
-  --borde:  #d8d8d4;
-  --bg:     #fafaf8;
+  --calc:   #1d4ed8; --calc-l: #dbeafe;
+  --geo:    #047857; --geo-l:  #d1fae5;
+  --trig:   #b45309; --trig-l: #fef3c7;
+  --ok:     #065f46; --ok-l:   #d1fae5;
+  --err:    #7f1d1d; --err-l:  #fee2e2;
+  --bg:     #f6f7f9;
   --card:   #ffffff;
+  --txt:    #111827;
+  --muted:  #6b7280;
+  --borde:  #e5e7eb;
+  --nav:    #0f172a;
+  --trk:    #334155;
+  --letra-bg: #f3f4f6;
+  --fb-ok-txt: #064e3b;
+  --fb-err-txt:#7f1d1d;
+  --desglose-hd:#f9fafb;
+  --barra-bg: #e5e7eb;
+  --shadow: 0 1px 3px rgba(0,0,0,.07),0 4px 12px rgba(0,0,0,.05);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
+[data-theme="dark"] {
+  --bg:    #0f172a;
+  --card:  #1e293b;
+  --txt:   #f1f5f9;
+  --muted: #94a3b8;
+  --borde: #334155;
+  --letra-bg: #334155;
+  --fb-ok-txt: #6ee7b7;
+  --fb-err-txt:#fca5a5;
+  --desglose-hd:#1e293b;
+  --barra-bg: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.2);
+  --calc-l: #1e3a5f; --geo-l: #064e3b; --trig-l: #451a03;
+  --ok-l:   #064e3b; --err-l: #450a0a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html { font-size: 16px; }
 body {
-  font-family: 'Source Sans 3', Georgia, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   background: var(--bg);
   color: var(--txt);
   min-height: 100vh;
-  padding: 0;
+  transition: background .25s, color .25s;
 }
 
-/* ── Pantalla de inicio ── */
+/* ── INICIO ── */
 #pantalla-inicio {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1.5rem;
+  padding: 2rem 1.25rem;
   text-align: center;
+  background: linear-gradient(160deg, #0f172a 0%, #1e3a5f 100%);
+  color: white;
 }
-.inicio-deco {
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  background: var(--calc);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 1.5rem;
-  font-size: 28px;
+[data-theme="dark"] #pantalla-inicio {
+  background: linear-gradient(160deg, #020617 0%, #0f172a 100%);
 }
+.inicio-icon { font-size: 3rem; margin-bottom: 1rem; }
 #pantalla-inicio h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--calc);
-  line-height: 1.2;
-  margin-bottom: 0.5rem;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 2rem; font-weight: 600;
+  line-height: 1.2; margin-bottom: .4rem;
 }
 #pantalla-inicio .subtitulo {
-  font-size: 1rem;
-  color: var(--muted);
-  margin-bottom: 2rem;
-  line-height: 1.6;
+  font-size: .95rem; color: rgba(255,255,255,.65);
+  margin-bottom: 2rem; line-height: 1.6;
 }
-.materias-chips {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 2rem;
+.stats-row { display: flex; gap: 1rem; margin-bottom: 2rem; justify-content: center; }
+.stat-box {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px; padding: .9rem 1.2rem; min-width: 80px;
 }
+.stat-num { font-size: 1.6rem; font-weight: 600; }
+.stat-label { font-size: .72rem; color: rgba(255,255,255,.55); letter-spacing: .04em; text-transform: uppercase; margin-top: 2px; }
+.materias-chips { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem; }
 .chip-materia {
-  padding: 5px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  padding: 5px 14px; border-radius: 20px;
+  font-size: .78rem; font-weight: 600;
+  background: rgba(255,255,255,.1); color: rgba(255,255,255,.85);
 }
-.chip-materia.calc { background: var(--calc-l); color: var(--calc); }
-.chip-materia.geo  { background: var(--geo-l);  color: var(--geo);  }
-.chip-materia.trig { background: var(--trig-l); color: var(--trig); }
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  max-width: 380px;
-  margin: 0 auto 2.5rem;
-}
-.info-item {
-  background: var(--card);
-  border: 1px solid var(--borde);
-  border-radius: 10px;
-  padding: 1rem 0.5rem;
-  text-align: center;
-}
-.info-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--calc);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.info-label {
-  font-size: 11px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
+.tiempo-info { display: flex; gap: .5rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
+.t-pill { background: rgba(255,255,255,.08); border-radius: 20px; padding: 4px 12px; font-size: .78rem; color: rgba(255,255,255,.7); }
 .btn-start {
-  background: var(--calc);
-  color: white;
-  border: none;
-  padding: 1rem 3rem;
-  border-radius: 8px;
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  letter-spacing: 0.05em;
-  transition: opacity 0.15s;
-  -webkit-tap-highlight-color: transparent;
+  display: block; width: 100%; max-width: 320px;
+  padding: 1rem; background: white; color: #0f172a;
+  border: none; border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity .15s;
 }
-.btn-start:active { opacity: 0.8; }
-.nota-adaptativo {
-  margin-top: 1.5rem;
-  font-size: 12px;
-  color: var(--muted);
-  max-width: 300px;
-  line-height: 1.6;
-}
+.btn-start:active { opacity: .85; }
+.nota-adaptativo { margin-top: 1.25rem; font-size: .78rem; color: rgba(255,255,255,.45); max-width: 300px; line-height: 1.6; }
 
-/* ── Examen ── */
+/* ── HEADER EXAMEN ── */
 #pantalla-examen { display: none; min-height: 100vh; }
-
 .header-examen {
-  position: sticky;
-  top: 0;
-  background: var(--card);
-  border-bottom: 1px solid var(--borde);
-  padding: 0.75rem 1.25rem;
+  position: sticky; top: 0;
+  background: var(--nav);
+  padding: .75rem 1.25rem .6rem;
   z-index: 10;
 }
-.header-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
-.pregunta-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--txt);
-}
-.header-derecha {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.score-badge {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-  letter-spacing: 0.05em;
-}
-.timer-wrap {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.timer-circle {
-  position: relative;
-  width: 38px; height: 38px;
-  flex-shrink: 0;
-}
+.header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
+.pregunta-num { font-family: 'DM Sans', sans-serif; font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.7); }
+.header-derecha { display: flex; align-items: center; gap: 10px; }
+.score-badge { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.6); }
+.timer-wrap { display: flex; align-items: center; }
+.timer-circle { position: relative; width: 38px; height: 38px; flex-shrink: 0; }
 .timer-svg { transform: rotate(-90deg); }
-.timer-track { fill: none; stroke: #e8e8e4; stroke-width: 3.5; }
-.timer-fill  { fill: none; stroke-width: 3.5; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.5s; }
+.timer-track { fill: none; stroke: #334155; stroke-width: 3.5; }
+.timer-fill  { fill: none; stroke-width: 3.5; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke .5s; }
 .timer-num {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--txt);
-  line-height: 1;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 10px; font-weight: 700; color: white; line-height: 1;
 }
-.timer-label {
-  font-size: 10px;
-  color: var(--muted);
-  font-weight: 600;
-  letter-spacing: 0.04em;
+/* Dark mode toggle */
+.dm-toggle {
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+  border-radius: 8px; padding: 5px 8px;
+  font-size: 14px; cursor: pointer; color: white; line-height: 1;
 }
-.barra-progreso {
-  height: 4px;
-  background: #eee;
-  border-radius: 2px;
-  overflow: hidden;
-}
-.barra-fill {
-  height: 100%;
-  background: var(--calc);
-  transition: width 0.4s ease;
-  border-radius: 2px;
-}
+.barra-progreso { height: 3px; background: rgba(255,255,255,.15); border-radius: 2px; overflow: hidden; }
+.barra-fill { height: 100%; background: #60a5fa; transition: width .4s ease; border-radius: 2px; }
 
+/* ── CUERPO EXAMEN ── */
 .cuerpo-examen {
-  padding: 1.5rem 1.25rem;
-  max-width: 680px;
-  margin: 0 auto;
+  padding: 1.5rem 1.25rem; max-width: 680px; margin: 0 auto;
+  background: var(--card); min-height: calc(100vh - 80px);
 }
-
+.enunciado { color: var(--txt) !important; }
+.tags-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
 .tag-materia {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
+  display: inline-block; padding: 4px 11px;
+  border-radius: 20px; font-size: .75rem; font-weight: 600; letter-spacing: .03em;
 }
 .tag-materia.calc { background: var(--calc-l); color: var(--calc); }
 .tag-materia.geo  { background: var(--geo-l);  color: var(--geo);  }
 .tag-materia.trig { background: var(--trig-l); color: var(--trig); }
-
 .tag-dificultad {
-  display: inline-block;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-left: 6px;
-  border: 1px solid;
+  display: inline-block; padding: 3px 9px;
+  border-radius: 20px; font-size: .72rem; font-weight: 600; border: 1.5px solid;
 }
-.dif-1 { color: #3a6e1a; border-color: #3a6e1a; background: #f0f8ec; }
-.dif-2 { color: #8a5a1a; border-color: #8a5a1a; background: #faf4ec; }
-.dif-3 { color: #8a1a1a; border-color: #8a1a1a; background: #faf0ec; }
+.dif-1 { color: #166534; border-color: #166534; background: #dcfce7; }
+.dif-2 { color: #92400e; border-color: #92400e; background: #fef3c7; }
+.dif-3 { color: #7f1d1d; border-color: #7f1d1d; background: #fee2e2; }
+[data-theme="dark"] .dif-1 { background: #052e16; color: #6ee7b7; border-color: #6ee7b7; }
+[data-theme="dark"] .dif-2 { background: #451a03; color: #fcd34d; border-color: #fcd34d; }
+[data-theme="dark"] .dif-3 { background: #450a0a; color: #fca5a5; border-color: #fca5a5; }
 
 .enunciado {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--txt);
-  margin-bottom: 1.75rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 400;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.1rem; line-height: 1.7;
+  color: var(--txt); margin-bottom: 1.5rem; font-weight: 400;
 }
-
-.opciones { display: flex; flex-direction: column; gap: 0.65rem; }
-
+.opciones { display: flex; flex-direction: column; gap: .6rem; }
 .opcion-btn {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  width: 100%;
-  text-align: left;
-  padding: 0.9rem 1rem;
+  display: flex; align-items: flex-start; gap: 12px;
+  width: 100%; text-align: left;
+  padding: .9rem 1rem;
   border: 1.5px solid var(--borde);
-  border-radius: 10px;
-  background: var(--card);
+  border-radius: 11px; background: var(--card);
   cursor: pointer;
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--txt);
-  -webkit-tap-highlight-color: transparent;
-  transition: border-color 0.12s, background 0.12s;
+  font-family: 'DM Sans', sans-serif; font-size: .95rem; line-height: 1.5; color: var(--txt);
+  transition: border-color .12s, background .12s;
 }
-.opcion-btn:active:not(:disabled) {
-  background: #f5f5f0;
-}
+.opcion-btn:active:not(:disabled) { background: var(--borde); }
 .opcion-btn:disabled { cursor: default; }
-
 .letra-opcion {
-  flex-shrink: 0;
-  width: 26px; height: 26px;
-  border-radius: 50%;
-  background: #f0efec;
+  flex-shrink: 0; width: 26px; height: 26px;
+  border-radius: 50%; background: var(--letra-bg);
   display: flex; align-items: center; justify-content: center;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-  margin-top: 1px;
+  font-size: 12px; font-weight: 600; color: var(--muted); margin-top: 1px;
 }
+.opcion-btn.correcta  { border-color: var(--ok);  background: var(--ok-l);  }
+.opcion-btn.incorrecta{ border-color: var(--err); background: var(--err-l); }
+.opcion-btn.correcta  .letra-opcion { background: var(--ok);  color: white; }
+.opcion-btn.incorrecta .letra-opcion { background: var(--err); color: white; }
 
-.opcion-btn.correcta {
-  border-color: var(--ok);
-  background: var(--ok-l);
-}
-.opcion-btn.correcta .letra-opcion {
-  background: var(--ok);
-  color: white;
-}
-.opcion-btn.incorrecta {
-  border-color: var(--err);
-  background: var(--err-l);
-}
-.opcion-btn.incorrecta .letra-opcion {
-  background: var(--err);
-  color: white;
-}
-.opcion-btn.correcta-highlight {
-  border-color: var(--ok);
-  background: var(--ok-l);
-}
-
-/* feedback */
 .feedback-box {
-  margin-top: 1.25rem;
-  padding: 0.9rem 1rem;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  display: none;
+  margin-top: 1.25rem; padding: 1rem; border-radius: 10px;
+  font-size: .9rem; line-height: 1.65; display: none;
 }
-.feedback-box.correcto {
-  background: var(--ok-l);
-  border-left: 3px solid var(--ok);
-  color: #144a28;
-}
-.feedback-box.incorrecto {
-  background: var(--err-l);
-  border-left: 3px solid var(--err);
-  color: #5a1010;
-}
-.feedback-icono {
-  font-weight: 700;
-  margin-right: 4px;
-}
+.feedback-box.correcto  { background: var(--ok-l);  border-left: 3px solid var(--ok);  color: var(--fb-ok-txt);  }
+.feedback-box.incorrecto{ background: var(--err-l); border-left: 3px solid var(--err); color: var(--fb-err-txt); }
+.feedback-icono { font-weight: 700; margin-right: 4px; }
 
 .btn-siguiente {
-  display: none;
-  width: 100%;
-  margin-top: 1.25rem;
-  padding: 1rem;
-  background: var(--calc);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: opacity 0.15s;
+  display: none; width: 100%; margin-top: 1.25rem; padding: 1rem;
+  background: var(--nav); color: white; border: none; border-radius: 11px;
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
+  cursor: pointer; transition: opacity .15s;
 }
-.btn-siguiente:active { opacity: 0.8; }
-.btn-siguiente.geo-theme  { background: var(--geo); }
-.btn-siguiente.trig-theme { background: var(--trig); }
+.btn-siguiente:active { opacity: .85; }
+[data-theme="dark"] .btn-siguiente { background: #2563eb; }
 
-/* ── Resultados ── */
-#pantalla-resultados { display: none; padding: 2rem 1.5rem; max-width: 680px; margin: 0 auto; }
-
-.resultado-titulo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  text-align: center;
-  color: var(--calc);
-  margin-bottom: 0.5rem;
+/* ── RESULTADOS ── */
+#pantalla-resultados { display: none; min-height: 100vh; }
+.res-header {
+  background: var(--nav); color: white;
+  padding: 2rem 1.25rem 1.5rem; text-align: center;
 }
-.resultado-subtitulo {
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-bottom: 2rem;
+.res-header h2 { font-family: 'Lora', Georgia, serif; font-size: 1.5rem; margin-bottom: .25rem; }
+.res-sub { font-size: .85rem; color: rgba(255,255,255,.55); margin-bottom: 1rem; }
+.puntaje-grande { font-size: 3.5rem; font-weight: 600; line-height: 1; }
+.puntaje-den    { font-size: 1.1rem; color: rgba(255,255,255,.5); }
+.nivel-badge {
+  display: inline-block; padding: 5px 16px; border-radius: 20px;
+  font-size: .82rem; font-weight: 600; margin-top: .75rem;
 }
-
-.puntaje-grande {
-  text-align: center;
-  margin-bottom: 2rem;
+.res-body { padding: 1.25rem; max-width: 680px; margin: 0 auto; }
+.res-stats-mini { display: flex; gap: .5rem; margin-bottom: 1.25rem; }
+.res-stat {
+  flex: 1; background: var(--card); border-radius: 12px;
+  padding: .8rem; text-align: center; box-shadow: var(--shadow);
 }
-.puntaje-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 4rem;
-  font-weight: 600;
-  line-height: 1;
-}
-.puntaje-label {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-top: 4px;
-}
-
+.res-stat-num { font-size: 1.4rem; font-weight: 600; }
+.res-stat-lbl { font-size: .7rem; color: var(--muted); margin-top: 2px; }
 .desglose {
-  border: 1px solid var(--borde);
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 2rem;
+  background: var(--card); border-radius: 14px;
+  overflow: hidden; margin-bottom: 1.5rem; box-shadow: var(--shadow);
 }
 .desglose-titulo {
-  padding: 0.75rem 1rem;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  background: #f7f6f3;
-  border-bottom: 1px solid var(--borde);
+  padding: .75rem 1rem; font-size: .72rem; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+  background: var(--desglose-hd); border-bottom: 1px solid var(--borde);
 }
 .desglose-fila {
-  display: flex;
-  align-items: center;
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid var(--borde);
-  gap: 12px;
+  display: flex; align-items: center;
+  padding: .85rem 1rem; border-bottom: 1px solid var(--borde); gap: 12px;
 }
 .desglose-fila:last-child { border-bottom: none; }
-.desglose-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.desglose-nombre { flex: 1; font-size: 0.9rem; }
-.desglose-barra-wrap {
-  width: 100px;
-  height: 6px;
-  background: #eee;
-  border-radius: 3px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.desglose-barra-fill {
-  height: 100%;
-  border-radius: 3px;
-}
-.desglose-score {
-  font-size: 0.85rem;
-  font-weight: 600;
-  min-width: 40px;
-  text-align: right;
-}
-
-.nivel-badge {
-  text-align: center;
-  padding: 1rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-}
+.desglose-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.desglose-nombre { flex: 1; font-size: .88rem; }
+.desglose-barra-wrap { width: 90px; height: 6px; background: var(--barra-bg); border-radius: 3px; overflow: hidden; flex-shrink: 0; }
+.desglose-barra-fill { height: 100%; border-radius: 3px; }
+.desglose-score { font-size: .85rem; font-weight: 600; min-width: 40px; text-align: right; }
 
 .btn-reiniciar {
-  display: block;
-  width: 100%;
-  padding: 1rem;
-  background: var(--calc);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  text-align: center;
+  display: block; width: 100%; padding: 1rem;
+  background: var(--nav); color: white; border: none; border-radius: 11px;
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer;
 }
 </style>
 </head>
@@ -467,21 +257,26 @@ body {
 
 <!-- ══ PANTALLA DE INICIO ══ -->
 <div id="pantalla-inicio">
-  <div class="inicio-deco">📐</div>
-  <h1>Examen Adaptativo</h1>
-  <p class="subtitulo">50 preguntas que se ajustan a tu nivel<br>en tiempo real.</p>
+  <div class="inicio-icon">📐</div>
+  <h1>Examen Adaptativo<br>Matemáticas</h1>
+  <p class="subtitulo">50 preguntas · dificultad en tiempo real</p>
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-num">50</div><div class="stat-label">Preguntas</div></div>
+    <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">Materias</div></div>
+    <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">Niveles</div></div>
+  </div>
   <div class="materias-chips">
-    <span class="chip-materia calc">Cálculo Diferencial</span>
-    <span class="chip-materia geo">Geometría Analítica</span>
-    <span class="chip-materia trig">Trigonometría</span>
+    <span class="chip-materia">Cálculo Diferencial</span>
+    <span class="chip-materia">Geometría Analítica</span>
+    <span class="chip-materia">Trigonometría</span>
   </div>
-  <div class="info-grid">
-    <div class="info-item"><div class="info-num">50</div><div class="info-label">Preguntas</div></div>
-    <div class="info-item"><div class="info-num">3</div><div class="info-label">Materias</div></div>
-    <div class="info-item"><div class="info-num">3</div><div class="info-label">Niveles</div></div>
+  <div class="tiempo-info">
+    <div class="t-pill">🟢 Básico · 90 seg</div>
+    <div class="t-pill">🟡 Intermedio · 2.5 min</div>
+    <div class="t-pill">🔴 Avanzado · 4 min</div>
   </div>
-  <button class="btn-start" onclick="iniciarExamen()">Comenzar examen</button>
-  <p class="nota-adaptativo">El examen adapta la dificultad según tus respuestas. Responde con honestidad para obtener una evaluación precisa.</p>
+  <button class="btn-start" onclick="iniciarExamen()">Comenzar examen →</button>
+  <p class="nota-adaptativo">El examen adapta la dificultad según tus respuestas.</p>
 </div>
 
 <!-- ══ PANTALLA DE EXAMEN ══ -->
@@ -496,13 +291,14 @@ body {
             <svg class="timer-svg" width="38" height="38" viewBox="0 0 38 38">
               <circle class="timer-track" cx="19" cy="19" r="16"/>
               <circle class="timer-fill" id="timer-arc" cx="19" cy="19" r="16"
-                stroke="#1a4f8a"
+                stroke="#60a5fa"
                 stroke-dasharray="100.53"
                 stroke-dashoffset="0"/>
             </svg>
             <span class="timer-num" id="timer-num">—</span>
           </div>
         </div>
+        <button class="dm-toggle" onclick="toggleDark()" id="dm-btn" title="Cambiar tema">🌙</button>
       </div>
     </div>
     <div class="barra-progreso">
@@ -510,7 +306,7 @@ body {
     </div>
   </div>
   <div class="cuerpo-examen">
-    <div>
+    <div class="tags-row">
       <span class="tag-materia" id="tag-materia"></span>
       <span class="tag-dificultad" id="tag-dif"></span>
     </div>
@@ -523,35 +319,49 @@ body {
 
 <!-- ══ PANTALLA DE RESULTADOS ══ -->
 <div id="pantalla-resultados">
-  <h2 class="resultado-titulo">Examen completado</h2>
-  <p class="resultado-subtitulo" id="res-fecha"></p>
-  <div class="puntaje-grande">
-    <div class="puntaje-num" id="res-pct"></div>
-    <div class="puntaje-label">de respuestas correctas</div>
+  <div class="res-header">
+    <h2>Examen completado</h2>
+    <p class="res-sub" id="res-fecha"></p>
+    <div>
+      <span class="puntaje-grande" id="res-pct" style="color:white">—</span>
+      <span class="puntaje-den"> correctas</span>
+    </div>
+    <div class="nivel-badge" id="res-nivel"></div>
   </div>
-  <div class="nivel-badge" id="res-nivel"></div>
-  <div class="desglose">
-    <div class="desglose-titulo">Desglose por materia</div>
-    <div class="desglose-fila">
-      <div class="desglose-dot" style="background:var(--calc)"></div>
-      <div class="desglose-nombre">Cálculo Diferencial</div>
-      <div class="desglose-barra-wrap"><div class="desglose-barra-fill" id="barra-calc" style="background:var(--calc)"></div></div>
-      <div class="desglose-score" id="score-calc"></div>
+  <div class="res-body">
+    <div class="res-stats-mini">
+      <div class="res-stat">
+        <div class="res-stat-num" id="res-corr" style="color:var(--ok)">—</div>
+        <div class="res-stat-lbl">Correctas</div>
+      </div>
+      <div class="res-stat">
+        <div class="res-stat-num" id="res-inco" style="color:var(--err)">—</div>
+        <div class="res-stat-lbl">Incorrectas</div>
+      </div>
     </div>
-    <div class="desglose-fila">
-      <div class="desglose-dot" style="background:var(--geo)"></div>
-      <div class="desglose-nombre">Geometría Analítica</div>
-      <div class="desglose-barra-wrap"><div class="desglose-barra-fill" id="barra-geo" style="background:var(--geo)"></div></div>
-      <div class="desglose-score" id="score-geo"></div>
+    <div class="desglose">
+      <div class="desglose-titulo">Desglose por materia</div>
+      <div class="desglose-fila">
+        <div class="desglose-dot" style="background:var(--calc)"></div>
+        <div class="desglose-nombre">Cálculo Diferencial</div>
+        <div class="desglose-barra-wrap"><div class="desglose-barra-fill" id="barra-calc" style="background:var(--calc)"></div></div>
+        <div class="desglose-score" id="score-calc"></div>
+      </div>
+      <div class="desglose-fila">
+        <div class="desglose-dot" style="background:var(--geo)"></div>
+        <div class="desglose-nombre">Geometría Analítica</div>
+        <div class="desglose-barra-wrap"><div class="desglose-barra-fill" id="barra-geo" style="background:var(--geo)"></div></div>
+        <div class="desglose-score" id="score-geo"></div>
+      </div>
+      <div class="desglose-fila">
+        <div class="desglose-dot" style="background:var(--trig)"></div>
+        <div class="desglose-nombre">Trigonometría</div>
+        <div class="desglose-barra-wrap"><div class="desglose-barra-fill" id="barra-trig" style="background:var(--trig)"></div></div>
+        <div class="desglose-score" id="score-trig"></div>
+      </div>
     </div>
-    <div class="desglose-fila">
-      <div class="desglose-dot" style="background:var(--trig)"></div>
-      <div class="desglose-nombre">Trigonometría</div>
-      <div class="desglose-barra-wrap"><div class="desglose-barra-fill" id="barra-trig" style="background:var(--trig)"></div></div>
-      <div class="desglose-score" id="score-trig"></div>
-    </div>
+    <button class="btn-reiniciar" onclick="reiniciar()">🔄 Intentar de nuevo</button>
   </div>
-  <button class="btn-reiniciar" onclick="reiniciar()">Intentar de nuevo</button>
 </div>
 
 <script>
@@ -1171,7 +981,6 @@ function siguientePregunta() {
 
 function mostrarResultados() {
   detenerTimer();
-  // Resetear visual del timer
   const arc = document.getElementById('timer-arc');
   const num = document.getElementById('timer-num');
   if (arc) arc.style.strokeDashoffset = 0;
@@ -1182,38 +991,41 @@ function mostrarResultados() {
 
   const pct = Math.round((estado.correctas / estado.respondidas) * 100);
   document.getElementById('res-pct').textContent = `${pct}%`;
+  document.getElementById('res-corr').textContent = estado.correctas;
+  document.getElementById('res-inco').textContent = estado.incorrectas;
 
   const ahora = new Date();
   document.getElementById('res-fecha').textContent =
     `${estado.respondidas} preguntas · ${ahora.toLocaleDateString('es-MX', {day:'numeric',month:'long',year:'numeric'})}`;
 
-  // Nivel
   const nivelEl = document.getElementById('res-nivel');
-  let nivel, nivelColor;
-  if (pct >= 90) { nivel = '🏆 Excelente dominio de los temas'; nivelColor = '#e6f4ec'; }
-  else if (pct >= 75) { nivel = '✅ Buen nivel — sigue repasando los temas difíciles'; nivelColor = '#edf4e8'; }
-  else if (pct >= 60) { nivel = '📚 Nivel en desarrollo — revisa los ejercicios de práctica'; nivelColor = '#faf4ec'; }
-  else { nivel = '📖 Necesitas reforzar los temas — trabaja con los ejercicios de cada materia'; nivelColor = '#faf0ec'; }
+  let nivel, nivelBg, nivelColor;
+  if (pct >= 90)      { nivel = '🏆 Excelente dominio'; nivelBg = '#d1fae5'; nivelColor = '#065f46'; }
+  else if (pct >= 75) { nivel = '✅ Buen nivel';         nivelBg = '#dbeafe'; nivelColor = '#1d4ed8'; }
+  else if (pct >= 60) { nivel = '📚 En desarrollo';      nivelBg = '#fef3c7'; nivelColor = '#92400e'; }
+  else                { nivel = '📖 A reforzar';         nivelBg = '#fee2e2'; nivelColor = '#7f1d1d'; }
   nivelEl.textContent = nivel;
-  nivelEl.style.background = nivelColor;
-  nivelEl.style.color = '#333';
+  nivelEl.style.background = nivelBg;
+  nivelEl.style.color = nivelColor;
 
-  // Desglose por materia
   ['calc','geo','trig'].forEach(mat => {
     const r = estado.resultados[mat];
     const p = r.t > 0 ? Math.round((r.c/r.t)*100) : 0;
     document.getElementById(`score-${mat}`).textContent = r.t > 0 ? `${r.c}/${r.t}` : '—';
     document.getElementById(`barra-${mat}`).style.width = `${p}%`;
   });
-
-  // Color del puntaje
-  const pctEl = document.getElementById('res-pct');
-  pctEl.style.color = pct >= 75 ? 'var(--ok)' : pct >= 60 ? 'var(--trig)' : 'var(--err)';
 }
 
 function reiniciar() {
   document.getElementById('pantalla-resultados').style.display = 'none';
   document.getElementById('pantalla-inicio').style.display     = 'flex';
+}
+
+// ── DARK MODE ──
+function toggleDark() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  document.documentElement.dataset.theme = isDark ? 'light' : 'dark';
+  document.getElementById('dm-btn').textContent = isDark ? '🌙' : '☀️';
 }
 </script>
 </body>
