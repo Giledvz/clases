@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Examen Adaptativo — UNAM Área 2</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="window.katexReady=true;if(window.katexQueue){window.katexQueue.forEach(fn=>fn());window.katexQueue=[];}"></script>
 <style>
 :root {
   --u1:#1d4ed8; --u1l:#dbeafe;
@@ -107,6 +111,18 @@ body { font-family:'DM Sans',system-ui,sans-serif; background:var(--bg); color:v
 .btn-siguiente { display:none; width:100%; margin-top:1.25rem; padding:1rem; background:var(--nav); color:white; border:none; border-radius:11px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:600; cursor:pointer; transition:opacity .15s; }
 .btn-siguiente:active { opacity:.85; }
 [data-theme="dark"] .btn-siguiente { background:#2563eb; }
+
+/* ── TABLAS DE RELACIONAR ── */
+.rel-tabla { width:100%; border-collapse:collapse; margin-top:.75rem; font-size:.88rem; font-family:'DM Sans',sans-serif; }
+.rel-tabla th, .rel-tabla td { padding:.45rem .7rem; border:1px solid var(--borde); vertical-align:top; line-height:1.5; }
+.rel-tabla th { background:var(--letra-bg); font-weight:600; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+.rel-lista { margin-top:.75rem; border:1px solid var(--borde); border-radius:8px; overflow:hidden; font-size:.88rem; }
+.rel-lista > div { padding:.45rem .85rem; border-bottom:1px solid var(--borde); line-height:1.5; }
+.rel-lista > div:last-child { border-bottom:none; }
+/* ── KATEX ── */
+.katex { font-size:1em; }
+.katex-display { margin:.4em 0; overflow-x:auto; overflow-y:hidden; }
+[data-theme="dark"] .katex { color:var(--txt); }
 
 /* ── RESULTADOS ── */
 #pantalla-resultados { display:none; min-height:100vh; }
@@ -327,124 +343,124 @@ const BANCO = [
 
 // ══ MATEMÁTICAS (u:2) ══
 { id:19, u:2, d:2,
-  q:'Realiza la siguiente operación: [(-3/4) + (-1/3)] + [-(3/4 + 1/3)]',
-  ops:['-13/6','13/6','6/13','-6/13'], ans:0,
-  exp:'= -3/4 - 1/3 - 3/4 - 1/3 = -3/2 - 2/3 = -9/6 - 4/6 = -13/6' },
+  q:'Realiza la siguiente operación: $$\\left[\\left(-\\frac{3}{4}\\right) + \\left(-\\frac{1}{3}\\right)\\right] + \\left[-\\left(\\frac{3}{4} + \\frac{1}{3}\\right)\\right]$$',
+  ops:['$-\\dfrac{13}{6}$','$\\dfrac{13}{6}$','$\\dfrac{6}{13}$','$-\\dfrac{6}{13}$'], ans:0,
+  exp:'$= -\\frac{3}{4} - \\frac{1}{3} - \\frac{3}{4} - \\frac{1}{3} = -\\frac{3}{2} - \\frac{2}{3} = -\\frac{9}{6} - \\frac{4}{6} = -\\frac{13}{6}$' },
 
 { id:20, u:2, d:3,
-  q:'¿Cuál es el cuarto término al desarrollar (5x² − y)⁴?',
-  ops:['−25x²y³','−20x²y³','−10x²y³','−35x²y³'], ans:1,
-  exp:'T₄ = C(4,3)(5x²)¹(−y)³ = 4 · 5x² · (−y³) = −20x²y³' },
+  q:'¿Cuál es el cuarto término al desarrollar $(5x^2 - y)^4$?',
+  ops:['$-25x^2y^3$','$-20x^2y^3$','$-10x^2y^3$','$-35x^2y^3$'], ans:1,
+  exp:'$T_4 = \\binom{4}{3}(5x^2)^1(-y)^3 = 4 \\cdot 5x^2 \\cdot (-y^3) = -20x^2y^3$' },
 
 { id:21, u:2, d:2,
-  q:'Encuentra el valor de a en la ecuación: (a + 1)/2 + (a − 1)/4 = a',
-  ops:['a = 2','a = 3','a = 1','a = 4'], ans:2,
-  exp:'Multiplicando por 4: 2(a+1) + (a−1) = 4a → 2a+2+a−1 = 4a → 3a+1 = 4a → a = 1' },
+  q:'Encuentra el valor de $a$ en la ecuación: $$\\frac{a+1}{2} + \\frac{a-1}{4} = a$$',
+  ops:['$a = 2$','$a = 3$','$a = 1$','$a = 4$'], ans:2,
+  exp:'Multiplicando por 4: $2(a+1)+(a-1)=4a \\Rightarrow 3a+1=4a \\Rightarrow a=1$' },
 
 { id:22, u:2, d:2,
-  q:'¿Cuáles son las raíces de la ecuación 3x² − 2x − 1 = 0?',
-  ops:['x₁ = −1, x₂ = 1/3','x₁ = −1, x₂ = −1/3','x₁ = −1, x₂ = 1/3 (incorrecta)','x₁ = 1, x₂ = −1/3'], ans:3,
-  exp:'Fórmula general: x = (2 ± √(4+12))/6 = (2 ± 4)/6 → x₁ = 6/6 = 1 y x₂ = −2/6 = −1/3' },
+  q:'¿Cuáles son las raíces de la ecuación $3x^2 - 2x - 1 = 0$?',
+  ops:['$x_1 = -1,\\; x_2 = \\dfrac{1}{3}$','$x_1 = -1,\\; x_2 = -\\dfrac{1}{3}$','$x_1 = -2,\\; x_2 = \\dfrac{1}{3}$','$x_1 = 1,\\; x_2 = -\\dfrac{1}{3}$'], ans:3,
+  exp:'$x = \\dfrac{2 \\pm \\sqrt{4+12}}{6} = \\dfrac{2 \\pm 4}{6}$ → $x_1 = 1,\\; x_2 = -\\dfrac{1}{3}$' },
 
 { id:23, u:2, d:3,
-  q:'Expresa en °C el intervalo 60° ≤ F ≤ 80° sabiendo que °C = (5/9)(F − 32)',
-  ops:['140/9 ≤ °C ≤ 80/3','9/140 ≤ °C ≤ 80/3','140/9 ≤ °C ≤ 3/80','80/9 ≤ °C ≤ 140/3'], ans:0,
-  exp:'Para F=60: °C=(5/9)(28)=140/9. Para F=80: °C=(5/9)(48)=240/9=80/3. Intervalo: 140/9 ≤ °C ≤ 80/3' },
+  q:'Expresa en °C el intervalo $60° \\leq F \\leq 80°$, sabiendo que $°C = \\dfrac{5}{9}(F - 32)$',
+  ops:['$\\dfrac{140}{9} \\leq °C \\leq \\dfrac{80}{3}$','$\\dfrac{9}{140} \\leq °C \\leq \\dfrac{80}{3}$','$\\dfrac{140}{9} \\leq °C \\leq \\dfrac{3}{80}$','$\\dfrac{80}{9} \\leq °C \\leq \\dfrac{140}{3}$'], ans:0,
+  exp:'Para $F=60$: $°C=\\frac{5}{9}(28)=\\frac{140}{9}$. Para $F=80$: $°C=\\frac{5}{9}(48)=\\frac{240}{9}=\\frac{80}{3}$. Intervalo: $\\frac{140}{9} \\leq °C \\leq \\frac{80}{3}$' },
 
 { id:24, u:2, d:2,
-  q:'Resuelve el sistema: { 4x + 11y + 13 = 0 } y { 5x − y = 28 }',
-  ops:['x = 5, y = −3','x = 3, y = −5','x = 5, y = 3','x = −3, y = −5'], ans:0,
-  exp:'De la 2ª: y = 5x−28. Sustituyendo: 4x + 11(5x−28) + 13 = 0 → 59x = 295 → x=5, y=5(5)−28=−3' },
+  q:'Resuelve el sistema de ecuaciones: $$\\begin{cases} 4x + 11y + 13 = 0 \\\\ 5x - y = 28 \\end{cases}$$',
+  ops:['$x = 5,\\; y = -3$','$x = 3,\\; y = -5$','$x = 5,\\; y = 3$','$x = -3,\\; y = -5$'], ans:0,
+  exp:'De la 2ª: $y = 5x-28$. Sustituyendo: $4x + 11(5x-28) + 13 = 0 \\Rightarrow 59x = 295 \\Rightarrow x=5,\\; y=-3$' },
 
 { id:25, u:2, d:2,
-  q:'Si f(x) = x² − 1, ¿cuánto es f(x + 2)?',
-  ops:['x² − 4x − 3','x² + 4x + 3','x² + 4x − 3','x² − 4x + 3'], ans:1,
-  exp:'f(x+2) = (x+2)² − 1 = x² + 4x + 4 − 1 = x² + 4x + 3' },
+  q:'Si $f(x) = x^2 - 1$, ¿cuánto es $f(x + 2)$?',
+  ops:['$x^2 - 4x - 3$','$x^2 + 4x + 3$','$x^2 + 4x - 3$','$x^2 - 4x + 3$'], ans:1,
+  exp:'$f(x+2) = (x+2)^2 - 1 = x^2 + 4x + 4 - 1 = x^2 + 4x + 3$' },
 
 { id:26, u:2, d:2,
-  q:'En un triángulo rectángulo con cateto opuesto = 4 u, cateto adyacente = 3 u e hipotenusa = 5 u, ¿cuáles son tan(a) y cos(a) para el ángulo a opuesto al cateto de 4?',
-  ops:['tan a = 3/4, cos a = 4/5','tan a = 4/3, cos a = 4/5','tan a = 4/3, cos a = 3/5','tan a = 4/5, cos a = 3/5'], ans:2,
-  exp:'tan(a) = opuesto/adyacente = 4/3. cos(a) = adyacente/hipotenusa = 3/5' },
+  q:'En un triángulo rectángulo con cateto opuesto $= 4$, cateto adyacente $= 3$ e hipotenusa $= 5$, ¿cuáles son $\\tan(a)$ y $\\cos(a)$ para el ángulo $a$ opuesto al cateto de 4?',
+  ops:['$\\tan a = \\dfrac{3}{4},\\; \\cos a = \\dfrac{4}{5}$','$\\tan a = \\dfrac{4}{3},\\; \\cos a = \\dfrac{4}{5}$','$\\tan a = \\dfrac{4}{3},\\; \\cos a = \\dfrac{3}{5}$','$\\tan a = \\dfrac{4}{5},\\; \\cos a = \\dfrac{3}{5}$'], ans:2,
+  exp:'$\\tan(a) = \\dfrac{\\text{opuesto}}{\\text{adyacente}} = \\dfrac{4}{3}$ y $\\cos(a) = \\dfrac{\\text{adyacente}}{\\text{hipotenusa}} = \\dfrac{3}{5}$' },
 
 { id:27, u:2, d:3,
-  q:'En un triángulo isósceles rectángulo (catetos iguales), ¿cuál es el valor del ángulo a entre la hipotenusa y uno de los catetos?',
-  ops:['a = 50°','a = 60°','a = 30°','a = 45°'], ans:3,
-  exp:'En un triángulo isósceles rectángulo los catetos son iguales, los ángulos agudos son iguales y suman 90°, por tanto cada uno mide 45°.' },
+  q:'En un triángulo isósceles rectángulo (catetos iguales), ¿cuál es el valor del ángulo $a$ entre la hipotenusa y uno de los catetos?',
+  ops:['$a = 50°$','$a = 60°$','$a = 30°$','$a = 45°$'], ans:3,
+  exp:'Los dos ángulos agudos son iguales y suman $90°$, por tanto cada uno mide $45°$.' },
 
 { id:28, u:2, d:3,
-  q:'¿Cuál es la ecuación de la asíntota horizontal de la función exponencial y = eˣ + 5?',
-  ops:['y = e','y = −5','y = e + 5','y = 5'], ans:3,
-  exp:'Cuando x → −∞, eˣ → 0, entonces y → 5. La asíntota horizontal es y = 5.' },
+  q:'¿Cuál es la ecuación de la asíntota horizontal de la función $y = e^x + 5$?',
+  ops:['$y = e$','$y = -5$','$y = e + 5$','$y = 5$'], ans:3,
+  exp:'Cuando $x \\to -\\infty$, $e^x \\to 0$, entonces $y \\to 5$. La asíntota horizontal es $y = 5$.' },
 
 { id:29, u:2, d:2,
-  q:'¿Cuál es la distancia entre los puntos A(−3, 5) y B(−2, −1)?',
-  ops:['√15','√17','√35','√37'], ans:3,
-  exp:'d = √[(−2−(−3))² + (−1−5)²] = √[1² + (−6)²] = √[1+36] = √37' },
+  q:'¿Cuál es la distancia entre los puntos $A(-3,\\, 5)$ y $B(-2,\\, -1)$?',
+  ops:['$\\sqrt{15}$','$\\sqrt{17}$','$\\sqrt{35}$','$\\sqrt{37}$'], ans:3,
+  exp:'$d = \\sqrt{(-2-(-3))^2+(-1-5)^2} = \\sqrt{1+36} = \\sqrt{37}$' },
 
 { id:30, u:2, d:2,
-  q:'El punto medio del segmento AB es C(1, 6). Si A tiene coordenadas (1, 5), ¿cuáles son las coordenadas de B?',
-  ops:['B(−1, −7)','B(−1, 7)','B(1, 7)','B(1, −7)'], ans:2,
-  exp:'B = (2×Cx − Ax, 2×Cy − Ay) = (2×1−1, 2×6−5) = (1, 7)' },
+  q:'El punto medio del segmento $\\overline{AB}$ es $C(1,\\,6)$. Si $A(1,\\,5)$, ¿cuáles son las coordenadas de $B$?',
+  ops:['$B(-1,\\,-7)$','$B(-1,\\,7)$','$B(1,\\,7)$','$B(1,\\,-7)$'], ans:2,
+  exp:'$B = (2C_x - A_x,\\; 2C_y - A_y) = (2\\cdot1-1,\\; 2\\cdot6-5) = (1,\\,7)$' },
 
 { id:31, u:2, d:2,
-  q:'El punto medio del segmento es R(−5, 2) y uno de sus extremos es P(−7, 3). ¿Cuál es el punto Q?',
-  ops:['Q(−3, −1)','Q(−3, 1)','Q(3, −1)','Q(3, 1)'], ans:1,
-  exp:'Q = (2×(−5)−(−7), 2×2−3) = (−10+7, 4−3) = (−3, 1)' },
+  q:'El punto medio del segmento es $R(-5,\\,2)$ y uno de sus extremos es $P(-7,\\,3)$. ¿Cuál es el punto $Q$?',
+  ops:['$Q(-3,\\,-1)$','$Q(-3,\\,1)$','$Q(3,\\,-1)$','$Q(3,\\,1)$'], ans:1,
+  exp:'$Q = (2(-5)-(-7),\\; 2(2)-3) = (-3,\\,1)$' },
 
 { id:32, u:2, d:3,
-  q:'¿Cuál es el vértice de la parábola (y + 2)² = 4(x − 3)?',
-  ops:['V(3, 2)','V(3, −2)','V(−3, 2)','V(3, −2)'], ans:3,
-  exp:'Forma canónica (y − k)² = 4p(x − h): h = 3, k = −2. Vértice en V(3, −2).' },
+  q:'¿Cuál es el vértice de la parábola $(y+2)^2 = 4(x-3)$?',
+  ops:['$V(3,\\,2)$','$V(-3,\\,-2)$','$V(-3,\\,2)$','$V(3,\\,-2)$'], ans:3,
+  exp:'Forma canónica $(y-k)^2 = 4p(x-h)$: $h=3,\\; k=-2$. Vértice en $V(3,\\,-2)$.' },
 
 { id:33, u:2, d:2,
-  q:'¿Cuál es la ecuación de la circunferencia con centro en el origen que pasa por P(0, −3)?',
-  ops:['x² + y² = 3','x² + y² = 6','x² + y² = 12','x² + y² = 9'], ans:3,
-  exp:'Radio r = |OP| = 3. Ecuación: x² + y² = r² = 9' },
+  q:'¿Cuál es la ecuación de la circunferencia con centro en el origen que pasa por $P(0,\\,-3)$?',
+  ops:['$x^2+y^2=3$','$x^2+y^2=6$','$x^2+y^2=12$','$x^2+y^2=9$'], ans:3,
+  exp:'Radio $r = |OP| = 3$. Ecuación: $x^2+y^2=r^2=9$' },
 
 { id:34, u:2, d:2,
   q:'¿Cuál es la definición de elipse?',
-  ops:['Lugar geométrico donde la RESTA de distancias a focos es constante','Lugar geométrico donde la MULTIPLICACIÓN de distancias a focos es constante','Lugar geométrico donde la SUMA de distancias a focos es constante','Lugar geométrico donde la DIVISIÓN de distancias a focos es constante'], ans:2,
-  exp:'Elipse: conjunto de puntos cuya suma de distancias a dos focos F₁ y F₂ es constante e igual a 2a (eje mayor).' },
+  ops:['Lugar geométrico donde la <b>resta</b> de distancias a los focos es constante','Lugar geométrico donde la <b>multiplicación</b> de distancias a los focos es constante','Lugar geométrico donde la <b>suma</b> de distancias a los focos es constante','Lugar geométrico donde la <b>división</b> de distancias a los focos es constante'], ans:2,
+  exp:'Elipse: conjunto de puntos cuya suma de distancias a dos focos $F_1$ y $F_2$ es constante e igual a $2a$ (eje mayor).' },
 
 { id:35, u:2, d:3,
-  q:'Determina el centro C de la hipérbola: (x − 2)²/25 − (y + 7)²/9 = 1',
-  ops:['C(5, 7)','C(−5, 7)','C(2, −7)','C(−2, −7)'], ans:2,
-  exp:'Forma canónica (x − h)²/a² − (y − k)²/b² = 1: h = 2, k = −7. Centro C(2, −7).' },
+  q:'Determina el centro $C$ de la hipérbola: $$\\frac{(x-2)^2}{25} - \\frac{(y+7)^2}{9} = 1$$',
+  ops:['$C(5,\\,7)$','$C(-5,\\,7)$','$C(2,\\,-7)$','$C(-2,\\,-7)$'], ans:2,
+  exp:'Forma canónica $\\dfrac{(x-h)^2}{a^2}-\\dfrac{(y-k)^2}{b^2}=1$: $h=2,\\; k=-7$. Centro $C(2,\\,-7)$.' },
 
 { id:36, u:2, d:3,
-  q:'¿Cuál es la ecuación general de una circunferencia con centro en (h, k)?',
-  ops:['Ax² + Bx + C = 0','x² + y² + Dx + Ey + F = 0','Ax² + By² + Dx + Ey + F = 0','Ax² + Bxy + Cy² + Dx + Ey + F = 0'], ans:3,
-  exp:'La ecuación general de segundo grado Ax²+Bxy+Cy²+Dx+Ey+F=0 representa conónicas. La circunferencia es un caso especial donde A=C, B=0.' },
+  q:'¿Cuál es la ecuación general de segundo grado que representa cónicas (incluida la circunferencia)?',
+  ops:['$Ax^2 + Bx + C = 0$','$x^2 + y^2 + Dx + Ey + F = 0$','$Ax^2 + By^2 + Dx + Ey + F = 0$','$Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$'], ans:3,
+  exp:'La ecuación general $Ax^2+Bxy+Cy^2+Dx+Ey+F=0$ representa cualquier cónica. La circunferencia es el caso especial donde $A=C$ y $B=0$.' },
 
 { id:37, u:2, d:2,
-  q:'Determina: lím(x→2) (x² + 3x − 8)',
-  ops:['7','5','3','2'], ans:3,
-  exp:'Sustitución directa: (2)² + 3(2) − 8 = 4 + 6 − 8 = 2' },
+  q:'Determina el siguiente límite: $$\\lim_{x \\to 2}\\,(x^2 + 3x - 8)$$',
+  ops:['$7$','$5$','$3$','$2$'], ans:3,
+  exp:'Sustitución directa: $(2)^2 + 3(2) - 8 = 4 + 6 - 8 = 2$' },
 
 { id:38, u:2, d:3,
-  q:'¿Cuál es la segunda derivada de f(x) = sin(3x)?',
-  ops:['−9 sin(3x)','9 sin(3x)','−3 sin(9x)','3 sin(9x)'], ans:0,
-  exp:"f'(x) = 3 cos(3x). f''(x) = −9 sin(3x)" },
+  q:'¿Cuál es la segunda derivada de $f(x) = \\sin(3x)$?',
+  ops:['$-9\\sin(3x)$','$9\\sin(3x)$','$-3\\sin(9x)$','$3\\sin(9x)$'], ans:0,
+  exp:"$f'(x) = 3\\cos(3x) \\Rightarrow f''(x) = -9\\sin(3x)$" },
 
 { id:39, u:2, d:3,
-  q:'¿Cuál es la tercera derivada de f(t) = e²ᵗ?',
-  ops:['8e²ᵗ','4e²ᵗ','3e²ᵗ','5e²ᵗ'], ans:0,
-  exp:"f'=2e²ᵗ, f''=4e²ᵗ, f'''=8e²ᵗ" },
+  q:'¿Cuál es la tercera derivada de $f(t) = e^{2t}$?',
+  ops:['$8e^{2t}$','$4e^{2t}$','$3e^{2t}$','$5e^{2t}$'], ans:0,
+  exp:"$f'=2e^{2t},\\quad f''=4e^{2t},\\quad f'''=8e^{2t}$" },
 
 { id:40, u:2, d:3,
-  q:'¿Cuál es la derivada de f(x) = 5^(x²)?',
-  ops:['2x · 5^(x²) · ln(2)','2x · 5^(x²) · ln(5)','5x² · 2x · ln(5)','2x² · 2x · ln(5)'], ans:1,
-  exp:'d/dx[aᵘ] = aᵘ · ln(a) · u\'. Aquí u = x², u\' = 2x. Resultado: 2x · 5^(x²) · ln(5)' },
+  q:'¿Cuál es la derivada de $f(x) = 5^{x^2}$?',
+  ops:['$2x \\cdot 5^{x^2} \\cdot \\ln 2$','$2x \\cdot 5^{x^2} \\cdot \\ln 5$','$5x^2 \\cdot 2x \\cdot \\ln 5$','$2x^2 \\cdot 2x \\cdot \\ln 5$'], ans:1,
+  exp:"$\\dfrac{d}{dx}[a^u] = a^u \\cdot \\ln(a) \\cdot u'$. Aquí $u = x^2,\\; u' = 2x$. Resultado: $2x \\cdot 5^{x^2} \\cdot \\ln 5$" },
 
 { id:41, u:2, d:3,
-  q:'Determina la integral: ∫ e²ᵗ dt',
-  ops:['(1/2)e²ᵗ + C','(1/2) + C','(1/3)e²ᵗ + C','(1/2)e²ᵗ − C'], ans:0,
-  exp:'∫ eᵃᵗ dt = (1/a)eᵃᵗ + C. Con a=2: (1/2)e²ᵗ + C' },
+  q:'Determina la integral: $$\\int e^{2t}\\, dt$$',
+  ops:['$\\dfrac{1}{2}e^{2t} + C$','$\\dfrac{1}{2} + C$','$\\dfrac{1}{3}e^{2t} + C$','$\\dfrac{1}{2}e^{2t} - C$'], ans:0,
+  exp:'$\\int e^{at}\\,dt = \\dfrac{1}{a}e^{at} + C$. Con $a=2$: $\\dfrac{1}{2}e^{2t} + C$' },
 
 { id:42, u:2, d:3,
-  q:'Determina la integral: ∫ (x² − 10x − 8) dx',
-  ops:['(1/3)x³ + 5x² + 8x + C','(1/3)x² + 8x² + 5x + C','(1/3)x³ − 8x² − 5x + C','(1/3)x³ − 5x² − 8x + C'], ans:3,
-  exp:'∫x²dx = x³/3, ∫−10x dx = −5x², ∫−8 dx = −8x. Resultado: (1/3)x³ − 5x² − 8x + C' },
+  q:'Determina la integral: $$\\int (x^2 - 10x - 8)\\, dx$$',
+  ops:['$\\dfrac{1}{3}x^3 + 5x^2 + 8x + C$','$\\dfrac{1}{3}x^2 + 8x^2 + 5x + C$','$\\dfrac{1}{3}x^3 - 8x^2 - 5x + C$','$\\dfrac{1}{3}x^3 - 5x^2 - 8x + C$'], ans:3,
+  exp:'$\\int x^2\\,dx = \\dfrac{x^3}{3},\\quad \\int -10x\\,dx = -5x^2,\\quad \\int -8\\,dx = -8x$. Resultado: $\\dfrac{1}{3}x^3 - 5x^2 - 8x + C$' },
 
 // ══ GEOGRAFÍA (u:3) ══
 { id:43, u:3, d:1,
@@ -493,15 +509,15 @@ const BANCO = [
   exp:'Egipto está en el noreste de África. Argelia también está al norte, pero la respuesta correcta según el banco es Egipto. Congo y Sudáfrica están en el centro y sur.' },
 
 { id:52, u:3, d:3,
-  q:'Relaciona: I. Formaban parte de la ex Yugoslavia. II. Se separan de la URSS. III. Surgen al desintegrarse la URSS. IV. Resurge como país unificado. Con: a.Alemania, b.Croacia/Serbia/Montenegro, c.Kazajistán/Uzbekistán/Turkmenistán, d.Estonia/Lituania/Letonia.',
+  q:`Relaciona cada caso con el país correspondiente:<table class="rel-tabla"><tr><th>Surgimiento</th><th>País</th></tr><tr><td><b>I.</b> Formaban parte de la ex Yugoslavia</td><td><b>a.</b> Alemania</td></tr><tr><td><b>II.</b> Se separan de la URSS</td><td><b>b.</b> Croacia, Serbia y Montenegro</td></tr><tr><td><b>III.</b> Surgen al desintegrarse la URSS</td><td><b>c.</b> Kazajistán, Uzbekistán y Turkmenistán</td></tr><tr><td><b>IV.</b> Resurge como país unificado</td><td><b>d.</b> Estonia, Lituania y Letonia</td></tr></table>`,
   ops:['I:d − II:b − III:c − IV:a','I:a − II:c − III:d − IV:b','I:b − II:c − III:d − IV:a','I:c − II:a − III:d − IV:b'], ans:2,
-  exp:'I→b (ex Yugoslavia: Croacia, Serbia, Montenegro). II→c (repúblicas centroasiáticas que se separan de la URSS). III→d (países bálticos al desintegrarse URSS). IV→a (Alemania unificada en 1990).' },
+  exp:'I→b (ex Yugoslavia: Croacia, Serbia, Montenegro). II→c (repúblicas centroasiáticas). III→d (países bálticos al desintegrarse URSS). IV→a (Alemania unificada en 1990).' },
 
 // ══ FÍSICA (u:4) ══
 { id:53, u:4, d:3,
-  q:'Para calcular el ángulo θ que forma la resultante c = a + b con el vector a (donde b es perpendicular a a), se utiliza:',
-  ops:['θ = sen⁻¹(c/a)','θ = tan⁻¹(c/a)','θ = sen⁻¹(c/b)','θ = tan⁻¹(b/a)'], ans:3,
-  exp:'En el triángulo de vectores, b es el lado opuesto y a el adyacente al ángulo θ. Por tanto θ = tan⁻¹(b/a).' },
+  q:'Para calcular el ángulo $\\theta$ que forma la resultante $\\vec{c} = \\vec{a} + \\vec{b}$ con el vector $\\vec{a}$ (donde $\\vec{b} \\perp \\vec{a}$), se utiliza:',
+  ops:['$\\theta = \\sin^{-1}\\!\\left(\\dfrac{c}{a}\\right)$','$\\theta = \\tan^{-1}\\!\\left(\\dfrac{c}{a}\\right)$','$\\theta = \\sin^{-1}\\!\\left(\\dfrac{c}{b}\\right)$','$\\theta = \\tan^{-1}\\!\\left(\\dfrac{b}{a}\\right)$'], ans:3,
+  exp:'En el triángulo de vectores, $b$ es el lado opuesto y $a$ el adyacente al ángulo $\\theta$. Por tanto $\\theta = \\tan^{-1}\\!\\left(\\dfrac{b}{a}\\right)$.' },
 
 { id:54, u:4, d:1,
   q:'Un resorte con constante k = 10 N/m. Si se le aplica una fuerza de 2.5 N, ¿cuánto se alarga?',
@@ -539,9 +555,9 @@ const BANCO = [
   exp:'I = V/R. Con V constante, si R aumenta entonces I disminuye (proporcionalidad inversa). Esta es la aplicación directa de la Ley de Ohm.' },
 
 { id:61, u:4, d:2,
-  q:'¿Cuál es la corriente eléctrica que circula a través de un resistor de 40 Ω si la tensión entre sus extremos es de 120 V?',
-  ops:['30 A','45 A','60 A','3 A'], ans:3,
-  exp:'I = V/R = 120/40 = 3 A' },
+  q:'¿Cuál es la corriente eléctrica que circula a través de un resistor de $40\\,\\Omega$ si la tensión entre sus extremos es de $120\\,\\text{V}$?',
+  ops:['$30\\,\\text{A}$','$45\\,\\text{A}$','$60\\,\\text{A}$','$3\\,\\text{A}$'], ans:3,
+  exp:'$I = \\dfrac{V}{R} = \\dfrac{120}{40} = 3\\,\\text{A}$' },
 
 { id:62, u:4, d:2,
   q:'La presión atmosférica a nivel del mar es mayor que en la Ciudad de México porque la…',
@@ -549,9 +565,9 @@ const BANCO = [
   exp:'P = ρgh. A nivel del mar hay más columna de aire encima (h mayor), por lo que la presión atmosférica es mayor que en la CDMX que está a ~2240 m de altitud.' },
 
 { id:63, u:4, d:3,
-  q:'La velocidad de la luz en vacío es 3×10⁸ m/s y la glicerina tiene índice de refracción 1.473. ¿Cuál es la rapidez de la luz en la glicerina?',
-  ops:['4.41×10⁸ m/s','4.91×10⁸ m/s','2.26×10⁸ m/s','2.03×10⁸ m/s'], ans:3,
-  exp:'v = c/n = 3×10⁸ / 1.473 ≈ 2.036×10⁸ m/s ≈ 2.03×10⁸ m/s' },
+  q:'La velocidad de la luz en el vacío es $3 \\times 10^8$ m/s y la glicerina tiene índice de refracción $n = 1.473$. ¿Cuál es la rapidez de la luz en la glicerina?',
+  ops:['$4.41 \\times 10^8$ m/s','$4.91 \\times 10^8$ m/s','$2.26 \\times 10^8$ m/s','$2.03 \\times 10^8$ m/s'], ans:3,
+  exp:'$v = \\dfrac{c}{n} = \\dfrac{3 \\times 10^8}{1.473} \\approx 2.03 \\times 10^8$ m/s' },
 
 { id:64, u:4, d:2,
   q:'Proceso en el cual los núcleos atómicos pesados se dividen en dos o más núcleos ligeros:',
@@ -676,9 +692,9 @@ const BANCO = [
   exp:'El Galio tiene estado de oxidación +3 típico. Con oxígeno forma Ga₂O₃ (óxido de galio III): 4Ga + 3O₂ → 2Ga₂O₃.' },
 
 { id:88, u:6, d:3,
-  q:'Relaciona: 1.Alquino, 2.Alcano, 3.Alqueno. Con: A) CH₃−CH₂−CH₂−CH₂−CH₂−CH₃, B) CH₃−CH₂−CH₂−CH=CH−CH₃, C) CH₃−C≡C−CH₂−CH₂−CH₃.',
+  q:`Relaciona cada tipo de hidrocarburo con su estructura:<table class="rel-tabla"><tr><th>#</th><th>Tipo</th><th>Estructura</th></tr><tr><td><b>1.</b></td><td>Alquino</td><td>CH₃−C≡C−CH₂−CH₂−CH₃</td></tr><tr><td><b>2.</b></td><td>Alcano</td><td>CH₃−CH₂−CH₂−CH₂−CH₂−CH₃</td></tr><tr><td><b>3.</b></td><td>Alqueno</td><td>CH₃−CH₂−CH₂−CH=CH−CH₃</td></tr></table>`,
   ops:['1A, 2B, 3C','1B, 2C, 3A','1C, 2B, 3A','1C, 2A, 3B'], ans:3,
-  exp:'Alquino(1)→C (triple enlace ≡). Alcano(2)→A (solo enlaces simples). Alqueno(3)→B (doble enlace =).' },
+  exp:'Alquino(1)→C (triple enlace ≡). Alcano(2)→A (solo enlaces simples, cadena saturada). Alqueno(3)→B (doble enlace =).' },
 
 { id:89, u:6, d:2,
   q:'¿Cuál de los siguientes compuestos se ioniza completamente en agua?',
@@ -773,9 +789,9 @@ const BANCO = [
   exp:'Los regímenes totalitarios (fascismo, nazismo, estalinismo) se caracterizan por un líder carismático con poder absoluto, partido único, represión de oposición y control total del Estado.' },
 
 { id:107, u:8, d:3,
-  q:'¿Cuáles fueron consecuencias de la Segunda Guerra Mundial?',
-  ops:['I y IV','V y VI','I solamente','IV y III'], ans:2,
-  exp:'La ocupación de los países vencidos y la creación de la ONU (1945) son consecuencias directas de la SGWW. Las opciones IV, V y VI se refieren a causas o hechos anteriores.' },
+  q:`De los siguientes hechos, ¿cuál(es) fue(ron) consecuencia(s) de la <b>Segunda Guerra Mundial</b>?<div class="rel-lista"><div><b>I.</b> La ocupación de los países vencidos y la creación de la ONU</div><div><b>II.</b> Las violaciones del tratado de Versalles</div><div><b>III.</b> Formación del eje Berlín–Roma–Tokio</div><div><b>IV.</b> La división de Alemania por parte de Italia</div><div><b>V.</b> La invasión de Abisinia por parte de Italia</div><div><b>VI.</b> El fracaso de la Sociedad de Naciones</div></div>`,
+  ops:['I y IV','V y VI','Solo I','IV y III'], ans:2,
+  exp:'Solo el hecho I (ocupación de países vencidos y creación de la ONU en 1945) es consecuencia directa de la SGWW. Los demás son causas o hechos anteriores a la guerra.' },
 
 { id:108, u:8, d:2,
   q:'El Pacto de Varsovia fue del _____ y la OTAN del _____.',
@@ -788,15 +804,15 @@ const BANCO = [
   exp:'La Ilustración (siglo XVIII) aportó los fundamentos ideológicos (soberanía popular, derechos naturales, separación de poderes) que impulsaron la Revolución Francesa y las independencias americanas.' },
 
 { id:110, u:8, d:3,
-  q:'Relaciona países con sus movimientos independentistas: I.India, II.Argelia, III.Sudáfrica, IV.Congo Belga. Con: a.condena segregación racial, b.derechos laborales/movimiento nacional, c.no violencia/resistencia pasiva, d.autonomía/golpe militar/guerra de 8 años.',
+  q:`Relaciona cada país con su movimiento independentista:<table class="rel-tabla"><tr><th>País</th><th>Movimiento</th></tr><tr><td><b>I.</b> India</td><td><b>a.</b> Condena la segregación racial; busca la unidad nacional</td></tr><tr><td><b>II.</b> Argelia</td><td><b>b.</b> Reivindica derechos laborales; crea un movimiento nacional</td></tr><tr><td><b>III.</b> Sudáfrica</td><td><b>c.</b> No violencia y resistencia pasiva; propone un Estado único</td></tr><tr><td><b>IV.</b> Congo Belga</td><td><b>d.</b> Autonomía por golpe militar; guerra de 8 años</td></tr></table>`,
   ops:['I:d − II:a − III:c − IV:b','I:c − II:d − III:a − IV:b','I:a − II:c − III:b − IV:d','I:b − II:a − III:d − IV:c'], ans:1,
-  exp:'India(I)→c (Gandhi, no violencia). Argelia(II)→d (guerra de independencia vs Francia, 1954-62, 8 años). Sudáfrica(III)→a (lucha contra el apartheid). Congo Belga(IV)→b (Lumumba, derechos laborales).' },
+  exp:'India(I)→c (Gandhi, no violencia). Argelia(II)→d (guerra vs Francia, 1954–62). Sudáfrica(III)→a (lucha contra el apartheid). Congo Belga(IV)→b (Lumumba, derechos laborales).' },
 
 // ══ HISTORIA DE MÉXICO (u:9) ══
 { id:111, u:9, d:3,
-  q:'Relaciona: I.Carlos II, II.Antonio de Mendoza, III.Bartolomé de las Casas, IV.Hernán Cortés, V.Carlos IV. Con: a.abdicó a favor de Napoleón, b.dirigió la conquista del Nuevo Mundo, c.fraile a favor de derechos indígenas, d.primer virrey de la Nueva España, e.Reformas Borbónicas.',
+  q:`Relaciona cada personaje con su aporte:<table class="rel-tabla"><tr><th>Personaje</th><th>Aporte</th></tr><tr><td><b>I.</b> Carlos II</td><td><b>a.</b> Abdicó a favor de Napoleón</td></tr><tr><td><b>II.</b> Antonio de Mendoza</td><td><b>b.</b> Dirigió la conquista en el Nuevo Mundo</td></tr><tr><td><b>III.</b> Bartolomé de las Casas</td><td><b>c.</b> Fraile defensor de los derechos indígenas</td></tr><tr><td><b>IV.</b> Hernán Cortés</td><td><b>d.</b> Primer virrey de la Nueva España</td></tr><tr><td><b>V.</b> Carlos IV</td><td><b>e.</b> Reformas Borbónicas</td></tr></table>`,
   ops:['I:d − II:e − III:a − IV:b − V:c','I:e − II:d − III:c − IV:b − V:a','I:a − II:d − III:c − IV:b − V:e','I:b − II:a − III:c − IV:d − V:e'], ans:1,
-  exp:'Carlos II(I)→e (Reformas Borbónicas, aunque más asociadas con Carlos III). Antonio de Mendoza(II)→d (primer virrey). Bartolomé de las Casas(III)→c. Hernán Cortés(IV)→b. Carlos IV(V)→a (abdicó ante Napoleón en 1808).' },
+  exp:'Carlos II(I)→e (Reformas Borbónicas). Antonio de Mendoza(II)→d (primer virrey). Bartolomé de las Casas(III)→c. Hernán Cortés(IV)→b. Carlos IV(V)→a (abdicó ante Napoleón, 1808).' },
 
 { id:112, u:9, d:2,
   q:'Etapa de la Independencia en la que se dio la Batalla de Aculco:',
@@ -844,6 +860,25 @@ const BANCO = [
   exp:'El neoliberalismo (implementado desde los 80 con De la Madrid, consolidado con Salinas) implica privatización de empresas estatales, apertura comercial (TLCAN), reducción del Estado y libre mercado.' },
 
 ];
+
+// ─────────────────────────────────────
+// RENDER KATEX
+// ─────────────────────────────────────
+const KATEX_OPTS = {
+  delimiters:[
+    {left:'$$', right:'$$', display:true},
+    {left:'$',  right:'$',  display:false},
+  ],
+  throwOnError: false,
+};
+function renderKatex(el) {
+  if (window.katexReady && window.renderMathInElement) {
+    renderMathInElement(el, KATEX_OPTS);
+  } else {
+    window.katexQueue = window.katexQueue || [];
+    window.katexQueue.push(() => renderMathInElement(el, KATEX_OPTS));
+  }
+}
 
 // ─────────────────────────────────────
 // ESTADO
@@ -926,7 +961,7 @@ function mostrarPregunta() {
   tagD.textContent = DIF_LABEL[preguntaActual.d];
   tagD.className = `tag-dificultad dif-${preguntaActual.d}`;
 
-  document.getElementById('enunciado').textContent = preguntaActual.q;
+  document.getElementById('enunciado').innerHTML = preguntaActual.q;
 
   const indices = [0,1,2,3];
   for (let i=3; i>0; i--) {
@@ -947,6 +982,9 @@ function mostrarPregunta() {
   const fb = document.getElementById('feedback');
   fb.style.display = 'none'; fb.className = 'feedback-box';
   document.getElementById('btn-sig').style.display = 'none';
+
+  // Renderizar KaTeX en toda la zona de la pregunta
+  renderKatex(document.querySelector('.cuerpo-examen'));
 
   iniciarTimer(preguntaActual.d);
 }
@@ -979,6 +1017,7 @@ function responder(opIdx, btnClickado) {
   fb.className = `feedback-box ${esCorrecta ? 'correcto' : 'incorrecto'}`;
   fb.innerHTML = `<span class="feedback-icono">${esCorrecta ? '✓' : '✗'}</span> ${preguntaActual.exp}`;
   fb.style.display = 'block';
+  renderKatex(fb);
 
   const btnSig = document.getElementById('btn-sig');
   btnSig.textContent = estado.respondidas >= estado.totalPreguntas ? 'Ver resultados' : 'Siguiente →';
@@ -1000,10 +1039,11 @@ function tiempoAgotado() {
   const arc = document.getElementById('timer-arc');
   if (arc) { arc.style.strokeDashoffset = CIRCUNF; arc.style.stroke = '#f87171'; }
 
-  const fb = document.getElementById('feedback');
-  fb.className = 'feedback-box incorrecto';
-  fb.innerHTML = `<span class="feedback-icono">⏱</span> Tiempo agotado. ${preguntaActual.exp}`;
-  fb.style.display = 'block';
+  const fb2 = document.getElementById('feedback');
+  fb2.className = 'feedback-box incorrecto';
+  fb2.innerHTML = `<span class="feedback-icono">⏱</span> Tiempo agotado. ${preguntaActual.exp}`;
+  fb2.style.display = 'block';
+  renderKatex(fb2);
 
   const btnSig = document.getElementById('btn-sig');
   btnSig.textContent = estado.respondidas >= estado.totalPreguntas ? 'Ver resultados' : 'Siguiente →';
