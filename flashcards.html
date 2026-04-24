@@ -406,17 +406,19 @@
    'correcta' es el índice (0 = A, 1 = B, 2 = C, 3 = D).
    ========================================================= */
 const PREGUNTAS = [
+  // —— Física: caída libre (velocidad) ——
   {
-    pregunta: "Un objeto se deja caer desde el reposo. Usando $g = 10\\ \\text{m/s}^2$, ¿qué velocidad tiene a los $3$ segundos?",
+    pregunta: "Un objeto se deja caer desde el reposo. Usando $g = 10\\,\\mathrm{m/s^2}$, ¿qué velocidad tiene a los $3\\,\\mathrm{s}$?",
     opciones: [
-      "$15\\ \\text{m/s}$",
-      "$30\\ \\text{m/s}$",
-      "$10\\ \\text{m/s}$",
-      "$45\\ \\text{m/s}$"
+      "$15\\,\\mathrm{m/s}$",
+      "$30\\,\\mathrm{m/s}$",
+      "$10\\,\\mathrm{m/s}$",
+      "$45\\,\\mathrm{m/s}$"
     ],
     correcta: 1,
-    explicacion: "En caída libre partiendo del reposo: $v = g \\cdot t = 10 \\cdot 3 = 30\\ \\text{m/s}$."
+    explicacion: "En caída libre partiendo del reposo: $v = g \\cdot t = (10\\,\\mathrm{m/s^2})(3\\,\\mathrm{s}) = 30\\,\\mathrm{m/s}$."
   },
+  // —— Matemáticas: factorización ——
   {
     pregunta: "¿Cuál es la forma factorizada de $x^2 - 9$?",
     opciones: [
@@ -428,38 +430,281 @@ const PREGUNTAS = [
     correcta: 2,
     explicacion: "Es una diferencia de cuadrados: $a^2 - b^2 = (a-b)(a+b)$, con $a=x$ y $b=3$."
   },
+  // —— Física: MRUA (frenando) ——
   {
-    pregunta: "Un auto viaja a $20\\ \\text{m/s}$ y frena con aceleración constante de $-4\\ \\text{m/s}^2$. ¿Cuánto tiempo tarda en detenerse?",
+    pregunta: "Un auto viaja a $20\\,\\mathrm{m/s}$ y frena con aceleración constante de $-4\\,\\mathrm{m/s^2}$. ¿Cuánto tiempo tarda en detenerse?",
     opciones: [
-      "$4\\ \\text{s}$",
-      "$5\\ \\text{s}$",
-      "$6\\ \\text{s}$",
-      "$10\\ \\text{s}$"
+      "$4\\,\\mathrm{s}$",
+      "$5\\,\\mathrm{s}$",
+      "$6\\,\\mathrm{s}$",
+      "$10\\,\\mathrm{s}$"
     ],
     correcta: 1,
-    explicacion: "Usando $v_f = v_0 + at$: $0 = 20 + (-4)t$, de donde $t = 5\\ \\text{s}$."
+    explicacion: "Usando $v_f = v_0 + at$: $0 = 20\\,\\mathrm{m/s} + (-4\\,\\mathrm{m/s^2})\\cdot t$, de donde $t = \\dfrac{20\\,\\mathrm{m/s}}{4\\,\\mathrm{m/s^2}} = 5\\,\\mathrm{s}$."
   },
+  // —— Matemáticas: trigonometría (valor notable) ——
   {
-    pregunta: "¿Cuál es el valor de $\\sin(30°)$?",
+    pregunta: "¿Cuál es el valor de $\\sin(30^{\\circ})$?",
     opciones: [
-      "$\\frac{\\sqrt{3}}{2}$",
-      "$\\frac{1}{2}$",
-      "$\\frac{\\sqrt{2}}{2}$",
+      "$\\dfrac{\\sqrt{3}}{2}$",
+      "$\\dfrac{1}{2}$",
+      "$\\dfrac{\\sqrt{2}}{2}$",
       "$1$"
     ],
     correcta: 1,
-    explicacion: "$\\sin(30°) = \\frac{1}{2}$ es uno de los valores notables que conviene memorizar."
+    explicacion: "$\\sin(30^{\\circ}) = \\dfrac{1}{2}$ es uno de los valores notables que conviene memorizar."
   },
+  // —— Física: gravitación universal ——
   {
-    pregunta: "Dos masas de $2\\ \\text{kg}$ y $3\\ \\text{kg}$ están separadas $1\\ \\text{m}$. Usando $G = 6.6 \\times 10^{-11}\\ \\text{N·m}^2/\\text{kg}^2$, ¿cuál es la fuerza gravitacional entre ellas?",
+    pregunta: "Dos masas de $2\\,\\mathrm{kg}$ y $3\\,\\mathrm{kg}$ están separadas $1\\,\\mathrm{m}$. Usando $G = 6.6 \\times 10^{-11}\\,\\mathrm{N\\cdot m^2/kg^2}$, ¿cuál es la fuerza gravitacional entre ellas?",
     opciones: [
-      "$3.96 \\times 10^{-10}\\ \\text{N}$",
-      "$6.6 \\times 10^{-11}\\ \\text{N}$",
-      "$1.32 \\times 10^{-10}\\ \\text{N}$",
-      "$9.9 \\times 10^{-11}\\ \\text{N}$"
+      "$3.96 \\times 10^{-10}\\,\\mathrm{N}$",
+      "$6.6 \\times 10^{-11}\\,\\mathrm{N}$",
+      "$1.32 \\times 10^{-10}\\,\\mathrm{N}$",
+      "$9.9 \\times 10^{-11}\\,\\mathrm{N}$"
     ],
     correcta: 0,
-    explicacion: "$F = G\\frac{m_1 m_2}{r^2} = 6.6 \\times 10^{-11} \\cdot \\frac{(2)(3)}{1^2} = 3.96 \\times 10^{-10}\\ \\text{N}$."
+    explicacion: "Por la ley de gravitación universal: $F = G\\dfrac{m_1 m_2}{r^2} = (6.6\\times 10^{-11}\\,\\mathrm{N\\cdot m^2/kg^2})\\dfrac{(2\\,\\mathrm{kg})(3\\,\\mathrm{kg})}{(1\\,\\mathrm{m})^2} = 3.96\\times 10^{-10}\\,\\mathrm{N}$."
+  },
+  // —— Física: MRUA (ciclista acelerando) ——
+  {
+    pregunta: "Un ciclista parte del reposo y acelera uniformemente a razón de $3\\,\\mathrm{m/s^2}$. ¿Qué velocidad alcanza a los $4\\,\\mathrm{s}$?",
+    opciones: [
+      "$7\\,\\mathrm{m/s}$",
+      "$12\\,\\mathrm{m/s}$",
+      "$24\\,\\mathrm{m/s}$",
+      "$0.75\\,\\mathrm{m/s}$"
+    ],
+    correcta: 1,
+    explicacion: "$v = v_0 + at = 0 + (3\\,\\mathrm{m/s^2})(4\\,\\mathrm{s}) = 12\\,\\mathrm{m/s}$."
+  },
+  // —— Matemáticas: operaciones con enteros y potencias ——
+  {
+    pregunta: "Simplifica la siguiente expresión: $(-2)^3 + 3(4-7)$",
+    opciones: [
+      "$1$",
+      "$-17$",
+      "$-1$",
+      "$17$"
+    ],
+    correcta: 1,
+    explicacion: "$(-2)^3=-8$ y $4-7=-3$. Entonces $-8+3(-3)=-8-9=-17$."
+  },
+  // —— Física: caída libre (distancia) ——
+  {
+    pregunta: "Un objeto se deja caer desde el reposo. ¿Qué distancia recorre durante los primeros $2\\,\\mathrm{s}$? (Usa $g=10\\,\\mathrm{m/s^2}$.)",
+    opciones: [
+      "$10\\,\\mathrm{m}$",
+      "$20\\,\\mathrm{m}$",
+      "$40\\,\\mathrm{m}$",
+      "$5\\,\\mathrm{m}$"
+    ],
+    correcta: 1,
+    explicacion: "$h = \\dfrac{1}{2}gt^2 = \\dfrac{1}{2}(10\\,\\mathrm{m/s^2})(2\\,\\mathrm{s})^2 = \\dfrac{1}{2}(10\\,\\mathrm{m/s^2})(4\\,\\mathrm{s^2}) = 20\\,\\mathrm{m}$."
+  },
+  // —— Matemáticas: producto notable (binomio al cuadrado) ——
+  {
+    pregunta: "Al desarrollar $(3x+2)^2$ se obtiene",
+    opciones: [
+      "$9x^2 + 4$",
+      "$9x^2 + 6x + 4$",
+      "$9x^2 + 12x + 4$",
+      "$6x^2 + 12x + 4$"
+    ],
+    correcta: 2,
+    explicacion: "$(a+b)^2 = a^2+2ab+b^2$ con $a=3x$, $b=2$: $9x^2+12x+4$."
+  },
+  // —— Física: segunda ley de Newton ——
+  {
+    pregunta: "Una fuerza neta de $15\\,\\mathrm{N}$ actúa sobre un cuerpo de $3\\,\\mathrm{kg}$. La aceleración que adquiere es",
+    opciones: [
+      "$5\\,\\mathrm{m/s^2}$",
+      "$45\\,\\mathrm{m/s^2}$",
+      "$0.2\\,\\mathrm{m/s^2}$",
+      "$18\\,\\mathrm{m/s^2}$"
+    ],
+    correcta: 0,
+    explicacion: "$F = ma \\Rightarrow a = \\dfrac{F}{m} = \\dfrac{15\\,\\mathrm{N}}{3\\,\\mathrm{kg}} = 5\\,\\mathrm{m/s^2}$."
+  },
+  // —— Matemáticas: ecuación lineal ——
+  {
+    pregunta: "Resuelve la ecuación $4(x+1) = 2x - 6$",
+    opciones: [
+      "$x = 5$",
+      "$x = -5$",
+      "$x = -1$",
+      "$x = 2$"
+    ],
+    correcta: 1,
+    explicacion: "$4x+4 = 2x-6 \\Rightarrow 2x = -10 \\Rightarrow x = -5$."
+  },
+  // —— Física: trabajo mecánico (fuerza horizontal) ——
+  {
+    pregunta: "Se empuja una caja horizontalmente con una fuerza de $25\\,\\mathrm{N}$ a lo largo de $8\\,\\mathrm{m}$. El trabajo realizado es",
+    opciones: [
+      "$33\\,\\mathrm{J}$",
+      "$3.1\\,\\mathrm{J}$",
+      "$17\\,\\mathrm{J}$",
+      "$200\\,\\mathrm{J}$"
+    ],
+    correcta: 3,
+    explicacion: "Como la fuerza es paralela al desplazamiento: $W = Fd = (25\\,\\mathrm{N})(8\\,\\mathrm{m}) = 200\\,\\mathrm{J}$."
+  },
+  // —— Matemáticas: sistema de ecuaciones ——
+  {
+    pregunta: "Resuelve el sistema\n\n$x + y = 10$\n$x - y = 4$",
+    opciones: [
+      "$x = 5,\\ y = 5$",
+      "$x = 7,\\ y = 3$",
+      "$x = 3,\\ y = 7$",
+      "$x = 6,\\ y = 4$"
+    ],
+    correcta: 1,
+    explicacion: "Sumando ambas ecuaciones: $2x = 14 \\Rightarrow x = 7$. Sustituyendo: $y = 10 - 7 = 3$."
+  },
+  // —— Física: energía cinética ——
+  {
+    pregunta: "Un cuerpo de $4\\,\\mathrm{kg}$ se mueve con rapidez $3\\,\\mathrm{m/s}$. Su energía cinética es",
+    opciones: [
+      "$12\\,\\mathrm{J}$",
+      "$36\\,\\mathrm{J}$",
+      "$18\\,\\mathrm{J}$",
+      "$6\\,\\mathrm{J}$"
+    ],
+    correcta: 2,
+    explicacion: "$E_c = \\dfrac{1}{2}mv^2 = \\dfrac{1}{2}(4\\,\\mathrm{kg})(3\\,\\mathrm{m/s})^2 = \\dfrac{1}{2}(4\\,\\mathrm{kg})(9\\,\\mathrm{m^2/s^2}) = 18\\,\\mathrm{J}$."
+  },
+  // —— Matemáticas: conversión radianes → grados ——
+  {
+    pregunta: "El ángulo $\\dfrac{3\\pi}{4}$ radianes equivale a",
+    opciones: [
+      "$120^{\\circ}$",
+      "$135^{\\circ}$",
+      "$150^{\\circ}$",
+      "$60^{\\circ}$"
+    ],
+    correcta: 1,
+    explicacion: "$\\pi\\,\\mathrm{rad} = 180^{\\circ}$, entonces $\\dfrac{3\\pi}{4} \\cdot \\dfrac{180^{\\circ}}{\\pi} = 3 \\cdot 45^{\\circ} = 135^{\\circ}$."
+  },
+  // —— Física: presión hidrostática ——
+  {
+    pregunta: "Calcula la presión hidrostática a $3\\,\\mathrm{m}$ de profundidad en agua ($\\rho = 1000\\,\\mathrm{kg/m^3}$, $g = 10\\,\\mathrm{m/s^2}$).",
+    opciones: [
+      "$3\\,000\\,\\mathrm{Pa}$",
+      "$300\\,\\mathrm{Pa}$",
+      "$30\\,000\\,\\mathrm{Pa}$",
+      "$3\\times 10^5\\,\\mathrm{Pa}$"
+    ],
+    correcta: 2,
+    explicacion: "$p = \\rho g h = (1000\\,\\mathrm{kg/m^3})(10\\,\\mathrm{m/s^2})(3\\,\\mathrm{m}) = 30\\,000\\,\\mathrm{Pa}$."
+  },
+  // —— Matemáticas: logaritmo ——
+  {
+    pregunta: "El valor de $x$ que satisface $\\log_3 x = 2$ es",
+    opciones: [
+      "$6$",
+      "$9$",
+      "$8$",
+      "$\\dfrac{1}{9}$"
+    ],
+    correcta: 1,
+    explicacion: "Por definición de logaritmo, $\\log_3 x = 2 \\iff x = 3^2 = 9$."
+  },
+  // —— Física: Ley de Ohm ——
+  {
+    pregunta: "Una resistencia de $6\\,\\Omega$ se conecta a una diferencia de potencial de $18\\,\\mathrm{V}$. La corriente que la atraviesa es",
+    opciones: [
+      "$108\\,\\mathrm{A}$",
+      "$0.33\\,\\mathrm{A}$",
+      "$24\\,\\mathrm{A}$",
+      "$3\\,\\mathrm{A}$"
+    ],
+    correcta: 3,
+    explicacion: "$V = IR \\Rightarrow I = \\dfrac{V}{R} = \\dfrac{18\\,\\mathrm{V}}{6\\,\\Omega} = 3\\,\\mathrm{A}$."
+  },
+  // —— Matemáticas: pendiente entre dos puntos ——
+  {
+    pregunta: "La pendiente de la recta que pasa por los puntos $(-1, 4)$ y $(3, -4)$ es",
+    opciones: [
+      "$2$",
+      "$-\\dfrac{1}{2}$",
+      "$-2$",
+      "$\\dfrac{1}{2}$"
+    ],
+    correcta: 2,
+    explicacion: "$m = \\dfrac{y_2 - y_1}{x_2 - x_1} = \\dfrac{-4 - 4}{3 - (-1)} = \\dfrac{-8}{4} = -2$."
+  },
+  // —— Física: velocidad de una onda ——
+  {
+    pregunta: "Una onda tiene frecuencia $20\\,\\mathrm{Hz}$ y longitud de onda $5\\,\\mathrm{m}$. Recuerda que $1\\,\\mathrm{Hz} = 1/\\mathrm{s}$. Su velocidad de propagación es",
+    opciones: [
+      "$25\\,\\mathrm{m/s}$",
+      "$100\\,\\mathrm{m/s}$",
+      "$4\\,\\mathrm{m/s}$",
+      "$0.25\\,\\mathrm{m/s}$"
+    ],
+    correcta: 1,
+    explicacion: "$v = f\\lambda = (20\\,\\mathrm{Hz})(5\\,\\mathrm{m}) = 100\\,\\mathrm{m/s}$."
+  },
+  // —— Matemáticas: derivada de polinomio ——
+  {
+    pregunta: "Si $f(x) = 2x^3 - 4x + 5$, entonces $f'(x)$ es",
+    opciones: [
+      "$6x^2 - 4$",
+      "$6x^2 - 4 + 5$",
+      "$2x^2 - 4$",
+      "$6x^2 - 4x$"
+    ],
+    correcta: 0,
+    explicacion: "Aplicando la regla de potencia $\\tfrac{d}{dx}(x^n) = nx^{n-1}$ término a término: $6x^2 - 4 + 0 = 6x^2 - 4$ (la derivada de una constante es cero)."
+  },
+  // —— Física: Ley de Hooke (con conversión de unidades) ——
+  {
+    pregunta: "Un resorte con constante elástica $k = 150\\,\\mathrm{N/m}$ se estira $20\\,\\mathrm{cm}$. La fuerza ejercida por el resorte es",
+    opciones: [
+      "$3\\,000\\,\\mathrm{N}$",
+      "$30\\,\\mathrm{N}$",
+      "$7.5\\,\\mathrm{N}$",
+      "$170\\,\\mathrm{N}$"
+    ],
+    correcta: 1,
+    explicacion: "Primero convertimos: $x = 20\\,\\mathrm{cm} = 0.20\\,\\mathrm{m}$. Luego $F = kx = (150\\,\\mathrm{N/m})(0.20\\,\\mathrm{m}) = 30\\,\\mathrm{N}$. (El error típico $3\\,000\\,\\mathrm{N}$ viene de olvidar pasar cm a m.)"
+  },
+  // —— Matemáticas: límite forma 0/0 ——
+  {
+    pregunta: "El valor del límite $\\displaystyle\\lim_{x\\to 3}\\dfrac{x^2 - 9}{x - 3}$ es",
+    opciones: [
+      "$6$",
+      "$0$",
+      "$3$",
+      "no existe"
+    ],
+    correcta: 0,
+    explicacion: "Al sustituir queda $0/0$. Factorizando: $\\dfrac{(x-3)(x+3)}{x-3} = x+3$. Entonces el límite es $3+3 = 6$."
+  },
+  // —— Física: trabajo mecánico con ángulo ——
+  {
+    pregunta: "Una fuerza de $20\\,\\mathrm{N}$ se aplica sobre un objeto formando un ángulo de $60^{\\circ}$ con el desplazamiento de $10\\,\\mathrm{m}$. El trabajo realizado es (usa $\\cos 60^{\\circ} = \\tfrac{1}{2}$)",
+    opciones: [
+      "$200\\,\\mathrm{J}$",
+      "$50\\,\\mathrm{J}$",
+      "$100\\,\\mathrm{J}$",
+      "$100\\sqrt{3}\\,\\mathrm{J}$"
+    ],
+    correcta: 2,
+    explicacion: "$W = F\\,d\\cos\\theta = (20\\,\\mathrm{N})(10\\,\\mathrm{m})\\cos 60^{\\circ} = (20\\,\\mathrm{N})(10\\,\\mathrm{m})(0.5) = 100\\,\\mathrm{J}$."
+  },
+  // —— Matemáticas: mínimo de parábola ——
+  {
+    pregunta: "El valor mínimo de la función $f(x) = x^2 - 4x + 7$ es",
+    opciones: [
+      "$2$",
+      "$3$",
+      "$7$",
+      "$-3$"
+    ],
+    correcta: 1,
+    explicacion: "$f'(x) = 2x - 4 = 0 \\Rightarrow x = 2$. Sustituyendo: $f(2) = 4 - 8 + 7 = 3$. El mínimo es el valor de $f$, no el de $x$."
   }
 ];
 
