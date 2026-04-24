@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarjetas de práctica</title>
+
+<!-- KaTeX para fórmulas matemáticas -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f4efe6;
+    --bg-grain: #ebe4d6;
+    --ink: #1a1a2e;
+    --ink-soft: #4a4a5e;
+    --paper: #fdfbf6;
+    --accent: #8b2635;
+    --accent-soft: #b85a67;
+    --correct: #3d6b4f;
+    --correct-bg: #d8e5dc;
+    --wrong: #a44a3f;
+    --wrong-bg: #ead5d2;
+    --line: #d4cbb8;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 20%, var(--bg-grain) 0%, transparent 50%),
+      radial-gradient(circle at 85% 80%, var(--bg-grain) 0%, transparent 50%);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 24px 20px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 28px;
+  }
+
+  .title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+  }
+  .title em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .meta {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .progress {
+    height: 3px;
+    background: var(--line);
+    border-radius: 2px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width .45s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* --- Card with flip --- */
+  .card-stage {
+    perspective: 1600px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform .7s cubic-bezier(.4,0,.2,1);
+    min-height: 420px;
+  }
+  .card.flipped { transform: rotateY(180deg); }
+
+  .face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 36px 32px;
+    box-shadow:
+      0 1px 2px rgba(26,26,46,.04),
+      0 8px 32px rgba(26,26,46,.06);
+  }
+  .face-front {
+    position: relative;
+  }
+  .face-back {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    transform: rotateY(180deg);
+    min-height: 100%;
+  }
+
+  .q-number {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+  }
+
+  .question {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.4;
+    font-weight: 500;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: left;
+    transition: all .18s ease;
+    width: 100%;
+  }
+  .option:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--paper);
+    transform: translateX(2px);
+  }
+  .option:disabled { cursor: default; }
+
+  .option-letter {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--accent);
+    flex-shrink: 0;
+    width: 20px;
+  }
+  .option-text { flex: 1; }
+
+  /* --- Back face (result) --- */
+  .result-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .result-badge.correct {
+    background: var(--correct-bg);
+    color: var(--correct);
+  }
+  .result-badge.wrong {
+    background: var(--wrong-bg);
+    color: var(--wrong);
+  }
+  .result-badge::before {
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .result-headline {
+    font-family: var(--serif);
+    font-size: 24px;
+    line-height: 1.3;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .answer-review {
+    padding: 16px 18px;
+    border-left: 3px solid var(--accent);
+    background: rgba(139, 38, 53, 0.04);
+    margin-bottom: 22px;
+    font-size: 14px;
+  }
+  .answer-review .label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .answer-review .answer {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ink);
+  }
+
+  .explanation-label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .explanation {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* --- Footer / next button --- */
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+
+  .btn {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 12px 22px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .18s ease;
+  }
+  .btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .btn.ghost {
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn.ghost:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+  }
+
+  /* --- Final screen --- */
+  .final {
+    text-align: center;
+    padding: 56px 32px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .final .score-number {
+    font-family: var(--serif);
+    font-size: 72px;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 18px 0 8px;
+  }
+  .final .score-number span {
+    font-size: 32px;
+    color: var(--ink-soft);
+  }
+  .final h2 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .final p {
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    font-size: 15px;
+  }
+
+  .hidden { display: none !important; }
+
+  /* --- Responsive --- */
+  @media (max-width: 560px) {
+    body { padding: 16px 14px 36px; }
+    .face { padding: 24px 20px; }
+    .question { font-size: 19px; }
+    .title { font-size: 22px; }
+    .result-headline { font-size: 20px; }
+    .final .score-number { font-size: 56px; }
+  }
+
+  /* --- Reveal on correct/wrong (option coloring after answer) --- */
+  .option.revealed-correct {
+    border-color: var(--correct);
+    background: var(--correct-bg);
+  }
+  .option.revealed-correct .option-letter { color: var(--correct); }
+
+  .option.revealed-wrong {
+    border-color: var(--wrong);
+    background: var(--wrong-bg);
+  }
+  .option.revealed-wrong .option-letter { color: var(--wrong); }
+
+  .option.revealed-dim { opacity: 0.45; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1 class="title">Tarjetas de <em>práctica</em></h1>
+    <span class="meta" id="counter">0 / 0</span>
+  </header>
+
+  <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+  <div id="cardContainer" class="card-stage">
+    <div class="card" id="card">
+      <div class="face face-front">
+        <div class="q-number" id="qNumber">Pregunta 1</div>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+      </div>
+      <div class="face face-back">
+        <div class="result-badge" id="resultBadge"></div>
+        <div class="result-headline" id="resultHeadline"></div>
+        <div class="answer-review">
+          <div class="label">Respuesta correcta</div>
+          <div class="answer" id="correctAnswer"></div>
+        </div>
+        <div class="explanation-label">Explicación</div>
+        <div class="explanation" id="explanation"></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn" id="nextBtn" disabled>Siguiente →</button>
+    </div>
+  </div>
+
+  <div id="finalScreen" class="final hidden">
+    <div class="meta">Resultado final</div>
+    <div class="score-number"><span id="scoreCorrect">0</span> / <span id="scoreTotal">0</span></div>
+    <h2 id="finalHeadline">¡Listo!</h2>
+    <p id="finalMessage">Has completado todas las tarjetas.</p>
+    <button class="btn ghost" id="restartBtn">Volver a empezar</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   PREGUNTAS — edita este arreglo para tu tema.
+   Usa $...$ para fórmulas en línea y $$...$$ para display.
+   'correcta' es el índice (0 = A, 1 = B, 2 = C, 3 = D).
+   ========================================================= */
+const PREGUNTAS = [
+  {
+    pregunta: "Un objeto se deja caer desde el reposo. Usando $g = 10\\ \\text{m/s}^2$, ¿qué velocidad tiene a los $3$ segundos?",
+    opciones: [
+      "$15\\ \\text{m/s}$",
+      "$30\\ \\text{m/s}$",
+      "$10\\ \\text{m/s}$",
+      "$45\\ \\text{m/s}$"
+    ],
+    correcta: 1,
+    explicacion: "En caída libre partiendo del reposo: $v = g \\cdot t = 10 \\cdot 3 = 30\\ \\text{m/s}$."
+  },
+  {
+    pregunta: "¿Cuál es la forma factorizada de $x^2 - 9$?",
+    opciones: [
+      "$(x-3)^2$",
+      "$(x+3)^2$",
+      "$(x-3)(x+3)$",
+      "$x(x-9)$"
+    ],
+    correcta: 2,
+    explicacion: "Es una diferencia de cuadrados: $a^2 - b^2 = (a-b)(a+b)$, con $a=x$ y $b=3$."
+  },
+  {
+    pregunta: "Un auto viaja a $20\\ \\text{m/s}$ y frena con aceleración constante de $-4\\ \\text{m/s}^2$. ¿Cuánto tiempo tarda en detenerse?",
+    opciones: [
+      "$4\\ \\text{s}$",
+      "$5\\ \\text{s}$",
+      "$6\\ \\text{s}$",
+      "$10\\ \\text{s}$"
+    ],
+    correcta: 1,
+    explicacion: "Usando $v_f = v_0 + at$: $0 = 20 + (-4)t$, de donde $t = 5\\ \\text{s}$."
+  },
+  {
+    pregunta: "¿Cuál es el valor de $\\sin(30°)$?",
+    opciones: [
+      "$\\frac{\\sqrt{3}}{2}$",
+      "$\\frac{1}{2}$",
+      "$\\frac{\\sqrt{2}}{2}$",
+      "$1$"
+    ],
+    correcta: 1,
+    explicacion: "$\\sin(30°) = \\frac{1}{2}$ es uno de los valores notables que conviene memorizar."
+  },
+  {
+    pregunta: "Dos masas de $2\\ \\text{kg}$ y $3\\ \\text{kg}$ están separadas $1\\ \\text{m}$. Usando $G = 6.6 \\times 10^{-11}\\ \\text{N·m}^2/\\text{kg}^2$, ¿cuál es la fuerza gravitacional entre ellas?",
+    opciones: [
+      "$3.96 \\times 10^{-10}\\ \\text{N}$",
+      "$6.6 \\times 10^{-11}\\ \\text{N}$",
+      "$1.32 \\times 10^{-10}\\ \\text{N}$",
+      "$9.9 \\times 10^{-11}\\ \\text{N}$"
+    ],
+    correcta: 0,
+    explicacion: "$F = G\\frac{m_1 m_2}{r^2} = 6.6 \\times 10^{-11} \\cdot \\frac{(2)(3)}{1^2} = 3.96 \\times 10^{-10}\\ \\text{N}$."
+  }
+];
+
+/* Opciones de configuración */
+const CONFIG = {
+  mezclarPreguntas: true,
+  mezclarOpciones: true
+};
+
+/* ========================================================= */
+
+// --- Utilidades ---
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function prepararPreguntas(lista) {
+  let preguntas = CONFIG.mezclarPreguntas ? shuffle(lista) : [...lista];
+  if (CONFIG.mezclarOpciones) {
+    preguntas = preguntas.map(p => {
+      const indices = shuffle([0,1,2,3]);
+      const nuevasOpciones = indices.map(i => p.opciones[i]);
+      const nuevaCorrecta = indices.indexOf(p.correcta);
+      return { ...p, opciones: nuevasOpciones, correcta: nuevaCorrecta };
+    });
+  }
+  return preguntas;
+}
+
+// --- Estado ---
+let preguntas = prepararPreguntas(PREGUNTAS);
+let indice = 0;
+let aciertos = 0;
+let respondida = false;
+
+// --- Elementos ---
+const $ = id => document.getElementById(id);
+const card = $('card');
+const optionsEl = $('options');
+const questionEl = $('question');
+const qNumberEl = $('qNumber');
+const nextBtn = $('nextBtn');
+const counter = $('counter');
+const progressBar = $('progressBar');
+const finalScreen = $('finalScreen');
+const cardContainer = $('cardContainer');
+
+function renderKatex(el) {
+  if (window.renderMathInElement) {
+    renderMathInElement(el, {
+      delimiters: [
+        {left:'$$',right:'$$',display:true},
+        {left:'$',right:'$',display:false}
+      ]
+    });
+  }
+}
+
+function mostrarPregunta() {
+  respondida = false;
+  card.classList.remove('flipped');
+  nextBtn.disabled = true;
+
+  const p = preguntas[indice];
+  qNumberEl.textContent = `Pregunta ${indice + 1}`;
+  questionEl.innerHTML = p.pregunta;
+
+  optionsEl.innerHTML = '';
+  const letras = ['A','B','C','D'];
+  p.opciones.forEach((op, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = `<span class="option-letter">${letras[i]}</span><span class="option-text">${op}</span>`;
+    btn.addEventListener('click', () => responder(i));
+    optionsEl.appendChild(btn);
+  });
+
+  counter.textContent = `${indice + 1} / ${preguntas.length}`;
+  progressBar.style.width = `${(indice / preguntas.length) * 100}%`;
+
+  renderKatex(card);
+}
+
+function responder(i) {
+  if (respondida) return;
+  respondida = true;
+
+  const p = preguntas[indice];
+  const correcto = i === p.correcta;
+  if (correcto) aciertos++;
+
+  // Pintar opciones
+  const botones = optionsEl.querySelectorAll('.option');
+  botones.forEach((b, idx) => {
+    b.disabled = true;
+    if (idx === p.correcta) b.classList.add('revealed-correct');
+    else if (idx === i) b.classList.add('revealed-wrong');
+    else b.classList.add('revealed-dim');
+  });
+
+  // Preparar cara de resultado
+  const badge = $('resultBadge');
+  const headline = $('resultHeadline');
+  badge.className = 'result-badge ' + (correcto ? 'correct' : 'wrong');
+  badge.textContent = correcto ? 'Correcto' : 'Incorrecto';
+  headline.textContent = correcto
+    ? '¡Muy bien!'
+    : 'Revisa el razonamiento';
+
+  $('correctAnswer').innerHTML = `${['A','B','C','D'][p.correcta]}. ${p.opciones[p.correcta]}`;
+  $('explanation').innerHTML = p.explicacion;
+
+  renderKatex(card);
+
+  // Voltear después de un pequeño delay
+  setTimeout(() => {
+    card.classList.add('flipped');
+    nextBtn.disabled = false;
+  }, 350);
+}
+
+function siguiente() {
+  indice++;
+  if (indice >= preguntas.length) {
+    mostrarFinal();
+  } else {
+    // Un pequeño giro inverso antes de mostrar la nueva pregunta
+    card.classList.remove('flipped');
+    setTimeout(mostrarPregunta, 400);
+  }
+}
+
+function mostrarFinal() {
+  cardContainer.classList.add('hidden');
+  finalScreen.classList.remove('hidden');
+  progressBar.style.width = '100%';
+  counter.textContent = `${preguntas.length} / ${preguntas.length}`;
+
+  $('scoreCorrect').textContent = aciertos;
+  $('scoreTotal').textContent = preguntas.length;
+
+  const pct = aciertos / preguntas.length;
+  let titulo, mensaje;
+  if (pct === 1)       { titulo = '¡Excelente!';    mensaje = 'Todas las respuestas correctas.'; }
+  else if (pct >= 0.8) { titulo = '¡Muy bien!';     mensaje = 'Dominas la mayoría de los conceptos.'; }
+  else if (pct >= 0.6) { titulo = 'Buen intento';   mensaje = 'Revisa los temas donde fallaste.'; }
+  else if (pct >= 0.4) { titulo = 'Sigue practicando'; mensaje = 'Vale la pena volver a estudiar el material.'; }
+  else                 { titulo = 'A repasar';      mensaje = 'Regresa a los apuntes y vuelve a intentarlo.'; }
+
+  $('finalHeadline').textContent = titulo;
+  $('finalMessage').textContent = mensaje;
+}
+
+function reiniciar() {
+  preguntas = prepararPreguntas(PREGUNTAS);
+  indice = 0;
+  aciertos = 0;
+  finalScreen.classList.add('hidden');
+  cardContainer.classList.remove('hidden');
+  mostrarPregunta();
+}
+
+// --- Eventos ---
+nextBtn.addEventListener('click', siguiente);
+$('restartBtn').addEventListener('click', reiniciar);
+
+// Permitir teclas A/B/C/D y 1-4
+document.addEventListener('keydown', (e) => {
+  if (respondida && (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight')) {
+    if (!nextBtn.disabled) { e.preventDefault(); siguiente(); }
+    return;
+  }
+  if (respondida) return;
+  const k = e.key.toLowerCase();
+  const map = { a:0, b:1, c:2, d:3, '1':0, '2':1, '3':2, '4':3 };
+  if (k in map) {
+    const botones = optionsEl.querySelectorAll('.option');
+    if (botones[map[k]]) botones[map[k]].click();
+  }
+});
+
+// --- Inicio ---
+mostrarPregunta();
+</script>
+
+</body>
+</html>
