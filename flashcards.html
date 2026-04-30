@@ -189,6 +189,26 @@
   }
   .option-text { flex: 1; }
 
+  /* --- Tema tag --- */
+  .tema-tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    padding: 4px 10px;
+    background: rgba(139, 38, 53, 0.06);
+    border-radius: 4px;
+  }
+  .tema-tag:empty { display: none; }
+  .tema-tag::before {
+    content: 'Tema · ';
+    color: var(--accent);
+  }
+
   /* --- Back face (result) --- */
   .result-badge {
     display: inline-flex;
@@ -375,6 +395,7 @@
         <div class="options" id="options"></div>
       </div>
       <div class="face face-back">
+        <div class="tema-tag" id="temaTag"></div>
         <div class="result-badge" id="resultBadge"></div>
         <div class="result-headline" id="resultHeadline"></div>
         <div class="answer-review">
@@ -409,6 +430,7 @@ const PREGUNTAS = [
   // —— Física: caída libre (velocidad) ——
   {
     materia: "fisica",
+    tema: "caída libre (velocidad)",
     pregunta: "Un objeto se deja caer desde el reposo. Usando $g = 10\\,\\mathrm{m/s^2}$, ¿qué velocidad tiene a los $3\\,\\mathrm{s}$?",
     opciones: [
       "$15\\,\\mathrm{m/s}$",
@@ -422,6 +444,7 @@ const PREGUNTAS = [
   // —— Matemáticas: factorización ——
   {
     materia: "matematicas",
+    tema: "factorización",
     pregunta: "¿Cuál es la forma factorizada de $x^2 - 9$?",
     opciones: [
       "$(x-3)^2$",
@@ -435,6 +458,7 @@ const PREGUNTAS = [
   // —— Física: MRUA (frenando) ——
   {
     materia: "fisica",
+    tema: "MRUA (frenando)",
     pregunta: "Un auto viaja a $20\\,\\mathrm{m/s}$ y frena con aceleración constante de $-4\\,\\mathrm{m/s^2}$. ¿Cuánto tiempo tarda en detenerse?",
     opciones: [
       "$4\\,\\mathrm{s}$",
@@ -448,6 +472,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trigonometría (valor notable) ——
   {
     materia: "matematicas",
+    tema: "trigonometría (valor notable)",
     pregunta: "¿Cuál es el valor de $\\sin(30^{\\circ})$?",
     opciones: [
       "$\\dfrac{\\sqrt{3}}{2}$",
@@ -461,6 +486,7 @@ const PREGUNTAS = [
   // —— Física: gravitación universal ——
   {
     materia: "fisica",
+    tema: "gravitación universal",
     pregunta: "Dos masas de $2\\,\\mathrm{kg}$ y $3\\,\\mathrm{kg}$ están separadas $1\\,\\mathrm{m}$. Usando $G = 6.6 \\times 10^{-11}\\,\\mathrm{N\\cdot m^2/kg^2}$, ¿cuál es la fuerza gravitacional entre ellas?",
     opciones: [
       "$3.96 \\times 10^{-10}\\,\\mathrm{N}$",
@@ -474,6 +500,7 @@ const PREGUNTAS = [
   // —— Física: MRUA (ciclista acelerando) ——
   {
     materia: "fisica",
+    tema: "MRUA (ciclista acelerando)",
     pregunta: "Un ciclista parte del reposo y acelera uniformemente a razón de $3\\,\\mathrm{m/s^2}$. ¿Qué velocidad alcanza a los $4\\,\\mathrm{s}$?",
     opciones: [
       "$7\\,\\mathrm{m/s}$",
@@ -487,6 +514,7 @@ const PREGUNTAS = [
   // —— Matemáticas: operaciones con enteros y potencias ——
   {
     materia: "matematicas",
+    tema: "operaciones con enteros y potencias",
     pregunta: "Simplifica la siguiente expresión: $(-2)^3 + 3(4-7)$",
     opciones: [
       "$1$",
@@ -500,6 +528,7 @@ const PREGUNTAS = [
   // —— Física: caída libre (distancia) ——
   {
     materia: "fisica",
+    tema: "caída libre (distancia)",
     pregunta: "Un objeto se deja caer desde el reposo. ¿Qué distancia recorre durante los primeros $2\\,\\mathrm{s}$? (Usa $g=10\\,\\mathrm{m/s^2}$.)",
     opciones: [
       "$10\\,\\mathrm{m}$",
@@ -513,6 +542,7 @@ const PREGUNTAS = [
   // —— Matemáticas: producto notable (binomio al cuadrado) ——
   {
     materia: "matematicas",
+    tema: "producto notable (binomio al cuadrado)",
     pregunta: "Al desarrollar $(3x+2)^2$ se obtiene",
     opciones: [
       "$9x^2 + 4$",
@@ -526,6 +556,7 @@ const PREGUNTAS = [
   // —— Física: segunda ley de Newton ——
   {
     materia: "fisica",
+    tema: "segunda ley de Newton",
     pregunta: "Una fuerza neta de $15\\,\\mathrm{N}$ actúa sobre un cuerpo de $3\\,\\mathrm{kg}$. La aceleración que adquiere es",
     opciones: [
       "$5\\,\\mathrm{m/s^2}$",
@@ -539,6 +570,7 @@ const PREGUNTAS = [
   // —— Matemáticas: ecuación lineal ——
   {
     materia: "matematicas",
+    tema: "ecuación lineal",
     pregunta: "Resuelve la ecuación $4(x+1) = 2x - 6$",
     opciones: [
       "$x = 5$",
@@ -552,6 +584,7 @@ const PREGUNTAS = [
   // —— Física: trabajo mecánico (fuerza horizontal) ——
   {
     materia: "fisica",
+    tema: "trabajo mecánico (fuerza horizontal)",
     pregunta: "Se empuja una caja horizontalmente con una fuerza de $25\\,\\mathrm{N}$ a lo largo de $8\\,\\mathrm{m}$. El trabajo realizado es",
     opciones: [
       "$33\\,\\mathrm{J}$",
@@ -565,6 +598,7 @@ const PREGUNTAS = [
   // —— Matemáticas: sistema de ecuaciones ——
   {
     materia: "matematicas",
+    tema: "sistema de ecuaciones",
     pregunta: "Resuelve el sistema $$\\begin{cases} x + y = 10 \\\\ x - y = 4 \\end{cases}$$",
     opciones: [
       "$x = 5,\\ y = 5$",
@@ -578,6 +612,7 @@ const PREGUNTAS = [
   // —— Física: energía cinética ——
   {
     materia: "fisica",
+    tema: "energía cinética",
     pregunta: "Un cuerpo de $4\\,\\mathrm{kg}$ se mueve con rapidez $3\\,\\mathrm{m/s}$. Su energía cinética es",
     opciones: [
       "$12\\,\\mathrm{J}$",
@@ -591,6 +626,7 @@ const PREGUNTAS = [
   // —— Matemáticas: conversión radianes → grados ——
   {
     materia: "matematicas",
+    tema: "conversión radianes → grados",
     pregunta: "El ángulo $\\dfrac{3\\pi}{4}$ radianes equivale a",
     opciones: [
       "$120^{\\circ}$",
@@ -604,6 +640,7 @@ const PREGUNTAS = [
   // —— Física: presión hidrostática ——
   {
     materia: "fisica",
+    tema: "presión hidrostática",
     pregunta: "Calcula la presión hidrostática a $3\\,\\mathrm{m}$ de profundidad en agua ($\\rho = 1000\\,\\mathrm{kg/m^3}$, $g = 10\\,\\mathrm{m/s^2}$).",
     opciones: [
       "$3\\,000\\,\\mathrm{Pa}$",
@@ -614,22 +651,24 @@ const PREGUNTAS = [
     correcta: 2,
     explicacion: "$p = \\rho g h = (1000\\,\\mathrm{kg/m^3})(10\\,\\mathrm{m/s^2})(3\\,\\mathrm{m}) = 30\\,000\\,\\mathrm{Pa}$."
   },
-  // —— Matemáticas: logaritmo ——
+  // —— Matemáticas: ecuación logarítmica ——
   {
     materia: "matematicas",
-    pregunta: "El valor de $x$ que satisface $\\log_3 x = 2$ es",
+    tema: "ecuación logarítmica",
+    pregunta: "Resuelve la ecuación $\\log x + \\log(x - 3) = 1$.",
     opciones: [
-      "$6$",
-      "$9$",
-      "$8$",
-      "$\\dfrac{1}{9}$"
+      "$x = 5$",
+      "$x = 5$ y $x = -2$",
+      "$x = 4$",
+      "$x = 10$"
     ],
-    correcta: 1,
-    explicacion: "Por definición de logaritmo, $\\log_3 x = 2 \\iff x = 3^2 = 9$."
+    correcta: 0,
+    explicacion: "Por la ley $\\log a + \\log b = \\log(ab)$: $\\log[x(x-3)] = 1 \\Rightarrow x(x-3) = 10 \\Rightarrow x^2 - 3x - 10 = 0$. Factorizando: $(x-5)(x+2) = 0$, así que $x = 5$ o $x = -2$. Se descarta $x = -2$ porque haría negativo el argumento del logaritmo."
   },
   // —— Física: Ley de Ohm ——
   {
     materia: "fisica",
+    tema: "Ley de Ohm",
     pregunta: "Una resistencia de $6\\,\\Omega$ se conecta a una diferencia de potencial de $18\\,\\mathrm{V}$. La corriente que la atraviesa es",
     opciones: [
       "$108\\,\\mathrm{A}$",
@@ -643,6 +682,7 @@ const PREGUNTAS = [
   // —— Matemáticas: pendiente entre dos puntos ——
   {
     materia: "matematicas",
+    tema: "pendiente entre dos puntos",
     pregunta: "La pendiente de la recta que pasa por los puntos $(-1, 4)$ y $(3, -4)$ es",
     opciones: [
       "$2$",
@@ -656,6 +696,7 @@ const PREGUNTAS = [
   // —— Física: velocidad de una onda ——
   {
     materia: "fisica",
+    tema: "velocidad de una onda",
     pregunta: "Una onda tiene frecuencia $20\\,\\mathrm{Hz}$ y longitud de onda $5\\,\\mathrm{m}$. Recuerda que $1\\,\\mathrm{Hz} = 1/\\mathrm{s}$. Su velocidad de propagación es",
     opciones: [
       "$25\\,\\mathrm{m/s}$",
@@ -669,6 +710,7 @@ const PREGUNTAS = [
   // —— Matemáticas: derivada de polinomio ——
   {
     materia: "matematicas",
+    tema: "derivada de polinomio",
     pregunta: "Si $f(x) = 2x^3 - 4x + 5$, entonces $f'(x)$ es",
     opciones: [
       "$6x^2 - 4$",
@@ -682,6 +724,7 @@ const PREGUNTAS = [
   // —— Física: Ley de Hooke (con conversión de unidades) ——
   {
     materia: "fisica",
+    tema: "Ley de Hooke (con conversión de unidades)",
     pregunta: "Un resorte con constante elástica $k = 150\\,\\mathrm{N/m}$ se estira $20\\,\\mathrm{cm}$. La fuerza ejercida por el resorte es",
     opciones: [
       "$3\\,000\\,\\mathrm{N}$",
@@ -695,6 +738,7 @@ const PREGUNTAS = [
   // —— Matemáticas: límite forma 0/0 ——
   {
     materia: "matematicas",
+    tema: "límite forma 0/0",
     pregunta: "El valor del límite $\\displaystyle\\lim_{x\\to 3}\\dfrac{x^2 - 9}{x - 3}$ es",
     opciones: [
       "$6$",
@@ -708,6 +752,7 @@ const PREGUNTAS = [
   // —— Física: trabajo mecánico con ángulo ——
   {
     materia: "fisica",
+    tema: "trabajo mecánico con ángulo",
     pregunta: "Una fuerza de $20\\,\\mathrm{N}$ se aplica sobre un objeto formando un ángulo de $60^{\\circ}$ con el desplazamiento de $10\\,\\mathrm{m}$. El trabajo realizado es (usa $\\cos 60^{\\circ} = \\tfrac{1}{2}$)",
     opciones: [
       "$200\\,\\mathrm{J}$",
@@ -721,6 +766,7 @@ const PREGUNTAS = [
   // —— Matemáticas: mínimo de parábola ——
   {
     materia: "matematicas",
+    tema: "mínimo de parábola",
     pregunta: "El valor mínimo de la función $f(x) = x^2 - 4x + 7$ es",
     opciones: [
       "$2$",
@@ -734,6 +780,7 @@ const PREGUNTAS = [
   // —— Historia: Plan de Iguala ——
   {
     materia: "historia",
+    tema: "Plan de Iguala",
     pregunta: "¿Quién proclamó el Plan de Iguala (1821)?",
     opciones: [
       "Agustín de Iturbide",
@@ -747,6 +794,7 @@ const PREGUNTAS = [
   // —— Historia: Tratados de Córdoba ——
   {
     materia: "historia",
+    tema: "Tratados de Córdoba",
     pregunta: "¿Quiénes firmaron los Tratados de Córdoba (1821)?",
     opciones: [
       "Iturbide y Vicente Guerrero",
@@ -760,6 +808,7 @@ const PREGUNTAS = [
   // —— Historia: Plan de Casa Mata ——
   {
     materia: "historia",
+    tema: "Plan de Casa Mata",
     pregunta: "¿Qué efecto principal tuvo el Plan de Casa Mata (1823)?",
     opciones: [
       "Consumó la independencia de México",
@@ -773,6 +822,7 @@ const PREGUNTAS = [
   // —— Historia: Tratados de Guadalupe Hidalgo ——
   {
     materia: "historia",
+    tema: "Tratados de Guadalupe Hidalgo",
     pregunta: "¿Cuál fue el resultado principal de los Tratados de Guadalupe Hidalgo (1848)?",
     opciones: [
       "México cede más de la mitad de su territorio a Estados Unidos a cambio de 15 millones de pesos",
@@ -786,6 +836,7 @@ const PREGUNTAS = [
   // —— Historia: Plan de Ayutla ——
   {
     materia: "historia",
+    tema: "Plan de Ayutla",
     pregunta: "¿A quién desconoce el Plan de Ayutla (1854)?",
     opciones: [
       "Antonio López de Santa Anna",
@@ -799,6 +850,7 @@ const PREGUNTAS = [
   // —— Historia: Plan de Tacubaya ——
   {
     materia: "historia",
+    tema: "Plan de Tacubaya",
     pregunta: "¿Qué desconoce el Plan de Tacubaya (1857) y qué desencadena?",
     opciones: [
       "Desconoce a Maximiliano y desencadena la Intervención Francesa",
@@ -812,6 +864,7 @@ const PREGUNTAS = [
   // —— Historia: Plan de la Noria ——
   {
     materia: "historia",
+    tema: "Plan de la Noria",
     pregunta: "¿Quién proclamó el Plan de la Noria (1871) y qué buscaba?",
     opciones: [
       "Porfirio Díaz; desconocer la reelección de Benito Juárez bajo el lema «No reelección»",
@@ -825,6 +878,7 @@ const PREGUNTAS = [
   // —— Historia: Plan de Tuxtepec ——
   {
     materia: "historia",
+    tema: "Plan de Tuxtepec",
     pregunta: "¿A quién derrocó el Plan de Tuxtepec (1876) y bajo qué lema?",
     opciones: [
       "A Benito Juárez, bajo el lema «No reelección»",
@@ -838,6 +892,7 @@ const PREGUNTAS = [
   // —— Historia: Plan de San Luis ——
   {
     materia: "historia",
+    tema: "Plan de San Luis",
     pregunta: "¿Quién proclamó el Plan de San Luis (1910) y a qué dio inicio?",
     opciones: [
       "Emiliano Zapata; dio inicio al reparto agrario",
@@ -851,6 +906,7 @@ const PREGUNTAS = [
   // —— Historia: Plan de Ayala ——
   {
     materia: "historia",
+    tema: "Plan de Ayala",
     pregunta: "El Plan de Ayala (1911), proclamado por Emiliano Zapata, principalmente",
     opciones: [
       "Reconoce a Madero como presidente y respalda su gobierno",
@@ -864,6 +920,7 @@ const PREGUNTAS = [
   // —— Historia: Plan de Guadalupe ——
   {
     materia: "historia",
+    tema: "Plan de Guadalupe",
     pregunta: "¿A qué gobierno desconoce el Plan de Guadalupe (1913)?",
     opciones: [
       "Al gobierno de Porfirio Díaz",
@@ -877,6 +934,7 @@ const PREGUNTAS = [
   // —— Historia: Plan de Agua Prieta ——
   {
     materia: "historia",
+    tema: "Plan de Agua Prieta",
     pregunta: "El Plan de Agua Prieta (1920), proclamado por Obregón, Calles y De la Huerta,",
     opciones: [
       "Desconoce a Porfirio Díaz e inicia la Revolución Mexicana",
@@ -890,6 +948,7 @@ const PREGUNTAS = [
   // —— Historia: Tratados de Bucareli ——
   {
     materia: "historia",
+    tema: "Tratados de Bucareli",
     pregunta: "¿Cuál fue el contenido principal de los Tratados de Bucareli (1923)?",
     opciones: [
       "México cede territorio a Estados Unidos a cambio de 15 millones de pesos",
@@ -903,6 +962,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — sin(0°) ——
   {
     materia: "matematicas",
+    tema: "trig — sin(0°)",
     pregunta: "¿Cuánto vale $\\sin(0^{\\circ})$?",
     opciones: ["$0$", "$1$", "$\\dfrac{1}{2}$", "$\\dfrac{\\sqrt{2}}{2}$"],
     correcta: 0,
@@ -911,6 +971,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — cos(π/6) ——
   {
     materia: "matematicas",
+    tema: "trig — cos(π/6)",
     pregunta: "$\\cos\\left(\\dfrac{\\pi}{6}\\right)$ es igual a",
     opciones: ["$\\dfrac{1}{2}$", "$\\dfrac{\\sqrt{3}}{2}$", "$\\dfrac{\\sqrt{2}}{2}$", "$1$"],
     correcta: 1,
@@ -919,6 +980,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — tan(45°) ——
   {
     materia: "matematicas",
+    tema: "trig — tan(45°)",
     pregunta: "$\\tan(45^{\\circ})$ es igual a",
     opciones: ["$0$", "$\\dfrac{\\sqrt{2}}{2}$", "$1$", "$\\sqrt{3}$"],
     correcta: 2,
@@ -927,6 +989,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — sin(π/2) ——
   {
     materia: "matematicas",
+    tema: "trig — sin(π/2)",
     pregunta: "$\\sin\\left(\\dfrac{\\pi}{2}\\right)$ es igual a",
     opciones: ["$0$", "$\\dfrac{\\sqrt{3}}{2}$", "$1$", "$-1$"],
     correcta: 2,
@@ -935,6 +998,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — tan(π/2) ——
   {
     materia: "matematicas",
+    tema: "trig — tan(π/2)",
     pregunta: "$\\tan\\left(\\dfrac{\\pi}{2}\\right)$",
     opciones: ["$0$", "$1$", "$\\sqrt{3}$", "no existe"],
     correcta: 3,
@@ -943,6 +1007,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — sin(2π/3) ——
   {
     materia: "matematicas",
+    tema: "trig — sin(2π/3)",
     pregunta: "$\\sin\\left(\\dfrac{2\\pi}{3}\\right)$ vale",
     opciones: ["$\\dfrac{1}{2}$", "$\\dfrac{\\sqrt{3}}{2}$", "$-\\dfrac{\\sqrt{3}}{2}$", "$-\\dfrac{1}{2}$"],
     correcta: 1,
@@ -951,6 +1016,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — cos(120°) ——
   {
     materia: "matematicas",
+    tema: "trig — cos(120°)",
     pregunta: "$\\cos(120^{\\circ})$ es",
     opciones: ["$\\dfrac{1}{2}$", "$-\\dfrac{1}{2}$", "$-\\dfrac{\\sqrt{3}}{2}$", "$-\\dfrac{\\sqrt{2}}{2}$"],
     correcta: 1,
@@ -959,6 +1025,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — tan(3π/4) ——
   {
     materia: "matematicas",
+    tema: "trig — tan(3π/4)",
     pregunta: "$\\tan\\left(\\dfrac{3\\pi}{4}\\right)$ es igual a",
     opciones: ["$1$", "$-1$", "$-\\dfrac{\\sqrt{2}}{2}$", "$\\dfrac{\\sqrt{2}}{2}$"],
     correcta: 1,
@@ -967,6 +1034,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — cos(180°) ——
   {
     materia: "matematicas",
+    tema: "trig — cos(180°)",
     pregunta: "$\\cos(180^{\\circ})$ es",
     opciones: ["$1$", "$0$", "$-1$", "$\\pi$"],
     correcta: 2,
@@ -975,6 +1043,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — sin(7π/6) ——
   {
     materia: "matematicas",
+    tema: "trig — sin(7π/6)",
     pregunta: "$\\sin\\left(\\dfrac{7\\pi}{6}\\right)$ es igual a",
     opciones: ["$\\dfrac{1}{2}$", "$-\\dfrac{1}{2}$", "$-\\dfrac{\\sqrt{3}}{2}$", "$-\\dfrac{\\sqrt{2}}{2}$"],
     correcta: 1,
@@ -983,6 +1052,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — tan(5π/4) ——
   {
     materia: "matematicas",
+    tema: "trig — tan(5π/4)",
     pregunta: "$\\tan\\left(\\dfrac{5\\pi}{4}\\right)$ vale",
     opciones: ["$1$", "$-1$", "$\\sqrt{3}$", "$-\\dfrac{\\sqrt{3}}{3}$"],
     correcta: 0,
@@ -991,6 +1061,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — cos(4π/3) ——
   {
     materia: "matematicas",
+    tema: "trig — cos(4π/3)",
     pregunta: "$\\cos\\left(\\dfrac{4\\pi}{3}\\right)$",
     opciones: ["$\\dfrac{1}{2}$", "$-\\dfrac{1}{2}$", "$-\\dfrac{\\sqrt{3}}{2}$", "$-\\dfrac{\\sqrt{2}}{2}$"],
     correcta: 1,
@@ -999,6 +1070,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — sin(3π/2) ——
   {
     materia: "matematicas",
+    tema: "trig — sin(3π/2)",
     pregunta: "$\\sin\\left(\\dfrac{3\\pi}{2}\\right)$ es",
     opciones: ["$0$", "$1$", "$-1$", "no existe"],
     correcta: 2,
@@ -1007,6 +1079,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — cos(11π/6) ——
   {
     materia: "matematicas",
+    tema: "trig — cos(11π/6)",
     pregunta: "$\\cos\\left(\\dfrac{11\\pi}{6}\\right)$ es igual a",
     opciones: ["$-\\dfrac{\\sqrt{3}}{2}$", "$\\dfrac{\\sqrt{3}}{2}$", "$\\dfrac{1}{2}$", "$-\\dfrac{1}{2}$"],
     correcta: 1,
@@ -1015,6 +1088,7 @@ const PREGUNTAS = [
   // —— Matemáticas: trig — tan(330°) ——
   {
     materia: "matematicas",
+    tema: "trig — tan(330°)",
     pregunta: "$\\tan(330^{\\circ})$ vale",
     opciones: ["$\\dfrac{\\sqrt{3}}{3}$", "$-\\dfrac{\\sqrt{3}}{3}$", "$-\\sqrt{3}$", "$\\sqrt{3}$"],
     correcta: 1,
@@ -1023,6 +1097,7 @@ const PREGUNTAS = [
   // —— Matemáticas: sistema 2x2 (a) ——
   {
     materia: "matematicas",
+    tema: "sistema 2x2 (a)",
     pregunta: "Resuelve el sistema $$\\begin{cases} 2x + y = 7 \\\\ x - y = 2 \\end{cases}$$",
     opciones: ["$x = 3,\\ y = 1$", "$x = 2,\\ y = 3$", "$x = 3,\\ y = -1$", "$x = 4,\\ y = -1$"],
     correcta: 0,
@@ -1031,6 +1106,7 @@ const PREGUNTAS = [
   // —— Matemáticas: sistema 2x2 (b) ——
   {
     materia: "matematicas",
+    tema: "sistema 2x2 (b)",
     pregunta: "Resuelve el sistema $$\\begin{cases} x + 3y = 11 \\\\ 2x - y = 1 \\end{cases}$$",
     opciones: ["$x = 5,\\ y = 2$", "$x = 2,\\ y = 3$", "$x = 2,\\ y = -3$", "$x = 4,\\ y = 7$"],
     correcta: 1,
@@ -1039,6 +1115,7 @@ const PREGUNTAS = [
   // —— Matemáticas: sistema 2x2 (c) ——
   {
     materia: "matematicas",
+    tema: "sistema 2x2 (c)",
     pregunta: "Resuelve el sistema $$\\begin{cases} 3x + 2y = 16 \\\\ x + y = 7 \\end{cases}$$",
     opciones: ["$x = 4,\\ y = 3$", "$x = 2,\\ y = 5$", "$x = 3,\\ y = 4$", "$x = 2,\\ y = -5$"],
     correcta: 1,
@@ -1047,6 +1124,7 @@ const PREGUNTAS = [
   // —— Matemáticas: sistema 2x2 (d) ——
   {
     materia: "matematicas",
+    tema: "sistema 2x2 (d)",
     pregunta: "Resuelve el sistema $$\\begin{cases} 4x - 3y = 6 \\\\ 2x + y = 8 \\end{cases}$$",
     opciones: ["$x = 2,\\ y = 4$", "$x = 3,\\ y = 2$", "$x = 4,\\ y = 0$", "$x = 3,\\ y = -2$"],
     correcta: 1,
@@ -1055,6 +1133,7 @@ const PREGUNTAS = [
   // —— Matemáticas: sistema 2x2 (e) ——
   {
     materia: "matematicas",
+    tema: "sistema 2x2 (e)",
     pregunta: "Resuelve el sistema $$\\begin{cases} 5x + 2y = 19 \\\\ 3x - y = 7 \\end{cases}$$",
     opciones: ["$x = 3,\\ y = 2$", "$x = 2,\\ y = -1$", "$x = 3,\\ y = -2$", "$x = 1,\\ y = 7$"],
     correcta: 0,
@@ -1063,6 +1142,7 @@ const PREGUNTAS = [
   // —— Matemáticas: sistema 2x2 (f) ——
   {
     materia: "matematicas",
+    tema: "sistema 2x2 (f)",
     pregunta: "Resuelve el sistema $$\\begin{cases} x - 4y = -7 \\\\ 2x + 3y = 8 \\end{cases}$$",
     opciones: ["$x = 1,\\ y = 2$", "$x = -7,\\ y = 0$", "$x = 4,\\ y = 0$", "$x = 1,\\ y = -2$"],
     correcta: 0,
@@ -1071,6 +1151,7 @@ const PREGUNTAS = [
   // —— Matemáticas: límite por factorización (a) ——
   {
     materia: "matematicas",
+    tema: "límite por factorización (a)",
     pregunta: "Calcula $\\displaystyle\\lim_{x\\to 2}\\dfrac{x^2 - 4}{x - 2}$",
     opciones: ["$4$", "$2$", "$0$", "no existe"],
     correcta: 0,
@@ -1079,6 +1160,7 @@ const PREGUNTAS = [
   // —— Matemáticas: límite por factorización (b) ——
   {
     materia: "matematicas",
+    tema: "límite por factorización (b)",
     pregunta: "Calcula $\\displaystyle\\lim_{x\\to 3}\\dfrac{x^2 - x - 6}{x - 3}$",
     opciones: ["$6$", "$5$", "$3$", "no existe"],
     correcta: 1,
@@ -1087,6 +1169,7 @@ const PREGUNTAS = [
   // —— Matemáticas: límite por factorización (c) ——
   {
     materia: "matematicas",
+    tema: "límite por factorización (c)",
     pregunta: "Calcula $\\displaystyle\\lim_{x\\to 1}\\dfrac{x^3 - 1}{x - 1}$",
     opciones: ["$1$", "$0$", "$3$", "no existe"],
     correcta: 2,
@@ -1095,6 +1178,7 @@ const PREGUNTAS = [
   // —— Matemáticas: límite por factorización (d) ——
   {
     materia: "matematicas",
+    tema: "límite por factorización (d)",
     pregunta: "Calcula $\\displaystyle\\lim_{x\\to -2}\\dfrac{x^2 + 5x + 6}{x + 2}$",
     opciones: ["$1$", "$0$", "$-1$", "no existe"],
     correcta: 0,
@@ -1103,6 +1187,7 @@ const PREGUNTAS = [
   // —— Matemáticas: límite por factorización (e) ——
   {
     materia: "matematicas",
+    tema: "límite por factorización (e)",
     pregunta: "Calcula $\\displaystyle\\lim_{x\\to 4}\\dfrac{x^2 - 16}{x - 4}$",
     opciones: ["$4$", "$8$", "$16$", "no existe"],
     correcta: 1,
@@ -1111,6 +1196,7 @@ const PREGUNTAS = [
   // —— Matemáticas: L'Hôpital trig (a) ——
   {
     materia: "matematicas",
+    tema: "L'Hôpital trig (a)",
     pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\sin x}{x}$",
     opciones: ["$0$", "$1$", "$\\infty$", "no existe"],
     correcta: 1,
@@ -1119,6 +1205,7 @@ const PREGUNTAS = [
   // —— Matemáticas: L'Hôpital trig (b) ——
   {
     materia: "matematicas",
+    tema: "L'Hôpital trig (b)",
     pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{1 - \\cos x}{x}$",
     opciones: ["$0$", "$1$", "$-1$", "no existe"],
     correcta: 0,
@@ -1127,6 +1214,7 @@ const PREGUNTAS = [
   // —— Matemáticas: L'Hôpital trig (c) ——
   {
     materia: "matematicas",
+    tema: "L'Hôpital trig (c)",
     pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\sin(3x)}{x}$",
     opciones: ["$1$", "$3$", "$\\dfrac{1}{3}$", "$0$"],
     correcta: 1,
@@ -1135,6 +1223,7 @@ const PREGUNTAS = [
   // —— Matemáticas: L'Hôpital trig (d) ——
   {
     materia: "matematicas",
+    tema: "L'Hôpital trig (d)",
     pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\tan x}{x}$",
     opciones: ["$0$", "$1$", "$\\infty$", "no existe"],
     correcta: 1,
@@ -1143,6 +1232,7 @@ const PREGUNTAS = [
   // —— Matemáticas: L'Hôpital trig (e) ——
   {
     materia: "matematicas",
+    tema: "L'Hôpital trig (e)",
     pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\sin(2x)}{\\sin(5x)}$",
     opciones: ["$1$", "$\\dfrac{2}{5}$", "$\\dfrac{5}{2}$", "$0$"],
     correcta: 1,
@@ -1151,6 +1241,7 @@ const PREGUNTAS = [
   // —— Matemáticas: ec. 2do grado (a) ——
   {
     materia: "matematicas",
+    tema: "ec. 2do grado (a)",
     pregunta: "Las soluciones de $x^2 - 5x + 6 = 0$ son",
     opciones: ["$x = 2,\\ x = 3$", "$x = -2,\\ x = -3$", "$x = 1,\\ x = 6$", "$x = -1,\\ x = -6$"],
     correcta: 0,
@@ -1159,6 +1250,7 @@ const PREGUNTAS = [
   // —— Matemáticas: ec. 2do grado (b) ——
   {
     materia: "matematicas",
+    tema: "ec. 2do grado (b)",
     pregunta: "Las soluciones de $x^2 + x - 12 = 0$ son",
     opciones: ["$x = 3,\\ x = 4$", "$x = 3,\\ x = -4$", "$x = -3,\\ x = 4$", "$x = -3,\\ x = -4$"],
     correcta: 1,
@@ -1167,6 +1259,7 @@ const PREGUNTAS = [
   // —— Matemáticas: ec. 2do grado (c) ——
   {
     materia: "matematicas",
+    tema: "ec. 2do grado (c)",
     pregunta: "Las soluciones de $2x^2 - 7x + 3 = 0$ son",
     opciones: ["$x = 3,\\ x = \\dfrac{1}{2}$", "$x = -3,\\ x = -\\dfrac{1}{2}$", "$x = 3,\\ x = -\\dfrac{1}{2}$", "$x = 1,\\ x = \\dfrac{3}{2}$"],
     correcta: 0,
@@ -1175,6 +1268,7 @@ const PREGUNTAS = [
   // —— Matemáticas: ec. 2do grado (d) ——
   {
     materia: "matematicas",
+    tema: "ec. 2do grado (d)",
     pregunta: "Las soluciones de $x^2 - 9 = 0$ son",
     opciones: ["$x = 3$ (única)", "$x = \\pm 3$", "$x = \\pm 9$", "$x = 9$ (única)"],
     correcta: 1,
@@ -1183,6 +1277,7 @@ const PREGUNTAS = [
   // —— Matemáticas: ec. 2do grado (e) ——
   {
     materia: "matematicas",
+    tema: "ec. 2do grado (e)",
     pregunta: "Las soluciones de $x^2 + 4x + 4 = 0$ son",
     opciones: ["$x = 2$ (raíz doble)", "$x = -2$ (raíz doble)", "$x = 2,\\ x = -2$", "$x = -4$ (raíz doble)"],
     correcta: 1,
@@ -1191,6 +1286,7 @@ const PREGUNTAS = [
   // —— Matemáticas: ec. 2do grado (f) ——
   {
     materia: "matematicas",
+    tema: "ec. 2do grado (f)",
     pregunta: "Las soluciones de $x^2 - 2x - 8 = 0$ son",
     opciones: ["$x = 4,\\ x = -2$", "$x = -4,\\ x = 2$", "$x = 4,\\ x = 2$", "$x = 8,\\ x = -1$"],
     correcta: 0,
@@ -1199,6 +1295,7 @@ const PREGUNTAS = [
   // —— Matemáticas: cónica por discriminante (a) ——
   {
     materia: "matematicas",
+    tema: "cónica por discriminante (a)",
     pregunta: "La cónica representada por $x^2 + y^2 - 16 = 0$ es",
     opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
     correcta: 0,
@@ -1207,6 +1304,7 @@ const PREGUNTAS = [
   // —— Matemáticas: cónica por discriminante (b) ——
   {
     materia: "matematicas",
+    tema: "cónica por discriminante (b)",
     pregunta: "La cónica representada por $9x^2 + 16y^2 - 144 = 0$ es",
     opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
     correcta: 1,
@@ -1215,6 +1313,7 @@ const PREGUNTAS = [
   // —— Matemáticas: cónica por discriminante (c) ——
   {
     materia: "matematicas",
+    tema: "cónica por discriminante (c)",
     pregunta: "La cónica representada por $x^2 - 4y^2 - 4 = 0$ es",
     opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
     correcta: 3,
@@ -1223,6 +1322,7 @@ const PREGUNTAS = [
   // —— Matemáticas: cónica por discriminante (d) ——
   {
     materia: "matematicas",
+    tema: "cónica por discriminante (d)",
     pregunta: "La cónica representada por $y^2 - 12x = 0$ es",
     opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
     correcta: 2,
@@ -1231,6 +1331,7 @@ const PREGUNTAS = [
   // —— Matemáticas: cónica por discriminante (e) ——
   {
     materia: "matematicas",
+    tema: "cónica por discriminante (e)",
     pregunta: "La cónica representada por $4x^2 - y^2 + 16 = 0$ es",
     opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
     correcta: 3,
@@ -1239,6 +1340,7 @@ const PREGUNTAS = [
   // —— Matemáticas: cónica por discriminante (f) ——
   {
     materia: "matematicas",
+    tema: "cónica por discriminante (f)",
     pregunta: "La cónica representada por $x^2 + 6x - y + 11 = 0$ es",
     opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
     correcta: 2,
@@ -1247,6 +1349,7 @@ const PREGUNTAS = [
   // —— Matemáticas: cónica forma general con xy — parábola ——
   {
     materia: "matematicas",
+    tema: "cónica forma general con xy — parábola",
     pregunta: "La cónica representada por $4x^2 + 4xy + y^2 - 5x + 2y - 7 = 0$ es",
     opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
     correcta: 2,
@@ -1255,6 +1358,7 @@ const PREGUNTAS = [
   // —— Matemáticas: cónica forma general con xy — elipse ——
   {
     materia: "matematicas",
+    tema: "cónica forma general con xy — elipse",
     pregunta: "La cónica representada por $3x^2 + 2xy + 3y^2 - 4x + 6y - 1 = 0$ es",
     opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
     correcta: 1,
@@ -1263,6 +1367,7 @@ const PREGUNTAS = [
   // —— Matemáticas: cónica forma general con xy — hipérbola ——
   {
     materia: "matematicas",
+    tema: "cónica forma general con xy — hipérbola",
     pregunta: "La cónica representada por $2x^2 + 5xy + 2y^2 + x - 3y - 6 = 0$ es",
     opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
     correcta: 3,
@@ -1271,6 +1376,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral inmediata (potencia) ——
   {
     materia: "matematicas",
+    tema: "integral inmediata (potencia)",
     pregunta: "$\\displaystyle\\int x^3\\,dx$ es igual a",
     opciones: ["$\\dfrac{x^4}{4} + C$", "$3x^2 + C$", "$\\dfrac{x^4}{3} + C$", "$x^4 + C$"],
     correcta: 0,
@@ -1279,6 +1385,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral inmediata (1/x) ——
   {
     materia: "matematicas",
+    tema: "integral inmediata (1/x)",
     pregunta: "$\\displaystyle\\int \\dfrac{1}{x}\\,dx$ es",
     opciones: ["$\\ln|x| + C$", "$\\dfrac{1}{2x^2} + C$", "$-\\dfrac{1}{x^2} + C$", "$x \\ln x + C$"],
     correcta: 0,
@@ -1287,6 +1394,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral inmediata (exponencial) ——
   {
     materia: "matematicas",
+    tema: "integral inmediata (exponencial)",
     pregunta: "$\\displaystyle\\int e^x\\,dx$ es igual a",
     opciones: ["$\\dfrac{e^x}{x} + C$", "$e^x + C$", "$x e^x + C$", "$e^{x+1} + C$"],
     correcta: 1,
@@ -1295,6 +1403,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral inmediata (sen) ——
   {
     materia: "matematicas",
+    tema: "integral inmediata (sen)",
     pregunta: "$\\displaystyle\\int \\sin x\\,dx$ es",
     opciones: ["$\\cos x + C$", "$-\\cos x + C$", "$-\\sin x + C$", "$\\dfrac{\\sin^2 x}{2} + C$"],
     correcta: 1,
@@ -1303,6 +1412,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral inmediata (cos) ——
   {
     materia: "matematicas",
+    tema: "integral inmediata (cos)",
     pregunta: "$\\displaystyle\\int \\cos x\\,dx$ es",
     opciones: ["$-\\sin x + C$", "$\\sin x + C$", "$-\\cos x + C$", "$\\tan x + C$"],
     correcta: 1,
@@ -1311,6 +1421,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral inmediata (sec²) ——
   {
     materia: "matematicas",
+    tema: "integral inmediata (sec²)",
     pregunta: "$\\displaystyle\\int \\sec^2 x\\,dx$ es",
     opciones: ["$\\sec x \\tan x + C$", "$\\tan x + C$", "$\\dfrac{\\sec^3 x}{3} + C$", "$\\ln|\\sec x| + C$"],
     correcta: 1,
@@ -1319,22 +1430,25 @@ const PREGUNTAS = [
   // —— Matemáticas: integral inmediata (polinomio) ——
   {
     materia: "matematicas",
+    tema: "integral inmediata (polinomio)",
     pregunta: "$\\displaystyle\\int (3x^2 + 2x)\\,dx$ es igual a",
     opciones: ["$x^3 + x^2 + C$", "$x^3 + 2x^2 + C$", "$6x + 2 + C$", "$3x^3 + 2x^2 + C$"],
     correcta: 0,
     explicacion: "Por linealidad: $\\int 3x^2\\,dx + \\int 2x\\,dx = x^3 + x^2 + C$ (las constantes se mantienen y se aplica la regla de la potencia término a término)."
   },
-  // —— Matemáticas: integral inmediata (arctan) ——
+  // —— Matemáticas: integral inmediata (raíz cuadrada) ——
   {
     materia: "matematicas",
-    pregunta: "$\\displaystyle\\int \\dfrac{1}{1+x^2}\\,dx$ es",
-    opciones: ["$\\ln(1+x^2) + C$", "$\\arctan x + C$", "$\\arcsin x + C$", "$\\dfrac{1}{2}\\ln(1+x^2) + C$"],
-    correcta: 1,
-    explicacion: "$\\dfrac{d}{dx}(\\arctan x) = \\dfrac{1}{1+x^2}$, por lo tanto $\\int \\dfrac{1}{1+x^2}\\,dx = \\arctan x + C$."
+    tema: "integral inmediata (raíz cuadrada)",
+    pregunta: "$\\displaystyle\\int \\sqrt{x}\\,dx$ es",
+    opciones: ["$\\dfrac{2}{3}x^{3/2} + C$", "$\\dfrac{x^{3/2}}{3} + C$", "$2\\sqrt{x} + C$", "$\\dfrac{1}{2\\sqrt{x}} + C$"],
+    correcta: 0,
+    explicacion: "$\\sqrt{x} = x^{1/2}$. Por la regla de la potencia: $\\int x^{1/2}\\,dx = \\dfrac{x^{3/2}}{3/2} + C = \\dfrac{2}{3}x^{3/2} + C$."
   },
   // —— Matemáticas: integral por sustitución (a) ——
   {
     materia: "matematicas",
+    tema: "integral por sustitución (a)",
     pregunta: "$\\displaystyle\\int 2x \\cos(x^2)\\,dx$",
     opciones: ["$\\sin(x^2) + C$", "$2\\sin(x^2) + C$", "$-\\sin(x^2) + C$", "$x^2 \\sin(x^2) + C$"],
     correcta: 0,
@@ -1343,6 +1457,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral por sustitución (b) ——
   {
     materia: "matematicas",
+    tema: "integral por sustitución (b)",
     pregunta: "$\\displaystyle\\int 3x^2 e^{x^3}\\,dx$",
     opciones: ["$e^{x^3} + C$", "$3 e^{x^3} + C$", "$\\dfrac{e^{x^3}}{3} + C$", "$x^3 e^{x^3} + C$"],
     correcta: 0,
@@ -1351,6 +1466,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral por sustitución (c) ——
   {
     materia: "matematicas",
+    tema: "integral por sustitución (c)",
     pregunta: "$\\displaystyle\\int \\dfrac{x}{1+x^2}\\,dx$",
     opciones: ["$\\ln(1+x^2) + C$", "$\\dfrac{1}{2}\\ln(1+x^2) + C$", "$\\arctan x + C$", "$\\dfrac{x^2}{2(1+x^2)} + C$"],
     correcta: 1,
@@ -1359,6 +1475,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral por partes (a) ——
   {
     materia: "matematicas",
+    tema: "integral por partes (a)",
     pregunta: "$\\displaystyle\\int x e^x\\,dx$",
     opciones: ["$\\dfrac{x^2 e^x}{2} + C$", "$e^x(x - 1) + C$", "$e^x(x + 1) + C$", "$x e^x + C$"],
     correcta: 1,
@@ -1367,6 +1484,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral por partes (b) ——
   {
     materia: "matematicas",
+    tema: "integral por partes (b)",
     pregunta: "$\\displaystyle\\int x \\sin x\\,dx$",
     opciones: ["$x \\cos x + \\sin x + C$", "$-x \\cos x + \\sin x + C$", "$-x \\cos x - \\sin x + C$", "$\\dfrac{x^2}{2}\\sin x + C$"],
     correcta: 1,
@@ -1375,6 +1493,7 @@ const PREGUNTAS = [
   // —— Matemáticas: integral por partes (c) ——
   {
     materia: "matematicas",
+    tema: "integral por partes (c)",
     pregunta: "$\\displaystyle\\int \\ln x\\,dx$",
     opciones: ["$\\dfrac{1}{x} + C$", "$x \\ln x - x + C$", "$x \\ln x + C$", "$\\dfrac{(\\ln x)^2}{2} + C$"],
     correcta: 1,
@@ -1383,6 +1502,7 @@ const PREGUNTAS = [
   // —— Física: cantidad de movimiento (operación) ——
   {
     materia: "fisica",
+    tema: "cantidad de movimiento (operación)",
     pregunta: "Un balón de $0.5\\,\\mathrm{kg}$ viaja a $12\\,\\mathrm{m/s}$. Su cantidad de movimiento es",
     opciones: ["$6\\,\\mathrm{kg\\cdot m/s}$", "$24\\,\\mathrm{kg\\cdot m/s}$", "$0.5\\,\\mathrm{kg\\cdot m/s}$", "$12\\,\\mathrm{kg\\cdot m/s}$"],
     correcta: 0,
@@ -1391,6 +1511,7 @@ const PREGUNTAS = [
   // —— Física: choque inelástico (operación) ——
   {
     materia: "fisica",
+    tema: "choque inelástico (operación)",
     pregunta: "Un objeto de $3\\,\\mathrm{kg}$ con velocidad $4\\,\\mathrm{m/s}$ choca contra otro de $1\\,\\mathrm{kg}$ en reposo y quedan unidos. La velocidad final del conjunto es",
     opciones: ["$4\\,\\mathrm{m/s}$", "$3\\,\\mathrm{m/s}$", "$1\\,\\mathrm{m/s}$", "$12\\,\\mathrm{m/s}$"],
     correcta: 1,
@@ -1399,6 +1520,7 @@ const PREGUNTAS = [
   // —— Física: conservación de energía (operación) ——
   {
     materia: "fisica",
+    tema: "conservación de energía (operación)",
     pregunta: "Un objeto de $2\\,\\mathrm{kg}$ se deja caer desde $5\\,\\mathrm{m}$ de altura. Sin fricción, ¿con qué rapidez llega al suelo? (Usa $g = 10\\,\\mathrm{m/s^2}$.)",
     opciones: ["$5\\,\\mathrm{m/s}$", "$10\\,\\mathrm{m/s}$", "$50\\,\\mathrm{m/s}$", "$100\\,\\mathrm{m/s}$"],
     correcta: 1,
@@ -1407,6 +1529,7 @@ const PREGUNTAS = [
   // —— Física: MCU — fuerza centrípeta (operación) ——
   {
     materia: "fisica",
+    tema: "MCU — fuerza centrípeta (operación)",
     pregunta: "Un cuerpo de $2\\,\\mathrm{kg}$ gira en una trayectoria circular de radio $0.5\\,\\mathrm{m}$ con rapidez $4\\,\\mathrm{m/s}$. La fuerza centrípeta es",
     opciones: ["$16\\,\\mathrm{N}$", "$32\\,\\mathrm{N}$", "$64\\,\\mathrm{N}$", "$4\\,\\mathrm{N}$"],
     correcta: 2,
@@ -1415,6 +1538,7 @@ const PREGUNTAS = [
   // —— Física: tiro parabólico (operación) ——
   {
     materia: "fisica",
+    tema: "tiro parabólico (operación)",
     pregunta: "Un proyectil se lanza horizontalmente desde una altura de $20\\,\\mathrm{m}$ con velocidad de $15\\,\\mathrm{m/s}$. ¿Cuánto tarda en caer? (Usa $g = 10\\,\\mathrm{m/s^2}$.)",
     opciones: ["$1.5\\,\\mathrm{s}$", "$2\\,\\mathrm{s}$", "$3\\,\\mathrm{s}$", "$4\\,\\mathrm{s}$"],
     correcta: 1,
@@ -1423,6 +1547,7 @@ const PREGUNTAS = [
   // —— Física: calor (operación) ——
   {
     materia: "fisica",
+    tema: "calor (operación)",
     pregunta: "¿Cuánto calor se necesita para elevar la temperatura de $200\\,\\mathrm{g}$ de agua de $20^{\\circ}\\mathrm{C}$ a $80^{\\circ}\\mathrm{C}$? (Calor específico del agua: $c = 1\\,\\mathrm{cal/(g\\cdot ^{\\circ}C)}$.)",
     opciones: ["$200\\,\\mathrm{cal}$", "$1\\,200\\,\\mathrm{cal}$", "$12\\,000\\,\\mathrm{cal}$", "$16\\,000\\,\\mathrm{cal}$"],
     correcta: 2,
@@ -1431,6 +1556,7 @@ const PREGUNTAS = [
   // —— Física: Coulomb (operación) ——
   {
     materia: "fisica",
+    tema: "Coulomb (operación)",
     pregunta: "Dos cargas de $2\\,\\mu\\mathrm{C}$ y $3\\,\\mu\\mathrm{C}$ están separadas $1\\,\\mathrm{m}$. La fuerza eléctrica entre ellas es (usa $k = 9\\times 10^9\\,\\mathrm{N\\cdot m^2/C^2}$).",
     opciones: ["$5.4\\times 10^{-3}\\,\\mathrm{N}$", "$5.4\\times 10^{-2}\\,\\mathrm{N}$", "$5.4\\times 10^{-1}\\,\\mathrm{N}$", "$6\\times 10^{-6}\\,\\mathrm{N}$"],
     correcta: 1,
@@ -1439,6 +1565,7 @@ const PREGUNTAS = [
   // —— Física: resistencias en paralelo (operación) ——
   {
     materia: "fisica",
+    tema: "resistencias en paralelo (operación)",
     pregunta: "Dos resistencias de $6\\,\\Omega$ y $3\\,\\Omega$ se conectan en paralelo. La resistencia equivalente es",
     opciones: ["$9\\,\\Omega$", "$4.5\\,\\Omega$", "$2\\,\\Omega$", "$18\\,\\Omega$"],
     correcta: 2,
@@ -1447,6 +1574,7 @@ const PREGUNTAS = [
   // —— Física: termodinámica (teórica) ——
   {
     materia: "fisica",
+    tema: "termodinámica (teórica)",
     pregunta: "¿En qué proceso termodinámico la presión permanece constante?",
     opciones: ["Isotérmico", "Isobárico", "Adiabático", "Isocórico"],
     correcta: 1,
@@ -1455,6 +1583,7 @@ const PREGUNTAS = [
   // —— Física: óptica — ley de Snell (teórica) ——
   {
     materia: "fisica",
+    tema: "óptica — ley de Snell (teórica)",
     pregunta: "Cuando un rayo de luz pasa de un medio menos denso a uno más denso (por ejemplo, de aire a agua):",
     opciones: ["No se desvía", "Se aleja de la normal", "Se acerca a la normal", "Se refleja totalmente"],
     correcta: 2,
@@ -1463,6 +1592,7 @@ const PREGUNTAS = [
   // —— Física: óptica — lentes (teórica) ——
   {
     materia: "fisica",
+    tema: "óptica — lentes (teórica)",
     pregunta: "Si un objeto se coloca más allá del doble de la distancia focal ($d > 2f$) de una lente convergente, la imagen formada es",
     opciones: ["Virtual, derecha y mayor", "Real, invertida y menor", "Real, invertida y mayor", "Virtual, derecha y menor"],
     correcta: 1,
@@ -1471,6 +1601,7 @@ const PREGUNTAS = [
   // —— Física: efecto fotoeléctrico (teórica) ——
   {
     materia: "fisica",
+    tema: "efecto fotoeléctrico (teórica)",
     pregunta: "El efecto fotoeléctrico, explicado por Einstein en 1905, es la prueba experimental de que",
     opciones: ["La luz se comporta exclusivamente como onda", "La luz tiene naturaleza corpuscular (cuántica)", "Los electrones poseen masa", "La luz viaja a velocidad constante en el vacío"],
     correcta: 1,
@@ -1479,6 +1610,7 @@ const PREGUNTAS = [
   // —— Matemáticas: circunferencia — centro (forma general) ——
   {
     materia: "matematicas",
+    tema: "circunferencia — centro (forma general)",
     pregunta: "El centro de la circunferencia $x^2 + y^2 - 4x + 6y - 12 = 0$ es",
     opciones: ["$(2, -3)$", "$(-2, 3)$", "$(2, 3)$", "$(4, -6)$"],
     correcta: 0,
@@ -1487,6 +1619,7 @@ const PREGUNTAS = [
   // —— Matemáticas: circunferencia — radio (forma general) ——
   {
     materia: "matematicas",
+    tema: "circunferencia — radio (forma general)",
     pregunta: "El radio de la circunferencia $x^2 + y^2 + 8x - 6y + 9 = 0$ es",
     opciones: ["$3$", "$4$", "$5$", "$16$"],
     correcta: 1,
@@ -1495,6 +1628,7 @@ const PREGUNTAS = [
   // —— Matemáticas: parábola — vértice (forma general) ——
   {
     materia: "matematicas",
+    tema: "parábola — vértice (forma general)",
     pregunta: "El vértice de la parábola $y^2 - 4y - 8x + 28 = 0$ es",
     opciones: ["$(3, 2)$", "$(-3, 2)$", "$(3, -2)$", "$(-3, -2)$"],
     correcta: 0,
@@ -1503,6 +1637,7 @@ const PREGUNTAS = [
   // —— Matemáticas: parábola — parámetro p (forma general) ——
   {
     materia: "matematicas",
+    tema: "parábola — parámetro p (forma general)",
     pregunta: "Para la parábola $x^2 + 6x - 12y + 33 = 0$, el valor del parámetro $p$ es",
     opciones: ["$3$", "$6$", "$12$", "$4$"],
     correcta: 0,
@@ -1511,6 +1646,7 @@ const PREGUNTAS = [
   // —— Matemáticas: elipse — centro (forma general) ——
   {
     materia: "matematicas",
+    tema: "elipse — centro (forma general)",
     pregunta: "El centro de la elipse $4x^2 + 9y^2 - 16x + 18y - 11 = 0$ es",
     opciones: ["$(-2, 1)$", "$(2, -1)$", "$(2, 1)$", "$(-4, 2)$"],
     correcta: 1,
@@ -1519,10 +1655,200 @@ const PREGUNTAS = [
   // —— Matemáticas: hipérbola — centro (forma general) ——
   {
     materia: "matematicas",
+    tema: "hipérbola — centro (forma general)",
     pregunta: "El centro de la hipérbola $x^2 - 4y^2 + 6x + 16y - 11 = 0$ es",
     opciones: ["$(3, -2)$", "$(-3, 2)$", "$(3, 2)$", "$(-3, -2)$"],
     correcta: 1,
     explicacion: "Agrupando: $(x^2 + 6x + 9) - 4(y^2 - 4y + 4) = 11 + 9 - 16 = 4 \\Rightarrow \\dfrac{(x+3)^2}{4} - \\dfrac{(y-2)^2}{1} = 1$. El centro es $(-3, 2)$, con $a = 2$ y $b = 1$."
+  },
+  // —— Matemáticas: ec. 2do grado (g) ——
+  {
+    materia: "matematicas",
+    tema: "ec. 2do grado",
+    pregunta: "Las soluciones de $x^2 - 7x + 10 = 0$ son",
+    opciones: ["$x = 2,\\ x = 5$", "$x = -2,\\ x = -5$", "$x = 1,\\ x = 10$", "$x = 7,\\ x = -10$"],
+    correcta: 0,
+    explicacion: "Factorizando: $(x-2)(x-5) = 0 \\Rightarrow x = 2$ o $x = 5$ (dos números cuyo producto es $10$ y suma $7$)."
+  },
+  // —— Matemáticas: ec. 2do grado (h) ——
+  {
+    materia: "matematicas",
+    tema: "ec. 2do grado",
+    pregunta: "Las soluciones de $x^2 - x - 6 = 0$ son",
+    opciones: ["$x = 3,\\ x = -2$", "$x = -3,\\ x = 2$", "$x = 6,\\ x = -1$", "$x = 3,\\ x = 2$"],
+    correcta: 0,
+    explicacion: "Factorizando: $(x-3)(x+2) = 0 \\Rightarrow x = 3$ o $x = -2$ (producto $-6$, suma $-1$)."
+  },
+  // —— Matemáticas: ec. 2do grado (i) ——
+  {
+    materia: "matematicas",
+    tema: "ec. 2do grado",
+    pregunta: "Las soluciones de $3x^2 + 5x - 2 = 0$ son",
+    opciones: ["$x = -2,\\ x = \\dfrac{1}{3}$", "$x = 2,\\ x = -\\dfrac{1}{3}$", "$x = -2,\\ x = -\\dfrac{1}{3}$", "$x = 1,\\ x = -\\dfrac{2}{3}$"],
+    correcta: 0,
+    explicacion: "Por la fórmula general: $x = \\dfrac{-5 \\pm \\sqrt{25 + 24}}{6} = \\dfrac{-5 \\pm 7}{6}$. Entonces $x = \\dfrac{1}{3}$ o $x = -2$."
+  },
+  // —— Matemáticas: ec. 2do grado (j) ——
+  {
+    materia: "matematicas",
+    tema: "ec. 2do grado",
+    pregunta: "Las soluciones de $x^2 + 6x + 9 = 0$ son",
+    opciones: ["$x = -3$ (raíz doble)", "$x = 3$ (raíz doble)", "$x = -3,\\ x = 3$", "$x = -6$ (raíz doble)"],
+    correcta: 0,
+    explicacion: "Trinomio cuadrado perfecto: $(x+3)^2 = 0 \\Rightarrow x = -3$ con multiplicidad dos. El discriminante es $36 - 36 = 0$."
+  },
+  // —— Matemáticas: ec. 2do grado (k) ——
+  {
+    materia: "matematicas",
+    tema: "ec. 2do grado",
+    pregunta: "Las soluciones de $x^2 + 3x - 10 = 0$ son",
+    opciones: ["$x = 2,\\ x = -5$", "$x = -2,\\ x = 5$", "$x = 5,\\ x = 2$", "$x = -5,\\ x = -2$"],
+    correcta: 0,
+    explicacion: "Factorizando: $(x+5)(x-2) = 0 \\Rightarrow x = 2$ o $x = -5$ (producto $-10$, suma $+3$)."
+  },
+  // —— Matemáticas: límite (e^x - 1)/x ——
+  {
+    materia: "matematicas",
+    tema: "límite (L'Hôpital)",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{e^x - 1}{x}$",
+    opciones: ["$0$", "$1$", "$e$", "no existe"],
+    correcta: 1,
+    explicacion: "Forma $0/0$. Por L'Hôpital: $\\dfrac{d}{dx}(e^x - 1) = e^x$, $\\dfrac{d}{dx}(x) = 1$. Entonces el límite es $\\dfrac{e^0}{1} = 1$."
+  },
+  // —— Matemáticas: límite (1-cos x)/x² ——
+  {
+    materia: "matematicas",
+    tema: "límite (L'Hôpital)",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{1 - \\cos x}{x^2}$",
+    opciones: ["$0$", "$\\dfrac{1}{2}$", "$1$", "no existe"],
+    correcta: 1,
+    explicacion: "Forma $0/0$. Por L'Hôpital: $\\dfrac{\\sin x}{2x}$ (sigue siendo $0/0$). Por L'Hôpital otra vez: $\\dfrac{\\cos x}{2}$. El límite es $\\dfrac{\\cos 0}{2} = \\dfrac{1}{2}$."
+  },
+  // —— Matemáticas: límite al infinito ——
+  {
+    materia: "matematicas",
+    tema: "límite al infinito",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to \\infty}\\dfrac{3x^2 + 1}{x^2 - 2}$",
+    opciones: ["$0$", "$1$", "$3$", "$\\infty$"],
+    correcta: 2,
+    explicacion: "Como numerador y denominador tienen el mismo grado, el límite es el cociente de los coeficientes principales: $\\dfrac{3}{1} = 3$. (Equivalentemente, divide ambos entre $x^2$.)"
+  },
+  // —— Matemáticas: límite por racionalización ——
+  {
+    materia: "matematicas",
+    tema: "límite por racionalización",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 1}\\dfrac{\\sqrt{x} - 1}{x - 1}$",
+    opciones: ["$0$", "$\\dfrac{1}{2}$", "$1$", "no existe"],
+    correcta: 1,
+    explicacion: "Forma $0/0$. Multiplica y divide por el conjugado $\\sqrt{x} + 1$: $\\dfrac{(\\sqrt{x}-1)(\\sqrt{x}+1)}{(x-1)(\\sqrt{x}+1)} = \\dfrac{x-1}{(x-1)(\\sqrt{x}+1)} = \\dfrac{1}{\\sqrt{x}+1}$. El límite es $\\dfrac{1}{1+1} = \\dfrac{1}{2}$."
+  },
+  // —— Matemáticas: límite por factorización (denom. no trivial) ——
+  {
+    materia: "matematicas",
+    tema: "límite por factorización",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 2}\\dfrac{x^2 - x - 2}{x^2 - 4}$",
+    opciones: ["$\\dfrac{3}{4}$", "$\\dfrac{1}{2}$", "$1$", "no existe"],
+    correcta: 0,
+    explicacion: "Forma $0/0$. Factorizando: $\\dfrac{(x-2)(x+1)}{(x-2)(x+2)} = \\dfrac{x+1}{x+2}$. El límite es $\\dfrac{2+1}{2+2} = \\dfrac{3}{4}$."
+  },
+  // —— Matemáticas: ecuación trigonométrica (a) ——
+  {
+    materia: "matematicas",
+    tema: "ecuación trigonométrica",
+    pregunta: "Resuelve $2\\sin x = 1$ en el intervalo $[0, \\pi/2]$.",
+    opciones: ["$x = \\dfrac{\\pi}{6}$", "$x = \\dfrac{\\pi}{4}$", "$x = \\dfrac{\\pi}{3}$", "$x = \\dfrac{\\pi}{2}$"],
+    correcta: 0,
+    explicacion: "$2\\sin x = 1 \\Rightarrow \\sin x = \\dfrac{1}{2}$. En el intervalo $[0, \\pi/2]$, esto ocurre cuando $x = \\dfrac{\\pi}{6}$ (que es $30^{\\circ}$)."
+  },
+  // —— Matemáticas: ecuación trigonométrica (b) ——
+  {
+    materia: "matematicas",
+    tema: "ecuación trigonométrica",
+    pregunta: "Resuelve $\\cos x = -\\dfrac{1}{2}$ en el intervalo $[0, \\pi]$.",
+    opciones: ["$x = \\dfrac{\\pi}{3}$", "$x = \\dfrac{\\pi}{2}$", "$x = \\dfrac{2\\pi}{3}$", "$x = \\dfrac{5\\pi}{6}$"],
+    correcta: 2,
+    explicacion: "$\\cos x = -\\dfrac{1}{2}$ en el II cuadrante. El ángulo de referencia es $\\dfrac{\\pi}{3}$ ($60^{\\circ}$), entonces $x = \\pi - \\dfrac{\\pi}{3} = \\dfrac{2\\pi}{3}$ ($120^{\\circ}$)."
+  },
+  // —— Matemáticas: ecuación trigonométrica (c) ——
+  {
+    materia: "matematicas",
+    tema: "ecuación trigonométrica",
+    pregunta: "Resuelve $\\sin x = \\cos x$ en el intervalo $[0, \\pi/2]$.",
+    opciones: ["$x = 0$", "$x = \\dfrac{\\pi}{6}$", "$x = \\dfrac{\\pi}{4}$", "$x = \\dfrac{\\pi}{3}$"],
+    correcta: 2,
+    explicacion: "Dividiendo entre $\\cos x$: $\\tan x = 1$. En $[0, \\pi/2]$ esto da $x = \\dfrac{\\pi}{4}$ ($45^{\\circ}$), donde $\\sin = \\cos = \\dfrac{\\sqrt{2}}{2}$."
+  },
+  // —— Matemáticas: triángulo rectángulo — Pitágoras ——
+  {
+    materia: "matematicas",
+    tema: "triángulo rectángulo",
+    pregunta: "En un triángulo rectángulo los catetos miden $3\\,\\mathrm{cm}$ y $4\\,\\mathrm{cm}$. ¿Cuánto mide la hipotenusa?",
+    opciones: ["$5\\,\\mathrm{cm}$", "$7\\,\\mathrm{cm}$", "$\\sqrt{7}\\,\\mathrm{cm}$", "$25\\,\\mathrm{cm}$"],
+    correcta: 0,
+    explicacion: "Por el teorema de Pitágoras: $h^2 = a^2 + b^2 = 9 + 16 = 25 \\Rightarrow h = 5\\,\\mathrm{cm}$."
+  },
+  // —— Matemáticas: triángulo rectángulo — cateto faltante ——
+  {
+    materia: "matematicas",
+    tema: "triángulo rectángulo",
+    pregunta: "En un triángulo rectángulo la hipotenusa mide $13$ y un cateto mide $5$. ¿Cuánto mide el otro cateto?",
+    opciones: ["$8$", "$12$", "$\\sqrt{13}$", "$18$"],
+    correcta: 1,
+    explicacion: "Por Pitágoras: $a^2 + 5^2 = 13^2 \\Rightarrow a^2 = 169 - 25 = 144 \\Rightarrow a = 12$. (Es el clásico triple pitagórico $5\\text{-}12\\text{-}13$.)"
+  },
+  // —— Matemáticas: triángulo rectángulo — razón trigonométrica ——
+  {
+    materia: "matematicas",
+    tema: "triángulo rectángulo",
+    pregunta: "En un triángulo rectángulo, uno de los ángulos agudos mide $30^{\\circ}$ y la hipotenusa $10\\,\\mathrm{m}$. ¿Cuánto mide el cateto opuesto a ese ángulo?",
+    opciones: ["$5\\,\\mathrm{m}$", "$5\\sqrt{3}\\,\\mathrm{m}$", "$10\\sqrt{3}\\,\\mathrm{m}$", "$\\dfrac{10}{\\sqrt{3}}\\,\\mathrm{m}$"],
+    correcta: 0,
+    explicacion: "$\\sin 30^{\\circ} = \\dfrac{\\text{cateto opuesto}}{\\text{hipotenusa}} \\Rightarrow \\dfrac{1}{2} = \\dfrac{\\text{op}}{10} \\Rightarrow \\text{op} = 5\\,\\mathrm{m}$."
+  },
+  // —— Matemáticas: triángulo oblicuángulo — ley de cosenos ——
+  {
+    materia: "matematicas",
+    tema: "ley de cosenos",
+    pregunta: "En un triángulo, $a = 3$, $b = 5$ y el ángulo $C$ entre ellos mide $120^{\\circ}$. ¿Cuánto mide el lado $c$?",
+    opciones: ["$\\sqrt{34}$", "$7$", "$\\sqrt{19}$", "$8$"],
+    correcta: 1,
+    explicacion: "Por la ley de cosenos: $c^2 = a^2 + b^2 - 2ab\\cos C = 9 + 25 - 2(3)(5)\\cos 120^{\\circ} = 34 - 30(-\\tfrac{1}{2}) = 34 + 15 = 49 \\Rightarrow c = 7$."
+  },
+  // —— Matemáticas: triángulo oblicuángulo — ley de senos ——
+  {
+    materia: "matematicas",
+    tema: "ley de senos",
+    pregunta: "En un triángulo, $A = 30^{\\circ}$, $B = 45^{\\circ}$ y $a = 10$. ¿Cuánto mide el lado $b$?",
+    opciones: ["$10\\sqrt{2}$", "$5\\sqrt{2}$", "$10$", "$15$"],
+    correcta: 0,
+    explicacion: "Ley de senos: $\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B} \\Rightarrow b = \\dfrac{a\\sin B}{\\sin A} = \\dfrac{10 \\cdot \\sqrt{2}/2}{1/2} = 10\\sqrt{2}$."
+  },
+  // —— Matemáticas: gráfica trig (sen) ——
+  {
+    materia: "matematicas",
+    tema: "gráfica de funciones trigonométricas",
+    pregunta: "¿Cuál función pasa por el origen, oscila entre $-1$ y $1$, y tiene período $2\\pi$?",
+    opciones: ["$\\sin x$", "$\\cos x$", "$\\tan x$", "$-\\cos x$"],
+    correcta: 0,
+    explicacion: "$\\sin 0 = 0$ (pasa por el origen), su rango es $[-1, 1]$ y se repite cada $2\\pi$. $\\cos x$ no pasa por el origen ($\\cos 0 = 1$); $\\tan x$ no está acotada y tiene asíntotas."
+  },
+  // —— Matemáticas: gráfica trig (cos) ——
+  {
+    materia: "matematicas",
+    tema: "gráfica de funciones trigonométricas",
+    pregunta: "¿Cuál función tiene su valor máximo $(1)$ en $x = 0$, su valor mínimo $(-1)$ en $x = \\pi$, y oscila entre $-1$ y $1$?",
+    opciones: ["$\\sin x$", "$\\cos x$", "$\\tan x$", "$-\\sin x$"],
+    correcta: 1,
+    explicacion: "$\\cos 0 = 1$ (máximo) y $\\cos \\pi = -1$ (mínimo). Es par y simétrica respecto al eje $y$."
+  },
+  // —— Matemáticas: gráfica trig (tan) ——
+  {
+    materia: "matematicas",
+    tema: "gráfica de funciones trigonométricas",
+    pregunta: "¿Cuál función tiene asíntotas verticales en $x = \\dfrac{\\pi}{2} + n\\pi$, pasa por el origen y no está acotada?",
+    opciones: ["$\\sin x$", "$\\cos x$", "$\\tan x$", "$\\sec x$"],
+    correcta: 2,
+    explicacion: "$\\tan x = \\dfrac{\\sin x}{\\cos x}$ no está definida cuando $\\cos x = 0$, es decir en $x = \\dfrac{\\pi}{2} + n\\pi$ (asíntotas). Pasa por el origen y crece sin cota dentro de cada rama."
   }
 ];
 
@@ -1667,6 +1993,7 @@ function responder(i) {
 
   $('correctAnswer').innerHTML = `${['A','B','C','D'][p.correcta]}. ${p.opciones[p.correcta]}`;
   $('explanation').innerHTML = p.explicacion;
+  $('temaTag').textContent = p.tema || '';
 
   renderKatex(card);
 
