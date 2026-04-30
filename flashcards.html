@@ -408,6 +408,7 @@
 const PREGUNTAS = [
   // —— Física: caída libre (velocidad) ——
   {
+    materia: "fisica",
     pregunta: "Un objeto se deja caer desde el reposo. Usando $g = 10\\,\\mathrm{m/s^2}$, ¿qué velocidad tiene a los $3\\,\\mathrm{s}$?",
     opciones: [
       "$15\\,\\mathrm{m/s}$",
@@ -420,6 +421,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: factorización ——
   {
+    materia: "matematicas",
     pregunta: "¿Cuál es la forma factorizada de $x^2 - 9$?",
     opciones: [
       "$(x-3)^2$",
@@ -432,6 +434,7 @@ const PREGUNTAS = [
   },
   // —— Física: MRUA (frenando) ——
   {
+    materia: "fisica",
     pregunta: "Un auto viaja a $20\\,\\mathrm{m/s}$ y frena con aceleración constante de $-4\\,\\mathrm{m/s^2}$. ¿Cuánto tiempo tarda en detenerse?",
     opciones: [
       "$4\\,\\mathrm{s}$",
@@ -444,6 +447,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: trigonometría (valor notable) ——
   {
+    materia: "matematicas",
     pregunta: "¿Cuál es el valor de $\\sin(30^{\\circ})$?",
     opciones: [
       "$\\dfrac{\\sqrt{3}}{2}$",
@@ -456,6 +460,7 @@ const PREGUNTAS = [
   },
   // —— Física: gravitación universal ——
   {
+    materia: "fisica",
     pregunta: "Dos masas de $2\\,\\mathrm{kg}$ y $3\\,\\mathrm{kg}$ están separadas $1\\,\\mathrm{m}$. Usando $G = 6.6 \\times 10^{-11}\\,\\mathrm{N\\cdot m^2/kg^2}$, ¿cuál es la fuerza gravitacional entre ellas?",
     opciones: [
       "$3.96 \\times 10^{-10}\\,\\mathrm{N}$",
@@ -468,6 +473,7 @@ const PREGUNTAS = [
   },
   // —— Física: MRUA (ciclista acelerando) ——
   {
+    materia: "fisica",
     pregunta: "Un ciclista parte del reposo y acelera uniformemente a razón de $3\\,\\mathrm{m/s^2}$. ¿Qué velocidad alcanza a los $4\\,\\mathrm{s}$?",
     opciones: [
       "$7\\,\\mathrm{m/s}$",
@@ -480,6 +486,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: operaciones con enteros y potencias ——
   {
+    materia: "matematicas",
     pregunta: "Simplifica la siguiente expresión: $(-2)^3 + 3(4-7)$",
     opciones: [
       "$1$",
@@ -492,6 +499,7 @@ const PREGUNTAS = [
   },
   // —— Física: caída libre (distancia) ——
   {
+    materia: "fisica",
     pregunta: "Un objeto se deja caer desde el reposo. ¿Qué distancia recorre durante los primeros $2\\,\\mathrm{s}$? (Usa $g=10\\,\\mathrm{m/s^2}$.)",
     opciones: [
       "$10\\,\\mathrm{m}$",
@@ -504,6 +512,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: producto notable (binomio al cuadrado) ——
   {
+    materia: "matematicas",
     pregunta: "Al desarrollar $(3x+2)^2$ se obtiene",
     opciones: [
       "$9x^2 + 4$",
@@ -516,6 +525,7 @@ const PREGUNTAS = [
   },
   // —— Física: segunda ley de Newton ——
   {
+    materia: "fisica",
     pregunta: "Una fuerza neta de $15\\,\\mathrm{N}$ actúa sobre un cuerpo de $3\\,\\mathrm{kg}$. La aceleración que adquiere es",
     opciones: [
       "$5\\,\\mathrm{m/s^2}$",
@@ -528,6 +538,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: ecuación lineal ——
   {
+    materia: "matematicas",
     pregunta: "Resuelve la ecuación $4(x+1) = 2x - 6$",
     opciones: [
       "$x = 5$",
@@ -540,6 +551,7 @@ const PREGUNTAS = [
   },
   // —— Física: trabajo mecánico (fuerza horizontal) ——
   {
+    materia: "fisica",
     pregunta: "Se empuja una caja horizontalmente con una fuerza de $25\\,\\mathrm{N}$ a lo largo de $8\\,\\mathrm{m}$. El trabajo realizado es",
     opciones: [
       "$33\\,\\mathrm{J}$",
@@ -552,7 +564,8 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: sistema de ecuaciones ——
   {
-    pregunta: "Resuelve el sistema\n\n$x + y = 10$\n$x - y = 4$",
+    materia: "matematicas",
+    pregunta: "Resuelve el sistema $$\\begin{cases} x + y = 10 \\\\ x - y = 4 \\end{cases}$$",
     opciones: [
       "$x = 5,\\ y = 5$",
       "$x = 7,\\ y = 3$",
@@ -564,6 +577,7 @@ const PREGUNTAS = [
   },
   // —— Física: energía cinética ——
   {
+    materia: "fisica",
     pregunta: "Un cuerpo de $4\\,\\mathrm{kg}$ se mueve con rapidez $3\\,\\mathrm{m/s}$. Su energía cinética es",
     opciones: [
       "$12\\,\\mathrm{J}$",
@@ -576,6 +590,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: conversión radianes → grados ——
   {
+    materia: "matematicas",
     pregunta: "El ángulo $\\dfrac{3\\pi}{4}$ radianes equivale a",
     opciones: [
       "$120^{\\circ}$",
@@ -588,6 +603,7 @@ const PREGUNTAS = [
   },
   // —— Física: presión hidrostática ——
   {
+    materia: "fisica",
     pregunta: "Calcula la presión hidrostática a $3\\,\\mathrm{m}$ de profundidad en agua ($\\rho = 1000\\,\\mathrm{kg/m^3}$, $g = 10\\,\\mathrm{m/s^2}$).",
     opciones: [
       "$3\\,000\\,\\mathrm{Pa}$",
@@ -600,6 +616,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: logaritmo ——
   {
+    materia: "matematicas",
     pregunta: "El valor de $x$ que satisface $\\log_3 x = 2$ es",
     opciones: [
       "$6$",
@@ -612,6 +629,7 @@ const PREGUNTAS = [
   },
   // —— Física: Ley de Ohm ——
   {
+    materia: "fisica",
     pregunta: "Una resistencia de $6\\,\\Omega$ se conecta a una diferencia de potencial de $18\\,\\mathrm{V}$. La corriente que la atraviesa es",
     opciones: [
       "$108\\,\\mathrm{A}$",
@@ -624,6 +642,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: pendiente entre dos puntos ——
   {
+    materia: "matematicas",
     pregunta: "La pendiente de la recta que pasa por los puntos $(-1, 4)$ y $(3, -4)$ es",
     opciones: [
       "$2$",
@@ -636,6 +655,7 @@ const PREGUNTAS = [
   },
   // —— Física: velocidad de una onda ——
   {
+    materia: "fisica",
     pregunta: "Una onda tiene frecuencia $20\\,\\mathrm{Hz}$ y longitud de onda $5\\,\\mathrm{m}$. Recuerda que $1\\,\\mathrm{Hz} = 1/\\mathrm{s}$. Su velocidad de propagación es",
     opciones: [
       "$25\\,\\mathrm{m/s}$",
@@ -648,6 +668,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: derivada de polinomio ——
   {
+    materia: "matematicas",
     pregunta: "Si $f(x) = 2x^3 - 4x + 5$, entonces $f'(x)$ es",
     opciones: [
       "$6x^2 - 4$",
@@ -660,6 +681,7 @@ const PREGUNTAS = [
   },
   // —— Física: Ley de Hooke (con conversión de unidades) ——
   {
+    materia: "fisica",
     pregunta: "Un resorte con constante elástica $k = 150\\,\\mathrm{N/m}$ se estira $20\\,\\mathrm{cm}$. La fuerza ejercida por el resorte es",
     opciones: [
       "$3\\,000\\,\\mathrm{N}$",
@@ -672,6 +694,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: límite forma 0/0 ——
   {
+    materia: "matematicas",
     pregunta: "El valor del límite $\\displaystyle\\lim_{x\\to 3}\\dfrac{x^2 - 9}{x - 3}$ es",
     opciones: [
       "$6$",
@@ -684,6 +707,7 @@ const PREGUNTAS = [
   },
   // —— Física: trabajo mecánico con ángulo ——
   {
+    materia: "fisica",
     pregunta: "Una fuerza de $20\\,\\mathrm{N}$ se aplica sobre un objeto formando un ángulo de $60^{\\circ}$ con el desplazamiento de $10\\,\\mathrm{m}$. El trabajo realizado es (usa $\\cos 60^{\\circ} = \\tfrac{1}{2}$)",
     opciones: [
       "$200\\,\\mathrm{J}$",
@@ -696,6 +720,7 @@ const PREGUNTAS = [
   },
   // —— Matemáticas: mínimo de parábola ——
   {
+    materia: "matematicas",
     pregunta: "El valor mínimo de la función $f(x) = x^2 - 4x + 7$ es",
     opciones: [
       "$2$",
@@ -705,12 +730,533 @@ const PREGUNTAS = [
     ],
     correcta: 1,
     explicacion: "$f'(x) = 2x - 4 = 0 \\Rightarrow x = 2$. Sustituyendo: $f(2) = 4 - 8 + 7 = 3$. El mínimo es el valor de $f$, no el de $x$."
+  },
+  // —— Historia: Plan de Iguala ——
+  {
+    materia: "historia",
+    pregunta: "¿Quién proclamó el Plan de Iguala (1821)?",
+    opciones: [
+      "Agustín de Iturbide",
+      "Antonio López de Santa Anna",
+      "Juan O'Donojú",
+      "Vicente Guerrero"
+    ],
+    correcta: 0,
+    explicacion: "El Plan de Iguala fue proclamado por Agustín de Iturbide en 1821 y consuma la independencia de México bajo las «Tres Garantías»: religión católica, independencia y unión entre españoles y mexicanos."
+  },
+  // —— Historia: Tratados de Córdoba ——
+  {
+    materia: "historia",
+    pregunta: "¿Quiénes firmaron los Tratados de Córdoba (1821)?",
+    opciones: [
+      "Iturbide y Vicente Guerrero",
+      "Iturbide y el virrey Juan O'Donojú",
+      "Santa Anna y Guadalupe Victoria",
+      "Guadalupe Victoria y el virrey Juan O'Donojú"
+    ],
+    correcta: 1,
+    explicacion: "Los Tratados de Córdoba fueron firmados en 1821 por Agustín de Iturbide y el virrey Juan O'Donojú. Con ellos España reconoce la independencia de México y ratifica el Plan de Iguala."
+  },
+  // —— Historia: Plan de Casa Mata ——
+  {
+    materia: "historia",
+    pregunta: "¿Qué efecto principal tuvo el Plan de Casa Mata (1823)?",
+    opciones: [
+      "Consumó la independencia de México",
+      "Provocó la caída del Imperio de Iturbide y convocó a un nuevo congreso constituyente",
+      "Inició la Reforma liberal",
+      "Restableció el orden constitucional tras el gobierno de Huerta"
+    ],
+    correcta: 1,
+    explicacion: "El Plan de Casa Mata, proclamado por Antonio López de Santa Anna y Guadalupe Victoria en 1823, provocó la caída del Imperio de Iturbide y la transformación de México en república."
+  },
+  // —— Historia: Tratados de Guadalupe Hidalgo ——
+  {
+    materia: "historia",
+    pregunta: "¿Cuál fue el resultado principal de los Tratados de Guadalupe Hidalgo (1848)?",
+    opciones: [
+      "México cede más de la mitad de su territorio a Estados Unidos a cambio de 15 millones de pesos",
+      "España reconoce la independencia de México",
+      "Estados Unidos devuelve Texas a México",
+      "México reconoce la independencia de Texas sin pago alguno"
+    ],
+    correcta: 0,
+    explicacion: "Al final de la guerra México–Estados Unidos, los Tratados de Guadalupe Hidalgo (1848) fijaron la cesión de Texas, Nuevo México, California y otros territorios a cambio de 15 millones de pesos."
+  },
+  // —— Historia: Plan de Ayutla ——
+  {
+    materia: "historia",
+    pregunta: "¿A quién desconoce el Plan de Ayutla (1854)?",
+    opciones: [
+      "Antonio López de Santa Anna",
+      "Benito Juárez",
+      "Porfirio Díaz",
+      "Sebastián Lerdo de Tejada"
+    ],
+    correcta: 0,
+    explicacion: "El Plan de Ayutla, proclamado por Juan Álvarez e Ignacio Comonfort en 1854, desconoce a Santa Anna y convoca a un congreso constituyente, dando inicio a la Reforma liberal."
+  },
+  // —— Historia: Plan de Tacubaya ——
+  {
+    materia: "historia",
+    pregunta: "¿Qué desconoce el Plan de Tacubaya (1857) y qué desencadena?",
+    opciones: [
+      "Desconoce a Maximiliano y desencadena la Intervención Francesa",
+      "Desconoce la Constitución de 1857 y detona la Guerra de Reforma",
+      "Desconoce a Porfirio Díaz e inicia la Revolución Mexicana",
+      "Desconoce a Iturbide y provoca la caída de su Imperio"
+    ],
+    correcta: 1,
+    explicacion: "El Plan de Tacubaya, proclamado por Félix Zuloaga en 1857 (apoyado por Comonfort), desconoce la Constitución de 1857 y detona la Guerra de Reforma entre liberales y conservadores."
+  },
+  // —— Historia: Plan de la Noria ——
+  {
+    materia: "historia",
+    pregunta: "¿Quién proclamó el Plan de la Noria (1871) y qué buscaba?",
+    opciones: [
+      "Porfirio Díaz; desconocer la reelección de Benito Juárez bajo el lema «No reelección»",
+      "Benito Juárez; defender su gobierno frente a Lerdo de Tejada",
+      "Sebastián Lerdo de Tejada; derrocar a Porfirio Díaz",
+      "Francisco I. Madero; desconocer a Porfirio Díaz"
+    ],
+    correcta: 0,
+    explicacion: "El Plan de la Noria fue proclamado por Porfirio Díaz en 1871 contra la reelección de Benito Juárez, bajo el lema «No reelección». Fracasó."
+  },
+  // —— Historia: Plan de Tuxtepec ——
+  {
+    materia: "historia",
+    pregunta: "¿A quién derrocó el Plan de Tuxtepec (1876) y bajo qué lema?",
+    opciones: [
+      "A Benito Juárez, bajo el lema «No reelección»",
+      "A Sebastián Lerdo de Tejada, bajo el lema «Sufragio efectivo, no reelección»",
+      "A Porfirio Díaz, bajo el lema «Tierra y Libertad»",
+      "A Maximiliano, bajo el lema «Religión y fueros»"
+    ],
+    correcta: 1,
+    explicacion: "El Plan de Tuxtepec, proclamado por Porfirio Díaz en 1876, derroca a Sebastián Lerdo de Tejada bajo el lema «Sufragio efectivo, no reelección» e inicia el Porfiriato."
+  },
+  // —— Historia: Plan de San Luis ——
+  {
+    materia: "historia",
+    pregunta: "¿Quién proclamó el Plan de San Luis (1910) y a qué dio inicio?",
+    opciones: [
+      "Emiliano Zapata; dio inicio al reparto agrario",
+      "Francisco I. Madero; dio inicio a la Revolución Mexicana",
+      "Venustiano Carranza; restableció el orden constitucional",
+      "Porfirio Díaz; consolidó el Porfiriato"
+    ],
+    correcta: 1,
+    explicacion: "El Plan de San Luis fue proclamado por Francisco I. Madero en 1910; desconoce a Porfirio Díaz y convoca a las armas el 20 de noviembre, dando inicio a la Revolución Mexicana."
+  },
+  // —— Historia: Plan de Ayala ——
+  {
+    materia: "historia",
+    pregunta: "El Plan de Ayala (1911), proclamado por Emiliano Zapata, principalmente",
+    opciones: [
+      "Reconoce a Madero como presidente y respalda su gobierno",
+      "Desconoce a Madero y exige la devolución de tierras a los campesinos bajo el lema «Tierra y Libertad»",
+      "Desconoce a Victoriano Huerta y restablece el orden constitucional",
+      "Desconoce a Porfirio Díaz y convoca a las armas"
+    ],
+    correcta: 1,
+    explicacion: "El Plan de Ayala, proclamado por Emiliano Zapata en 1911, desconoce a Madero como presidente y exige la devolución de tierras a los campesinos. Su lema es «Tierra y Libertad»."
+  },
+  // —— Historia: Plan de Guadalupe ——
+  {
+    materia: "historia",
+    pregunta: "¿A qué gobierno desconoce el Plan de Guadalupe (1913)?",
+    opciones: [
+      "Al gobierno de Porfirio Díaz",
+      "Al gobierno de Francisco I. Madero",
+      "Al gobierno de Victoriano Huerta",
+      "Al gobierno de Álvaro Obregón"
+    ],
+    correcta: 2,
+    explicacion: "El Plan de Guadalupe, proclamado por Venustiano Carranza en 1913, desconoce al gobierno de Victoriano Huerta (instaurado tras el asesinato de Madero) y busca restablecer el orden constitucional."
+  },
+  // —— Historia: Plan de Agua Prieta ——
+  {
+    materia: "historia",
+    pregunta: "El Plan de Agua Prieta (1920), proclamado por Obregón, Calles y De la Huerta,",
+    opciones: [
+      "Desconoce a Porfirio Díaz e inicia la Revolución Mexicana",
+      "Desconoce a Victoriano Huerta y restablece el orden constitucional",
+      "Desconoce a Venustiano Carranza como presidente e inicia el llamado «Grupo Sonora» en el poder",
+      "Desconoce a Madero y exige la devolución de tierras"
+    ],
+    correcta: 2,
+    explicacion: "El Plan de Agua Prieta, proclamado por Álvaro Obregón, Plutarco Elías Calles y Adolfo de la Huerta en 1920, desconoce a Carranza como presidente y da paso al llamado «Grupo Sonora» en el poder."
+  },
+  // —— Historia: Tratados de Bucareli ——
+  {
+    materia: "historia",
+    pregunta: "¿Cuál fue el contenido principal de los Tratados de Bucareli (1923)?",
+    opciones: [
+      "México cede territorio a Estados Unidos a cambio de 15 millones de pesos",
+      "Estados Unidos reconoce al gobierno de Obregón a cambio de no aplicar de manera retroactiva el artículo 27 sobre petróleo y propiedad de extranjeros",
+      "España reconoce la independencia de México",
+      "México obtiene la devolución de Texas y California"
+    ],
+    correcta: 1,
+    explicacion: "Los Tratados de Bucareli (1923), firmados entre Álvaro Obregón y Estados Unidos, establecen el reconocimiento estadounidense al gobierno de Obregón a cambio de no aplicar retroactivamente el artículo 27 constitucional sobre petróleo y propiedad de extranjeros."
+  },
+  // —— Matemáticas: trig — sin(0°) ——
+  {
+    materia: "matematicas",
+    pregunta: "¿Cuánto vale $\\sin(0^{\\circ})$?",
+    opciones: ["$0$", "$1$", "$\\dfrac{1}{2}$", "$\\dfrac{\\sqrt{2}}{2}$"],
+    correcta: 0,
+    explicacion: "$\\sin(0^{\\circ}) = 0$. El seno se anula en $0^{\\circ}$ y en $180^{\\circ}$."
+  },
+  // —— Matemáticas: trig — cos(π/6) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\cos\\left(\\dfrac{\\pi}{6}\\right)$ es igual a",
+    opciones: ["$\\dfrac{1}{2}$", "$\\dfrac{\\sqrt{3}}{2}$", "$\\dfrac{\\sqrt{2}}{2}$", "$1$"],
+    correcta: 1,
+    explicacion: "$\\dfrac{\\pi}{6}\\,\\mathrm{rad} = 30^{\\circ}$, y $\\cos(30^{\\circ}) = \\dfrac{\\sqrt{3}}{2}$."
+  },
+  // —— Matemáticas: trig — tan(45°) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\tan(45^{\\circ})$ es igual a",
+    opciones: ["$0$", "$\\dfrac{\\sqrt{2}}{2}$", "$1$", "$\\sqrt{3}$"],
+    correcta: 2,
+    explicacion: "$\\tan(45^{\\circ}) = \\dfrac{\\sin 45^{\\circ}}{\\cos 45^{\\circ}} = \\dfrac{\\sqrt{2}/2}{\\sqrt{2}/2} = 1$."
+  },
+  // —— Matemáticas: trig — sin(π/2) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\sin\\left(\\dfrac{\\pi}{2}\\right)$ es igual a",
+    opciones: ["$0$", "$\\dfrac{\\sqrt{3}}{2}$", "$1$", "$-1$"],
+    correcta: 2,
+    explicacion: "$\\dfrac{\\pi}{2}\\,\\mathrm{rad} = 90^{\\circ}$, y $\\sin(90^{\\circ}) = 1$ (es el máximo del seno)."
+  },
+  // —— Matemáticas: trig — tan(π/2) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\tan\\left(\\dfrac{\\pi}{2}\\right)$",
+    opciones: ["$0$", "$1$", "$\\sqrt{3}$", "no existe"],
+    correcta: 3,
+    explicacion: "En $\\dfrac{\\pi}{2}$, $\\cos = 0$ y $\\tan = \\dfrac{\\sin}{\\cos}$ no está definida (asíntota vertical)."
+  },
+  // —— Matemáticas: trig — sin(2π/3) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\sin\\left(\\dfrac{2\\pi}{3}\\right)$ vale",
+    opciones: ["$\\dfrac{1}{2}$", "$\\dfrac{\\sqrt{3}}{2}$", "$-\\dfrac{\\sqrt{3}}{2}$", "$-\\dfrac{1}{2}$"],
+    correcta: 1,
+    explicacion: "$\\dfrac{2\\pi}{3}\\,\\mathrm{rad} = 120^{\\circ}$ (II cuadrante). $\\sin(120^{\\circ}) = \\sin(180^{\\circ}-60^{\\circ}) = \\sin(60^{\\circ}) = \\dfrac{\\sqrt{3}}{2}$."
+  },
+  // —— Matemáticas: trig — cos(120°) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\cos(120^{\\circ})$ es",
+    opciones: ["$\\dfrac{1}{2}$", "$-\\dfrac{1}{2}$", "$-\\dfrac{\\sqrt{3}}{2}$", "$-\\dfrac{\\sqrt{2}}{2}$"],
+    correcta: 1,
+    explicacion: "En el II cuadrante el coseno es negativo. $\\cos(120^{\\circ}) = -\\cos(60^{\\circ}) = -\\dfrac{1}{2}$."
+  },
+  // —— Matemáticas: trig — tan(3π/4) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\tan\\left(\\dfrac{3\\pi}{4}\\right)$ es igual a",
+    opciones: ["$1$", "$-1$", "$-\\dfrac{\\sqrt{2}}{2}$", "$\\dfrac{\\sqrt{2}}{2}$"],
+    correcta: 1,
+    explicacion: "$\\dfrac{3\\pi}{4}\\,\\mathrm{rad} = 135^{\\circ}$ (II cuadrante). $\\tan(135^{\\circ}) = -\\tan(45^{\\circ}) = -1$."
+  },
+  // —— Matemáticas: trig — cos(180°) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\cos(180^{\\circ})$ es",
+    opciones: ["$1$", "$0$", "$-1$", "$\\pi$"],
+    correcta: 2,
+    explicacion: "En $180^{\\circ}$ estamos en el eje negativo de las $x$. $\\cos(180^{\\circ}) = -1$ (es el mínimo del coseno)."
+  },
+  // —— Matemáticas: trig — sin(7π/6) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\sin\\left(\\dfrac{7\\pi}{6}\\right)$ es igual a",
+    opciones: ["$\\dfrac{1}{2}$", "$-\\dfrac{1}{2}$", "$-\\dfrac{\\sqrt{3}}{2}$", "$-\\dfrac{\\sqrt{2}}{2}$"],
+    correcta: 1,
+    explicacion: "$\\dfrac{7\\pi}{6}\\,\\mathrm{rad} = 210^{\\circ}$ (III cuadrante). $\\sin(210^{\\circ}) = -\\sin(30^{\\circ}) = -\\dfrac{1}{2}$."
+  },
+  // —— Matemáticas: trig — tan(5π/4) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\tan\\left(\\dfrac{5\\pi}{4}\\right)$ vale",
+    opciones: ["$1$", "$-1$", "$\\sqrt{3}$", "$-\\dfrac{\\sqrt{3}}{3}$"],
+    correcta: 0,
+    explicacion: "$\\dfrac{5\\pi}{4}\\,\\mathrm{rad} = 225^{\\circ}$ (III cuadrante). $\\tan(225^{\\circ}) = \\tan(45^{\\circ}) = 1$ (seno y coseno negativos: cociente positivo)."
+  },
+  // —— Matemáticas: trig — cos(4π/3) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\cos\\left(\\dfrac{4\\pi}{3}\\right)$",
+    opciones: ["$\\dfrac{1}{2}$", "$-\\dfrac{1}{2}$", "$-\\dfrac{\\sqrt{3}}{2}$", "$-\\dfrac{\\sqrt{2}}{2}$"],
+    correcta: 1,
+    explicacion: "$\\dfrac{4\\pi}{3}\\,\\mathrm{rad} = 240^{\\circ}$ (III cuadrante). $\\cos(240^{\\circ}) = -\\cos(60^{\\circ}) = -\\dfrac{1}{2}$."
+  },
+  // —— Matemáticas: trig — sin(3π/2) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\sin\\left(\\dfrac{3\\pi}{2}\\right)$ es",
+    opciones: ["$0$", "$1$", "$-1$", "no existe"],
+    correcta: 2,
+    explicacion: "$\\dfrac{3\\pi}{2}\\,\\mathrm{rad} = 270^{\\circ}$, y $\\sin(270^{\\circ}) = -1$ (es el mínimo del seno)."
+  },
+  // —— Matemáticas: trig — cos(11π/6) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\cos\\left(\\dfrac{11\\pi}{6}\\right)$ es igual a",
+    opciones: ["$-\\dfrac{\\sqrt{3}}{2}$", "$\\dfrac{\\sqrt{3}}{2}$", "$\\dfrac{1}{2}$", "$-\\dfrac{1}{2}$"],
+    correcta: 1,
+    explicacion: "$\\dfrac{11\\pi}{6}\\,\\mathrm{rad} = 330^{\\circ}$ (IV cuadrante). $\\cos(330^{\\circ}) = \\cos(30^{\\circ}) = \\dfrac{\\sqrt{3}}{2}$."
+  },
+  // —— Matemáticas: trig — tan(330°) ——
+  {
+    materia: "matematicas",
+    pregunta: "$\\tan(330^{\\circ})$ vale",
+    opciones: ["$\\dfrac{\\sqrt{3}}{3}$", "$-\\dfrac{\\sqrt{3}}{3}$", "$-\\sqrt{3}$", "$\\sqrt{3}$"],
+    correcta: 1,
+    explicacion: "$\\tan(330^{\\circ}) = -\\tan(30^{\\circ}) = -\\dfrac{\\sqrt{3}}{3}$ (IV cuadrante)."
+  },
+  // —— Matemáticas: sistema 2x2 (a) ——
+  {
+    materia: "matematicas",
+    pregunta: "Resuelve el sistema $$\\begin{cases} 2x + y = 7 \\\\ x - y = 2 \\end{cases}$$",
+    opciones: ["$x = 3,\\ y = 1$", "$x = 2,\\ y = 3$", "$x = 1,\\ y = 5$", "$x = 4,\\ y = -1$"],
+    correcta: 0,
+    explicacion: "Sumando ambas ecuaciones: $3x = 9 \\Rightarrow x = 3$. Sustituyendo en la segunda: $3 - y = 2 \\Rightarrow y = 1$."
+  },
+  // —— Matemáticas: sistema 2x2 (b) ——
+  {
+    materia: "matematicas",
+    pregunta: "Resuelve el sistema $$\\begin{cases} x + 3y = 11 \\\\ 2x - y = 1 \\end{cases}$$",
+    opciones: ["$x = 5,\\ y = 2$", "$x = 2,\\ y = 3$", "$x = 8,\\ y = 1$", "$x = 4,\\ y = 7$"],
+    correcta: 1,
+    explicacion: "De la 2ª: $y = 2x - 1$. Sustituyendo: $x + 3(2x - 1) = 11 \\Rightarrow 7x = 14 \\Rightarrow x = 2$, $y = 3$."
+  },
+  // —— Matemáticas: sistema 2x2 (c) ——
+  {
+    materia: "matematicas",
+    pregunta: "Resuelve el sistema $$\\begin{cases} 3x + 2y = 16 \\\\ x + y = 7 \\end{cases}$$",
+    opciones: ["$x = 4,\\ y = 3$", "$x = 2,\\ y = 5$", "$x = 3,\\ y = 4$", "$x = 6,\\ y = 1$"],
+    correcta: 1,
+    explicacion: "De la 2ª: $y = 7 - x$. En la 1ª: $3x + 2(7 - x) = 16 \\Rightarrow x + 14 = 16 \\Rightarrow x = 2$, $y = 5$."
+  },
+  // —— Matemáticas: sistema 2x2 (d) ——
+  {
+    materia: "matematicas",
+    pregunta: "Resuelve el sistema $$\\begin{cases} 4x - 3y = 6 \\\\ 2x + y = 8 \\end{cases}$$",
+    opciones: ["$x = 2,\\ y = 4$", "$x = 3,\\ y = 2$", "$x = 4,\\ y = 0$", "$x = 0,\\ y = 8$"],
+    correcta: 1,
+    explicacion: "De la 2ª: $y = 8 - 2x$. Sustituyendo: $4x - 3(8 - 2x) = 6 \\Rightarrow 10x = 30 \\Rightarrow x = 3$, $y = 2$."
+  },
+  // —— Matemáticas: sistema 2x2 (e) ——
+  {
+    materia: "matematicas",
+    pregunta: "Resuelve el sistema $$\\begin{cases} 5x + 2y = 19 \\\\ 3x - y = 7 \\end{cases}$$",
+    opciones: ["$x = 3,\\ y = 2$", "$x = 2,\\ y = -1$", "$x = 4,\\ y = 5$", "$x = 1,\\ y = 7$"],
+    correcta: 0,
+    explicacion: "De la 2ª: $y = 3x - 7$. En la 1ª: $5x + 2(3x - 7) = 19 \\Rightarrow 11x = 33 \\Rightarrow x = 3$, $y = 2$."
+  },
+  // —— Matemáticas: sistema 2x2 (f) ——
+  {
+    materia: "matematicas",
+    pregunta: "Resuelve el sistema $$\\begin{cases} x - 4y = -7 \\\\ 2x + 3y = 8 \\end{cases}$$",
+    opciones: ["$x = 1,\\ y = 2$", "$x = -7,\\ y = 0$", "$x = 4,\\ y = 0$", "$x = 5,\\ y = 3$"],
+    correcta: 0,
+    explicacion: "De la 1ª: $x = 4y - 7$. En la 2ª: $2(4y - 7) + 3y = 8 \\Rightarrow 11y = 22 \\Rightarrow y = 2$, $x = 1$."
+  },
+  // —— Matemáticas: límite por factorización (a) ——
+  {
+    materia: "matematicas",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 2}\\dfrac{x^2 - 4}{x - 2}$",
+    opciones: ["$4$", "$2$", "$0$", "no existe"],
+    correcta: 0,
+    explicacion: "Forma $0/0$. Factorizando: $\\dfrac{(x-2)(x+2)}{x-2} = x+2$. El límite es $2 + 2 = 4$."
+  },
+  // —— Matemáticas: límite por factorización (b) ——
+  {
+    materia: "matematicas",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 3}\\dfrac{x^2 - x - 6}{x - 3}$",
+    opciones: ["$6$", "$5$", "$3$", "no existe"],
+    correcta: 1,
+    explicacion: "Forma $0/0$. Factorizando: $\\dfrac{(x-3)(x+2)}{x-3} = x+2$. El límite es $3 + 2 = 5$."
+  },
+  // —— Matemáticas: límite por factorización (c) ——
+  {
+    materia: "matematicas",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 1}\\dfrac{x^3 - 1}{x - 1}$",
+    opciones: ["$1$", "$0$", "$3$", "no existe"],
+    correcta: 2,
+    explicacion: "Forma $0/0$. Factorizando: $\\dfrac{(x-1)(x^2+x+1)}{x-1} = x^2+x+1$. El límite es $1+1+1 = 3$."
+  },
+  // —— Matemáticas: límite por factorización (d) ——
+  {
+    materia: "matematicas",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to -2}\\dfrac{x^2 + 5x + 6}{x + 2}$",
+    opciones: ["$1$", "$0$", "$-1$", "no existe"],
+    correcta: 0,
+    explicacion: "Forma $0/0$. Factorizando: $\\dfrac{(x+2)(x+3)}{x+2} = x+3$. El límite es $-2 + 3 = 1$."
+  },
+  // —— Matemáticas: límite por factorización (e) ——
+  {
+    materia: "matematicas",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 4}\\dfrac{x^2 - 16}{x - 4}$",
+    opciones: ["$4$", "$8$", "$16$", "no existe"],
+    correcta: 1,
+    explicacion: "Forma $0/0$. Diferencia de cuadrados: $\\dfrac{(x-4)(x+4)}{x-4} = x+4$. El límite es $4 + 4 = 8$."
+  },
+  // —— Matemáticas: L'Hôpital trig (a) ——
+  {
+    materia: "matematicas",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\sin x}{x}$",
+    opciones: ["$0$", "$1$", "$\\infty$", "no existe"],
+    correcta: 1,
+    explicacion: "Forma $0/0$. Por L'Hôpital: $\\dfrac{d}{dx}\\sin x = \\cos x$, $\\dfrac{d}{dx} x = 1$. El límite es $\\dfrac{\\cos 0}{1} = 1$."
+  },
+  // —— Matemáticas: L'Hôpital trig (b) ——
+  {
+    materia: "matematicas",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{1 - \\cos x}{x}$",
+    opciones: ["$0$", "$1$", "$-1$", "no existe"],
+    correcta: 0,
+    explicacion: "Forma $0/0$. Por L'Hôpital: $\\dfrac{d}{dx}(1 - \\cos x) = \\sin x$, $\\dfrac{d}{dx} x = 1$. El límite es $\\sin 0 = 0$."
+  },
+  // —— Matemáticas: L'Hôpital trig (c) ——
+  {
+    materia: "matematicas",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\sin(3x)}{x}$",
+    opciones: ["$1$", "$3$", "$\\dfrac{1}{3}$", "$0$"],
+    correcta: 1,
+    explicacion: "Forma $0/0$. Por L'Hôpital (regla de la cadena): $\\dfrac{d}{dx}\\sin(3x) = 3\\cos(3x)$. El límite es $\\dfrac{3\\cos 0}{1} = 3$."
+  },
+  // —— Matemáticas: L'Hôpital trig (d) ——
+  {
+    materia: "matematicas",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\tan x}{x}$",
+    opciones: ["$0$", "$1$", "$\\infty$", "no existe"],
+    correcta: 1,
+    explicacion: "Forma $0/0$. Por L'Hôpital: $\\dfrac{d}{dx}\\tan x = \\sec^2 x$. El límite es $\\dfrac{\\sec^2 0}{1} = 1$."
+  },
+  // —— Matemáticas: L'Hôpital trig (e) ——
+  {
+    materia: "matematicas",
+    pregunta: "Calcula $\\displaystyle\\lim_{x\\to 0}\\dfrac{\\sin(2x)}{\\sin(5x)}$",
+    opciones: ["$1$", "$\\dfrac{2}{5}$", "$\\dfrac{5}{2}$", "$0$"],
+    correcta: 1,
+    explicacion: "Forma $0/0$. Por L'Hôpital: $\\dfrac{2\\cos(2x)}{5\\cos(5x)}$. El límite es $\\dfrac{2\\cos 0}{5\\cos 0} = \\dfrac{2}{5}$."
+  },
+  // —— Matemáticas: ec. 2do grado (a) ——
+  {
+    materia: "matematicas",
+    pregunta: "Las soluciones de $x^2 - 5x + 6 = 0$ son",
+    opciones: ["$x = 2,\\ x = 3$", "$x = -2,\\ x = -3$", "$x = 1,\\ x = 6$", "$x = -1,\\ x = -6$"],
+    correcta: 0,
+    explicacion: "Factorizando: $(x-2)(x-3) = 0 \\Rightarrow x = 2$ o $x = 3$ (dos números que multiplicados den $6$ y sumados den $5$)."
+  },
+  // —— Matemáticas: ec. 2do grado (b) ——
+  {
+    materia: "matematicas",
+    pregunta: "Las soluciones de $x^2 + x - 12 = 0$ son",
+    opciones: ["$x = 3,\\ x = 4$", "$x = 3,\\ x = -4$", "$x = -3,\\ x = 4$", "$x = -3,\\ x = -4$"],
+    correcta: 1,
+    explicacion: "Factorizando: $(x+4)(x-3) = 0 \\Rightarrow x = 3$ o $x = -4$ (dos números cuyo producto sea $-12$ y cuya suma sea $+1$)."
+  },
+  // —— Matemáticas: ec. 2do grado (c) ——
+  {
+    materia: "matematicas",
+    pregunta: "Las soluciones de $2x^2 - 7x + 3 = 0$ son",
+    opciones: ["$x = 3,\\ x = \\dfrac{1}{2}$", "$x = -3,\\ x = -\\dfrac{1}{2}$", "$x = 3,\\ x = -\\dfrac{1}{2}$", "$x = 1,\\ x = \\dfrac{3}{2}$"],
+    correcta: 0,
+    explicacion: "Por la fórmula general: $x = \\dfrac{7 \\pm \\sqrt{49 - 24}}{4} = \\dfrac{7 \\pm 5}{4} \\Rightarrow x = 3$ o $x = \\dfrac{1}{2}$."
+  },
+  // —— Matemáticas: ec. 2do grado (d) ——
+  {
+    materia: "matematicas",
+    pregunta: "Las soluciones de $x^2 - 9 = 0$ son",
+    opciones: ["$x = 3$ (única)", "$x = \\pm 3$", "$x = \\pm 9$", "$x = 9$ (única)"],
+    correcta: 1,
+    explicacion: "$x^2 = 9 \\Rightarrow x = \\pm\\sqrt{9} = \\pm 3$. Es una diferencia de cuadrados: $(x-3)(x+3) = 0$."
+  },
+  // —— Matemáticas: ec. 2do grado (e) ——
+  {
+    materia: "matematicas",
+    pregunta: "Las soluciones de $x^2 + 4x + 4 = 0$ son",
+    opciones: ["$x = 2$ (raíz doble)", "$x = -2$ (raíz doble)", "$x = 2,\\ x = -2$", "$x = -4$ (raíz doble)"],
+    correcta: 1,
+    explicacion: "Trinomio cuadrado perfecto: $(x+2)^2 = 0 \\Rightarrow x = -2$ con multiplicidad dos. El discriminante es $16 - 16 = 0$."
+  },
+  // —— Matemáticas: ec. 2do grado (f) ——
+  {
+    materia: "matematicas",
+    pregunta: "Las soluciones de $x^2 - 2x - 8 = 0$ son",
+    opciones: ["$x = 4,\\ x = -2$", "$x = -4,\\ x = 2$", "$x = 4,\\ x = 2$", "$x = 8,\\ x = -1$"],
+    correcta: 0,
+    explicacion: "Factorizando: $(x-4)(x+2) = 0 \\Rightarrow x = 4$ o $x = -2$ (dos números cuyo producto sea $-8$ y suma $-2$)."
+  },
+  // —— Matemáticas: cónica por discriminante (a) ——
+  {
+    materia: "matematicas",
+    pregunta: "La cónica representada por $x^2 + y^2 - 16 = 0$ es",
+    opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
+    correcta: 0,
+    explicacion: "$A=1$, $B=0$, $C=1$. $B^2 - 4AC = -4 < 0$ (tipo elíptico). Como además $A = C$ y $B = 0$, es una circunferencia (de radio $4$)."
+  },
+  // —— Matemáticas: cónica por discriminante (b) ——
+  {
+    materia: "matematicas",
+    pregunta: "La cónica representada por $9x^2 + 16y^2 - 144 = 0$ es",
+    opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
+    correcta: 1,
+    explicacion: "$A=9$, $B=0$, $C=16$. $B^2 - 4AC = -576 < 0$ (tipo elíptico). Como $A \\neq C$, es una elipse (no circunferencia)."
+  },
+  // —— Matemáticas: cónica por discriminante (c) ——
+  {
+    materia: "matematicas",
+    pregunta: "La cónica representada por $x^2 - 4y^2 - 4 = 0$ es",
+    opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
+    correcta: 3,
+    explicacion: "$A=1$, $B=0$, $C=-4$. $B^2 - 4AC = 0 - 4(1)(-4) = 16 > 0 \\Rightarrow$ hipérbola."
+  },
+  // —— Matemáticas: cónica por discriminante (d) ——
+  {
+    materia: "matematicas",
+    pregunta: "La cónica representada por $y^2 - 12x = 0$ es",
+    opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
+    correcta: 2,
+    explicacion: "$A=0$, $B=0$, $C=1$. $B^2 - 4AC = 0 \\Rightarrow$ parábola. Sólo una variable está al cuadrado."
+  },
+  // —— Matemáticas: cónica por discriminante (e) ——
+  {
+    materia: "matematicas",
+    pregunta: "La cónica representada por $4x^2 - y^2 + 16 = 0$ es",
+    opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
+    correcta: 3,
+    explicacion: "$A=4$, $B=0$, $C=-1$. $B^2 - 4AC = 0 - 4(4)(-1) = 16 > 0 \\Rightarrow$ hipérbola."
+  },
+  // —— Matemáticas: cónica por discriminante (f) ——
+  {
+    materia: "matematicas",
+    pregunta: "La cónica representada por $x^2 + 6x - y + 11 = 0$ es",
+    opciones: ["una circunferencia", "una elipse", "una parábola", "una hipérbola"],
+    correcta: 2,
+    explicacion: "$A=1$, $B=0$, $C=0$. $B^2 - 4AC = 0 \\Rightarrow$ parábola. Sólo $x$ está al cuadrado."
   }
 ];
 
+/* Cuotas por materia: cuántas preguntas se sortean de cada una en cada sesión.
+   Para agregar una materia nueva, añade su clave aquí y etiqueta las preguntas
+   con esa misma clave en el campo 'materia'. */
+const CUOTAS = {
+  matematicas: 18,
+  fisica: 6,
+  historia: 6
+};
+
 /* Opciones de configuración */
 const CONFIG = {
-  mezclarPreguntas: true,
   mezclarOpciones: true
 };
 
@@ -727,7 +1273,27 @@ function shuffle(arr) {
 }
 
 function prepararPreguntas(lista) {
-  let preguntas = CONFIG.mezclarPreguntas ? shuffle(lista) : [...lista];
+  // Agrupa por materia
+  const porMateria = {};
+  for (const p of lista) {
+    if (!porMateria[p.materia]) porMateria[p.materia] = [];
+    porMateria[p.materia].push(p);
+  }
+
+  // Sortea N preguntas de cada materia según CUOTAS
+  let seleccionadas = [];
+  for (const materia in CUOTAS) {
+    const disponibles = porMateria[materia] || [];
+    const cuota = CUOTAS[materia];
+    if (disponibles.length < cuota) {
+      console.warn(`Materia "${materia}": cuota ${cuota} pero sólo hay ${disponibles.length} preguntas. Se usarán todas.`);
+    }
+    seleccionadas = seleccionadas.concat(shuffle(disponibles).slice(0, cuota));
+  }
+
+  // Mezcla el orden final entre materias
+  let preguntas = shuffle(seleccionadas);
+
   if (CONFIG.mezclarOpciones) {
     preguntas = preguntas.map(p => {
       const indices = shuffle([0,1,2,3]);
