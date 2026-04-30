@@ -570,7 +570,7 @@ const PREGUNTAS = [
       "$x = 5,\\ y = 5$",
       "$x = 7,\\ y = 3$",
       "$x = 3,\\ y = 7$",
-      "$x = 6,\\ y = 4$"
+      "$x = 7,\\ y = -3$"
     ],
     correcta: 1,
     explicacion: "Sumando ambas ecuaciones: $2x = 14 \\Rightarrow x = 7$. Sustituyendo: $y = 10 - 7 = 3$."
@@ -1024,7 +1024,7 @@ const PREGUNTAS = [
   {
     materia: "matematicas",
     pregunta: "Resuelve el sistema $$\\begin{cases} 2x + y = 7 \\\\ x - y = 2 \\end{cases}$$",
-    opciones: ["$x = 3,\\ y = 1$", "$x = 2,\\ y = 3$", "$x = 1,\\ y = 5$", "$x = 4,\\ y = -1$"],
+    opciones: ["$x = 3,\\ y = 1$", "$x = 2,\\ y = 3$", "$x = 3,\\ y = -1$", "$x = 4,\\ y = -1$"],
     correcta: 0,
     explicacion: "Sumando ambas ecuaciones: $3x = 9 \\Rightarrow x = 3$. Sustituyendo en la segunda: $3 - y = 2 \\Rightarrow y = 1$."
   },
@@ -1032,7 +1032,7 @@ const PREGUNTAS = [
   {
     materia: "matematicas",
     pregunta: "Resuelve el sistema $$\\begin{cases} x + 3y = 11 \\\\ 2x - y = 1 \\end{cases}$$",
-    opciones: ["$x = 5,\\ y = 2$", "$x = 2,\\ y = 3$", "$x = 8,\\ y = 1$", "$x = 4,\\ y = 7$"],
+    opciones: ["$x = 5,\\ y = 2$", "$x = 2,\\ y = 3$", "$x = 2,\\ y = -3$", "$x = 4,\\ y = 7$"],
     correcta: 1,
     explicacion: "De la 2ª: $y = 2x - 1$. Sustituyendo: $x + 3(2x - 1) = 11 \\Rightarrow 7x = 14 \\Rightarrow x = 2$, $y = 3$."
   },
@@ -1040,7 +1040,7 @@ const PREGUNTAS = [
   {
     materia: "matematicas",
     pregunta: "Resuelve el sistema $$\\begin{cases} 3x + 2y = 16 \\\\ x + y = 7 \\end{cases}$$",
-    opciones: ["$x = 4,\\ y = 3$", "$x = 2,\\ y = 5$", "$x = 3,\\ y = 4$", "$x = 6,\\ y = 1$"],
+    opciones: ["$x = 4,\\ y = 3$", "$x = 2,\\ y = 5$", "$x = 3,\\ y = 4$", "$x = 2,\\ y = -5$"],
     correcta: 1,
     explicacion: "De la 2ª: $y = 7 - x$. En la 1ª: $3x + 2(7 - x) = 16 \\Rightarrow x + 14 = 16 \\Rightarrow x = 2$, $y = 5$."
   },
@@ -1048,7 +1048,7 @@ const PREGUNTAS = [
   {
     materia: "matematicas",
     pregunta: "Resuelve el sistema $$\\begin{cases} 4x - 3y = 6 \\\\ 2x + y = 8 \\end{cases}$$",
-    opciones: ["$x = 2,\\ y = 4$", "$x = 3,\\ y = 2$", "$x = 4,\\ y = 0$", "$x = 0,\\ y = 8$"],
+    opciones: ["$x = 2,\\ y = 4$", "$x = 3,\\ y = 2$", "$x = 4,\\ y = 0$", "$x = 3,\\ y = -2$"],
     correcta: 1,
     explicacion: "De la 2ª: $y = 8 - 2x$. Sustituyendo: $4x - 3(8 - 2x) = 6 \\Rightarrow 10x = 30 \\Rightarrow x = 3$, $y = 2$."
   },
@@ -1056,7 +1056,7 @@ const PREGUNTAS = [
   {
     materia: "matematicas",
     pregunta: "Resuelve el sistema $$\\begin{cases} 5x + 2y = 19 \\\\ 3x - y = 7 \\end{cases}$$",
-    opciones: ["$x = 3,\\ y = 2$", "$x = 2,\\ y = -1$", "$x = 4,\\ y = 5$", "$x = 1,\\ y = 7$"],
+    opciones: ["$x = 3,\\ y = 2$", "$x = 2,\\ y = -1$", "$x = 3,\\ y = -2$", "$x = 1,\\ y = 7$"],
     correcta: 0,
     explicacion: "De la 2ª: $y = 3x - 7$. En la 1ª: $5x + 2(3x - 7) = 19 \\Rightarrow 11x = 33 \\Rightarrow x = 3$, $y = 2$."
   },
@@ -1064,7 +1064,7 @@ const PREGUNTAS = [
   {
     materia: "matematicas",
     pregunta: "Resuelve el sistema $$\\begin{cases} x - 4y = -7 \\\\ 2x + 3y = 8 \\end{cases}$$",
-    opciones: ["$x = 1,\\ y = 2$", "$x = -7,\\ y = 0$", "$x = 4,\\ y = 0$", "$x = 5,\\ y = 3$"],
+    opciones: ["$x = 1,\\ y = 2$", "$x = -7,\\ y = 0$", "$x = 4,\\ y = 0$", "$x = 1,\\ y = -2$"],
     correcta: 0,
     explicacion: "De la 1ª: $x = 4y - 7$. En la 2ª: $2(4y - 7) + 3y = 8 \\Rightarrow 11y = 22 \\Rightarrow y = 2$, $x = 1$."
   },
@@ -1475,6 +1475,54 @@ const PREGUNTAS = [
     opciones: ["La luz se comporta exclusivamente como onda", "La luz tiene naturaleza corpuscular (cuántica)", "Los electrones poseen masa", "La luz viaja a velocidad constante en el vacío"],
     correcta: 1,
     explicacion: "El efecto fotoeléctrico demuestra que la luz se comporta como partículas (fotones) con energía $E = hf$. Junto con su comportamiento ondulatorio, da lugar al concepto de dualidad onda-partícula."
+  },
+  // —— Matemáticas: circunferencia — centro (forma general) ——
+  {
+    materia: "matematicas",
+    pregunta: "El centro de la circunferencia $x^2 + y^2 - 4x + 6y - 12 = 0$ es",
+    opciones: ["$(2, -3)$", "$(-2, 3)$", "$(2, 3)$", "$(4, -6)$"],
+    correcta: 0,
+    explicacion: "Completando el cuadrado: $(x^2 - 4x + 4) + (y^2 + 6y + 9) = 12 + 4 + 9$, es decir $(x-2)^2 + (y+3)^2 = 25$. El centro es $(2, -3)$ y el radio es $5$."
+  },
+  // —— Matemáticas: circunferencia — radio (forma general) ——
+  {
+    materia: "matematicas",
+    pregunta: "El radio de la circunferencia $x^2 + y^2 + 8x - 6y + 9 = 0$ es",
+    opciones: ["$3$", "$4$", "$5$", "$16$"],
+    correcta: 1,
+    explicacion: "Completando el cuadrado: $(x^2 + 8x + 16) + (y^2 - 6y + 9) = -9 + 16 + 9$, es decir $(x+4)^2 + (y-3)^2 = 16$. El radio es $r = \\sqrt{16} = 4$ (centro en $(-4, 3)$)."
+  },
+  // —— Matemáticas: parábola — vértice (forma general) ——
+  {
+    materia: "matematicas",
+    pregunta: "El vértice de la parábola $y^2 - 4y - 8x + 28 = 0$ es",
+    opciones: ["$(3, 2)$", "$(-3, 2)$", "$(3, -2)$", "$(-3, -2)$"],
+    correcta: 0,
+    explicacion: "Completando el cuadrado en $y$: $y^2 - 4y + 4 = 8x - 28 + 4 \\Rightarrow (y-2)^2 = 8(x-3)$. La forma estándar $(y-k)^2 = 4p(x-h)$ revela el vértice $(h, k) = (3, 2)$."
+  },
+  // —— Matemáticas: parábola — parámetro p (forma general) ——
+  {
+    materia: "matematicas",
+    pregunta: "Para la parábola $x^2 + 6x - 12y + 33 = 0$, el valor del parámetro $p$ es",
+    opciones: ["$3$", "$6$", "$12$", "$4$"],
+    correcta: 0,
+    explicacion: "Completando el cuadrado en $x$: $x^2 + 6x + 9 = 12y - 33 + 9 \\Rightarrow (x+3)^2 = 12(y-2)$. Comparando con $(x-h)^2 = 4p(y-k)$: $4p = 12 \\Rightarrow p = 3$. (Vértice en $(-3, 2)$, foco en $(-3, 5)$.)"
+  },
+  // —— Matemáticas: elipse — centro (forma general) ——
+  {
+    materia: "matematicas",
+    pregunta: "El centro de la elipse $4x^2 + 9y^2 - 16x + 18y - 11 = 0$ es",
+    opciones: ["$(-2, 1)$", "$(2, -1)$", "$(2, 1)$", "$(-4, 2)$"],
+    correcta: 1,
+    explicacion: "Agrupando y factorizando: $4(x^2 - 4x + 4) + 9(y^2 + 2y + 1) = 11 + 16 + 9 = 36 \\Rightarrow \\dfrac{(x-2)^2}{9} + \\dfrac{(y+1)^2}{4} = 1$. El centro es $(2, -1)$, con semiejes $a = 3$ y $b = 2$."
+  },
+  // —— Matemáticas: hipérbola — centro (forma general) ——
+  {
+    materia: "matematicas",
+    pregunta: "El centro de la hipérbola $x^2 - 4y^2 + 6x + 16y - 11 = 0$ es",
+    opciones: ["$(3, -2)$", "$(-3, 2)$", "$(3, 2)$", "$(-3, -2)$"],
+    correcta: 1,
+    explicacion: "Agrupando: $(x^2 + 6x + 9) - 4(y^2 - 4y + 4) = 11 + 9 - 16 = 4 \\Rightarrow \\dfrac{(x+3)^2}{4} - \\dfrac{(y-2)^2}{1} = 1$. El centro es $(-3, 2)$, con $a = 2$ y $b = 1$."
   }
 ];
 
