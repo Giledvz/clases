@@ -4270,16 +4270,10 @@ document.addEventListener('keydown', (e) => {
 // --- Inicio ---
 if (MODO_REVISAR) {
   $('filtroBanner').classList.remove('hidden');
-  const etiqueta = FILTRO_FUENTE
-    ? `Revisión · fuente "${FILTRO_FUENTE}" (${preguntas.length} preguntas en orden)`
-    : `Revisión · todas las preguntas (${preguntas.length} en orden)`;
-  $('filtroTema').textContent = etiqueta;
+  $('filtroTema').textContent = `Revisión · ${preguntas.length} preguntas en orden`;
 } else if (MODO_ESTUDIO) {
   $('filtroBanner').classList.remove('hidden');
-  const etiqueta = FILTRO_FUENTE
-    ? `Estudio · fuente "${FILTRO_FUENTE}" (${preguntas.length} preguntas en orden aleatorio)`
-    : `Estudio · todas las preguntas (${preguntas.length} en orden aleatorio)`;
-  $('filtroTema').textContent = etiqueta;
+  $('filtroTema').textContent = `Estudio · ${preguntas.length} preguntas en orden aleatorio`;
 } else if (FILTRO_TEMA) {
   $('filtroBanner').classList.remove('hidden');
   $('filtroTema').textContent = FILTRO_TEMA;
