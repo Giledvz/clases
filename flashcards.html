@@ -1575,7 +1575,7 @@ const PREGUNTAS = [
     pregunta: "¿Cuánto calor se necesita para elevar la temperatura de $200\\,\\mathrm{g}$ de agua de $20^{\\circ}\\mathrm{C}$ a $80^{\\circ}\\mathrm{C}$? (Calor específico del agua: $c = 1\\,\\dfrac{\\mathrm{cal}}{\\mathrm{g}\\cdot{}^{\\circ}\\mathrm{C}}$.)",
     opciones: ["$200\\,\\mathrm{cal}$", "$1\\,200\\,\\mathrm{cal}$", "$12\\,000\\,\\mathrm{cal}$", "$16\\,000\\,\\mathrm{cal}$"],
     correcta: 2,
-    explicacion: "$Q = mc\\Delta T = (200\\,\\mathrm{g})\\left(1\\,\\dfrac{\\mathrm{cal}}{\\mathrm{g}\\cdot{}^{\\circ}\\mathrm{C}}\\right)(60\\,^{\\circ}\\mathrm{C}) = 12\\,000\\,\\mathrm{cal}$."
+    explicacion: "$Q = mc\\Delta T = (200\\,\\mathrm{g})\\left(1\\,\\dfrac{\\mathrm{cal}}{\\mathrm{g}\\cdot{}^{\\circ}\\mathrm{C}}\\right)(60\\,{}^{\\circ}\\mathrm{C}) = 12\\,000\\,\\mathrm{cal}$."
   },
   // —— Física: Coulomb (operación) ——
   {
@@ -2116,6 +2116,1400 @@ const PREGUNTAS = [
     opciones: ["$t = 1\\,\\mathrm{s}$", "$t = 0\\,\\mathrm{s}$", "$t = 3\\,\\mathrm{s}$", "$t = 2\\,\\mathrm{s}$"],
     correcta: 0,
     explicacion: "$v(t) = s'(t) = 3t^2 - 12t + 9 = 3(t^2 - 4t + 3) = 3(t-1)(t-3)$. $v = 0$ cuando $t = 1$ o $t = 3$. La primera vez es $t = 1\\,\\mathrm{s}$."
+  },
+
+  // ===================== BIOLOGÍA (preguntas tipo examen UNAM) =====================
+  {
+    materia: "biologia",
+    tema: "ATP — hidrólisis",
+    fuente: "320_UNAM",
+    pregunta: "Cuando se hidroliza una molécula de ATP, ¿qué se obtiene principalmente?",
+    opciones: ["AMP + 2 fosfatos", "ADP + fosfato inorgánico", "GTP + fosfato", "ADN + energía"],
+    correcta: 1,
+    explicacion: "La hidrólisis del ATP rompe un enlace fosfato y libera energía: ATP → ADP + Pi."
+  },
+  {
+    materia: "biologia",
+    tema: "célula vegetal",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es la estructura exclusiva de la célula vegetal compuesta principalmente de celulosa?",
+    opciones: ["Membrana plasmática", "Cloroplasto", "Pared celular", "Vacuola"],
+    correcta: 2,
+    explicacion: "La pared celular rígida formada por celulosa es exclusiva de las células vegetales (también la tienen hongos —de quitina— y bacterias —de peptidoglicano—, con composición distinta)."
+  },
+  {
+    materia: "biologia",
+    tema: "reinos — Monera",
+    fuente: "320_UNAM",
+    pregunta: "¿A qué reino pertenecen las bacterias y las cianobacterias?",
+    opciones: ["Protista", "Fungi", "Monera", "Plantae"],
+    correcta: 2,
+    explicacion: "El reino Monera agrupa a los organismos procariontes (sin núcleo definido): bacterias y cianobacterias."
+  },
+  {
+    materia: "biologia",
+    tema: "enfermedades ligadas al sexo",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles son ejemplos clásicos de enfermedades ligadas al cromosoma X que afectan predominantemente a varones?",
+    opciones: ["Diabetes y obesidad", "Hemofilia y daltonismo", "Asma y alergias", "Tuberculosis y cólera"],
+    correcta: 1,
+    explicacion: "La hemofilia y el daltonismo son rasgos recesivos ligados al cromosoma X; los varones (XY) los expresan al heredar un solo alelo afectado."
+  },
+  {
+    materia: "biologia",
+    tema: "enzimas",
+    fuente: "320_UNAM",
+    pregunta: "Las enzimas son ___ que actúan como ___ biológicos.",
+    opciones: ["lípidos / hormonas", "proteínas / catalizadores", "carbohidratos / sustratos", "ácidos nucleicos / mensajeros"],
+    correcta: 1,
+    explicacion: "Las enzimas son proteínas que aceleran reacciones químicas (catalizadores biológicos) sin consumirse."
+  },
+  {
+    materia: "biologia",
+    tema: "niveles de organización ecológica",
+    fuente: "320_UNAM",
+    pregunta: "Un grupo de garzas blancas que habitan en un mismo pantano se considera, ecológicamente, una:",
+    opciones: ["especie", "comunidad", "población", "ecosistema"],
+    correcta: 2,
+    explicacion: "Una población es un conjunto de individuos de la misma especie que viven en un mismo lugar y tiempo. Si hubiera varias especies sería una comunidad."
+  },
+  {
+    materia: "biologia",
+    tema: "tipos de alimentación",
+    fuente: "320_UNAM",
+    pregunta: "¿Cómo se llama a los organismos que se alimentan tanto de animales como de plantas?",
+    opciones: ["Herbívoros", "Carnívoros", "Omnívoros", "Detritívoros"],
+    correcta: 2,
+    explicacion: "Los omnívoros consumen materia vegetal y animal (ej. humano, oso, cerdo)."
+  },
+  {
+    materia: "biologia",
+    tema: "respiración celular",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es el proceso por el cual la célula obtiene energía a partir de moléculas orgánicas?",
+    opciones: ["Fotosíntesis", "Respiración celular", "Transpiración", "Excreción"],
+    correcta: 1,
+    explicacion: "La respiración celular oxida moléculas como la glucosa para producir ATP, que es la moneda energética de la célula."
+  },
+  {
+    materia: "biologia",
+    tema: "biotecnología — ADN recombinante",
+    fuente: "320_UNAM",
+    pregunta: "Para producir insulina humana se introduce ADN humano en bacterias como Escherichia coli. ¿Cómo se llama esta técnica?",
+    opciones: ["Clonación reproductiva", "ADN recombinante", "Reacción en cadena de la polimerasa (PCR)", "Mutagénesis aleatoria"],
+    correcta: 1,
+    explicacion: "La técnica del ADN recombinante combina fragmentos de ADN de distintos organismos en un mismo vector para que se exprese el gen deseado."
+  },
+  {
+    materia: "biologia",
+    tema: "evolución — variación",
+    fuente: "320_UNAM",
+    pregunta: "¿Cómo se les conoce a los cambios al azar en el material genético que generan variabilidad en una población?",
+    opciones: ["Selección natural", "Mutaciones", "Adaptaciones", "Migraciones"],
+    correcta: 1,
+    explicacion: "Las mutaciones son cambios aleatorios en la secuencia del ADN. Son la fuente primaria de variación sobre la que actúa la selección natural."
+  },
+  {
+    materia: "biologia",
+    tema: "mitosis — anafase",
+    fuente: "320_UNAM",
+    pregunta: "¿En qué fase de la mitosis las cromátidas hermanas se separan y son llevadas hacia los polos opuestos de la célula?",
+    opciones: ["Profase", "Metafase", "Anafase", "Telofase"],
+    correcta: 2,
+    explicacion: "En anafase los centrómeros se dividen y las cromátidas hermanas son arrastradas a polos opuestos por las fibras del huso mitótico."
+  },
+  {
+    materia: "biologia",
+    tema: "reinos — características",
+    fuente: "320_UNAM",
+    pregunta: "Relaciona cada reino con su caracterización celular y nutricional: I. Fungi, II. Monera, III. Plantae.",
+    opciones: [
+      "I. Procarionte heterótrofo — II. Eucarionte autótrofo — III. Eucarionte heterótrofo",
+      "I. Eucarionte heterótrofo — II. Procarionte autótrofo/heterótrofo — III. Eucarionte autótrofo",
+      "I. Eucarionte autótrofo — II. Eucarionte heterótrofo — III. Procarionte autótrofo",
+      "I. Procarionte autótrofo — II. Eucarionte heterótrofo — III. Procarionte autótrofo"
+    ],
+    correcta: 1,
+    explicacion: "Fungi: eucariontes heterótrofos (absorción). Monera: procariontes, pueden ser autótrofos o heterótrofos. Plantae: eucariontes autótrofos (fotosíntesis)."
+  },
+  {
+    materia: "biologia",
+    tema: "reinos multicelulares heterótrofos",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué reinos están formados por organismos multicelulares y heterótrofos?",
+    opciones: ["Plantae y Fungi", "Fungi y Animalia", "Monera y Protista", "Plantae y Animalia"],
+    correcta: 1,
+    explicacion: "Tanto Animalia como Fungi son multicelulares (con excepciones en Fungi) y heterótrofos. Plantae es autótrofo y Monera es procarionte."
+  },
+  {
+    materia: "biologia",
+    tema: "hemoglobina",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué elemento metálico contiene la molécula de hemoglobina y le permite transportar oxígeno?",
+    opciones: ["Calcio", "Magnesio", "Hierro", "Zinc"],
+    correcta: 2,
+    explicacion: "El grupo hemo contiene un átomo de hierro (Fe²⁺) que es el sitio de unión reversible al oxígeno."
+  },
+  {
+    materia: "biologia",
+    tema: "reproducción sexual",
+    fuente: "320_UNAM",
+    pregunta: "En la reproducción ___, las células llamadas gametos transfieren información genética dando como resultado descendencia con gran variabilidad.",
+    opciones: ["asexual", "sexual", "vegetativa", "por gemación"],
+    correcta: 1,
+    explicacion: "La reproducción sexual implica la fusión de gametos haploides (óvulo y espermatozoide), generando combinaciones genéticas nuevas."
+  },
+  {
+    materia: "biologia",
+    tema: "cadena alimenticia — descomponedores",
+    fuente: "320_UNAM",
+    pregunta: "¿Quiénes son los encargados de degradar la materia orgánica muerta y devolver nutrientes al ecosistema?",
+    opciones: ["Productores", "Consumidores primarios", "Consumidores secundarios", "Descomponedores"],
+    correcta: 3,
+    explicacion: "Los descomponedores (hongos y bacterias) reciclan la materia orgánica de cadáveres y desechos, liberando nutrientes inorgánicos al suelo."
+  },
+  {
+    materia: "biologia",
+    tema: "enlace peptídico",
+    fuente: "320_UNAM",
+    pregunta: "¿Cómo se llama el enlace que une el grupo amino de un aminoácido con el grupo carboxilo de otro?",
+    opciones: ["Enlace glucosídico", "Enlace peptídico", "Puente de hidrógeno", "Enlace fosfodiéster"],
+    correcta: 1,
+    explicacion: "El enlace peptídico (–CO–NH–) se forma entre el grupo carboxilo (–COOH) de un aminoácido y el grupo amino (–NH₂) del siguiente, liberando agua."
+  },
+  {
+    materia: "biologia",
+    tema: "origen de la vida",
+    fuente: "320_UNAM",
+    pregunta: "¿Cómo se conoce a la teoría que proponía que la vida podía surgir espontáneamente a partir de materia inerte?",
+    opciones: ["Panspermia", "Generación espontánea", "Quimiosíntesis", "Selección natural"],
+    correcta: 1,
+    explicacion: "La teoría de la generación espontánea (refutada por Pasteur en el siglo XIX) afirmaba que organismos vivos podían originarse de materia no viva."
+  },
+  {
+    materia: "biologia",
+    tema: "taxonomía",
+    fuente: "320_UNAM",
+    pregunta: "Rama de la biología que se encarga de clasificar y ordenar a los organismos en grupos según sus semejanzas:",
+    opciones: ["Ecología", "Genética", "Taxonomía", "Fisiología"],
+    correcta: 2,
+    explicacion: "La taxonomía clasifica a los seres vivos en una jerarquía: dominio, reino, filo, clase, orden, familia, género y especie."
+  },
+  {
+    materia: "biologia",
+    tema: "relaciones interespecíficas",
+    fuente: "320_UNAM",
+    pregunta: "Interacción entre dos especies en la que ambas obtienen un beneficio mutuo:",
+    opciones: ["Comensalismo", "Parasitismo", "Mutualismo", "Depredación"],
+    correcta: 2,
+    explicacion: "En el mutualismo ambas especies se benefician (ej. abejas y flores). En el comensalismo solo una se beneficia y la otra no se afecta."
+  },
+  {
+    materia: "biologia",
+    tema: "componentes mínimos de una célula",
+    fuente: "320_UNAM",
+    pregunta: "Como unidad anatómica, toda célula está integrada al menos por:",
+    opciones: ["pared celular, mitocondria y cloroplasto", "membrana celular, citoplasma y material genético", "núcleo, retículo endoplásmico y aparato de Golgi", "centriolos, lisosomas y vacuolas"],
+    correcta: 1,
+    explicacion: "Toda célula posee al menos membrana plasmática (que la delimita), citoplasma (donde ocurren las reacciones) y material genético (ADN). Los procariontes no tienen núcleo definido."
+  },
+  {
+    materia: "biologia",
+    tema: "genética — Mendel",
+    fuente: "320_UNAM",
+    pregunta: "¿Quién planteó los principios de la herencia en los que se basa la genética moderna?",
+    opciones: ["Charles Darwin", "Gregor Mendel", "Louis Pasteur", "James Watson"],
+    correcta: 1,
+    explicacion: "Gregor Mendel, en 1866, formuló las leyes de la herencia trabajando con plantas de chícharo (Pisum sativum)."
+  },
+  {
+    materia: "biologia",
+    tema: "evolución — Darwin y Wallace",
+    fuente: "320_UNAM",
+    pregunta: "Para Darwin y Wallace, ¿cuál es el mecanismo evolutivo de mayor impacto?",
+    opciones: ["Mutación al azar", "Selección natural", "Herencia de caracteres adquiridos", "Deriva génica"],
+    correcta: 1,
+    explicacion: "La selección natural —los individuos mejor adaptados sobreviven y se reproducen más— es la propuesta central de Darwin y Wallace para explicar la evolución."
+  },
+  {
+    materia: "biologia",
+    tema: "mitosis — secuencia",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es la secuencia correcta de las fases de la mitosis?",
+    opciones: ["Profase, Anafase, Metafase, Telofase", "Metafase, Profase, Telofase, Anafase", "Profase, Metafase, Anafase, Telofase", "Anafase, Profase, Metafase, Telofase"],
+    correcta: 2,
+    explicacion: "Mnemotecnia: PRO-ME-ANA-TELO (PROfase, METafase, ANAfase, TELOfase)."
+  },
+  {
+    materia: "biologia",
+    tema: "ciclo celular — fase M",
+    fuente: "320_UNAM",
+    pregunta: "Etapa del ciclo celular en la que ocurren la cariocinesis (división del núcleo) y la citocinesis (división del citoplasma):",
+    opciones: ["Fase G1", "Fase S", "Fase G2", "Fase M"],
+    correcta: 3,
+    explicacion: "La fase M (mitótica) incluye la cariocinesis y la citocinesis. Las fases G1, S y G2 forman la interfase."
+  },
+  {
+    materia: "biologia",
+    tema: "ciclo celular — fase S",
+    fuente: "320_UNAM",
+    pregunta: "¿En qué fase del ciclo celular ocurre la duplicación del material genético, previo a la división celular?",
+    opciones: ["G1", "S", "G2", "M"],
+    correcta: 1,
+    explicacion: "En la fase S (síntesis) se replica el ADN, de modo que cada cromosoma queda formado por dos cromátidas hermanas idénticas."
+  },
+  {
+    materia: "biologia",
+    tema: "haploidía",
+    fuente: "320_UNAM",
+    pregunta: "Si una célula humana haploide (n) se divide, ¿con cuántos cromosomas queda cada célula hija?",
+    opciones: ["46", "23", "22", "92"],
+    correcta: 1,
+    explicacion: "El número haploide humano es n = 23. Una célula haploide al dividirse por mitosis genera células hijas también con 23 cromosomas."
+  },
+  {
+    materia: "biologia",
+    tema: "estructuras celulares",
+    fuente: "320_UNAM",
+    pregunta: "Estructura ubicada dentro del núcleo donde se sintetizan los componentes de los ribosomas:",
+    opciones: ["Centríolo", "Nucléolo", "Aparato de Golgi", "Mitocondria"],
+    correcta: 1,
+    explicacion: "El nucléolo, dentro del núcleo, ensambla las subunidades ribosomales a partir de ARN ribosomal y proteínas."
+  },
+  {
+    materia: "biologia",
+    tema: "metabolismo — catabolismo",
+    fuente: "320_UNAM",
+    pregunta: "El proceso de oxidación de los azúcares hasta formar moléculas de CO₂ se conoce como:",
+    opciones: ["Anabolismo", "Catabolismo", "Fotosíntesis", "Quimiosíntesis"],
+    correcta: 1,
+    explicacion: "El catabolismo degrada moléculas complejas en moléculas simples liberando energía. El anabolismo es lo contrario: construye moléculas grandes."
+  },
+  {
+    materia: "biologia",
+    tema: "glucólisis",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles son los productos de la glucólisis (por molécula de glucosa)?",
+    opciones: ["2 lactato + 2 H₂O", "2 ácido pirúvico + 2 NADH + 2 ATP (neto)", "CO₂ + H₂O + 36 ATP", "Acetil-CoA + NADH"],
+    correcta: 1,
+    explicacion: "La glucólisis convierte una glucosa (6C) en dos moléculas de ácido pirúvico (3C), generando 2 NADH y un saldo neto de 2 ATP."
+  },
+  {
+    materia: "biologia",
+    tema: "ecosistemas — fuente de energía",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es la fuente primaria de energía para la mayoría de los ecosistemas?",
+    opciones: ["El viento", "El Sol", "El calor geotérmico", "Los productores"],
+    correcta: 1,
+    explicacion: "El Sol provee la energía que los productores (plantas, algas, cianobacterias) capturan vía fotosíntesis y la introducen al ecosistema."
+  },
+  {
+    materia: "biologia",
+    tema: "niveles de organización — ecosistema",
+    fuente: "320_UNAM",
+    pregunta: "Conjunto de poblaciones de distintas especies que comparten un espacio físico e interactúan entre sí y con su ambiente:",
+    opciones: ["Población", "Comunidad", "Ecosistema", "Bioma"],
+    correcta: 2,
+    explicacion: "El ecosistema incluye a la comunidad biológica (factores bióticos) más el medio físico-químico que la sostiene (factores abióticos)."
+  },
+  {
+    materia: "biologia",
+    tema: "mitosis — número cromosómico",
+    fuente: "320_UNAM",
+    pregunta: "Las células somáticas humanas tienen 46 cromosomas. Tras una división por mitosis, ¿cuántos cromosomas tiene cada célula hija?",
+    opciones: ["23", "46", "92", "Depende de la fase"],
+    correcta: 1,
+    explicacion: "La mitosis es una división conservativa: las células hijas son genéticamente idénticas a la madre. Por eso conservan los 46 cromosomas. Quien reduce a 23 es la meiosis."
+  },
+  {
+    materia: "biologia",
+    tema: "ARN — composición",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles son las cuatro bases nitrogenadas que componen el ARN?",
+    opciones: ["Adenina, Guanina, Citosina, Timina", "Adenina, Guanina, Citosina, Uracilo", "Adenina, Timina, Citosina, Uracilo", "Guanina, Citosina, Timina, Uracilo"],
+    correcta: 1,
+    explicacion: "El ARN contiene A, G, C y Uracilo (U). En el ADN, en cambio, el uracilo es reemplazado por timina (T)."
+  },
+  {
+    materia: "biologia",
+    tema: "alteraciones cromosómicas",
+    fuente: "320_UNAM",
+    pregunta: "¿Cómo se le llama a la alteración resultante de una segregación incorrecta de los cromosomas durante la división celular?",
+    opciones: ["Poliploidía", "Aneuploidía", "Mutación puntual", "Duplicación génica"],
+    correcta: 1,
+    explicacion: "La aneuploidía es la presencia de un número anormal de cromosomas (no múltiplo del número haploide). Ejemplos: trisomía 21 (Down), monosomía X (Turner)."
+  },
+
+  // ===================== QUÍMICA (preguntas tipo examen UNAM) =====================
+  {
+    materia: "quimica",
+    tema: "óxidos ácidos",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál de los siguientes compuestos se clasifica como óxido ácido (anhídrido)?",
+    opciones: ["$\\mathrm{Na_2O}$", "$\\mathrm{CaO}$", "$\\mathrm{SO_3}$", "$\\mathrm{KCl}$"],
+    correcta: 2,
+    explicacion: "Un óxido ácido se forma con un no metal y oxígeno. $\\mathrm{SO_3}$ + $\\mathrm{H_2O}$ → $\\mathrm{H_2SO_4}$ (ácido sulfúrico). $\\mathrm{Na_2O}$ y $\\mathrm{CaO}$ son óxidos básicos."
+  },
+  {
+    materia: "quimica",
+    tema: "número másico",
+    fuente: "320_UNAM",
+    pregunta: "¿Cómo se le llama a la suma del número de protones y neutrones de un átomo?",
+    opciones: ["Número atómico", "Número másico", "Masa molar", "Valencia"],
+    correcta: 1,
+    explicacion: "Número másico (A) = protones + neutrones. El número atómico (Z) es solo la cantidad de protones."
+  },
+  {
+    materia: "quimica",
+    tema: "masa molar — ácido acético",
+    fuente: "320_UNAM",
+    pregunta: "El vinagre es una solución acuosa de ácido acético ($\\mathrm{CH_3COOH}$). ¿Cuál es su masa molar? (C=12, H=1, O=16)",
+    opciones: ["$46\\,\\mathrm{g/mol}$", "$60\\,\\mathrm{g/mol}$", "$74\\,\\mathrm{g/mol}$", "$58\\,\\mathrm{g/mol}$"],
+    correcta: 1,
+    explicacion: "$\\mathrm{C_2H_4O_2}$: $2(12) + 4(1) + 2(16) = 24 + 4 + 32 = 60\\,\\mathrm{g/mol}$."
+  },
+  {
+    materia: "quimica",
+    tema: "pH — escala",
+    fuente: "320_UNAM",
+    pregunta: "Si al medir el pH de una sustancia se obtiene un valor de 2, dicha sustancia es:",
+    opciones: ["Neutra", "Básica", "Ácida", "Anfótera"],
+    correcta: 2,
+    explicacion: "La escala de pH va de 0 a 14: pH < 7 es ácido, pH = 7 es neutro y pH > 7 es básico. Un pH de 2 indica una sustancia bastante ácida."
+  },
+  {
+    materia: "quimica",
+    tema: "lluvia ácida",
+    fuente: "320_UNAM",
+    pregunta: "La lluvia ácida (ácido sulfúrico) ataca al mármol (carbonato de calcio). ¿Cuál ecuación representa la reacción?",
+    opciones: [
+      "$\\mathrm{H_2SO_4 + CaCO_3 \\rightarrow CaSO_4 + H_2CO_3}$",
+      "$\\mathrm{H_2SO_3 + CaCO_3 \\rightarrow CaSO_3 + H_2O}$",
+      "$\\mathrm{HCl + CaCO_3 \\rightarrow CaCl_2 + CO_2}$",
+      "$\\mathrm{HNO_3 + CaCO_3 \\rightarrow Ca(NO_3)_2 + H_2O}$"
+    ],
+    correcta: 0,
+    explicacion: "El $\\mathrm{H_2SO_4}$ desplaza al ácido carbónico produciendo sulfato de calcio (yeso) y $\\mathrm{H_2CO_3}$, que se descompone en agua y CO₂."
+  },
+  {
+    materia: "quimica",
+    tema: "puentes de hidrógeno",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál de los siguientes compuestos forma puentes de hidrógeno entre sus moléculas?",
+    opciones: ["$\\mathrm{CH_4}$", "$\\mathrm{CO_2}$", "$\\mathrm{H_2O}$", "$\\mathrm{NaCl}$"],
+    correcta: 2,
+    explicacion: "Los puentes de hidrógeno se forman cuando un H está unido a un átomo muy electronegativo (F, O, N) e interactúa con otro átomo electronegativo. El agua es el ejemplo clásico."
+  },
+  {
+    materia: "quimica",
+    tema: "termoquímica — endotérmica",
+    fuente: "320_UNAM",
+    pregunta: "Una reacción endotérmica tiene una variación de entalpía ___ y ___ energía del entorno.",
+    opciones: ["$\\Delta H < 0$ / libera", "$\\Delta H > 0$ / absorbe", "$\\Delta H = 0$ / mantiene", "$\\Delta H > 0$ / libera"],
+    correcta: 1,
+    explicacion: "En una reacción endotérmica el sistema absorbe energía del entorno: $\\Delta H > 0$ (positiva). Lo contrario es la exotérmica ($\\Delta H < 0$, libera energía)."
+  },
+  {
+    materia: "quimica",
+    tema: "termoquímica — clasificación",
+    fuente: "320_UNAM",
+    pregunta: "Si la reacción R tiene una entalpía positiva y la reacción Q tiene entalpía negativa, ¿cómo se clasifican respectivamente?",
+    opciones: ["Exotérmica — Endotérmica", "Endotérmica — Exotérmica", "Ambas exotérmicas", "Ambas endotérmicas"],
+    correcta: 1,
+    explicacion: "Mnemotecnia: Endo = positiva = absorbe; Exo = negativa = libera. R con $\\Delta H > 0$ es endotérmica; Q con $\\Delta H < 0$ es exotérmica."
+  },
+  {
+    materia: "quimica",
+    tema: "ácidos débiles",
+    fuente: "320_UNAM",
+    pregunta: "¿Cómo se clasifica al ácido acético en términos de su disociación en agua?",
+    opciones: ["Ácido fuerte", "Ácido débil", "Base débil", "Sustancia neutra"],
+    correcta: 1,
+    explicacion: "El ácido acético se disocia parcialmente en agua, por lo que es un ácido débil. Los ácidos fuertes (HCl, H₂SO₄, HNO₃) se ionizan completamente."
+  },
+  {
+    materia: "quimica",
+    tema: "ácidos fuertes",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál de los siguientes ácidos se ioniza completamente en agua?",
+    opciones: ["$\\mathrm{CH_3COOH}$", "$\\mathrm{H_2CO_3}$", "$\\mathrm{HCl}$", "$\\mathrm{HF}$"],
+    correcta: 2,
+    explicacion: "El HCl es un ácido fuerte: en solución acuosa se disocia totalmente en H⁺ y Cl⁻. Los demás son ácidos débiles."
+  },
+  {
+    materia: "quimica",
+    tema: "masa molecular — bicarbonato de calcio",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es la masa molecular del bicarbonato de calcio $\\mathrm{Ca(HCO_3)_2}$? (Ca=40, H=1, C=12, O=16)",
+    opciones: ["$101\\,\\mathrm{g/mol}$", "$162\\,\\mathrm{g/mol}$", "$122\\,\\mathrm{g/mol}$", "$144\\,\\mathrm{g/mol}$"],
+    correcta: 1,
+    explicacion: "$\\mathrm{Ca(HCO_3)_2}$: $40 + 2(1 + 12 + 3\\cdot 16) = 40 + 2(61) = 40 + 122 = 162\\,\\mathrm{g/mol}$."
+  },
+  {
+    materia: "quimica",
+    tema: "masa molar — bicarbonato de sodio",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es la masa molar del bicarbonato de sodio $\\mathrm{NaHCO_3}$? (Na=23, H=1, C=12, O=16)",
+    opciones: ["$84\\,\\mathrm{g/mol}$", "$74\\,\\mathrm{g/mol}$", "$106\\,\\mathrm{g/mol}$", "$60\\,\\mathrm{g/mol}$"],
+    correcta: 0,
+    explicacion: "$\\mathrm{NaHCO_3}$: $23 + 1 + 12 + 3(16) = 23 + 1 + 12 + 48 = 84\\,\\mathrm{g/mol}$."
+  },
+  {
+    materia: "quimica",
+    tema: "ácidos y bases — propiedades",
+    fuente: "320_UNAM",
+    pregunta: "Una sustancia que pinta el papel tornasol de azul y se siente jabonosa al tacto es:",
+    opciones: ["Un ácido", "Una sal", "Una base", "Un compuesto neutro"],
+    correcta: 2,
+    explicacion: "Las bases tornan el papel tornasol azul, son jabonosas al tacto y tienen sabor amargo. Los ácidos tornan el tornasol rojo y son agrios."
+  },
+  {
+    materia: "quimica",
+    tema: "bioquímica — glucólisis",
+    fuente: "320_UNAM",
+    pregunta: "Molécula orgánica de 3 carbonos que se obtiene como producto de la degradación (glucólisis) de la glucosa ($\\mathrm{C_6H_{12}O_6}$):",
+    opciones: ["Lactato", "Etanol", "Piruvato", "Acetil-CoA"],
+    correcta: 2,
+    explicacion: "La glucólisis rompe la glucosa (6C) en dos moléculas de piruvato (3C cada una), generando además 2 ATP y 2 NADH."
+  },
+  {
+    materia: "quimica",
+    tema: "química ambiental — capa de ozono",
+    fuente: "320_UNAM",
+    pregunta: "Los clorofluorocarbonos (CFC) han provocado el agotamiento y destrucción de la capa de:",
+    opciones: ["Dióxido de carbono ($\\mathrm{CO_2}$)", "Ozono ($\\mathrm{O_3}$)", "Nitrógeno ($\\mathrm{N_2}$)", "Vapor de agua"],
+    correcta: 1,
+    explicacion: "Los CFC liberan átomos de cloro en la estratósfera que destruyen el ozono ($\\mathrm{O_3}$), debilitando la capa que nos protege de la radiación UV."
+  },
+  {
+    materia: "quimica",
+    tema: "química orgánica — derivados halogenados",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es un ejemplo de un derivado halogenado de un hidrocarburo?",
+    opciones: ["$\\mathrm{CH_3-CH_2-OH}$", "$\\mathrm{CH_3-CH_2-Br}$", "$\\mathrm{CH_3-CH_3}$", "$\\mathrm{CH_3-COOH}$"],
+    correcta: 1,
+    explicacion: "Los derivados halogenados tienen un átomo de halógeno (F, Cl, Br, I) sustituyendo a un H. $\\mathrm{CH_3-CH_2-Br}$ (bromoetano) es un haloalcano."
+  },
+  {
+    materia: "quimica",
+    tema: "transferencia de calor",
+    fuente: "320_UNAM",
+    pregunta: "Para que ocurra una transferencia de calor entre dos cuerpos, debe existir entre ellos una diferencia de:",
+    opciones: ["Masa", "Volumen", "Temperatura", "Densidad"],
+    correcta: 2,
+    explicacion: "El calor fluye espontáneamente desde el cuerpo de mayor temperatura hacia el de menor temperatura hasta alcanzar el equilibrio térmico."
+  },
+  {
+    materia: "quimica",
+    tema: "combustión",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es la ecuación balanceada de la combustión completa del metano?",
+    opciones: [
+      "$\\mathrm{CH_4 + O_2 \\rightarrow CO_2 + H_2O}$",
+      "$\\mathrm{CH_4 + 2O_2 \\rightarrow CO_2 + 2H_2O}$",
+      "$\\mathrm{2CH_4 + O_2 \\rightarrow 2CO + 2H_2O}$",
+      "$\\mathrm{CH_4 + 3O_2 \\rightarrow CO_2 + 2H_2O}$"
+    ],
+    correcta: 1,
+    explicacion: "Combustión completa del metano: $\\mathrm{CH_4 + 2O_2 \\rightarrow CO_2 + 2H_2O}$. El balance verifica 1 C, 4 H y 4 O en cada lado."
+  },
+  {
+    materia: "quimica",
+    tema: "mezclas — homogéneas",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál de las siguientes es un ejemplo clásico de mezcla homogénea?",
+    opciones: ["Agua con aceite", "Aire", "Granito", "Ensalada"],
+    correcta: 1,
+    explicacion: "El aire es una mezcla homogénea (gases mezclados uniformemente: ~78% N₂, ~21% O₂, etc). En las homogéneas no se distinguen los componentes."
+  },
+  {
+    materia: "quimica",
+    tema: "enlaces intermoleculares — agua",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué tipo de fuerza une a las moléculas de agua entre sí?",
+    opciones: ["Enlace iónico", "Enlace covalente", "Puente de hidrógeno", "Fuerza de London"],
+    correcta: 2,
+    explicacion: "Entre moléculas de agua hay puentes de hidrógeno: el H (parcialmente positivo) de una molécula es atraído por el O (parcialmente negativo) de otra."
+  },
+  {
+    materia: "quimica",
+    tema: "enlaces intramoleculares — agua",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué tipo de enlace une al hidrógeno con el oxígeno dentro de una molécula de agua?",
+    opciones: ["Iónico", "Covalente polar", "Covalente no polar", "Metálico"],
+    correcta: 1,
+    explicacion: "El enlace H–O es covalente polar: los átomos comparten electrones, pero el O (más electronegativo) atrae más densidad electrónica, generando dipolos parciales."
+  },
+  {
+    materia: "quimica",
+    tema: "mol — número de Avogadro",
+    fuente: "320_UNAM",
+    pregunta: "La fórmula del dióxido de azufre es $\\mathrm{SO_2}$. ¿Qué cantidad en gramos se necesita para tener $6.022\\times 10^{23}$ moléculas? (S=32, O=16)",
+    opciones: ["$32\\,\\mathrm{g}$", "$48\\,\\mathrm{g}$", "$64\\,\\mathrm{g}$", "$80\\,\\mathrm{g}$"],
+    correcta: 2,
+    explicacion: "$6.022\\times 10^{23}$ moléculas = 1 mol. La masa molar de $\\mathrm{SO_2}$ es $32 + 2(16) = 64\\,\\mathrm{g/mol}$, así que 1 mol pesa 64 g."
+  },
+  {
+    materia: "quimica",
+    tema: "compuestos vs elementos",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál de las siguientes sustancias es un compuesto químico?",
+    opciones: ["Oxígeno ($\\mathrm{O_2}$)", "Hierro (Fe)", "Metano ($\\mathrm{CH_4}$)", "Helio (He)"],
+    correcta: 2,
+    explicacion: "Un compuesto está formado por dos o más elementos químicamente unidos. El metano contiene C e H. Los demás son elementos puros."
+  },
+  {
+    materia: "quimica",
+    tema: "clasificación de la materia — mezclas",
+    fuente: "320_UNAM",
+    pregunta: "De la siguiente lista, ¿cuáles son mezclas? (a) Aire, (b) Yodo, (c) Gasolina, (d) Bromo, (e) Petróleo, (f) Agua.",
+    opciones: ["a, b, c", "a, c, e", "b, d, f", "c, d, e"],
+    correcta: 1,
+    explicacion: "Aire (gases mezclados), gasolina (mezcla de hidrocarburos) y petróleo (mezcla de hidrocarburos) son mezclas. Yodo y bromo son elementos; el agua es un compuesto."
+  },
+  {
+    materia: "quimica",
+    tema: "definición — disolución",
+    fuente: "320_UNAM",
+    pregunta: "Una disolución se define como:",
+    opciones: ["Una mezcla heterogénea", "Una mezcla homogénea de dos o más sustancias", "Un compuesto químico", "Una reacción reversible"],
+    correcta: 1,
+    explicacion: "Una disolución es una mezcla homogénea formada por un disolvente (mayor cantidad) y uno o más solutos (menor cantidad)."
+  },
+  {
+    materia: "quimica",
+    tema: "solubilidad — solución saturada",
+    fuente: "320_UNAM",
+    pregunta: "Si la solubilidad de una sal a 70 °C es $50\\,\\mathrm{g}$ por cada $100\\,\\mathrm{cm^3}$ de agua, y se intentan disolver $75\\,\\mathrm{g}$ en $100\\,\\mathrm{cm^3}$ de agua a esa temperatura, la solución resulta:",
+    opciones: ["Insaturada (todo se disuelve)", "Saturada con $25\\,\\mathrm{g}$ sin disolver", "Sobresaturada estable", "Diluida"],
+    correcta: 1,
+    explicacion: "El máximo que el agua puede disolver a esa T es 50 g; los 25 g excedentes quedan como sólido sin disolver. La parte líquida está saturada."
+  },
+  {
+    materia: "quimica",
+    tema: "radiactividad — historia",
+    fuente: "320_UNAM",
+    pregunta: "Científico que obtuvo el Premio Nobel (1903) por sus estudios con sales de uranio que llevaron al descubrimiento de la radiactividad:",
+    opciones: ["Marie Curie", "Henri Becquerel", "Ernest Rutherford", "Albert Einstein"],
+    correcta: 1,
+    explicacion: "Henri Becquerel descubrió la radiactividad en 1896 al estudiar sales de uranio. Compartió el Nobel de Física de 1903 con Marie y Pierre Curie."
+  },
+
+  // ===================== HISTORIA UNIVERSAL (preguntas tipo examen UNAM) =====================
+  {
+    materia: "historia_universal",
+    tema: "padre de la historia",
+    fuente: "320_UNAM",
+    pregunta: "¿Quién es considerado el \"padre de la historia\" por su obra <i>Los nueve libros de la Historia</i>?",
+    opciones: ["Tucídides", "Heródoto", "Polibio", "Tácito"],
+    correcta: 1,
+    explicacion: "Heródoto (siglo V a.C.) fue el primero en investigar y narrar las guerras médicas con un método sistemático, por lo que recibió el título de \"padre de la historia\"."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Segunda Revolución Industrial",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál fue la principal aportación energética de la Segunda Revolución Industrial?",
+    opciones: ["Carbón y máquina de vapor", "Petróleo y electricidad", "Energía nuclear y atómica", "Eólica y solar"],
+    correcta: 1,
+    explicacion: "La 1ª Revolución Industrial dependió del carbón y la máquina de vapor. La 2ª (finales del s. XIX) introdujo el petróleo (motor de combustión) y la electricidad como nuevas fuentes de energía."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Primera Guerra Mundial — origen",
+    fuente: "320_UNAM",
+    pregunta: "La Primera Guerra Mundial (la \"Gran Guerra\") inició a partir de un detonante en la región de:",
+    opciones: ["El Rin", "Alsacia y Lorena", "Los Balcanes", "Mesopotamia"],
+    correcta: 2,
+    explicacion: "El asesinato del archiduque Francisco Fernando en Sarajevo (1914), en los Balcanes, fue el detonante. La región era llamada \"el polvorín de Europa\" por sus tensiones étnicas."
+  },
+  {
+    materia: "historia_universal",
+    tema: "caída del bloque socialista",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué reformas impulsadas por Mijaíl Gorbachov contribuyeron a la caída del bloque socialista?",
+    opciones: ["New Deal y Plan Marshall", "Glasnost y Perestroika", "Doctrina Truman y Doctrina Brezhnev", "Plan Quinquenal y NEP"],
+    correcta: 1,
+    explicacion: "Glasnost (apertura, transparencia política) y Perestroika (reestructuración económica), iniciadas en 1985, debilitaron el control soviético y precipitaron el colapso del bloque del Este (1989-1991)."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Ilustración — obra cumbre",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es la obra colectiva más representativa de la Ilustración, dirigida por Diderot y D'Alembert?",
+    opciones: ["El espíritu de las leyes", "El contrato social", "La Enciclopedia", "El Capital"],
+    correcta: 2,
+    explicacion: "La <i>Encyclopédie</i> (1751-1772) reunió el saber de la época y difundió las ideas ilustradas. Las otras opciones son obras importantes de la Ilustración (Montesquieu, Rousseau) o posteriores (Marx)."
+  },
+  {
+    materia: "historia_universal",
+    tema: "desintegración de Yugoslavia",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles países se formaron tras la desintegración de Yugoslavia en los años 90?",
+    opciones: ["Polonia, Hungría y Checoslovaquia", "Croacia, Serbia, Eslovenia, Bosnia, Macedonia y Montenegro", "Estonia, Letonia y Lituania", "República Checa y Eslovaquia"],
+    correcta: 1,
+    explicacion: "De Yugoslavia surgieron Croacia, Serbia, Eslovenia, Bosnia-Herzegovina, Macedonia (Norte) y Montenegro (después también Kosovo). Las otras opciones son la URSS y Checoslovaquia."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Segunda Guerra Mundial — Pearl Harbor",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué hecho marcó el inicio de la segunda etapa de la Segunda Guerra Mundial?",
+    opciones: ["La invasión a Polonia por Alemania", "La caída de Francia", "El ataque japonés a Pearl Harbor y la entrada de E.U.A.", "El desembarco en Normandía"],
+    correcta: 2,
+    explicacion: "El ataque japonés a Pearl Harbor (7 dic. 1941) provocó la entrada de Estados Unidos a la guerra, ampliando el conflicto a una escala global y marcando una nueva etapa."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Rusia — Chechenia",
+    fuente: "320_UNAM",
+    pregunta: "Región del Cáucaso que ha buscado independizarse de Rusia mediante guerras y conflictos armados:",
+    opciones: ["Crimea", "Chechenia", "Georgia", "Ucrania"],
+    correcta: 1,
+    explicacion: "Chechenia, en el Cáucaso Norte, libró dos guerras contra Rusia (1994-1996 y 1999-2009) por su independencia, sin lograrla."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Ilustración — sistema político",
+    fuente: "320_UNAM",
+    pregunta: "En el ámbito político, la Ilustración influyó en el establecimiento de un sistema denominado:",
+    opciones: ["Absolutismo monárquico", "Despotismo ilustrado", "Feudalismo", "Teocracia"],
+    correcta: 1,
+    explicacion: "El despotismo ilustrado (\"Todo para el pueblo, pero sin el pueblo\") combinaba un monarca absoluto con reformas inspiradas en la Ilustración. Carlos III, Federico II y Catalina la Grande son ejemplos."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Revolución Rusa — Lenin",
+    fuente: "320_UNAM",
+    pregunta: "Líder de los bolcheviques, autor de las <i>Tesis de Abril</i> (1917):",
+    opciones: ["León Trotsky", "Vladimir Lenin", "Iósif Stalin", "Karl Marx"],
+    correcta: 1,
+    explicacion: "Lenin publicó las <i>Tesis de Abril</i> al volver del exilio en 1917; en ellas propuso \"todo el poder a los soviets\" y el rechazo al gobierno provisional, sentando las bases de la Revolución de Octubre."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Ilustración — definición",
+    fuente: "320_UNAM",
+    pregunta: "Movimiento intelectual del siglo XVIII que consideraba a la razón humana como la principal guía para el conocimiento y el progreso:",
+    opciones: ["El Renacimiento", "El Romanticismo", "La Ilustración", "El Positivismo"],
+    correcta: 2,
+    explicacion: "La Ilustración, también llamada \"Siglo de las Luces\", exaltó la razón frente a la tradición y la fe, e impulsó las revoluciones políticas de fines del XVIII."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Guerra Fría — bloques",
+    fuente: "320_UNAM",
+    pregunta: "Durante la Guerra Fría, ¿qué bloque encabezaba el Pacto de Varsovia y cuál el Plan Marshall y la OTAN?",
+    opciones: [
+      "Capitalista — Socialista",
+      "Socialista — Capitalista",
+      "Neutral — Capitalista",
+      "Socialista — Neutral"
+    ],
+    correcta: 1,
+    explicacion: "El Pacto de Varsovia agrupaba al bloque socialista (URSS y satélites). La OTAN y el Plan Marshall fueron iniciativas del bloque capitalista (E.U.A. y aliados de Europa Occidental)."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Tratado de Versalles",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál tratado tuvo como finalidad la desmilitarización de Alemania tras la Primera Guerra Mundial?",
+    opciones: ["Tratado de Trianón", "Tratado de Versalles", "Tratado de Brest-Litovsk", "Tratado de Saint-Germain"],
+    correcta: 1,
+    explicacion: "El Tratado de Versalles (1919) impuso a Alemania la desmilitarización, fuertes reparaciones de guerra y la pérdida de territorios y colonias."
+  },
+  {
+    materia: "historia_universal",
+    tema: "estados totalitarios",
+    fuente: "320_UNAM",
+    pregunta: "La concentración de poder en un solo partido, la discriminación y la xenofobia son consecuencias propias de los estados:",
+    opciones: ["Democráticos", "Federales", "Totalitarios", "Republicanos"],
+    correcta: 2,
+    explicacion: "Los regímenes totalitarios (fascismo italiano, nazismo, estalinismo) controlan todos los aspectos de la vida social, eliminan la oposición y promueven ideologías excluyentes."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Guerra Fría — hechos",
+    fuente: "320_UNAM",
+    pregunta: "El COMECON, el Plan Marshall y el Pacto de Varsovia son hechos característicos de:",
+    opciones: ["La Primera Guerra Mundial", "El periodo entreguerras", "La Guerra Fría", "La Segunda Guerra Mundial"],
+    correcta: 2,
+    explicacion: "Los tres son instrumentos económicos o militares del enfrentamiento entre los bloques capitalista (Plan Marshall) y socialista (COMECON, Pacto de Varsovia) durante la Guerra Fría."
+  },
+  {
+    materia: "historia_universal",
+    tema: "consecuencias 2da Guerra Mundial",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles fueron consecuencias directas de la Segunda Guerra Mundial?",
+    opciones: [
+      "Creación de la Sociedad de Naciones y Tratado de Versalles",
+      "Ocupación de los países vencidos, creación de la ONU y división de Alemania en 4 zonas",
+      "Caída del Imperio Romano y migraciones germánicas",
+      "Disolución del Imperio Austro-Húngaro"
+    ],
+    correcta: 1,
+    explicacion: "La 2ª GM dejó la ocupación de Alemania, Austria y Japón; la creación de la ONU (1945) en sustitución de la fallida Sociedad de Naciones; y el inicio de la Guerra Fría."
+  },
+  {
+    materia: "historia_universal",
+    tema: "URSS — independencias",
+    fuente: "320_UNAM",
+    pregunta: "Tras la disolución de la URSS (1991), ¿qué países bálticos recuperaron su independencia?",
+    opciones: ["Bielorrusia, Ucrania y Moldavia", "Estonia, Letonia y Lituania", "Kazajistán, Uzbekistán y Turkmenistán", "Polonia, Hungría y Rumania"],
+    correcta: 1,
+    explicacion: "Estonia, Letonia y Lituania —los tres países bálticos— recuperaron su independencia en 1991. Las otras opciones también fueron repúblicas soviéticas o satélites, pero no son los bálticos."
+  },
+  {
+    materia: "historia_universal",
+    tema: "ludismo",
+    fuente: "320_UNAM",
+    pregunta: "Movimiento obrero surgido en Gran Bretaña a finales del siglo XVIII que consistía en el ataque y destrucción de máquinas:",
+    opciones: ["Cartismo", "Ludismo", "Sindicalismo", "Anarquismo"],
+    correcta: 1,
+    explicacion: "Los luditas, seguidores del legendario Ned Ludd, destruían máquinas textiles a las que culpaban del desempleo y del empeoramiento de las condiciones laborales."
+  },
+  {
+    materia: "historia_universal",
+    tema: "consecuencias 1ra Guerra Mundial",
+    fuente: "320_UNAM",
+    pregunta: "La creación de Checoslovaquia y la Sociedad de Naciones fueron consecuencias directas de:",
+    opciones: ["La Revolución Francesa", "La Primera Guerra Mundial", "La Guerra Fría", "La Segunda Guerra Mundial"],
+    correcta: 1,
+    explicacion: "El fin de la 1ª GM y el desmembramiento del Imperio Austro-Húngaro dieron origen a Checoslovaquia (1918). La Sociedad de Naciones se fundó en 1920 para preservar la paz."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Revoluciones de 1848",
+    fuente: "320_UNAM",
+    pregunta: "Las revoluciones de 1848 (\"Primavera de los pueblos\") se caracterizaron por:",
+    opciones: [
+      "Restauración del absolutismo monárquico",
+      "Lucha de obreros y burgueses por derechos políticos universales",
+      "Independencia de las colonias americanas",
+      "La unificación de Alemania e Italia"
+    ],
+    correcta: 1,
+    explicacion: "Las revoluciones de 1848 demandaron sufragio universal, libertades civiles y mejores condiciones laborales. Aunque fueron sofocadas, sentaron las bases del liberalismo y socialismo modernos."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Tratado de Lisboa",
+    fuente: "320_UNAM",
+    pregunta: "¿Con qué tratado se reformó y consolidó la Unión Europea, entrando en vigor en 2009?",
+    opciones: ["Tratado de Roma", "Tratado de Maastricht", "Tratado de Lisboa", "Tratado de Niza"],
+    correcta: 2,
+    explicacion: "El Tratado de Lisboa (firmado 2007, en vigor 2009) reformó las instituciones de la UE. Maastricht (1992) creó la UE; Roma (1957) creó la CEE; Niza (2003) preparó la ampliación al este."
+  },
+  {
+    materia: "historia_universal",
+    tema: "hegemonía — pos 2da GM",
+    fuente: "320_UNAM",
+    pregunta: "País que demostró su hegemonía militar y económica al término de la Segunda Guerra Mundial:",
+    opciones: ["Reino Unido", "Estados Unidos", "Francia", "Alemania"],
+    correcta: 1,
+    explicacion: "E.U.A. salió de la guerra como la principal potencia industrial y militar del mundo, con la única posesión inicial de la bomba atómica y con su economía intacta a diferencia de Europa."
+  },
+  {
+    materia: "historia_universal",
+    tema: "OTAN",
+    fuente: "320_UNAM",
+    pregunta: "Organización militar fundada en 1949 con el objetivo principal de defender al bloque capitalista occidental durante la Guerra Fría:",
+    opciones: ["ONU", "OTAN (Organización del Tratado del Atlántico Norte)", "Pacto de Varsovia", "Liga de las Naciones"],
+    correcta: 1,
+    explicacion: "La OTAN agrupó a E.U.A., Canadá y países de Europa Occidental bajo el principio de defensa colectiva (un ataque a uno se considera ataque a todos)."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Simón Bolívar",
+    fuente: "320_UNAM",
+    pregunta: "Personaje conocido como \"El Libertador de América\" por liderar las independencias de varios países sudamericanos:",
+    opciones: ["José de San Martín", "Simón Bolívar", "Miguel Hidalgo", "Toussaint Louverture"],
+    correcta: 1,
+    explicacion: "Simón Bolívar fue clave en la independencia de Venezuela, Colombia, Ecuador, Perú y Bolivia (que lleva su nombre). San Martín liberó Argentina, Chile y Perú."
+  },
+  {
+    materia: "historia_universal",
+    tema: "unificación alemana — Bismarck",
+    fuente: "320_UNAM",
+    pregunta: "Personaje que, tras la guerra de 1866 contra Austria, logró la unificación de Alemania:",
+    opciones: ["Guillermo I", "Otto von Bismarck", "Guillermo II", "Paul von Hindenburg"],
+    correcta: 1,
+    explicacion: "Otto von Bismarck, el \"Canciller de Hierro\", unificó Alemania mediante tres guerras: contra Dinamarca (1864), Austria (1866) y Francia (1870-71). El imperio alemán se proclamó en 1871."
+  },
+  {
+    materia: "historia_universal",
+    tema: "Guerra Fría — acontecimientos",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles de los siguientes son acontecimientos característicos de la Guerra Fría?",
+    opciones: [
+      "Revolución Francesa, independencia de E.U.A. y Revolución Industrial",
+      "Revolución Cubana, independencia del Congo y carrera espacial",
+      "Caída de Roma, Cruzadas y Reforma Protestante",
+      "Caída del Muro de Berlín, atentados del 11-S y crisis de 2008"
+    ],
+    correcta: 1,
+    explicacion: "Durante la Guerra Fría se enmarcan la Revolución Cubana (1959), las independencias africanas (incluyendo Congo en 1960) y la carrera espacial entre E.U.A. y la URSS."
+  },
+
+  // ===================== GEOGRAFÍA (preguntas tipo examen UNAM) =====================
+  {
+    materia: "geografia",
+    tema: "ciclo hidrológico",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es la fase del ciclo hidrológico mediante la cual el agua dulce vuelve a los continentes?",
+    opciones: ["Evaporación", "Precipitación", "Condensación", "Escurrimiento"],
+    correcta: 1,
+    explicacion: "La precipitación (lluvia, nieve, granizo) devuelve a los continentes el agua dulce que se evaporó de océanos y cuerpos de agua. Es la fase clave para el abastecimiento terrestre."
+  },
+  {
+    materia: "geografia",
+    tema: "México — café",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es el principal estado mexicano productor de café (incluido el orgánico)?",
+    opciones: ["Veracruz", "Oaxaca", "Chiapas", "Puebla"],
+    correcta: 2,
+    explicacion: "Chiapas es el primer productor de café en México (~40% nacional), favorecido por su altitud, humedad y suelos volcánicos. Veracruz es el segundo."
+  },
+  {
+    materia: "geografia",
+    tema: "ríos de Asia",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles son los dos ríos más importantes de China (y de los más relevantes de Asia)?",
+    opciones: ["Ganges y Brahmaputra", "Tigris y Éufrates", "Yangtsé (Río Azul) y Huang He (Río Amarillo)", "Mekong e Irawadi"],
+    correcta: 2,
+    explicacion: "El Yangtsé (Río Azul) es el más largo de Asia; el Huang He (Río Amarillo) fue cuna de la civilización china. Ambos cruzan China de oeste a este."
+  },
+  {
+    materia: "geografia",
+    tema: "México — minería",
+    fuente: "320_UNAM",
+    pregunta: "En México, los principales yacimientos de oro, plata y plomo se ubican en los estados de:",
+    opciones: ["Yucatán, Tabasco y Veracruz", "Sonora, Coahuila y Chihuahua", "Chiapas, Oaxaca y Guerrero", "Jalisco, Colima y Nayarit"],
+    correcta: 1,
+    explicacion: "Los estados del norte —Sonora (oro), Coahuila (plata, plomo) y Chihuahua (los tres)— concentran la mayor parte de la minería metálica del país."
+  },
+  {
+    materia: "geografia",
+    tema: "MERCOSUR",
+    fuente: "320_UNAM",
+    pregunta: "¿A qué bloque económico pertenecen Uruguay, Paraguay, Brasil y Argentina?",
+    opciones: ["Comunidad Andina", "MERCOSUR", "ALBA", "TLCAN/T-MEC"],
+    correcta: 1,
+    explicacion: "El MERCOSUR (Mercado Común del Sur), creado en 1991, está formado por Argentina, Brasil, Paraguay y Uruguay (y posteriormente Venezuela, suspendida)."
+  },
+  {
+    materia: "geografia",
+    tema: "mesetas — características",
+    fuente: "320_UNAM",
+    pregunta: "Las características económicas y demográficas típicas de las mesetas son:",
+    opciones: ["Pesca intensiva y alta densidad poblacional", "Ganadería extensiva y densidad de población media", "Agricultura de subsistencia y población dispersa", "Industria pesada y población urbana muy alta"],
+    correcta: 1,
+    explicacion: "Las mesetas, por su altitud y suelos a menudo poco profundos, favorecen la ganadería extensiva (mucho terreno, poco ganado por hectárea). La población suele ser intermedia."
+  },
+  {
+    materia: "geografia",
+    tema: "México — plata",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es el estado mexicano históricamente reconocido como mayor productor de plata?",
+    opciones: ["Guanajuato", "Zacatecas", "Hidalgo", "Estado de México"],
+    correcta: 1,
+    explicacion: "Zacatecas ha sido durante siglos el principal productor de plata en México (y México es el primer productor mundial). Le siguen Chihuahua y Durango."
+  },
+  {
+    materia: "geografia",
+    tema: "climas — tropical",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué tipo de clima se caracteriza por presentar lluvias prácticamente durante todo el año?",
+    opciones: ["Desértico", "Tropical (selva)", "Templado", "Polar"],
+    correcta: 1,
+    explicacion: "El clima tropical lluvioso (Af de Köppen, propio de las selvas ecuatoriales como el Amazonas) tiene precipitaciones todo el año y temperaturas altas constantes."
+  },
+  {
+    materia: "geografia",
+    tema: "remesas",
+    fuente: "320_UNAM",
+    pregunta: "Importante fuente de ingreso económico para los países emisores de migrantes:",
+    opciones: ["Aranceles", "Remesas", "Inversión extranjera directa", "Petróleo"],
+    correcta: 1,
+    explicacion: "Las remesas son los envíos de dinero que los migrantes hacen a sus países de origen. Para México son una de las principales fuentes de divisas, junto con el petróleo y el turismo."
+  },
+  {
+    materia: "geografia",
+    tema: "países desarrollados",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles son rasgos típicos de los países desarrollados?",
+    opciones: [
+      "Alta población infantil y predominio del sector primario",
+      "Baja población infantil y predominio del sector terciario (servicios)",
+      "Alta mortalidad infantil y economía agrícola",
+      "Población joven y dependencia de exportación de materias primas"
+    ],
+    correcta: 1,
+    explicacion: "Los países desarrollados muestran transición demográfica avanzada (baja natalidad y baja mortalidad infantil) y una economía dominada por servicios (sector terciario)."
+  },
+  {
+    materia: "geografia",
+    tema: "geografía — definición",
+    fuente: "320_UNAM",
+    pregunta: "Disciplina cuyo objeto de estudio es la interacción entre elementos físicos, biológicos y humanos en un espacio determinado:",
+    opciones: ["Historia", "Geografía", "Biología", "Sociología"],
+    correcta: 1,
+    explicacion: "La geografía estudia las interrelaciones entre los componentes naturales (físicos y biológicos) y humanos en un territorio, a distintas escalas."
+  },
+  {
+    materia: "geografia",
+    tema: "tectónica — Himalaya",
+    fuente: "320_UNAM",
+    pregunta: "Los fósiles marinos hallados en el Himalaya se explican porque su formación se debió a:",
+    opciones: ["Una glaciación masiva", "La colisión de las placas Euroasiática e Indostánica", "Un impacto meteorítico", "Erosión fluvial milenaria"],
+    correcta: 1,
+    explicacion: "El choque de la placa Indostánica contra la Euroasiática (hace ~50 millones de años) levantó el lecho marino formando el Himalaya, lo que explica los fósiles marinos en altura."
+  },
+  {
+    materia: "geografia",
+    tema: "tectónica — convergentes",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué relieve se forma típicamente cuando las placas tectónicas tienen movimientos convergentes (chocan entre sí)?",
+    opciones: ["Dorsales oceánicas", "Cordilleras y montañas", "Fosas abisales planas", "Llanuras"],
+    correcta: 1,
+    explicacion: "Los movimientos convergentes generan cordilleras (continente-continente) o subducción y arcos volcánicos (océano-continente). Los divergentes forman dorsales."
+  },
+  {
+    materia: "geografia",
+    tema: "cartografía — escalas",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué escala representa con mayor detalle la información de una carta topográfica?",
+    opciones: ["1:1 000 000", "1:250 000", "1:50 000", "1:10 000 000"],
+    correcta: 2,
+    explicacion: "A menor denominador, mayor detalle. Una escala 1:50 000 muestra mucho más detalle que 1:1 000 000. (1:50 000 significa que 1 cm en el mapa = 500 m en la realidad.)"
+  },
+  {
+    materia: "geografia",
+    tema: "sureste asiático — monzones",
+    fuente: "320_UNAM",
+    pregunta: "Los grandes asentamientos humanos del sureste asiático se concentran en regiones de ___ que favorecen el cultivo de ___.",
+    opciones: ["clima desértico / dátiles", "lluvias monzónicas / arroz", "estepa / trigo", "altiplano / quinua"],
+    correcta: 1,
+    explicacion: "Los monzones aportan abundante agua estacional al sureste asiático, ideal para el cultivo de arroz, alimento básico de la región y soporte de su alta densidad demográfica."
+  },
+  {
+    materia: "geografia",
+    tema: "Japón — pesca",
+    fuente: "320_UNAM",
+    pregunta: "Las corrientes marinas frente a las costas de Japón (cálida Kuroshio y fría Oyashio) favorecen principalmente:",
+    opciones: ["La agricultura de subsistencia", "La actividad pesquera", "La explotación petrolera", "La minería submarina"],
+    correcta: 1,
+    explicacion: "El choque entre Kuroshio (cálida) y Oyashio (fría) crea zonas ricas en plancton y por tanto en peces, lo que explica la enorme tradición y producción pesquera japonesa."
+  },
+  {
+    materia: "geografia",
+    tema: "niveles de organización ecológica",
+    fuente: "320_UNAM",
+    pregunta: "Conjunto de poblaciones de distintas especies que interactúan entre sí en un mismo lugar:",
+    opciones: ["Hábitat", "Población", "Comunidad", "Bioma"],
+    correcta: 2,
+    explicacion: "Una comunidad biológica reúne a varias poblaciones que conviven e interactúan. Si añadimos el medio físico, hablamos de ecosistema."
+  },
+  {
+    materia: "geografia",
+    tema: "husos horarios",
+    fuente: "320_UNAM",
+    pregunta: "Si en el meridiano de Greenwich (0°) son las 20:00, ¿qué hora es en Tijuana, México (120° W)?",
+    opciones: ["04:00 del día siguiente", "12:00", "16:00", "08:00"],
+    correcta: 1,
+    explicacion: "Cada 15° de longitud equivale a 1 hora. 120° / 15° = 8 horas de diferencia. Como Tijuana está al oeste, se restan: 20:00 − 8 = 12:00."
+  },
+  {
+    materia: "geografia",
+    tema: "corrientes marinas",
+    fuente: "320_UNAM",
+    pregunta: "Las corrientes marinas regulan la ___ de las aguas oceánicas y trasladan ___ que sirve de alimento a otras especies.",
+    opciones: ["salinidad / arena", "temperatura / fitoplancton", "presión / coral", "densidad / petróleo"],
+    correcta: 1,
+    explicacion: "Las corrientes redistribuyen el calor (regulando la temperatura del océano y de los climas costeros) y transportan fitoplancton, base de las cadenas alimenticias marinas."
+  },
+  {
+    materia: "geografia",
+    tema: "Cuenca del Pacífico",
+    fuente: "320_UNAM",
+    pregunta: "País asiático que lidera económicamente la Cuenca del Pacífico:",
+    opciones: ["China", "Japón", "Corea del Sur", "Tailandia"],
+    correcta: 1,
+    explicacion: "Históricamente Japón ha sido el líder económico de la Cuenca del Pacífico, aunque China lo ha desafiado fuertemente en las últimas décadas."
+  },
+  {
+    materia: "geografia",
+    tema: "México — petróleo",
+    fuente: "320_UNAM",
+    pregunta: "¿Por qué México es un gran productor de petróleo?",
+    opciones: [
+      "Por sus yacimientos en el océano Pacífico, frente a Sinaloa",
+      "Por los yacimientos del Golfo de México, especialmente en la Sonda de Campeche",
+      "Por sus reservas en el desierto de Sonora",
+      "Por su producción en la Península de Yucatán continental"
+    ],
+    correcta: 1,
+    explicacion: "Las principales reservas mexicanas están en el Golfo de México (no en el Pacífico). La Sonda de Campeche, con campos como Cantarell y Ku-Maloob-Zaap, ha sido el corazón de la producción."
+  },
+  {
+    materia: "geografia",
+    tema: "Unión Europea",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál de los siguientes grupos contiene únicamente países miembros de la Unión Europea?",
+    opciones: ["Alemania, Grecia y Portugal", "Suiza, Noruega y Reino Unido", "Rusia, Ucrania y Turquía", "Serbia, Bosnia y Albania"],
+    correcta: 0,
+    explicacion: "Alemania, Grecia y Portugal pertenecen a la UE. Suiza y Noruega nunca se adhirieron; el Reino Unido salió en 2020 (Brexit); los balcánicos del último grupo son candidatos pero no miembros."
+  },
+  {
+    materia: "geografia",
+    tema: "norte de África",
+    fuente: "320_UNAM",
+    pregunta: "País ubicado al norte de África, atravesado por el río Nilo:",
+    opciones: ["Sudán", "Egipto", "Etiopía", "Libia"],
+    correcta: 1,
+    explicacion: "Egipto se ubica al noreste de África, sobre el Mediterráneo, y es atravesado de sur a norte por el río Nilo, que ha sido el eje de su civilización por milenios."
+  },
+  {
+    materia: "geografia",
+    tema: "línea internacional del cambio de fecha",
+    fuente: "320_UNAM",
+    pregunta: "Si un barco viaja de Sídney (Australia) a San Francisco (California) cruzando hacia el este la línea internacional del cambio de fecha, ¿qué ajuste debe hacerse?",
+    opciones: ["Adelantar un día la fecha", "Retrasar un día la fecha", "Adelantar 12 horas", "No se hace ningún cambio"],
+    correcta: 1,
+    explicacion: "Al cruzar la línea internacional del cambio de fecha (≈180°) hacia el este, se resta un día (se retrasa la fecha). Hacia el oeste, se suma."
+  },
+  {
+    materia: "geografia",
+    tema: "efecto invernadero",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál es el principal gas responsable del incremento del efecto invernadero por actividad humana?",
+    opciones: ["O₂", "N₂", "CO₂", "Ar"],
+    correcta: 2,
+    explicacion: "El dióxido de carbono (CO₂), liberado al quemar combustibles fósiles, es el principal gas de efecto invernadero antropogénico. Otros relevantes son el metano (CH₄) y el óxido nitroso."
+  },
+  {
+    materia: "geografia",
+    tema: "Yugoslavia y los Balcanes",
+    fuente: "320_UNAM",
+    pregunta: "Los países de la península balcánica con conflictos religiosos y étnicos como Croacia, Serbia y Bosnia, formaron parte de:",
+    opciones: ["La Unión Soviética", "Yugoslavia", "El Imperio Otomano", "La Confederación Germánica"],
+    correcta: 1,
+    explicacion: "Yugoslavia agrupó a estos países desde 1918 hasta su desintegración violenta en los años 90, marcada por guerras de independencia y limpieza étnica."
+  },
+  {
+    materia: "geografia",
+    tema: "ciclo del oxígeno — algas",
+    fuente: "320_UNAM",
+    pregunta: "La renovación del oxígeno atmosférico se ve afectada por la contaminación marina porque ésta provoca la mortalidad masiva de:",
+    opciones: ["Corales", "Algas y fitoplancton", "Peces grandes", "Crustáceos"],
+    correcta: 1,
+    explicacion: "Las algas y el fitoplancton oceánicos producen aproximadamente la mitad del oxígeno atmosférico vía fotosíntesis. Su muerte por contaminación reduce ese aporte vital."
+  },
+
+  // ===================== HISTORIA DE MÉXICO (preguntas tipo examen UNAM) =====================
+  {
+    materia: "historia",
+    tema: "Maximato — presidentes",
+    fuente: "320_UNAM",
+    pregunta: "¿Quiénes fueron los presidentes durante el periodo conocido como Maximato (1928-1934)?",
+    opciones: [
+      "Álvaro Obregón, Plutarco E. Calles y Lázaro Cárdenas",
+      "Emilio Portes Gil, Pascual Ortiz Rubio y Abelardo L. Rodríguez",
+      "Adolfo de la Huerta, Álvaro Obregón y Plutarco E. Calles",
+      "Lázaro Cárdenas, Manuel Ávila Camacho y Miguel Alemán"
+    ],
+    correcta: 1,
+    explicacion: "El Maximato fue el periodo en que tres presidentes (Portes Gil, Ortiz Rubio y Abelardo Rodríguez) gobernaron bajo la influencia de Calles, el \"Jefe Máximo\". Mnemotecnia: E-P-A."
+  },
+  {
+    materia: "historia",
+    tema: "Maximato — Jefe Máximo",
+    fuente: "320_UNAM",
+    pregunta: "¿Quién fue conocido como el \"Jefe Máximo\" durante el Maximato, ejerciendo el poder real detrás de tres presidentes?",
+    opciones: ["Álvaro Obregón", "Plutarco Elías Calles", "Lázaro Cárdenas", "Venustiano Carranza"],
+    correcta: 1,
+    explicacion: "Plutarco Elías Calles, tras su presidencia (1924-1928), siguió ejerciendo el poder real entre 1928 y 1934, hasta que Cárdenas lo expulsó del país."
+  },
+  {
+    materia: "historia",
+    tema: "consumación de la Independencia",
+    fuente: "320_UNAM",
+    pregunta: "¿Quién consumó la Independencia de México al entrar al frente del Ejército Trigarante a la Ciudad de México en 1821?",
+    opciones: ["Miguel Hidalgo", "José María Morelos", "Agustín de Iturbide", "Vicente Guerrero"],
+    correcta: 2,
+    explicacion: "Agustín de Iturbide, tras pactar con Vicente Guerrero el Plan de Iguala, encabezó la entrada triunfal del Ejército Trigarante a la capital el 27 de septiembre de 1821."
+  },
+  {
+    materia: "historia",
+    tema: "Nueva España — autoridad",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál era la máxima autoridad política en la Nueva España, representante directo del rey de España?",
+    opciones: ["Capitán General", "Virrey", "Corregidor", "Encomendero"],
+    correcta: 1,
+    explicacion: "El Virrey era la máxima autoridad colonial: nombrado por el rey, ejercía funciones ejecutivas, militares y judiciales. La Nueva España tuvo 62 virreyes en sus 300 años."
+  },
+  {
+    materia: "historia",
+    tema: "Independencia — causas externas",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles fueron las principales causas externas de la Independencia de México?",
+    opciones: [
+      "La Ilustración, la Independencia de las 13 Colonias y la invasión napoleónica a España",
+      "La Revolución Industrial, la Guerra de Secesión y la unificación alemana",
+      "La Guerra Fría, la Doctrina Monroe y el Plan Marshall",
+      "La Revolución Rusa, la Primera Guerra Mundial y la Gran Depresión"
+    ],
+    correcta: 0,
+    explicacion: "Las ideas ilustradas, el ejemplo de la independencia estadounidense (1776) y la crisis política provocada por la invasión napoleónica a España (1808) son las tres causas externas clásicas."
+  },
+  {
+    materia: "historia",
+    tema: "Reformas Borbónicas",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál fue el principal objetivo de las Reformas Borbónicas en la Nueva España?",
+    opciones: [
+      "Independizar políticamente a las colonias",
+      "Aumentar la recaudación, recuperar el control político y reducir el poder de los grupos locales",
+      "Otorgar derechos civiles a indígenas y mestizos",
+      "Trasladar la capital del virreinato a Veracruz"
+    ],
+    correcta: 1,
+    explicacion: "Las Reformas Borbónicas (s. XVIII) buscaron centralizar el poder, modernizar la administración y aumentar los ingresos fiscales para la corona, debilitando a élites locales y a la Iglesia."
+  },
+  {
+    materia: "historia",
+    tema: "antecedentes de las independencias",
+    fuente: "320_UNAM",
+    pregunta: "La Ilustración, las Reformas Borbónicas y las guerras napoleónicas fueron antecedentes directos de:",
+    opciones: ["La caída del Imperio Romano", "La independencia de Hispanoamérica", "La Revolución Industrial", "La Guerra Civil de Estados Unidos"],
+    correcta: 1,
+    explicacion: "Estos tres procesos (s. XVIII–inicios del XIX) erosionaron la legitimidad colonial española y abrieron la puerta a los movimientos de independencia hispanoamericanos."
+  },
+  {
+    materia: "historia",
+    tema: "periódico Regeneración",
+    fuente: "320_UNAM",
+    pregunta: "Periódico fundado por los hermanos Flores Magón, opositor a la dictadura de Porfirio Díaz:",
+    opciones: ["El Imparcial", "Regeneración", "El Hijo del Ahuizote", "El Universal"],
+    correcta: 1,
+    explicacion: "Regeneración (1900) fue el medio principal del magonismo. Su crítica al porfiriato lo convirtió en preludio ideológico de la Revolución Mexicana."
+  },
+  {
+    materia: "historia",
+    tema: "entrevista Díaz-Creelman",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué evento de 1908 motivó indirectamente la creación de partidos políticos opositores en México?",
+    opciones: [
+      "La entrevista Díaz-Creelman",
+      "La huelga de Cananea",
+      "El Plan de San Luis",
+      "La Decena Trágica"
+    ],
+    correcta: 0,
+    explicacion: "En la entrevista al periodista James Creelman, Porfirio Díaz declaró que México estaba listo para la democracia y no buscaría la reelección. Esto alentó la formación de partidos como el Antirreeleccionista de Madero."
+  },
+  {
+    materia: "historia",
+    tema: "Revolución Mexicana — causas",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles fueron causas principales de la Revolución Mexicana?",
+    opciones: [
+      "La invasión estadounidense y la pérdida de territorio",
+      "El periodismo de oposición, el dominio de capitales extranjeros y los movimientos obreros y campesinos",
+      "La Reforma agraria de Cárdenas y la nacionalización del petróleo",
+      "El Maximato y la guerra cristera"
+    ],
+    correcta: 1,
+    explicacion: "El régimen porfirista enfrentaba una creciente prensa opositora, la concentración de tierras y recursos en manos de extranjeros, y el descontento obrero (Cananea, Río Blanco) y campesino."
+  },
+  {
+    materia: "historia",
+    tema: "Revolución Mexicana — etapas",
+    fuente: "320_UNAM",
+    pregunta: "Relaciona cada etapa de la Revolución Mexicana con su rasgo característico: I. Maderista, II. Constitucionalista, III. Reconstrucción nacional.",
+    opciones: [
+      "I. Constitución de 1917 — II. Decena Trágica — III. Plan de Ayala",
+      "I. Movimiento zapatista y Decena Trágica — II. Constitución de 1917 — III. Rebelión de Agua Prieta y gobierno de Obregón",
+      "I. Plan de San Luis — II. Maximato — III. Cardenismo",
+      "I. Plan de Ayala — II. Plan de Guadalupe — III. Revolución de Tuxtepec"
+    ],
+    correcta: 1,
+    explicacion: "Maderista: convocatoria armada, zapatismo y Decena Trágica. Constitucionalista: lucha de Carranza y promulgación de la Constitución de 1917. Reconstrucción: Agua Prieta y gobierno de Obregón."
+  },
+  {
+    materia: "historia",
+    tema: "caudillismo — características",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuáles son rasgos característicos del caudillismo mexicano posrevolucionario?",
+    opciones: [
+      "Líder electo por partido político mediante voto ciudadano formal",
+      "Líder carismático con apoyo militar y de masas, surgido informalmente del propio movimiento",
+      "Sucesión hereditaria estilo monarquía",
+      "Gobierno colegiado de tres ministros con rotación"
+    ],
+    correcta: 1,
+    explicacion: "El caudillo se legitima por su carisma personal, su trayectoria militar y el apoyo popular, no por procedimientos institucionales. Es típico de Latinoamérica del siglo XIX e inicios del XX."
+  },
+  {
+    materia: "historia",
+    tema: "presidencialismo",
+    fuente: "320_UNAM",
+    pregunta: "¿Cómo se diferencia el presidencialismo del caudillismo en el México posrevolucionario?",
+    opciones: [
+      "El presidente es electo por un partido político y el poder se divide en tres ramas",
+      "El presidente es nombrado por el ejército",
+      "Es lo mismo, son sinónimos",
+      "El presidencialismo no admite reelección, el caudillismo sí"
+    ],
+    correcta: 0,
+    explicacion: "El presidencialismo institucionaliza el poder: candidato de partido, voto popular y división de poderes (ejecutivo, legislativo, judicial). El caudillismo se sostiene en la figura personal del líder."
+  },
+  {
+    materia: "historia",
+    tema: "Porfiriato — filosofía",
+    fuente: "320_UNAM",
+    pregunta: "¿Cuál fue la base ideológica del régimen de Porfirio Díaz?",
+    opciones: ["Liberalismo radical", "Positivismo", "Marxismo", "Anarquismo"],
+    correcta: 1,
+    explicacion: "El positivismo de Auguste Comte (\"orden y progreso\") fue adoptado por el grupo de los \"Científicos\" del porfiriato como base para modernizar el país."
+  },
+  {
+    materia: "historia",
+    tema: "Porfiriato — modernización",
+    fuente: "320_UNAM",
+    pregunta: "¿En qué gobierno se construyó el Palacio de Bellas Artes, se fundó la Universidad Nacional y se expandieron las vías férreas?",
+    opciones: ["Benito Juárez", "Porfirio Díaz", "Lázaro Cárdenas", "Adolfo López Mateos"],
+    correcta: 1,
+    explicacion: "El Porfiriato (1876-1911) se caracterizó por una intensa modernización material: ferrocarriles, telégrafos, edificios emblemáticos como Bellas Artes (iniciado en 1904) y la refundación de la Universidad Nacional (1910)."
+  },
+  {
+    materia: "historia",
+    tema: "Lázaro Cárdenas",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué acciones caracterizaron al gobierno de Lázaro Cárdenas (1934-1940)?",
+    opciones: [
+      "Privatización de empresas estatales y apertura comercial",
+      "Creación de la CTM, reparto agrario y nacionalización del petróleo",
+      "Devolución del Chamizal y libros de texto gratuitos",
+      "Programa Bracero y fundación del IMSS"
+    ],
+    correcta: 1,
+    explicacion: "Cárdenas fundó la Confederación de Trabajadores de México (CTM, 1936), repartió ~18 millones de hectáreas a campesinos y nacionalizó el petróleo (1938)."
+  },
+  {
+    materia: "historia",
+    tema: "Plan Sexenal",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué consolidó la implementación del Plan Sexenal durante el gobierno de Lázaro Cárdenas?",
+    opciones: [
+      "El federalismo radical",
+      "El presidencialismo como sistema de gobierno en México",
+      "El parlamentarismo",
+      "La descentralización del poder"
+    ],
+    correcta: 1,
+    explicacion: "El Plan Sexenal (planeación a 6 años) institucionalizó la primacía del Ejecutivo sobre los demás poderes y partidos, consolidando el presidencialismo mexicano del siglo XX."
+  },
+  {
+    materia: "historia",
+    tema: "Ávila Camacho — declaración de guerra",
+    fuente: "320_UNAM",
+    pregunta: "Tras el hundimiento de los buques petroleros mexicanos <i>Potrero del Llano</i> y <i>Faja de Oro</i> por submarinos alemanes, ¿qué decisión tomó el presidente Manuel Ávila Camacho en 1942?",
+    opciones: [
+      "Decretó la neutralidad estricta",
+      "Le declaró la guerra a las potencias del Eje",
+      "Solicitó intervención de E.U.A.",
+      "Rompió relaciones únicamente con Alemania"
+    ],
+    correcta: 1,
+    explicacion: "México declaró la guerra a Alemania, Italia y Japón el 22 de mayo de 1942. Posteriormente envió al Escuadrón 201 a combatir en el Pacífico."
+  },
+  {
+    materia: "historia",
+    tema: "Ávila Camacho — IMSS y Bracero",
+    fuente: "320_UNAM",
+    pregunta: "¿Durante qué presidencia se fundó el Instituto Mexicano del Seguro Social (IMSS) y se inició el Programa Bracero con E.U.A.?",
+    opciones: ["Lázaro Cárdenas", "Manuel Ávila Camacho", "Miguel Alemán", "Adolfo López Mateos"],
+    correcta: 1,
+    explicacion: "Bajo Ávila Camacho (1940-1946) se creó el IMSS (1943) y se firmó el acuerdo migratorio (Programa Bracero, 1942) que permitió a trabajadores mexicanos laborar legalmente en E.U.A."
+  },
+  {
+    materia: "historia",
+    tema: "Desarrollo estabilizador",
+    fuente: "320_UNAM",
+    pregunta: "¿Cómo se le conoce al periodo (~1954-1970) en que México registró un crecimiento económico anual sostenido cercano al 6-7% con baja inflación?",
+    opciones: [
+      "Porfiriato económico",
+      "Desarrollo estabilizador o \"Milagro Mexicano\"",
+      "Neoliberalismo",
+      "Sustitución de importaciones agrícolas"
+    ],
+    correcta: 1,
+    explicacion: "El \"Milagro Mexicano\" o Desarrollo Estabilizador combinó crecimiento del PIB cercano al 6%, peso estable y baja inflación, sustentado en la sustitución de importaciones."
+  },
+  {
+    materia: "historia",
+    tema: "López Mateos — Chamizal",
+    fuente: "320_UNAM",
+    pregunta: "¿En qué presidencia se logró la devolución de El Chamizal por parte de Estados Unidos a México?",
+    opciones: ["Adolfo Ruiz Cortines", "Adolfo López Mateos", "Gustavo Díaz Ordaz", "Luis Echeverría"],
+    correcta: 1,
+    explicacion: "López Mateos (1958-1964) negoció con J. F. Kennedy y Lyndon B. Johnson la devolución de El Chamizal, territorio fronterizo en disputa cerca de Ciudad Juárez (resuelto en 1963-1967)."
+  },
+  {
+    materia: "historia",
+    tema: "López Mateos — política social",
+    fuente: "320_UNAM",
+    pregunta: "¿Durante qué gobierno se nacionalizó la industria eléctrica y se introdujeron los libros de texto gratuitos?",
+    opciones: ["Lázaro Cárdenas", "Adolfo López Mateos", "Luis Echeverría", "José López Portillo"],
+    correcta: 1,
+    explicacion: "Adolfo López Mateos (1958-1964) nacionalizó la industria eléctrica en 1960 y creó la Comisión Nacional de los Libros de Texto Gratuitos (CONALITEG) en 1959."
+  },
+  {
+    materia: "historia",
+    tema: "Díaz Ordaz — 1968",
+    fuente: "320_UNAM",
+    pregunta: "¿En qué presidencia ocurrió el movimiento estudiantil de 1968 y la masacre de Tlatelolco?",
+    opciones: ["Adolfo López Mateos", "Gustavo Díaz Ordaz", "Luis Echeverría", "José López Portillo"],
+    correcta: 1,
+    explicacion: "El 2 de octubre de 1968, días antes de los Juegos Olímpicos, fuerzas militares y paramilitares dispararon contra estudiantes en la Plaza de las Tres Culturas, durante el sexenio de Díaz Ordaz."
+  },
+  {
+    materia: "historia",
+    tema: "Echeverría — CONACYT",
+    fuente: "320_UNAM",
+    pregunta: "¿En qué sexenio se fundó el Consejo Nacional de Ciencia y Tecnología (CONACYT) y se establecieron relaciones con la República Popular China?",
+    opciones: ["Gustavo Díaz Ordaz", "Luis Echeverría Álvarez", "José López Portillo", "Miguel de la Madrid"],
+    correcta: 1,
+    explicacion: "Bajo Luis Echeverría (1970-1976) se creó CONACYT (1970) y se restablecieron relaciones diplomáticas con China continental (1972), siguiendo la apertura iniciada por E.U.A."
+  },
+  {
+    materia: "historia",
+    tema: "neoliberalismo en México",
+    fuente: "320_UNAM",
+    pregunta: "¿Qué características definieron al modelo neoliberal en México (a partir de los años 80)?",
+    opciones: [
+      "Reparto agrario y nacionalización de industrias estratégicas",
+      "Privatización de empresas paraestatales y apertura al libre mercado",
+      "Sustitución de importaciones y proteccionismo arancelario",
+      "Estado de bienestar con expansión del gasto social"
+    ],
+    correcta: 1,
+    explicacion: "El neoliberalismo (Miguel de la Madrid, Salinas, Zedillo) se caracterizó por reducir el papel del Estado: privatización de paraestatales (Telmex, banca, etc.) y apertura comercial (TLCAN, 1994)."
+  },
+  {
+    materia: "historia",
+    tema: "caudillismo posrevolucionario",
+    fuente: "320_UNAM",
+    pregunta: "Uno de los rasgos distintivos del fenómeno del caudillismo en el México posrevolucionario fue que:",
+    opciones: [
+      "El poder político fue ejercido por el clero",
+      "Los jefes militares de la Revolución detentaron el poder político",
+      "Los presidentes eran nombrados por la Suprema Corte",
+      "El poder se concentró en manos del Congreso"
+    ],
+    correcta: 1,
+    explicacion: "Tras la Revolución, los principales caudillos militares (Obregón, Calles) ocuparon la presidencia. La institucionalización del poder solo se consolidó con el Maximato y, sobre todo, con Cárdenas."
   }
 ];
 
@@ -2123,9 +3517,15 @@ const PREGUNTAS = [
    Para agregar una materia nueva, añade su clave aquí y etiqueta las preguntas
    con esa misma clave en el campo 'materia'. */
 const CUOTAS = {
-  matematicas: 18,
-  fisica: 8,
-  historia: 6
+  matematicas: 7,
+  fisica: 4,
+  biologia: 3,
+  quimica: 3,
+  geografia: 3,
+  historia: 3,
+  historia_universal: 3,
+  espanol: 2,
+  literatura: 2
 };
 
 /* Opciones de configuración */
