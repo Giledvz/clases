@@ -4044,10 +4044,13 @@ function shuffle(arr) {
 // Lee parámetros de la URL
 //   ?tema=...       — filtrar por tema/materia (ej. ?tema=trig)
 //   ?modo=revisar   — modo revisión: todas las preguntas en orden, sin shuffle
-//   ?fuente=...     — combinable con modo=revisar (ej. ?modo=revisar&fuente=320_UNAM)
+//   ?modo=estudio   — modo estudio: todas las preguntas con shuffle de orden y opciones
+//   ?fuente=...     — combinable con modo=revisar o modo=estudio (ej. ?modo=estudio&fuente=320_UNAM)
 const URL_PARAMS = new URLSearchParams(window.location.search);
 const FILTRO_TEMA = URL_PARAMS.get('tema');
-const MODO_REVISAR = URL_PARAMS.get('modo') === 'revisar';
+const MODO = URL_PARAMS.get('modo');
+const MODO_REVISAR = MODO === 'revisar';
+const MODO_ESTUDIO = MODO === 'estudio';
 const FILTRO_FUENTE = URL_PARAMS.get('fuente');
 
 function mezclarOpciones(preguntas) {
@@ -4069,6 +4072,16 @@ function prepararPreguntas(lista) {
       filtradas = filtradas.filter(p => p.fuente === FILTRO_FUENTE);
     }
     return filtradas;
+  }
+
+  // Modo estudio: todas las preguntas con shuffle de orden y de opciones.
+  // Combinable con fuente para sesiones largas enfocadas (ej. todas las 189 del PDF).
+  if (MODO_ESTUDIO) {
+    let filtradas = lista;
+    if (FILTRO_FUENTE) {
+      filtradas = filtradas.filter(p => p.fuente === FILTRO_FUENTE);
+    }
+    return mezclarOpciones(shuffle(filtradas));
   }
 
   // Modo filtrado por tema: ignora cuotas, usa todas las que coincidan.
@@ -4260,6 +4273,12 @@ if (MODO_REVISAR) {
   const etiqueta = FILTRO_FUENTE
     ? `Revisión · fuente "${FILTRO_FUENTE}" (${preguntas.length} preguntas en orden)`
     : `Revisión · todas las preguntas (${preguntas.length} en orden)`;
+  $('filtroTema').textContent = etiqueta;
+} else if (MODO_ESTUDIO) {
+  $('filtroBanner').classList.remove('hidden');
+  const etiqueta = FILTRO_FUENTE
+    ? `Estudio · fuente "${FILTRO_FUENTE}" (${preguntas.length} preguntas en orden aleatorio)`
+    : `Estudio · todas las preguntas (${preguntas.length} en orden aleatorio)`;
   $('filtroTema').textContent = etiqueta;
 } else if (FILTRO_TEMA) {
   $('filtroBanner').classList.remove('hidden');
