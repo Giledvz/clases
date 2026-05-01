@@ -2044,6 +2044,78 @@ const PREGUNTAS = [
     opciones: ["$x - 2y - 8 = 0$", "$x + 2y - 8 = 0$", "$x - 2y + 8 = 0$", "$-x + 2y + 8 = 0$"],
     correcta: 0,
     explicacion: "Multiplicando por $2$: $2y = x - 8 \\Rightarrow x - 2y - 8 = 0$. (El coeficiente de $x$ queda positivo como se pide.)"
+  },
+  // —— Matemáticas: derivada de polinomio (a) ——
+  {
+    materia: "matematicas",
+    tema: "derivada de polinomio",
+    pregunta: "Si $f(x) = x^4 + 3x^2 - 2x + 5$, entonces $f'(x)$ es",
+    opciones: ["$4x^3 + 6x - 2$", "$4x^3 + 6x - 2 + 5$", "$4x^4 + 6x^2 - 2x$", "$\\dfrac{x^5}{5} + x^3 - x^2 + 5x$"],
+    correcta: 0,
+    explicacion: "Aplicando la regla de la potencia término a término: $\\dfrac{d}{dx}(x^4)=4x^3$, $\\dfrac{d}{dx}(3x^2)=6x$, $\\dfrac{d}{dx}(-2x)=-2$, $\\dfrac{d}{dx}(5)=0$. Resultado: $4x^3+6x-2$."
+  },
+  // —— Matemáticas: derivada de polinomio (b) ——
+  {
+    materia: "matematicas",
+    tema: "derivada de polinomio",
+    pregunta: "Si $f(x) = 2x^5 - x^3 + 7$, entonces $f'(x)$ es",
+    opciones: ["$10x^4 - 3x^2$", "$10x^4 - 3x^2 + 7$", "$2x^4 - x^2$", "$5x^4 - 3x^2$"],
+    correcta: 0,
+    explicacion: "$\\dfrac{d}{dx}(2x^5) = 10x^4$, $\\dfrac{d}{dx}(-x^3) = -3x^2$, $\\dfrac{d}{dx}(7) = 0$. Por lo tanto $f'(x) = 10x^4 - 3x^2$."
+  },
+  // —— Matemáticas: derivada evaluada en un punto ——
+  {
+    materia: "matematicas",
+    tema: "derivada de polinomio",
+    pregunta: "Si $f(x) = x^3 - 4x^2 + 7x - 1$, ¿cuánto vale $f'(2)$?",
+    opciones: ["$3$", "$-1$", "$5$", "$7$"],
+    correcta: 0,
+    explicacion: "Primero deriva: $f'(x) = 3x^2 - 8x + 7$. Luego evalúa: $f'(2) = 3(4) - 8(2) + 7 = 12 - 16 + 7 = 3$."
+  },
+  // —— Matemáticas: segunda derivada ——
+  {
+    materia: "matematicas",
+    tema: "derivada de orden superior",
+    pregunta: "Si $f(x) = x^4 - 2x^3$, ¿cuánto vale $f''(x)$?",
+    opciones: ["$12x^2 - 12x$", "$4x^3 - 6x^2$", "$12x^2 - 6x$", "$24x - 12$"],
+    correcta: 0,
+    explicacion: "Primera: $f'(x) = 4x^3 - 6x^2$. Segunda: $f''(x) = 12x^2 - 12x$ (derivar otra vez la primera)."
+  },
+  // —— Matemáticas: tercera derivada ——
+  {
+    materia: "matematicas",
+    tema: "derivada de orden superior",
+    pregunta: "Si $f(x) = x^5 + x^2$, ¿cuánto vale $f'''(x)$?",
+    opciones: ["$60x^2$", "$60x^3$", "$20x^2 + 2$", "$5x^4 + 2x$"],
+    correcta: 0,
+    explicacion: "$f'(x) = 5x^4 + 2x$. $f''(x) = 20x^3 + 2$. $f'''(x) = 60x^2$ (la derivada de $2$ es cero)."
+  },
+  // —— Matemáticas: posición → velocidad (a) ——
+  {
+    materia: "matematicas",
+    tema: "derivada — posición y velocidad",
+    pregunta: "La posición de una partícula está dada por $s(t) = t^3 - 3t^2 + 2t$ (en metros, $t$ en segundos). ¿Cuál es su velocidad en $t = 2\\,\\mathrm{s}$?",
+    opciones: ["$2\\,\\mathrm{m/s}$", "$0\\,\\mathrm{m/s}$", "$6\\,\\mathrm{m/s}$", "$-2\\,\\mathrm{m/s}$"],
+    correcta: 0,
+    explicacion: "$v(t) = s'(t) = 3t^2 - 6t + 2$. Sustituyendo $t = 2$: $v(2) = 3(4) - 6(2) + 2 = 12 - 12 + 2 = 2\\,\\mathrm{m/s}$."
+  },
+  // —— Matemáticas: posición → aceleración ——
+  {
+    materia: "matematicas",
+    tema: "derivada — posición y velocidad",
+    pregunta: "Si la posición de una partícula es $s(t) = 2t^2 + 5t - 3$ (en metros), ¿cuál es su aceleración en $t = 1\\,\\mathrm{s}$?",
+    opciones: ["$4\\,\\mathrm{m/s^2}$", "$9\\,\\mathrm{m/s^2}$", "$5\\,\\mathrm{m/s^2}$", "$13\\,\\mathrm{m/s^2}$"],
+    correcta: 0,
+    explicacion: "Hay que derivar dos veces: $v(t) = s'(t) = 4t + 5$, y luego $a(t) = v'(t) = 4$. La aceleración es constante: $a(1) = 4\\,\\mathrm{m/s^2}$ (no depende de $t$)."
+  },
+  // —— Matemáticas: posición → velocidad (b) ——
+  {
+    materia: "matematicas",
+    tema: "derivada — posición y velocidad",
+    pregunta: "La posición de un objeto es $s(t) = t^3 - 6t^2 + 9t$ (metros). ¿En qué instante la velocidad es cero por primera vez?",
+    opciones: ["$t = 1\\,\\mathrm{s}$", "$t = 0\\,\\mathrm{s}$", "$t = 3\\,\\mathrm{s}$", "$t = 2\\,\\mathrm{s}$"],
+    correcta: 0,
+    explicacion: "$v(t) = s'(t) = 3t^2 - 12t + 9 = 3(t^2 - 4t + 3) = 3(t-1)(t-3)$. $v = 0$ cuando $t = 1$ o $t = 3$. La primera vez es $t = 1\\,\\mathrm{s}$."
   }
 ];
 

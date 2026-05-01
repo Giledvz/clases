@@ -262,12 +262,25 @@
   </details>
 
   <details>
-    <summary>Integrales por partes</summary>
+    <summary>Derivadas — polinomios, orden superior, cinemática</summary>
     <div class="content">
-      <p class="item"><span class="item-label">Idea clave</span>Fórmula: $\displaystyle\int u\,dv = uv - \int v\,du$. Para elegir $u$, usa el mnemónico <strong>LIATE</strong> (orden de prioridad): <strong>L</strong>ogaritmo > <strong>I</strong>nversa trig > <strong>A</strong>lgebraica > <strong>T</strong>rigonométrica > <strong>E</strong>xponencial.</p>
-      <p class="item"><span class="item-label pitfall">Pitfall</span>Elegir mal $u$ y $dv$: la nueva integral $\int v\,du$ debe ser <em>más fácil</em> que la original, no más complicada. Si te complica, prueba al revés.</p>
-      <p class="item"><span class="item-label example">Ejemplo</span>$\displaystyle\int x e^x\,dx$. Por LIATE, $u=x$ (algebraica) y $dv=e^x\,dx$. Entonces $du=dx$, $v=e^x$. Resultado: $xe^x - \int e^x\,dx = xe^x - e^x + C = e^x(x-1)+C$.</p>
-      <a href="flashcards.html?tema=integral por partes" class="practica-link">Practicar este tema →</a>
+      <p class="item"><span class="item-label">Idea clave</span><strong>Regla de la potencia:</strong> $\dfrac{d}{dx}(x^n) = nx^{n-1}$. <strong>Constante:</strong> $\dfrac{d}{dx}(c) = 0$. <strong>Suma/resta y constantes:</strong> se distribuyen. <strong>Trig/exp/log básicas:</strong> $(\sin x)' = \cos x$; $(\cos x)' = -\sin x$; $(e^x)' = e^x$; $(\ln x)' = \dfrac{1}{x}$. <strong>Orden superior:</strong> derivar $n$ veces ($f''$, $f'''$, ...). <strong>Cinemática:</strong> si $s(t)$ es posición, $v(t) = s'(t)$ y $a(t) = v'(t) = s''(t)$.</p>
+      <p class="item"><span class="item-label pitfall">Pitfall</span>Olvidar que la derivada de una constante es <strong>cero</strong> (no la constante misma). Multiplicar coeficientes pero olvidar bajar el exponente. En cinemática, confundir posición con velocidad: si la pregunta es "velocidad en $t = 2$", primero derivas y <em>luego</em> sustituyes — no al revés.</p>
+      <p class="item"><span class="item-label example">Ejemplo</span>$s(t) = t^3 - 3t^2 + 2t$ (metros). Velocidad en $t = 2$: $v(t) = 3t^2 - 6t + 2 \Rightarrow v(2) = 12 - 12 + 2 = 2\,\mathrm{m/s}$. Aceleración en $t = 2$: $a(t) = 6t - 6 \Rightarrow a(2) = 6\,\mathrm{m/s^2}$.</p>
+      <a href="flashcards.html?tema=derivada" class="practica-link">Practicar este tema →</a>
+    </div>
+  </details>
+
+  <details>
+    <summary>Integrales — inmediatas, sustitución, partes</summary>
+    <div class="content">
+      <p class="item"><span class="item-label">Idea clave (inmediatas)</span><strong>Potencia:</strong> $\displaystyle\int x^n\,dx = \dfrac{x^{n+1}}{n+1} + C$ (con $n \neq -1$). <strong>$1/x$:</strong> $\displaystyle\int \dfrac{dx}{x} = \ln|x| + C$. <strong>Exp:</strong> $\int e^x\,dx = e^x + C$. <strong>Trig:</strong> $\int \sin x\,dx = -\cos x + C$; $\int \cos x\,dx = \sin x + C$; $\int \sec^2 x\,dx = \tan x + C$.</p>
+      <p class="item"><span class="item-label">Idea clave (sustitución)</span>Si tienes $\displaystyle\int f(g(x))\cdot g'(x)\,dx$, sustituye $u = g(x)$, $du = g'(x)\,dx$. Reescribe todo en términos de $u$, integra, y regresa a $x$.</p>
+      <p class="item"><span class="item-label">Idea clave (partes)</span>$\displaystyle\int u\,dv = uv - \int v\,du$. Mnemónico <strong>LIATE</strong> para elegir $u$: <strong>L</strong>ogaritmo > <strong>I</strong>nversa trig > <strong>A</strong>lgebraica > <strong>T</strong>rigonométrica > <strong>E</strong>xponencial.</p>
+      <p class="item"><span class="item-label pitfall">Pitfall</span>Olvidar el $+C$. Olvidar el signo negativo en $\int \sin x\,dx = -\cos x$. En sustitución: olvidar cambiar $dx$ por $du$ (las dos cosas tienen que estar en función de $u$). En partes: elegir mal $u$ — si la nueva integral te complica más, prueba al revés.</p>
+      <p class="item"><span class="item-label example">Ejemplo (sustitución)</span>$\displaystyle\int 2x \cos(x^2)\,dx$. Sea $u = x^2$, $du = 2x\,dx$. Queda $\int \cos u\,du = \sin u + C = \sin(x^2) + C$.</p>
+      <p class="item"><span class="item-label example">Ejemplo (partes)</span>$\displaystyle\int x e^x\,dx$. $u=x$, $dv=e^x\,dx$ ⇒ $du=dx$, $v=e^x$. $= xe^x - \int e^x\,dx = xe^x - e^x + C = e^x(x-1)+C$.</p>
+      <a href="flashcards.html?tema=integral" class="practica-link">Practicar este tema →</a>
     </div>
   </details>
 
