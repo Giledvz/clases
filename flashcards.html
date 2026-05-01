@@ -189,6 +189,25 @@
   }
   .option-text { flex: 1; }
 
+  /* --- Filtro por tema (banner) --- */
+  .filtro-banner {
+    font-size: 13px;
+    color: var(--ink-soft);
+    padding: 10px 14px;
+    background: rgba(139, 38, 53, 0.08);
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  .filtro-banner strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .filtro-banner a {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+  .filtro-banner a:hover { color: var(--accent); }
+
   /* --- Tema tag --- */
   .tema-tag {
     display: inline-block;
@@ -384,6 +403,11 @@
     <h1 class="title">Tarjetas de <em>práctica</em></h1>
     <span class="meta" id="counter">0 / 0</span>
   </header>
+
+  <div id="filtroBanner" class="filtro-banner hidden">
+    Practicando: <strong id="filtroTema"></strong>
+    · <a href="flashcards.html">ver todas</a>
+  </div>
 
   <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
 
@@ -1849,6 +1873,177 @@ const PREGUNTAS = [
     opciones: ["$\\sin x$", "$\\cos x$", "$\\tan x$", "$\\sec x$"],
     correcta: 2,
     explicacion: "$\\tan x = \\dfrac{\\sin x}{\\cos x}$ no está definida cuando $\\cos x = 0$, es decir en $x = \\dfrac{\\pi}{2} + n\\pi$ (asíntotas). Pasa por el origen y crece sin cota dentro de cada rama."
+  },
+  // —— Matemáticas: punto medio (a) ——
+  {
+    materia: "matematicas",
+    tema: "punto medio",
+    pregunta: "¿Cuál es el punto medio del segmento que va de $(2, 4)$ a $(8, 10)$?",
+    opciones: ["$(5, 7)$", "$(10, 14)$", "$(3, 3)$", "$(4, 5)$"],
+    correcta: 0,
+    explicacion: "$M = \\left(\\dfrac{x_1+x_2}{2}, \\dfrac{y_1+y_2}{2}\\right) = \\left(\\dfrac{2+8}{2}, \\dfrac{4+10}{2}\\right) = (5, 7)$."
+  },
+  // —— Matemáticas: punto medio (b) ——
+  {
+    materia: "matematicas",
+    tema: "punto medio",
+    pregunta: "¿Cuál es el punto medio del segmento que va de $(-3, 6)$ a $(5, -2)$?",
+    opciones: ["$(1, 2)$", "$(-1, -2)$", "$(4, 4)$", "$(2, 4)$"],
+    correcta: 0,
+    explicacion: "$M = \\left(\\dfrac{-3+5}{2}, \\dfrac{6+(-2)}{2}\\right) = \\left(\\dfrac{2}{2}, \\dfrac{4}{2}\\right) = (1, 2)$."
+  },
+  // —— Matemáticas: punto medio (c) ——
+  {
+    materia: "matematicas",
+    tema: "punto medio",
+    pregunta: "¿Cuál es el punto medio del segmento que va de $(-4, -7)$ a $(6, 1)$?",
+    opciones: ["$(1, -3)$", "$(-1, 3)$", "$(2, -6)$", "$(10, 8)$"],
+    correcta: 0,
+    explicacion: "$M = \\left(\\dfrac{-4+6}{2}, \\dfrac{-7+1}{2}\\right) = \\left(\\dfrac{2}{2}, \\dfrac{-6}{2}\\right) = (1, -3)$."
+  },
+  // —— Matemáticas: punto medio (extremo faltante) ——
+  {
+    materia: "matematicas",
+    tema: "punto medio",
+    pregunta: "Si $M(3, 5)$ es el punto medio del segmento $\\overline{AB}$ y $A(1, 2)$, ¿cuáles son las coordenadas de $B$?",
+    opciones: ["$(5, 8)$", "$(2, 3)$", "$(4, 7)$", "$(-1, -1)$"],
+    correcta: 0,
+    explicacion: "Despejando de la fórmula del punto medio: $B = (2M_x - A_x,\\ 2M_y - A_y) = (2(3) - 1,\\ 2(5) - 2) = (5, 8)$."
+  },
+  // —— Matemáticas: pendiente (a) ——
+  {
+    materia: "matematicas",
+    tema: "pendiente entre dos puntos",
+    pregunta: "La pendiente de la recta que pasa por $(2, 5)$ y $(6, 13)$ es",
+    opciones: ["$2$", "$-2$", "$4$", "$\\dfrac{1}{2}$"],
+    correcta: 0,
+    explicacion: "$m = \\dfrac{y_2 - y_1}{x_2 - x_1} = \\dfrac{13 - 5}{6 - 2} = \\dfrac{8}{4} = 2$."
+  },
+  // —— Matemáticas: pendiente (b) ——
+  {
+    materia: "matematicas",
+    tema: "pendiente entre dos puntos",
+    pregunta: "La pendiente de la recta que pasa por $(-1, 3)$ y $(4, -7)$ es",
+    opciones: ["$-2$", "$2$", "$-\\dfrac{10}{3}$", "$-\\dfrac{1}{2}$"],
+    correcta: 0,
+    explicacion: "$m = \\dfrac{-7 - 3}{4 - (-1)} = \\dfrac{-10}{5} = -2$. Cuidado con los paréntesis al restar el $-1$."
+  },
+  // —— Matemáticas: pendiente (recta vertical) ——
+  {
+    materia: "matematicas",
+    tema: "pendiente",
+    pregunta: "¿Cuál es la pendiente de la recta $x = 5$?",
+    opciones: ["$0$", "$5$", "$1$", "indefinida (no existe)"],
+    correcta: 3,
+    explicacion: "$x = 5$ es una recta vertical. La pendiente $m = \\dfrac{\\Delta y}{\\Delta x}$ involucra $\\Delta x = 0$, lo que da una división entre cero: la pendiente no está definida."
+  },
+  // —— Matemáticas: ec. de la recta — 2 puntos (canónica) ——
+  {
+    materia: "matematicas",
+    tema: "ecuación de la recta — dos puntos",
+    pregunta: "La ecuación de la recta que pasa por $(1, 3)$ y $(3, 7)$, en forma pendiente-ordenada $y = mx + b$, es",
+    opciones: ["$y = 2x + 1$", "$y = 2x + 3$", "$y = -2x + 5$", "$y = x + 2$"],
+    correcta: 0,
+    explicacion: "Pendiente: $m = \\dfrac{7-3}{3-1} = 2$. Usando $(1, 3)$: $y - 3 = 2(x - 1) \\Rightarrow y = 2x + 1$."
+  },
+  // —— Matemáticas: ec. de la recta — 2 puntos (general) ——
+  {
+    materia: "matematicas",
+    tema: "ecuación de la recta — dos puntos",
+    pregunta: "La ecuación de la recta que pasa por $(-2, 4)$ y $(1, -2)$, en forma general $Ax + By + C = 0$, es",
+    opciones: ["$2x + y = 0$", "$2x - y = 0$", "$x + 2y = 0$", "$2x + y - 4 = 0$"],
+    correcta: 0,
+    explicacion: "Pendiente: $m = \\dfrac{-2-4}{1-(-2)} = \\dfrac{-6}{3} = -2$. Usando $(-2, 4)$: $y - 4 = -2(x + 2) \\Rightarrow y = -2x \\Rightarrow 2x + y = 0$."
+  },
+  // —— Matemáticas: ec. de la recta — 2 puntos (canónica) ——
+  {
+    materia: "matematicas",
+    tema: "ecuación de la recta — dos puntos",
+    pregunta: "La ecuación de la recta que pasa por $(0, -3)$ y $(4, 5)$, en forma pendiente-ordenada, es",
+    opciones: ["$y = 2x - 3$", "$y = 2x + 3$", "$y = -2x - 3$", "$y = \\dfrac{1}{2}x - 3$"],
+    correcta: 0,
+    explicacion: "Pendiente: $m = \\dfrac{5 - (-3)}{4 - 0} = \\dfrac{8}{4} = 2$. Como pasa por $(0, -3)$, la ordenada al origen es $b = -3$. Por lo tanto $y = 2x - 3$."
+  },
+  // —— Matemáticas: ec. recta — punto y pendiente (canónica) ——
+  {
+    materia: "matematicas",
+    tema: "ecuación de la recta — punto y pendiente",
+    pregunta: "La ecuación de la recta con pendiente $m = 3$ que pasa por $(2, -1)$, en forma pendiente-ordenada, es",
+    opciones: ["$y = 3x - 7$", "$y = 3x + 7$", "$y = 3x - 5$", "$y = 3x + 5$"],
+    correcta: 0,
+    explicacion: "Forma punto-pendiente: $y - (-1) = 3(x - 2) \\Rightarrow y + 1 = 3x - 6 \\Rightarrow y = 3x - 7$."
+  },
+  // —— Matemáticas: ec. recta — punto y pendiente (general) ——
+  {
+    materia: "matematicas",
+    tema: "ecuación de la recta — punto y pendiente",
+    pregunta: "La ecuación de la recta con pendiente $m = -\\dfrac{1}{2}$ que pasa por $(4, 3)$, en forma general, es",
+    opciones: ["$x + 2y - 10 = 0$", "$x - 2y - 10 = 0$", "$x + 2y + 10 = 0$", "$x + 2y - 2 = 0$"],
+    correcta: 0,
+    explicacion: "$y - 3 = -\\dfrac{1}{2}(x - 4)$. Multiplicando por $2$: $2y - 6 = -(x - 4) = -x + 4 \\Rightarrow x + 2y - 10 = 0$."
+  },
+  // —— Matemáticas: ec. recta — punto y pendiente (sencilla) ——
+  {
+    materia: "matematicas",
+    tema: "ecuación de la recta — punto y pendiente",
+    pregunta: "La ecuación de la recta con pendiente $m = 2$ que pasa por $(0, 5)$, en forma pendiente-ordenada, es",
+    opciones: ["$y = 2x + 5$", "$y = 2x - 5$", "$y = 5x + 2$", "$y = \\dfrac{1}{2}x + 5$"],
+    correcta: 0,
+    explicacion: "Como pasa por el eje $y$ en $(0, 5)$, la ordenada al origen es $b = 5$. Con $m = 2$: $y = 2x + 5$."
+  },
+  // —— Matemáticas: paralelismo (pendiente) ——
+  {
+    materia: "matematicas",
+    tema: "paralelismo y perpendicularidad",
+    pregunta: "¿Cuál es la pendiente de cualquier recta paralela a $3x + y - 5 = 0$?",
+    opciones: ["$-3$", "$3$", "$\\dfrac{1}{3}$", "$-\\dfrac{1}{3}$"],
+    correcta: 0,
+    explicacion: "Despejando: $y = -3x + 5$, así que la recta dada tiene pendiente $-3$. Las rectas paralelas tienen la misma pendiente: $m = -3$."
+  },
+  // —— Matemáticas: perpendicularidad (pendiente) ——
+  {
+    materia: "matematicas",
+    tema: "paralelismo y perpendicularidad",
+    pregunta: "¿Cuál es la pendiente de cualquier recta perpendicular a $2x - 4y + 1 = 0$?",
+    opciones: ["$-2$", "$2$", "$\\dfrac{1}{2}$", "$-\\dfrac{1}{2}$"],
+    correcta: 0,
+    explicacion: "Despejando: $y = \\dfrac{1}{2}x + \\dfrac{1}{4}$, pendiente $\\dfrac{1}{2}$. Para perpendiculares: $m_1 \\cdot m_2 = -1 \\Rightarrow m_2 = -\\dfrac{1}{1/2} = -2$ (negativo recíproco)."
+  },
+  // —— Matemáticas: perpendicular por un punto ——
+  {
+    materia: "matematicas",
+    tema: "paralelismo y perpendicularidad",
+    pregunta: "La ecuación de la recta perpendicular a $y = 3x + 2$ que pasa por $(6, 1)$ es",
+    opciones: ["$y = -\\dfrac{1}{3}x + 3$", "$y = 3x + 3$", "$y = -\\dfrac{1}{3}x - 3$", "$y = \\dfrac{1}{3}x + 3$"],
+    correcta: 0,
+    explicacion: "La pendiente de $y=3x+2$ es $3$, por lo que la perpendicular tiene pendiente $-\\dfrac{1}{3}$. Usando el punto $(6, 1)$: $y - 1 = -\\dfrac{1}{3}(x - 6) \\Rightarrow y = -\\dfrac{1}{3}x + 2 + 1 = -\\dfrac{1}{3}x + 3$."
+  },
+  // —— Matemáticas: paralela por un punto ——
+  {
+    materia: "matematicas",
+    tema: "paralelismo y perpendicularidad",
+    pregunta: "La ecuación de la recta paralela a $2x + y - 3 = 0$ que pasa por $(1, 4)$ es",
+    opciones: ["$y = -2x + 6$", "$y = 2x + 6$", "$y = -2x - 6$", "$y = \\dfrac{1}{2}x + 6$"],
+    correcta: 0,
+    explicacion: "Despejando $2x + y - 3 = 0$: $y = -2x + 3$, pendiente $-2$. La paralela tiene la misma pendiente. Usando $(1, 4)$: $y - 4 = -2(x - 1) \\Rightarrow y = -2x + 6$."
+  },
+  // —— Matemáticas: conversión recta (general → canónica) ——
+  {
+    materia: "matematicas",
+    tema: "conversión de formas de la recta",
+    pregunta: "La forma pendiente-ordenada de la recta $3x + 2y - 6 = 0$ es",
+    opciones: ["$y = -\\dfrac{3}{2}x + 3$", "$y = \\dfrac{3}{2}x + 3$", "$y = -\\dfrac{3}{2}x - 3$", "$y = 3x + 6$"],
+    correcta: 0,
+    explicacion: "Despejando $y$: $2y = -3x + 6 \\Rightarrow y = -\\dfrac{3}{2}x + 3$. La pendiente es $-\\dfrac{3}{2}$ y la ordenada al origen es $3$."
+  },
+  // —— Matemáticas: conversión recta (canónica → general) ——
+  {
+    materia: "matematicas",
+    tema: "conversión de formas de la recta",
+    pregunta: "La forma general (con $A$ entero positivo) de la recta $y = \\dfrac{1}{2}x - 4$ es",
+    opciones: ["$x - 2y - 8 = 0$", "$x + 2y - 8 = 0$", "$x - 2y + 8 = 0$", "$-x + 2y + 8 = 0$"],
+    correcta: 0,
+    explicacion: "Multiplicando por $2$: $2y = x - 8 \\Rightarrow x - 2y - 8 = 0$. (El coeficiente de $x$ queda positivo como se pide.)"
   }
 ];
 
@@ -1878,15 +2073,38 @@ function shuffle(arr) {
   return a;
 }
 
+// Lee el filtro por tema de la URL (ej. flashcards.html?tema=trig)
+const FILTRO_TEMA = new URLSearchParams(window.location.search).get('tema');
+
+function mezclarOpciones(preguntas) {
+  if (!CONFIG.mezclarOpciones) return preguntas;
+  return preguntas.map(p => {
+    const indices = shuffle([0,1,2,3]);
+    const nuevasOpciones = indices.map(i => p.opciones[i]);
+    const nuevaCorrecta = indices.indexOf(p.correcta);
+    return { ...p, opciones: nuevasOpciones, correcta: nuevaCorrecta };
+  });
+}
+
 function prepararPreguntas(lista) {
-  // Agrupa por materia
+  // Modo filtrado por tema: ignora cuotas, usa todas las que coincidan.
+  // Acepta múltiples temas separados por coma (OR). Coincide en tema o materia.
+  if (FILTRO_TEMA) {
+    const filtros = FILTRO_TEMA.toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
+    const filtradas = lista.filter(p => {
+      const tema = (p.tema || '').toLowerCase();
+      const materia = (p.materia || '').toLowerCase();
+      return filtros.some(f => tema.includes(f) || materia.includes(f));
+    });
+    return mezclarOpciones(shuffle(filtradas));
+  }
+
+  // Modo normal: cuotas por materia
   const porMateria = {};
   for (const p of lista) {
     if (!porMateria[p.materia]) porMateria[p.materia] = [];
     porMateria[p.materia].push(p);
   }
-
-  // Sortea N preguntas de cada materia según CUOTAS
   let seleccionadas = [];
   for (const materia in CUOTAS) {
     const disponibles = porMateria[materia] || [];
@@ -1896,19 +2114,7 @@ function prepararPreguntas(lista) {
     }
     seleccionadas = seleccionadas.concat(shuffle(disponibles).slice(0, cuota));
   }
-
-  // Mezcla el orden final entre materias
-  let preguntas = shuffle(seleccionadas);
-
-  if (CONFIG.mezclarOpciones) {
-    preguntas = preguntas.map(p => {
-      const indices = shuffle([0,1,2,3]);
-      const nuevasOpciones = indices.map(i => p.opciones[i]);
-      const nuevaCorrecta = indices.indexOf(p.correcta);
-      return { ...p, opciones: nuevasOpciones, correcta: nuevaCorrecta };
-    });
-  }
-  return preguntas;
+  return mezclarOpciones(shuffle(seleccionadas));
 }
 
 // --- Estado ---
@@ -2065,7 +2271,20 @@ document.addEventListener('keydown', (e) => {
 });
 
 // --- Inicio ---
-mostrarPregunta();
+if (FILTRO_TEMA) {
+  $('filtroBanner').classList.remove('hidden');
+  $('filtroTema').textContent = FILTRO_TEMA;
+}
+if (preguntas.length === 0) {
+  cardContainer.classList.add('hidden');
+  finalScreen.classList.remove('hidden');
+  $('finalHeadline').textContent = 'Sin preguntas';
+  $('finalMessage').textContent = `No hay preguntas con el tema "${FILTRO_TEMA}". Prueba con otro o regresa a todas.`;
+  $('scoreCorrect').textContent = '0';
+  $('scoreTotal').textContent = '0';
+} else {
+  mostrarPregunta();
+}
 </script>
 
 </body>
