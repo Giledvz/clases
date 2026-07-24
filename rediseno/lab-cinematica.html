@@ -37,13 +37,17 @@
 
 <style>
   /* etiquetas funcionales de magnitud (no decorativas) */
+  /* El acento sale del NIVEL (nada de azul): universidad = coñac (default de
+     tokens) · prepa = terracota con ?nivel=prepa. Las tres magnitudes se
+     distinguen por INTENSIDAD del mismo acento + la forma (línea sólida,
+     punteada, área), no por colores ajenos a la marca. */
   :root {
-    --pos: var(--accent-conac);
-    --vel: var(--cat-teal);
-    --ace: var(--cat-purple);
+    --pos: var(--color-accent);
+    --vel: var(--color-accent-soft);
+    --ace: var(--ink-500);
     --rejilla: color-mix(in srgb, var(--color-text-meta) 22%, transparent);
   }
-  [data-theme="dark"] :root, [data-theme="dark"] { --pos: #c79a82; --vel: #7eb0b5; --ace: #b08299; }
+  :root[data-nivel="prepa"] { --color-accent: var(--accent-terracota); --color-accent-soft: var(--accent-terracota-soft); }
 
   .wrap { max-width: 940px; margin-inline: auto; padding: 0 var(--space-5) var(--space-9); }
 
@@ -234,6 +238,12 @@
     if (window.ClasesTheme) window.ClasesTheme.toggle();
   });
 
+  /* nivel: universidad (coñac, por defecto) o prepa (terracota) vía ?nivel=prepa */
+  if (new URLSearchParams(location.search).get('nivel') === 'prepa') {
+    document.documentElement.setAttribute('data-nivel', 'prepa');
+    document.querySelector('.top__level').textContent = 'prepa · laboratorio';
+  }
+
   /* ── modelo físico: MRUA ── */
   var T_MAX = 8, X_MAX = 100;                        // s, m
   var est = { x0: 0, v0: 10, a: 0, t: 0, corriendo: false };
@@ -275,18 +285,20 @@
     var cx = x0 + (x1 - x0) * (x / X_MAX);
     // estela
     var cx0 = x0 + (x1 - x0) * (Math.max(0, Math.min(X_MAX, est.x0)) / X_MAX);
-    pista.appendChild(el('line', { x1: cx0, y1: y - 13, x2: cx, y2: y - 13,
+    pista.appendChild(el('line', { x1: cx0, y1: y - 2, x2: cx, y2: y - 2,
       stroke: 'var(--pos)', 'stroke-width': 2.5, 'stroke-opacity': .22, 'stroke-linecap': 'round' }));
-    // carrito
-    var g = el('g', { transform: 'translate(' + cx + ',' + (y - 13) + ')' });
-    g.appendChild(el('rect', { x: -13, y: -9, width: 26, height: 15, rx: 3, fill: 'var(--pos)' }));
-    g.appendChild(el('circle', { cx: -7, cy: 7, r: 3.1, fill: 'var(--pos)', 'fill-opacity': .55 }));
-    g.appendChild(el('circle', { cx: 7,  cy: 7, r: 3.1, fill: 'var(--pos)', 'fill-opacity': .55 }));
+    // el auto (ilustración del repo ECOEMS). Mira hacia donde va: si la
+    // velocidad es negativa se voltea — se VE que "se regresó".
+    var vAhora = vDe(est.t), mira = vAhora < 0 ? -1 : 1;
+    var AW = 54, AH = 13.4;                                   // 600×149 px a escala
+    var g = el('g', { transform: 'translate(' + cx + ',' + (y - 7) + ') scale(' + mira + ',1)' });
+    g.appendChild(el('image', { href: '/tercial/assets/img/auto.png',
+      x: -AW / 2, y: -AH, width: AW, height: AH, preserveAspectRatio: 'xMidYMid meet' }));
     pista.appendChild(g);
     // vector velocidad
     var v = vDe(est.t), L = Math.max(-58, Math.min(58, v * 2.6));
     if (Math.abs(L) > 3) {
-      var yv = y - 30;
+      var yv = y - 26;
       pista.appendChild(el('line', { x1: cx, y1: yv, x2: cx + L, y2: yv, stroke: 'var(--vel)', 'stroke-width': 2 }));
       var s = L > 0 ? 1 : -1;
       pista.appendChild(el('path', { d: 'M' + (cx + L) + ',' + yv + ' l' + (-6 * s) + ',-3.6 l0,7.2 z', fill: 'var(--vel)' }));
