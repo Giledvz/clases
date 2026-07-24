@@ -12,12 +12,22 @@
 <link rel="stylesheet" href="../assets/css/components.css">
 <link rel="stylesheet" href="../assets/css/exam-print.css">
 <style>
+  /* 128 reactivos (32 filas/columna). Debe caber en UNA página (lectura óptica).
+     Optimizada para Chrome, que respeta @page. El margen se calcula para que el
+     área imprimible IGUALE la altura del contenido (~9.79in aquí), así llena la
+     página de arriba a abajo con margen balanceado. Es más chico que el de la
+     hoja de uni porque esta es más alta (más reactivos). */
+  @page { size: letter; margin: 0.51in; }
+  /* Prepa (COMIPEMS): el acento de esta hoja es terracota. Se redefine el token
+     a nivel de la hoja para que TODO lo que use el acento —incluida la itálica del
+     título, cuyo color vive en exam-print.css— quede en terracota. */
+  .exam-pdf--neutral { --accent-conac: var(--accent-terracota); }
   /* ===== Hoja de respuestas (OMR) · componente local =====
      Las clases hr-* viven aquí porque son específicas de esta hoja
      (lectura óptica). Todo lo cromático sale de tokens.css. */
   .exam-pdf--neutral .exam-pdf__hero { border-top-color: var(--accent-conac); }
 
-  .hr-sheet { position: relative; }
+  .hr-sheet { position: relative; padding: 0.15in 0.12in; }
   /* Marcas de registro para alinear al calificar con cámara/escáner */
   .hr-reg { position: absolute; width: 9pt; height: 9pt; background: var(--ink-900); }
   .hr-reg--tl { top: 0; left: 0; }

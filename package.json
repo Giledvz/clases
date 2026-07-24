@@ -5,7 +5,8 @@
   "type": "module",
   "description": "Tercial · materiales y exámenes de preparación UNAM",
   "scripts": {
-    "exam": "node tools/build-exam-pdf.mjs"
+    "exam": "node tools/build-exam-pdf.mjs",
+    "test:regresiones": "node design/verify-calculo.mjs && node design/verify-formulario.mjs"
   },
   "dependencies": {
     "puppeteer": "^25.1.0"

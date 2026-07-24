@@ -52,13 +52,13 @@
     </header>
     <div class="constantes-grid">
       <div class="constantes-grid__item"><span class="constantes-grid__value">$g = 10\,\mathrm{m/s^2}$</span><span class="constantes-grid__label">gravedad (examen)</span></div>
-      <div class="constantes-grid__item"><span class="constantes-grid__value">$c = 3 \times 10^{8}\,\mathrm{m/s}$</span><span class="constantes-grid__label">velocidad de la luz</span></div>
-      <div class="constantes-grid__item"><span class="constantes-grid__value">$k = 9 \times 10^{9}\,\mathrm{N \cdot m^2 / C^2}$</span><span class="constantes-grid__label">cte. de Coulomb</span></div>
+      <div class="constantes-grid__item"><span class="constantes-grid__value">$c = 3 \times 10^{8}\,\mathrm{m/s}$</span><span class="constantes-grid__label">velocidad de la luz en el vacío</span></div>
+      <div class="constantes-grid__item"><span class="constantes-grid__value">$k_e = 9 \times 10^{9}\,\mathrm{N \cdot m^2 / C^2}$</span><span class="constantes-grid__label">cte. de Coulomb</span></div>
       <div class="constantes-grid__item"><span class="constantes-grid__value">$h = 6.63 \times 10^{-34}\,\mathrm{J \cdot s}$</span><span class="constantes-grid__label">cte. de Planck</span></div>
       <div class="constantes-grid__item"><span class="constantes-grid__value">$\mu_0 = 4\pi \times 10^{-7}\,\mathrm{T \cdot m/A}$</span><span class="constantes-grid__label">cte. magnética</span></div>
-      <div class="constantes-grid__item"><span class="constantes-grid__value">$R = 0.082\,\mathrm{atm \cdot L / mol \cdot K}$</span><span class="constantes-grid__label">cte. universal de los gases</span></div>
+      <div class="constantes-grid__item"><span class="constantes-grid__value">$R = 0.082057\,\mathrm{L\,atm\,mol^{-1}K^{-1}} = 8.314\,\mathrm{J\,mol^{-1}K^{-1}}$</span><span class="constantes-grid__label">cte. universal de los gases</span></div>
       <div class="constantes-grid__item"><span class="constantes-grid__value">$\rho_{\mathrm{agua}} = 1000\,\mathrm{kg/m^3}$</span><span class="constantes-grid__label">densidad del agua</span></div>
-      <div class="constantes-grid__item"><span class="constantes-grid__value">$c_{\mathrm{agua}} = 1\,\mathrm{cal/g\,°C}$</span><span class="constantes-grid__label">calor específico del agua</span></div>
+      <div class="constantes-grid__item"><span class="constantes-grid__value">$c_{\mathrm{agua}} = 1\,\mathrm{\frac{cal}{g\,°C}}$</span><span class="constantes-grid__label">calor específico del agua</span></div>
       <div class="constantes-grid__item"><span class="constantes-grid__value">$L_f = 80\,\mathrm{cal/g}$</span><span class="constantes-grid__label">calor latente de fusión (agua)</span></div>
       <div class="constantes-grid__item"><span class="constantes-grid__value">$L_v = 540\,\mathrm{cal/g}$</span><span class="constantes-grid__label">calor latente de vaporización (agua)</span></div>
       <div class="constantes-grid__item"><span class="constantes-grid__value">$v_{\mathrm{sonido}} \approx 340\,\mathrm{m/s}$</span><span class="constantes-grid__label">en aire a 20 °C</span></div>
@@ -74,18 +74,18 @@
       <span class="section-header__count">MRU · MRUA · Caída libre · Tiro vertical · MCU</span>
     </header>
     <div class="formula-table">
-      <div class="formula-row"><span class="formula-row__eq">$d = v \cdot t$</span><span class="formula-row__desc">MRU — distancia a velocidad constante</span><span class="formula-row__unit">[m] = [m/s]·[s]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\Delta x = v\,\Delta t$</span><span class="formula-row__desc">MRU — desplazamiento a velocidad constante</span><span class="formula-row__unit">[m] = [m/s]·[s]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$v = v_0 + a\,t$</span><span class="formula-row__desc">MRUA — velocidad en función del tiempo</span><span class="formula-row__unit">[m/s]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$d = v_0 t + \tfrac{1}{2} a\,t^2$</span><span class="formula-row__desc">MRUA — distancia en función del tiempo</span><span class="formula-row__unit">[m]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$v^2 = v_0^2 + 2 a\,d$</span><span class="formula-row__desc">MRUA — velocidad sin tiempo (Torricelli)</span><span class="formula-row__unit">[m²/s²]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\Delta x = v_0 t + \tfrac{1}{2} a\,t^2$</span><span class="formula-row__desc">MRUA — desplazamiento en función del tiempo</span><span class="formula-row__unit">[m]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$v^2 = v_0^2 + 2 a\,\Delta x$</span><span class="formula-row__desc">MRUA — velocidad sin tiempo (Torricelli)</span><span class="formula-row__unit">[m²/s²]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$d = \tfrac{1}{2} g\,t^2$</span><span class="formula-row__desc">Caída libre — desde el reposo ($v_0 = 0$)</span><span class="formula-row__unit">[m]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$v = g\,t$</span><span class="formula-row__desc">Caída libre — velocidad al tiempo $t$</span><span class="formula-row__unit">[m/s]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$h_{\max} = \dfrac{v_0^2}{2g}$</span><span class="formula-row__desc">Tiro vertical — altura máxima</span><span class="formula-row__unit">[m]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$t_{\mathrm{sub}} = \dfrac{v_0}{g}$</span><span class="formula-row__desc">Tiro vertical — tiempo hasta $h_{\max}$</span><span class="formula-row__unit">[s]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\Delta h_{\max} = \dfrac{v_0^2}{2g}$</span><span class="formula-row__desc">Tiro vertical — elevación sobre el punto de lanzamiento</span><span class="formula-row__unit">[m]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$t_{\mathrm{sub}} = \dfrac{v_0}{g}$</span><span class="formula-row__desc">Tiro vertical — tiempo hasta el punto más alto</span><span class="formula-row__unit">[s]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$a_c = \dfrac{v^2}{r}$</span><span class="formula-row__desc">MCU — aceleración centrípeta</span><span class="formula-row__unit">[m/s²]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\omega = 2\pi f$, $\;v = \omega r$</span><span class="formula-row__desc">MCU — velocidad angular y tangencial</span><span class="formula-row__unit">[rad/s]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\omega = 2\pi f$, $\;v = \omega r$</span><span class="formula-row__desc">MCU — velocidad angular y tangencial</span><span class="formula-row__unit">[$\omega$] = [rad/s]; [$v$] = [m/s]</span></div>
     </div>
-    <p class="formula-note">Caída libre: $v_0 = 0$, $a = +g$. Tiro vertical hacia arriba: $a = -g$; en $h_{\max}$ la velocidad es cero.</p>
+    <p class="formula-note">Caída libre: $v_0 = 0$, $a = +g$. Tiro vertical hacia arriba: $a = -g$; en el punto más alto la velocidad es cero.</p>
     <a class="btn btn--secondary" href="/tercial/flashcards.html?tema=ca%C3%ADda+libre%2CMRUA%2Ctiro+parab%C3%B3lico">Practicar este tema →</a>
   </section>
 
@@ -98,14 +98,14 @@
       <span class="section-header__count">Newton · Hooke · Fricción · Gravitación</span>
     </header>
     <div class="formula-table">
-      <div class="formula-row"><span class="formula-row__eq">$F = m\,a$</span><span class="formula-row__desc">2ª ley — fuerza neta sobre un objeto</span><span class="formula-row__unit">[N] = [kg]·[m/s²]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$W = m\,g$</span><span class="formula-row__desc">Peso — fuerza gravitacional sobre el objeto</span><span class="formula-row__unit">[N]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$F_f = \mu\,N$</span><span class="formula-row__desc">Fricción — $\mu$ adimensional, $N$ = normal</span><span class="formula-row__unit">[N]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$F = k\,x$</span><span class="formula-row__desc">Hooke — $k$: cte. del resorte; $x$: elongación</span><span class="formula-row__unit">[N] = [N/m]·[m]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\sum \vec F = m\,\vec a$</span><span class="formula-row__desc">2ª ley — fuerza neta en un marco de referencia inercial</span><span class="formula-row__unit">[N] = [kg]·[m/s²]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$F_g = m\,g$</span><span class="formula-row__desc">Magnitud del peso cerca de la superficie terrestre</span><span class="formula-row__unit">[N]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$f_k = \mu_k N$; $\;0 \leq |f_s| \leq \mu_s N$</span><span class="formula-row__desc">Magnitudes de fricción cinética y estática; $N$ es la magnitud de la normal</span><span class="formula-row__unit">[N]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$F_{\mathrm{resorte}} = -k\,x$</span><span class="formula-row__desc">Hooke — $k$ es la constante elástica [N/m]; $x$ es la deformación algebraica</span><span class="formula-row__unit">[N] = [N/m]·[m]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$R = \sqrt{F_1^2 + F_2^2}$</span><span class="formula-row__desc">Magnitud de fuerzas perpendiculares</span><span class="formula-row__unit">[N]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$F = G\,\dfrac{m_1 m_2}{r^2}$</span><span class="formula-row__desc">Gravitación universal — $G = 6.67\times10^{-11}$</span><span class="formula-row__unit">[N]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$F = G\,\dfrac{m_1 m_2}{r^2}$</span><span class="formula-row__desc">Masas puntuales o esféricas; $r$ entre centros; $G = 6.67\times10^{-11}\,\mathrm{N\,m^2/kg^2}$</span><span class="formula-row__unit">[N]</span></div>
     </div>
-    <p class="formula-note">1ª ley: si $F_{\mathrm{neta}} = 0$ el objeto permanece en reposo o MRU. 3ª ley: acción = reacción. En plano horizontal $N = W$.</p>
+    <p class="formula-note">1ª ley: si $\sum\vec F = 0$, la velocidad permanece constante (el reposo es el caso $v=0$). 3ª ley: acción y reacción tienen igual magnitud y dirección opuesta, pero actúan sobre cuerpos distintos. En un plano horizontal, $N=F_g=mg$ sólo si no hay aceleración vertical ni otras fuerzas con componente vertical.</p>
     <a class="btn btn--secondary" href="/tercial/flashcards.html?tema=segunda+ley+de+Newton%2CMCU">Practicar este tema →</a>
   </section>
 
@@ -118,16 +118,17 @@
       <span class="section-header__count">Energía · Potencia · Colisiones</span>
     </header>
     <div class="formula-table">
-      <div class="formula-row"><span class="formula-row__eq">$W = F\,d \cos\theta$</span><span class="formula-row__desc">Trabajo mecánico — fuerza × desplazamiento</span><span class="formula-row__unit">[J] = [N]·[m]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$W = F\,\Delta r \cos\theta$</span><span class="formula-row__desc">Fuerza constante; $\Delta r$ es la magnitud del desplazamiento y $\theta$ su ángulo con la fuerza</span><span class="formula-row__unit">[J] = [N]·[m]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$W_{\mathrm{neto}} = \Delta E_c$</span><span class="formula-row__desc">Teorema trabajo–energía</span><span class="formula-row__unit">[J]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$E_c = \tfrac{1}{2} m\,v^2$</span><span class="formula-row__desc">Energía cinética</span><span class="formula-row__unit">[J] = [kg]·[m²/s²]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$E_p = m\,g\,h$</span><span class="formula-row__desc">Energía potencial gravitacional</span><span class="formula-row__unit">[J]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$E_p = \tfrac{1}{2} k\,x^2$</span><span class="formula-row__desc">Energía potencial elástica (resorte)</span><span class="formula-row__unit">[J]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$E_m = E_c + E_p = \mathrm{cte}$</span><span class="formula-row__desc">Conservación de la energía mecánica</span><span class="formula-row__unit">[J]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$P = \dfrac{W}{t}$</span><span class="formula-row__desc">Potencia — trabajo por unidad de tiempo</span><span class="formula-row__unit">[W] = [J/s]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$E_m = E_c + E_p = \mathrm{cte}$</span><span class="formula-row__desc">Si el trabajo de las fuerzas no conservativas es cero</span><span class="formula-row__unit">[J]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$P_{\mathrm{prom}} = \dfrac{W}{\Delta t}$</span><span class="formula-row__desc">Potencia media — trabajo por intervalo de tiempo</span><span class="formula-row__unit">[W] = [J/s]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$p = m\,v$</span><span class="formula-row__desc">Momento lineal (ímpetu)</span><span class="formula-row__unit">[kg·m/s]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$m_1 v_1 + m_2 v_2 = (m_1 + m_2) v_f$</span><span class="formula-row__desc">Colisión perfectamente inelástica</span><span class="formula-row__unit">[kg·m/s]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$m_1 v_1 + m_2 v_2 = (m_1 + m_2) v_f$</span><span class="formula-row__desc">Colisión perfectamente inelástica, sistema aislado y 1D; velocidades con signo</span><span class="formula-row__unit">[kg·m/s]</span></div>
     </div>
-    <p class="formula-note">Con fricción: $W_{\mathrm{total}} = \Delta E_c + \Delta E_p + W_{\mathrm{rozamiento}}$.</p>
+    <p class="formula-note">En general, $W_{\mathrm{no\,conservativas}}=\Delta E_m$. Si la única fuerza no conservativa es el rozamiento cinético y se opone al movimiento: $E_{m,i}=E_{m,f}+|W_{\mathrm{roz}}|$.</p>
     <a class="btn btn--secondary" href="/tercial/flashcards.html?tema=trabajo+mec%C3%A1nico%2Cenerg%C3%ADa+cin%C3%A9tica%2Cconservaci%C3%B3n+de+energ%C3%ADa%2CHooke">Practicar este tema →</a>
   </section>
 
@@ -140,15 +141,15 @@
       <span class="section-header__count">Pascal · Arquímedes · Bernoulli</span>
     </header>
     <div class="formula-table">
-      <div class="formula-row"><span class="formula-row__eq">$P = \dfrac{F}{A}$</span><span class="formula-row__desc">Presión — fuerza por unidad de área</span><span class="formula-row__unit">[Pa] = [N/m²]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$P_{\mathrm{prom}} = \dfrac{F_\perp}{A}$</span><span class="formula-row__desc">Presión media — componente normal de la fuerza por área</span><span class="formula-row__unit">[Pa] = [N/m²]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$\rho = \dfrac{m}{V}$</span><span class="formula-row__desc">Densidad</span><span class="formula-row__unit">[kg/m³]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$P_h = \rho\,g\,h$</span><span class="formula-row__desc">Presión hidrostática a profundidad $h$</span><span class="formula-row__unit">[Pa]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\dfrac{F_1}{A_1} = \dfrac{F_2}{A_2}$</span><span class="formula-row__desc">Principio de Pascal — prensa hidráulica</span><span class="formula-row__unit">[N/m²]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\Delta P_h = \rho\,g\,h$</span><span class="formula-row__desc">Fluido en reposo y densidad constante; $h$ es profundidad vertical</span><span class="formula-row__unit">[Pa]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\Delta P_1=\Delta P_2 \Rightarrow \dfrac{F_1}{A_1} = \dfrac{F_2}{A_2}$</span><span class="formula-row__desc">Pascal — prensa ideal, despreciando diferencias de altura</span><span class="formula-row__unit">[Pa]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$E = \rho_f\,V_s\,g$</span><span class="formula-row__desc">Empuje de Arquímedes ($V_s$: vol. sumergido)</span><span class="formula-row__unit">[N]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$A_1 v_1 = A_2 v_2$</span><span class="formula-row__desc">Continuidad — flujo incompresible</span><span class="formula-row__unit">[m³/s]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$P + \tfrac{1}{2}\rho v^2 + \rho g h = \mathrm{cte}$</span><span class="formula-row__desc">Ecuación de Bernoulli</span><span class="formula-row__unit">[Pa]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$Q = A_1 \bar v_1 = A_2 \bar v_2$</span><span class="formula-row__desc">Caudal en flujo estacionario e incompresible; $\bar v$ es velocidad media</span><span class="formula-row__unit">[m³/s]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$P + \tfrac{1}{2}\rho v^2 + \rho g h = \mathrm{cte}$</span><span class="formula-row__desc">Bernoulli — flujo ideal y estacionario; $h$ es elevación respecto a una referencia</span><span class="formula-row__unit">[Pa]</span></div>
     </div>
-    <p class="formula-note">Un objeto flota si $\rho_{\mathrm{objeto}} < \rho_{\mathrm{fluido}}$. Pascal: la presión en un fluido cerrado se transmite igual a todos los puntos.</p>
+    <p class="formula-note">En flotación en equilibrio, el empuje iguala al peso; si la densidad promedio del objeto es menor que la del fluido, queda parcialmente sumergido. Pascal: un incremento de presión aplicado a un fluido incompresible confinado se transmite sin disminución en todas direcciones.</p>
     <a class="btn btn--secondary" href="/tercial/flashcards.html?tema=presi%C3%B3n+hidrost%C3%A1tica%2Cgravitaci%C3%B3n">Practicar este tema →</a>
   </section>
 
@@ -161,23 +162,23 @@
       <span class="section-header__count">Temperatura · Dilatación · Calor · Gases · 1ª ley · Eficiencia</span>
     </header>
     <div class="formula-table">
-      <div class="formula-row"><span class="formula-row__eq">$T(\mathrm{K}) = T(°\mathrm{C}) + 273$</span><span class="formula-row__desc">Conversión Celsius → Kelvin</span><span class="formula-row__unit">[K]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$T(\mathrm{K}) = T(°\mathrm{C}) + 273.15$</span><span class="formula-row__desc">Conversión Celsius → Kelvin (en ejercicios suele aproximarse con 273)</span><span class="formula-row__unit">[K]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$T(°\mathrm{F}) = \tfrac{9}{5}\,T(°\mathrm{C}) + 32$</span><span class="formula-row__desc">Conversión Celsius → Fahrenheit</span><span class="formula-row__unit">[°F]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\Delta L = \alpha\,L_0\,\Delta T$</span><span class="formula-row__desc">Dilatación lineal — $\alpha$: coef. lineal</span><span class="formula-row__unit">[m]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\Delta A = 2\alpha\,A_0\,\Delta T$</span><span class="formula-row__desc">Dilatación superficial</span><span class="formula-row__unit">[m²]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\Delta V = 3\alpha\,V_0\,\Delta T$</span><span class="formula-row__desc">Dilatación volumétrica</span><span class="formula-row__unit">[m³]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\Delta L \approx \alpha\,L_0\,\Delta T$</span><span class="formula-row__desc">Dilatación lineal — coeficiente $\alpha$ aproximadamente constante</span><span class="formula-row__unit">[m]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\Delta A \approx 2\alpha\,A_0\,\Delta T$</span><span class="formula-row__desc">Dilatación superficial de un sólido isotrópico</span><span class="formula-row__unit">[m²]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\Delta V \approx 3\alpha\,V_0\,\Delta T$</span><span class="formula-row__desc">Dilatación volumétrica de un sólido isotrópico</span><span class="formula-row__unit">[m³]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$Q = m\,c\,\Delta T$</span><span class="formula-row__desc">Calor sensible — sin cambio de fase</span><span class="formula-row__unit">[cal] o [J]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$Q = m\,L$</span><span class="formula-row__desc">Calor latente — fusión ($L_f$) o vaporización ($L_v$)</span><span class="formula-row__unit">[cal]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$|Q| = m\,L$</span><span class="formula-row__desc">Magnitud del calor latente; se absorbe al fundir/vaporizar y se libera al solidificar/condensar</span><span class="formula-row__unit">[cal] o [J]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$P_1 V_1 = P_2 V_2$</span><span class="formula-row__desc">Boyle — isotérmico ($T$ cte.)</span><span class="formula-row__unit">[Pa·m³]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$\dfrac{V_1}{T_1} = \dfrac{V_2}{T_2}$</span><span class="formula-row__desc">Charles — isobárico ($P$ cte.)</span><span class="formula-row__unit">[m³/K]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$\dfrac{P_1}{T_1} = \dfrac{P_2}{T_2}$</span><span class="formula-row__desc">Gay-Lussac — isocórico ($V$ cte.)</span><span class="formula-row__unit">[Pa/K]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$\dfrac{P_1 V_1}{T_1} = \dfrac{P_2 V_2}{T_2}$</span><span class="formula-row__desc">Ley combinada de los gases</span><span class="formula-row__unit">[Pa·m³/K]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$P V = n R T$</span><span class="formula-row__desc">Ecuación del gas ideal — $n$: moles</span><span class="formula-row__unit">[Pa·m³]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\Delta U = Q - W$</span><span class="formula-row__desc">1ª ley — energía interna del sistema</span><span class="formula-row__unit">[J]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\eta = \dfrac{W}{Q_c}$</span><span class="formula-row__desc">Eficiencia térmica — $Q_c$: calor absorbido</span><span class="formula-row__unit">adimensional</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\eta_{\mathrm{Carnot}} = 1 - \dfrac{T_f}{T_c}$</span><span class="formula-row__desc">Eficiencia máxima de Carnot — $T$ en kelvin</span><span class="formula-row__unit">adimensional</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$P V = n R T$</span><span class="formula-row__desc">Gas ideal — $n$ en mol; usa $R=8.314$ con Pa·m³ o $R=0.082057$ con atm·L</span><span class="formula-row__unit">[Pa·m³] o [atm·L]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\Delta U = Q - W_{\mathrm{sis}}$</span><span class="formula-row__desc">1ª ley — $Q>0$ entra al sistema; $W_{\mathrm{sis}}>0$ lo realiza el sistema</span><span class="formula-row__unit">[J]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\eta = \dfrac{W_{\mathrm{neto}}}{Q_H}$</span><span class="formula-row__desc">Motor térmico — trabajo neto de salida / calor del foco caliente</span><span class="formula-row__unit">adimensional</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\eta_{\mathrm{Carnot}} = 1 - \dfrac{T_{\mathrm{fría}}}{T_{\mathrm{caliente}}}$</span><span class="formula-row__desc">Motor reversible entre dos focos; temperaturas en kelvin</span><span class="formula-row__unit">adimensional</span></div>
     </div>
-    <p class="formula-note">¡La temperatura en gases siempre en kelvin! Isotérmico: $\Delta U = 0$ ($Q = W$). Adiabático: $Q = 0$. Isocórico: $W = 0$.</p>
+    <p class="formula-note">Leyes de los gases: misma cantidad de gas, presión absoluta y temperatura en kelvin. Para un gas ideal, isotérmico: $\Delta U = 0$ ($Q = W_{\mathrm{sis}}$). Adiabático: $Q = 0$. Isocórico: $W_{\mathrm{sis}} = 0$.</p>
     <a class="btn btn--secondary" href="/tercial/flashcards.html?tema=calor+(operaci%C3%B3n)%2Ctermodin%C3%A1mica">Practicar este tema →</a>
   </section>
 
@@ -197,8 +198,8 @@
       <div class="formula-row"><span class="formula-row__eq">$T = 2\pi\sqrt{\dfrac{m}{k}}$</span><span class="formula-row__desc">Período del MAS de un resorte</span><span class="formula-row__unit">[s]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$T = 2\pi\sqrt{\dfrac{L}{g}}$</span><span class="formula-row__desc">Péndulo simple (oscilaciones pequeñas)</span><span class="formula-row__unit">[s]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$v_{\max} = \omega\,A$</span><span class="formula-row__desc">Velocidad máxima en MAS — $A$: amplitud</span><span class="formula-row__unit">[m/s]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$f' = f\,\dfrac{v}{v - v_f}$</span><span class="formula-row__desc">Doppler — fuente acercándose al observador en reposo</span><span class="formula-row__unit">[Hz]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$f' = f\,\dfrac{v}{v + v_f}$</span><span class="formula-row__desc">Doppler — fuente alejándose del observador en reposo</span><span class="formula-row__unit">[Hz]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$f' = f\,\dfrac{v}{v - v_s}$</span><span class="formula-row__desc">Doppler — fuente subsónica acercándose; observador y medio en reposo</span><span class="formula-row__unit">[Hz]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$f' = f\,\dfrac{v}{v + v_s}$</span><span class="formula-row__desc">Doppler — fuente subsónica alejándose; observador y medio en reposo</span><span class="formula-row__unit">[Hz]</span></div>
     </div>
     <p class="formula-note">El periodo del péndulo no depende ni de la masa ni de la amplitud (oscilaciones chicas). Sonido en aire: $\approx 340\,\mathrm{m/s}$. Rango audible: 20 Hz – 20 000 Hz.</p>
     <a class="btn btn--secondary" href="/tercial/flashcards.html?tema=velocidad+de+una+onda">Practicar este tema →</a>
@@ -214,15 +215,15 @@
     </header>
     <div class="formula-table">
       <div class="formula-row"><span class="formula-row__eq">$\theta_i = \theta_r$</span><span class="formula-row__desc">Ley de reflexión (respecto a la normal)</span><span class="formula-row__unit">[°] o [rad]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$n_1 \sin\theta_1 = n_2 \sin\theta_2$</span><span class="formula-row__desc">Ley de Snell — refracción</span><span class="formula-row__unit">adimensional</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$n_1 \sin\theta_1 = n_2 \sin\theta_2$</span><span class="formula-row__desc">Ley de Snell — ambos ángulos se miden desde la normal</span><span class="formula-row__unit">adimensional</span></div>
       <div class="formula-row"><span class="formula-row__eq">$n = \dfrac{c}{v}$</span><span class="formula-row__desc">Índice de refracción del medio</span><span class="formula-row__unit">adimensional</span></div>
       <div class="formula-row"><span class="formula-row__eq">$v = \dfrac{c}{n}$</span><span class="formula-row__desc">Velocidad de la luz en el medio</span><span class="formula-row__unit">[m/s]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\sin\theta_c = \dfrac{n_2}{n_1}$</span><span class="formula-row__desc">Ángulo crítico para reflexión total ($n_1 > n_2$)</span><span class="formula-row__unit">[°]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$f = \dfrac{R}{2}$</span><span class="formula-row__desc">Distancia focal de un espejo esférico</span><span class="formula-row__unit">[m]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\sin\theta_c = \dfrac{n_2}{n_1}$</span><span class="formula-row__desc">Luz de $n_1$ hacia $n_2$, con $n_1>n_2$; reflexión total si $\theta_i>\theta_c$</span><span class="formula-row__unit">[°]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$f = \dfrac{R}{2}$</span><span class="formula-row__desc">Espejo esférico paraxial; $R$ y $f$ siguen la misma convención de signos</span><span class="formula-row__unit">[m]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$\dfrac{1}{f} = \dfrac{1}{p} + \dfrac{1}{q}$</span><span class="formula-row__desc">Espejos y lentes delgadas — $p$: objeto, $q$: imagen</span><span class="formula-row__unit">[m] o [cm]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$M = -\dfrac{q}{p}$</span><span class="formula-row__desc">Aumento lateral — $M>0$ derecha, $M<0$ invertida</span><span class="formula-row__unit">adimensional</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$M = -\dfrac{q}{p}$</span><span class="formula-row__desc">Aumento lateral — $M>0$ erecta, $M<0$ invertida</span><span class="formula-row__unit">adimensional</span></div>
     </div>
-    <p class="formula-note">Espejo cóncavo / lente convergente: $f > 0$. Espejo convexo / lente divergente: $f < 0$. Imagen virtual: $q < 0$.</p>
+    <p class="formula-note">Convención real-positivo: objeto real $p>0$; imagen real $q>0$ y virtual $q<0$; sistema convergente $f>0$ y divergente $f<0$.</p>
     <a class="btn btn--secondary" href="/tercial/flashcards.html?tema=%C3%B3ptica">Practicar este tema →</a>
   </section>
 
@@ -235,11 +236,11 @@
       <span class="section-header__count">Coulomb · Campo · Ohm · Circuitos</span>
     </header>
     <div class="formula-table">
-      <div class="formula-row"><span class="formula-row__eq">$F = k\,\dfrac{q_1 q_2}{r^2}$</span><span class="formula-row__desc">Ley de Coulomb — fuerza entre dos cargas</span><span class="formula-row__unit">[N]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$E = \dfrac{F}{q}$</span><span class="formula-row__desc">Campo eléctrico</span><span class="formula-row__unit">[N/C] = [V/m]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$V = I R$</span><span class="formula-row__desc">Ley de Ohm</span><span class="formula-row__unit">[V] = [A]·[Ω]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$P = V I = I^2 R$</span><span class="formula-row__desc">Potencia eléctrica disipada</span><span class="formula-row__unit">[W] = [V]·[A]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$E = P\,t$</span><span class="formula-row__desc">Energía eléctrica consumida</span><span class="formula-row__unit">[J] = [W]·[s]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$F = k_e\,\dfrac{|q_1 q_2|}{r^2}$</span><span class="formula-row__desc">Cargas puntuales en vacío/aire; $r$ es su separación</span><span class="formula-row__unit">[N]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$E = \dfrac{F}{|q_0|}$</span><span class="formula-row__desc">Magnitud del campo sobre una carga de prueba</span><span class="formula-row__unit">[N/C] = [V/m]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$V = I R$</span><span class="formula-row__desc">Elemento óhmico a condiciones constantes; $V$ es diferencia de potencial</span><span class="formula-row__unit">[V] = [A]·[Ω]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$P_R = V I = I^2 R = \dfrac{V^2}{R}$</span><span class="formula-row__desc">Potencia disipada por un resistor óhmico</span><span class="formula-row__unit">[W] = [V]·[A]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$E_{\mathrm{el}} = P\,\Delta t$</span><span class="formula-row__desc">Energía eléctrica si la potencia es constante</span><span class="formula-row__unit">[J] = [W]·[s]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$R_s = R_1 + R_2 + \cdots$</span><span class="formula-row__desc">Resistencias en serie</span><span class="formula-row__unit">[Ω]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$\dfrac{1}{R_p} = \dfrac{1}{R_1} + \dfrac{1}{R_2} + \cdots$</span><span class="formula-row__desc">Resistencias en paralelo</span><span class="formula-row__unit">[Ω]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$C = \dfrac{Q}{V}$</span><span class="formula-row__desc">Capacitancia — carga por voltaje</span><span class="formula-row__unit">[F] = [C/V]</span></div>
@@ -257,13 +258,13 @@
       <span class="section-header__count">Lorentz · Conductores · Campo · Faraday · Transformador</span>
     </header>
     <div class="formula-table">
-      <div class="formula-row"><span class="formula-row__eq">$F = q\,v\,B \sin\theta$</span><span class="formula-row__desc">Fuerza de Lorentz sobre carga en movimiento</span><span class="formula-row__unit">[N]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$F = B\,I\,L \sin\theta$</span><span class="formula-row__desc">Fuerza sobre un conductor con corriente</span><span class="formula-row__unit">[N]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$B = \dfrac{\mu_0 I}{2\pi r}$</span><span class="formula-row__desc">Campo magnético de un alambre largo</span><span class="formula-row__unit">[T]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$B = \mu_0\,n\,I$</span><span class="formula-row__desc">Campo dentro de un solenoide ($n$: espiras/m)</span><span class="formula-row__unit">[T]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\Phi = B\,A \cos\theta$</span><span class="formula-row__desc">Flujo magnético a través de una superficie</span><span class="formula-row__unit">[Wb] = [T·m²]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\varepsilon = -N\,\dfrac{\Delta\Phi}{\Delta t}$</span><span class="formula-row__desc">FEM inducida — ley de Faraday</span><span class="formula-row__unit">[V]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$\dfrac{V_1}{V_2} = \dfrac{N_1}{N_2} = \dfrac{I_2}{I_1}$</span><span class="formula-row__desc">Transformador ideal</span><span class="formula-row__unit">adimensional</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$F = |q|\,v\,B \sin\theta$</span><span class="formula-row__desc">Magnitud; $\theta$ entre velocidad y campo magnético</span><span class="formula-row__unit">[N]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$F = B\,I\,L \sin\theta$</span><span class="formula-row__desc">Tramo recto en campo uniforme; $\theta$ entre corriente y campo</span><span class="formula-row__unit">[N]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$B = \dfrac{\mu_0 I}{2\pi r}$</span><span class="formula-row__desc">Alambre recto muy largo en vacío/aire; $r$ es distancia perpendicular</span><span class="formula-row__unit">[T]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$B = \mu_0\,n\,I$</span><span class="formula-row__desc">Solenoide ideal largo; $n=N/L$ [m⁻¹], lejos de los extremos</span><span class="formula-row__unit">[T]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\Phi_B = B\,A \cos\theta$</span><span class="formula-row__desc">Campo uniforme y superficie plana; $\theta$ respecto a la normal</span><span class="formula-row__unit">[Wb] = [T·m²]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\varepsilon_{\mathrm{prom}} = -N\,\dfrac{\Delta\Phi_B}{\Delta t}$</span><span class="formula-row__desc">Faraday — flujo por espira en $N$ espiras idénticas</span><span class="formula-row__unit">[V]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$\dfrac{V_1}{V_2} = \dfrac{N_1}{N_2} = \dfrac{I_2}{I_1}$</span><span class="formula-row__desc">Transformador ideal con corriente alterna</span><span class="formula-row__unit">adimensional</span></div>
     </div>
     <p class="formula-note">La ley de Lenz indica que la corriente inducida se opone al cambio de flujo que la produce. Corrientes paralelas en el mismo sentido se atraen; en sentidos opuestos, se repelen.</p>
     <a class="btn btn--secondary" href="/tercial/flashcards.html?tema=magnetismo,electromagnetismo">Practicar este tema →</a>
@@ -278,10 +279,10 @@
       <span class="section-header__count">Fotón · Dualidad · Átomo · Radiactividad · Nuclear</span>
     </header>
     <div class="formula-table">
-      <div class="formula-row"><span class="formula-row__eq">$E = h\,f = \dfrac{h\,c}{\lambda}$</span><span class="formula-row__desc">Energía de un fotón — Planck/Einstein</span><span class="formula-row__unit">[J]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$E_{\mathrm{cin}} = h f - W$</span><span class="formula-row__desc">Efecto fotoeléctrico — $W$: función de trabajo</span><span class="formula-row__unit">[J]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$E = h\,f = \dfrac{h\,c}{\lambda_0}$</span><span class="formula-row__desc">Energía de un fotón — $\lambda_0$ es su longitud de onda en el vacío</span><span class="formula-row__unit">[J]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$K_{\mathrm{max}} = h f - \phi$</span><span class="formula-row__desc">Fotoeléctrico — $\phi$ es la función de trabajo; emisión si $hf \geq \phi$</span><span class="formula-row__unit">[J]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$\lambda = \dfrac{h}{p}$</span><span class="formula-row__desc">Longitud de onda de De Broglie</span><span class="formula-row__unit">[m]</span></div>
-      <div class="formula-row"><span class="formula-row__eq">$E = \Delta m\,c^2$</span><span class="formula-row__desc">Equivalencia masa-energía (Einstein)</span><span class="formula-row__unit">[J] = [kg]·[m²/s²]</span></div>
+      <div class="formula-row"><span class="formula-row__eq">$E_{\mathrm{liberada}} = \Delta m_{\mathrm{def}}\,c^2$</span><span class="formula-row__desc">Defecto de masa $\Delta m_{\mathrm{def}}=m_i-m_f>0$</span><span class="formula-row__unit">[J] = [kg]·[m²/s²]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$N = A - Z$</span><span class="formula-row__desc">Neutrones = núm. de masa − núm. atómico</span><span class="formula-row__unit">adimensional</span></div>
       <div class="formula-row"><span class="formula-row__eq">$m(t) = m_0 \left(\tfrac{1}{2}\right)^n$</span><span class="formula-row__desc">Decaimiento radiactivo — $n$: núm. de semividas</span><span class="formula-row__unit">[g] o [kg]</span></div>
       <div class="formula-row"><span class="formula-row__eq">$n = \dfrac{t_{\mathrm{total}}}{t_{1/2}}$</span><span class="formula-row__desc">Número de semividas transcurridas</span><span class="formula-row__unit">adimensional</span></div>

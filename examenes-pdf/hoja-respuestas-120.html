@@ -12,12 +12,17 @@
 <link rel="stylesheet" href="../assets/css/components.css">
 <link rel="stylesheet" href="../assets/css/exam-print.css">
 <style>
+  /* Debe caber en UNA página al imprimir (hoja de lectura óptica). Optimizada
+     para Chrome, que respeta @page. El margen se calcula para que el área
+     imprimible IGUALE la altura del contenido (~9.33in aquí), así llena la
+     página de arriba a abajo con margen balanceado, sin hueco abajo. */
+  @page { size: letter; margin: 0.73in; }
   /* ===== Hoja de respuestas (OMR) · componente local =====
      Las clases hr-* viven aquí porque son específicas de esta hoja
      (lectura óptica). Todo lo cromático sale de tokens.css. */
   .exam-pdf--neutral .exam-pdf__hero { border-top-color: var(--accent-conac); }
 
-  .hr-sheet { position: relative; }
+  .hr-sheet { position: relative; padding: 0.15in 0.12in; }
   /* Marcas de registro para alinear al calificar con cámara/escáner */
   .hr-reg { position: absolute; width: 9pt; height: 9pt; background: var(--ink-900); }
   .hr-reg--tl { top: 0; left: 0; }

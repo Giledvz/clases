@@ -35,6 +35,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verificar regresiones matemáticas conocidas
+        run: npm run test:regresiones
+
       - name: Armar _site (solo lo que le sirve al alumno)
         run: |
           set -euo pipefail
@@ -45,6 +53,7 @@ jobs:
             --exclude '_site' \
             `# — documentación y estrategia interna —` \
             --exclude 'METODO.md' \
+            --exclude 'AGENTS.md' \
             --exclude 'README.md' \
             --exclude 'design/' \
             `# — herramientas y generadores (no son del alumno) —` \
@@ -54,7 +63,13 @@ jobs:
             --exclude 'package-lock.json' \
             --exclude 'node_modules/' \
             `# — prototipos: quitar esta línea cuando el rediseño esté listo —` \
-            --exclude 'rediseno/'
+            --exclude 'rediseno/' \
+            `# — simulacros con errores: en revisión, NO publicar hasta corregir —` \
+            --exclude 'examenes-pdf/simulacion-2024-v1.html' \
+            --exclude 'examenes-pdf/simulacion-2024-v2.html' \
+            --exclude 'examenes-pdf/img/simulacion-2024/' \
+            `# — PDF de cálculo con errores y sin fuente editable: retirado hasta regenerar —` \
+            --exclude 'calculo_diferencial_latex.pdf'
           # .nojekyll debe viajar sí o sí (evita que Pages procese con Jekyll)
           touch _site/.nojekyll
           echo "── se publica ──"
@@ -65,7 +80,7 @@ jobs:
           set -euo pipefail
           fugas=0
           # a · archivos/carpetas internas que nunca deben publicarse
-          for p in METODO.md README.md package.json design migrar tools rediseno; do
+          for p in METODO.md AGENTS.md README.md package.json design migrar tools rediseno; do
             if [ -e "_site/$p" ]; then echo "❌ FUGA (archivo interno): _site/$p"; fugas=1; fi
           done
           # b · claves del profesor: ni marcadores ni archivos de respuestas
