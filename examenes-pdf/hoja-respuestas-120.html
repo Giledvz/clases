@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="../assets/css/components.css">
 <link rel="stylesheet" href="../assets/css/exam-print.css">
 <style>
-  /* Debe caber en UNA página al imprimir (hoja de lectura óptica). Se le da un
-     @page ajustado y, por robustez (Safari usa márgenes propios y la partía),
-     un zoom de impresión que la encoge lo justo para caber con cualquier
-     margen. Solo afecta impresión; en pantalla se ve igual. */
+  /* Debe caber en UNA página al imprimir (hoja de lectura óptica). Optimizada
+     para Chrome, que respeta @page. El margen se calcula para que el área
+     imprimible IGUALE la altura del contenido (~9.33in aquí), así llena la
+     página de arriba a abajo con margen balanceado, sin hueco abajo. */
   @page { size: letter; margin: 0.73in; }
   /* ===== Hoja de respuestas (OMR) · componente local =====
      Las clases hr-* viven aquí porque son específicas de esta hoja
