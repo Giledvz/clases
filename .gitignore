@@ -33,3 +33,6 @@ tercial
 # Staging de migración Overleaf (fuentes .tex descomprimidas; los zips
 # originales viven en ~/Downloads, los HTML migrados son la fuente de verdad)
 migrar/overleaf/
+
+# Artefactos locales (renders temporales de PDFs, etc.)
+tmp/
