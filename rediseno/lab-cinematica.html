@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Laboratorio · Cinemática · Tercial</title>
+<meta name="description" content="Gráficas interactivas de cinemática: mira cómo la pendiente de posición-tiempo ES la velocidad, y cómo el área bajo velocidad-tiempo ES el desplazamiento.">
+
+<!-- ══════════════════════════════════════════════════════════════
+     LABORATORIO · pieza interactiva de física (prototipo)
+     Objetivo pedagógico: hacer VISIBLE lo que el examen pregunta y
+     el alumno no ve — que la PENDIENTE de x-t es la velocidad y el
+     ÁREA bajo v-t es el desplazamiento. Se mueve el móvil y las dos
+     gráficas se trazan en vivo, sincronizadas.
+     Diseño: lenguaje Tercial (Fraunces + IBM Plex, crema/coñac,
+     contención editorial). Color como ETIQUETA funcional, no adorno:
+     posición = coñac · velocidad = verdigris · aceleración = polvo.
+     Sin librerías: SVG + requestAnimationFrame.
+     ══════════════════════════════════════════════════════════════ -->
+
+<script>
+  (function () {
+    var p = localStorage.getItem('tercial-theme-pref') || 'auto';
+    var d = p === 'auto' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : p;
+    var r = document.documentElement;
+    r.setAttribute('data-theme', d); r.setAttribute('data-theme-pref', p);
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/tercial/assets/css/tokens.css">
+<link rel="stylesheet" href="/tercial/assets/css/base.css">
+<link rel="stylesheet" href="/tercial/assets/css/components.css">
+
+<style>
+  /* etiquetas funcionales de magnitud (no decorativas) */
+  :root {
+    --pos: var(--accent-conac);
+    --vel: var(--cat-teal);
+    --ace: var(--cat-purple);
+    --rejilla: color-mix(in srgb, var(--color-text-meta) 22%, transparent);
+  }
+  [data-theme="dark"] :root, [data-theme="dark"] { --pos: #c79a82; --vel: #7eb0b5; --ace: #b08299; }
+
+  .wrap { max-width: 940px; margin-inline: auto; padding: 0 var(--space-5) var(--space-9); }
+
+  .top { display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4) 0; }
+  .top__brand { font-family: var(--font-family-display); font-style: italic;
+    font-size: var(--font-size-20); color: var(--color-text-primary); text-decoration: none; }
+  .top__brand:hover { color: var(--color-accent); text-decoration: none; }
+  .top__level { font-family: var(--font-family-mono); font-size: var(--font-size-11);
+    letter-spacing: .12em; text-transform: uppercase; color: var(--color-text-meta); }
+  .top__right { margin-left: auto; display: flex; align-items: center; gap: var(--space-4); }
+
+  .head { margin: var(--space-3) 0 var(--space-6); }
+  .head__eyebrow { font-family: var(--font-family-mono); font-size: var(--font-size-11);
+    letter-spacing: .14em; text-transform: uppercase; color: var(--vel); margin: 0 0 var(--space-2); }
+  .head__t { font-family: var(--font-family-display); font-weight: var(--font-weight-medium);
+    font-size: clamp(26px, 4vw, 34px); line-height: 1.08; margin: 0 0 var(--space-2); color: var(--color-text-primary); }
+  .head__t em { font-style: italic; color: var(--vel); }
+  .head__d { font-size: var(--font-size-14); color: var(--color-text-secondary); margin: 0; max-width: 56ch; line-height: 1.6; }
+
+  /* ── escenario: el móvil ── */
+  .lab { border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+    background: var(--color-bg-raised); overflow: hidden; }
+  .lab__pista { padding: var(--space-5) var(--space-6) var(--space-3); }
+  .lab__pistaLbl { font-family: var(--font-family-mono); font-size: 10px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--color-text-meta); margin: 0 0 var(--space-3); }
+
+  /* ── gráficas ── */
+  .graf { display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-top: 1px solid var(--color-border); }
+  @media (max-width: 680px) { .graf { grid-template-columns: 1fr; } }
+  .graf__panel { padding: var(--space-5) var(--space-5) var(--space-4); }
+  .graf__panel + .graf__panel { border-left: 1px solid var(--color-border); }
+  @media (max-width: 680px) { .graf__panel + .graf__panel { border-left: 0; border-top: 1px solid var(--color-border); } }
+  .graf__t { font-family: var(--font-family-display); font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-16); margin: 0 0 2px; color: var(--color-text-primary); }
+  .graf__t em { font-style: italic; color: var(--c); }
+  .graf__hint { font-size: var(--font-size-12); color: var(--color-text-meta); margin: 0 0 var(--space-3); min-height: 2.6em; line-height: 1.45; }
+  .graf__hint b { color: var(--c); font-weight: var(--font-weight-medium); }
+
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .eje { stroke: var(--color-text-meta); stroke-width: 1; }
+  .rejilla { stroke: var(--rejilla); stroke-width: .5; }
+  .ejeLbl { font-family: var(--font-family-mono); font-size: 9px; fill: var(--color-text-meta); }
+  .curva { fill: none; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+  .punto { r: 4; }
+  .area { opacity: .17; }
+  .tangente { stroke-width: 1.5; stroke-dasharray: 4 3; opacity: .95; }
+
+  /* ── controles ── */
+  .ctrl { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-5);
+    padding: var(--space-4) var(--space-6); border-top: 1px solid var(--color-border); }
+  .ctrl__grupo { display: flex; flex-direction: column; gap: 5px; min-width: 178px; flex: 1; }
+  .ctrl__lbl { font-family: var(--font-family-mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--color-text-meta); display: flex; justify-content: space-between; gap: var(--space-3); }
+  .ctrl__val { color: var(--c); font-weight: 500; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 3px;
+    background: var(--color-border); border-radius: var(--radius-pill); outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
+    width: 15px; height: 15px; border-radius: 50%; background: var(--c); cursor: pointer;
+    border: 2px solid var(--color-bg-raised); box-shadow: 0 0 0 1px var(--c); }
+  input[type=range]::-moz-range-thumb { width: 15px; height: 15px; border-radius: 50%;
+    background: var(--c); cursor: pointer; border: 2px solid var(--color-bg-raised); box-shadow: 0 0 0 1px var(--c); }
+
+  .acciones { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;
+    padding: var(--space-4) var(--space-6); border-top: 1px solid var(--color-border); }
+  .btn { font-size: var(--font-size-14); font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-pill); padding: 9px 20px; cursor: pointer; border: 1px solid transparent; }
+  .btn--main { background: var(--vel); color: var(--color-bg-raised); border-color: var(--vel); }
+  .btn--main:hover { filter: brightness(1.08); }
+  .btn--ghost { background: transparent; color: var(--color-text-secondary); border-color: var(--color-border); }
+  .btn--ghost:hover { border-color: var(--vel); color: var(--color-text-primary); }
+  .lectura { margin-left: auto; display: flex; gap: var(--space-4); font-family: var(--font-family-mono);
+    font-size: var(--font-size-12); color: var(--color-text-meta); flex-wrap: wrap; }
+  .lectura b { font-weight: var(--font-weight-medium); }
+
+  /* ── nota pedagógica ── */
+  .nota { margin-top: var(--space-6); padding: var(--space-5);
+    border: 1px solid var(--color-border); border-left: 3px solid var(--vel);
+    border-radius: var(--radius-md); background: color-mix(in srgb, var(--vel) 4%, transparent); }
+  .nota__t { font-family: var(--font-family-mono); font-size: var(--font-size-11); letter-spacing: .12em;
+    text-transform: uppercase; color: var(--vel); margin: 0 0 var(--space-2); }
+  .nota p { font-size: var(--font-size-14); color: var(--color-text-secondary); margin: 0 0 var(--space-2); line-height: 1.6; }
+  .nota p:last-child { margin-bottom: 0; }
+  .nota strong { color: var(--color-text-primary); font-weight: var(--font-weight-medium); }
+
+  .presets { display: flex; gap: var(--space-2); flex-wrap: wrap; padding: 0 var(--space-6) var(--space-5); }
+  .preset { font-size: var(--font-size-12); color: var(--color-text-secondary);
+    border: 1px solid var(--color-border); background: var(--color-bg-page);
+    border-radius: var(--radius-pill); padding: 6px 14px; cursor: pointer; }
+  .preset:hover { border-color: var(--vel); color: var(--color-text-primary); }
+  .preset__lbl { font-family: var(--font-family-mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--color-text-meta); align-self: center; margin-right: 2px; }
+</style>
+<script defer src="/tercial/assets/js/theme.js"></script>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="top__brand" href="/tercial/">Tercial</a>
+    <span class="top__level">universidad · laboratorio</span>
+    <div class="top__right">
+      <button class="theme-toggle" id="themeBtn" type="button" aria-label="Cambiar modo de color">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-sunmoon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 4.9-1.4 1.4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="head">
+    <p class="head__eyebrow">Laboratorio · cinemática</p>
+    <h1 class="head__t">La pendiente <em>es</em> la velocidad</h1>
+    <p class="head__d">Mueve el carrito y mira las dos gráficas trazarse al mismo tiempo. Lo que el
+      examen pregunta con palabras, aquí lo ves: la <strong>inclinación</strong> de posición-tiempo
+      dice qué tan rápido va, y el <strong>área</strong> bajo velocidad-tiempo dice cuánto avanzó.</p>
+  </div>
+
+  <section class="lab">
+    <!-- escenario -->
+    <div class="lab__pista">
+      <p class="lab__pistaLbl">La pista · 100 m</p>
+      <svg id="pista" viewBox="0 0 600 76" role="img" aria-label="Carrito moviéndose sobre una pista de 100 metros"></svg>
+    </div>
+
+    <!-- gráficas -->
+    <div class="graf">
+      <div class="graf__panel" style="--c: var(--pos)">
+        <h2 class="graf__t">Posición — <em>tiempo</em></h2>
+        <p class="graf__hint" id="hintPos">La <b>pendiente</b> de esta curva es la velocidad.</p>
+        <svg id="gPos" viewBox="0 0 300 190" role="img" aria-label="Gráfica de posición contra tiempo"></svg>
+      </div>
+      <div class="graf__panel" style="--c: var(--vel)">
+        <h2 class="graf__t">Velocidad — <em>tiempo</em></h2>
+        <p class="graf__hint" id="hintVel">El <b>área</b> bajo esta curva es lo que avanzó.</p>
+        <svg id="gVel" viewBox="0 0 300 190" role="img" aria-label="Gráfica de velocidad contra tiempo"></svg>
+      </div>
+    </div>
+
+    <!-- controles -->
+    <div class="ctrl">
+      <div class="ctrl__grupo" style="--c: var(--pos)">
+        <label class="ctrl__lbl" for="x0">Posición inicial <span class="ctrl__val" id="vx0">0 m</span></label>
+        <input type="range" id="x0" min="0" max="60" step="5" value="0" style="--c: var(--pos)">
+      </div>
+      <div class="ctrl__grupo" style="--c: var(--vel)">
+        <label class="ctrl__lbl" for="v0">Velocidad inicial <span class="ctrl__val" id="vv0">10 m/s</span></label>
+        <input type="range" id="v0" min="-15" max="25" step="1" value="10" style="--c: var(--vel)">
+      </div>
+      <div class="ctrl__grupo" style="--c: var(--ace)">
+        <label class="ctrl__lbl" for="a">Aceleración <span class="ctrl__val" id="va">0 m/s²</span></label>
+        <input type="range" id="a" min="-4" max="4" step="0.5" value="0" style="--c: var(--ace)">
+      </div>
+    </div>
+
+    <div class="presets">
+      <span class="preset__lbl">Prueba</span>
+      <button class="preset" type="button" data-p="mru">Velocidad constante (MRU)</button>
+      <button class="preset" type="button" data-p="acelera">Acelerando (MRUA)</button>
+      <button class="preset" type="button" data-p="frena">Frenando</button>
+      <button class="preset" type="button" data-p="regresa">Se regresa</button>
+    </div>
+
+    <div class="acciones">
+      <button class="btn btn--main" id="play" type="button">▶ Reproducir</button>
+      <button class="btn btn--ghost" id="reset" type="button">Reiniciar</button>
+      <span class="lectura">
+        <span>t = <b id="lt">0.0</b> s</span>
+        <span style="color: var(--pos)">x = <b id="lx">0</b> m</span>
+        <span style="color: var(--vel)">v = <b id="lv">10</b> m/s</span>
+      </span>
+    </div>
+  </section>
+
+  <div class="nota">
+    <p class="nota__t">Por qué esto importa en el examen</p>
+    <p>Muchas preguntas de la UNAM <strong>no piden calcular</strong>: te dan una gráfica y preguntan
+      qué está pasando. Si ves que la curva de posición se <strong>endereza</strong>, la velocidad es
+      constante; si se <strong>curva hacia arriba</strong>, está acelerando; si la velocidad cruza el
+      cero, el objeto <strong>se regresa</strong>.</p>
+    <p>Y es el mismo puente con matemáticas: esa pendiente es <strong>exactamente</strong> la de la
+      recta que ves en geometría analítica. Misma idea, otro nombre.</p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    if (window.ClasesTheme) window.ClasesTheme.toggle();
+  });
+
+  /* ── modelo físico: MRUA ── */
+  var T_MAX = 8, X_MAX = 100;                        // s, m
+  var est = { x0: 0, v0: 10, a: 0, t: 0, corriendo: false };
+  var xDe = function (t) { return est.x0 + est.v0 * t + 0.5 * est.a * t * t; };
+  var vDe = function (t) { return est.v0 + est.a * t; };
+
+  /* el móvil se detiene si sale de la pista (choca con los extremos) */
+  function tLimite() {
+    var t = 0, dt = 0.01;
+    while (t < T_MAX) { var x = xDe(t); if (x < 0 || x > X_MAX) return t; t += dt; }
+    return T_MAX;
+  }
+
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+
+  /* ── escenario ── */
+  var pista = document.getElementById('pista');
+  function pintarPista() {
+    pista.innerHTML = '';
+    var y = 50, x0 = 18, x1 = 582;
+    // marcas cada 10 m
+    for (var m = 0; m <= 100; m += 10) {
+      var px = x0 + (x1 - x0) * (m / 100);
+      pista.appendChild(el('line', { x1: px, y1: y, x2: px, y2: y + (m % 50 === 0 ? 9 : 5),
+        class: 'rejilla', stroke: 'currentColor', 'stroke-opacity': m % 50 === 0 ? .5 : .28 }));
+      if (m % 50 === 0) {
+        var tx = el('text', { x: px, y: y + 21, class: 'ejeLbl', 'text-anchor': 'middle' });
+        tx.textContent = m; pista.appendChild(tx);
+      }
+    }
+    pista.appendChild(el('line', { x1: x0, y1: y, x2: x1, y2: y, class: 'eje' }));
+
+    var x = Math.max(0, Math.min(X_MAX, xDe(est.t)));
+    var cx = x0 + (x1 - x0) * (x / X_MAX);
+    // estela
+    var cx0 = x0 + (x1 - x0) * (Math.max(0, Math.min(X_MAX, est.x0)) / X_MAX);
+    pista.appendChild(el('line', { x1: cx0, y1: y - 13, x2: cx, y2: y - 13,
+      stroke: 'var(--pos)', 'stroke-width': 2.5, 'stroke-opacity': .22, 'stroke-linecap': 'round' }));
+    // carrito
+    var g = el('g', { transform: 'translate(' + cx + ',' + (y - 13) + ')' });
+    g.appendChild(el('rect', { x: -13, y: -9, width: 26, height: 15, rx: 3, fill: 'var(--pos)' }));
+    g.appendChild(el('circle', { cx: -7, cy: 7, r: 3.1, fill: 'var(--pos)', 'fill-opacity': .55 }));
+    g.appendChild(el('circle', { cx: 7,  cy: 7, r: 3.1, fill: 'var(--pos)', 'fill-opacity': .55 }));
+    pista.appendChild(g);
+    // vector velocidad
+    var v = vDe(est.t), L = Math.max(-58, Math.min(58, v * 2.6));
+    if (Math.abs(L) > 3) {
+      var yv = y - 30;
+      pista.appendChild(el('line', { x1: cx, y1: yv, x2: cx + L, y2: yv, stroke: 'var(--vel)', 'stroke-width': 2 }));
+      var s = L > 0 ? 1 : -1;
+      pista.appendChild(el('path', { d: 'M' + (cx + L) + ',' + yv + ' l' + (-6 * s) + ',-3.6 l0,7.2 z', fill: 'var(--vel)' }));
+    }
+  }
+
+  /* ── gráficas ── */
+  var M = { l: 34, r: 10, t: 22, b: 24 }, W = 300, H = 190;
+  var IW = W - M.l - M.r, IH = H - M.t - M.b;
+
+  function marco(svg, yMin, yMax, yLabel, nY) {
+    svg.innerHTML = '';
+    var sx = function (t) { return M.l + IW * (t / T_MAX); };
+    var sy = function (v) { return M.t + IH * (1 - (v - yMin) / (yMax - yMin)); };
+    // rejilla horizontal
+    for (var i = 0; i <= nY; i++) {
+      var val = yMin + (yMax - yMin) * i / nY, yy = sy(val);
+      svg.appendChild(el('line', { x1: M.l, y1: yy, x2: M.l + IW, y2: yy, class: 'rejilla' }));
+      var tx = el('text', { x: M.l - 6, y: yy + 3, class: 'ejeLbl', 'text-anchor': 'end' });
+      tx.textContent = Math.round(val); svg.appendChild(tx);
+    }
+    // rejilla vertical (cada 2 s)
+    for (var t = 0; t <= T_MAX; t += 2) {
+      svg.appendChild(el('line', { x1: sx(t), y1: M.t, x2: sx(t), y2: M.t + IH, class: 'rejilla' }));
+      var tt = el('text', { x: sx(t), y: H - 8, class: 'ejeLbl', 'text-anchor': 'middle' });
+      tt.textContent = t + 's'; svg.appendChild(tt);
+    }
+    // ejes
+    svg.appendChild(el('line', { x1: M.l, y1: M.t, x2: M.l, y2: M.t + IH, class: 'eje' }));
+    var y0 = (yMin < 0 && yMax > 0) ? sy(0) : M.t + IH;
+    svg.appendChild(el('line', { x1: M.l, y1: y0, x2: M.l + IW, y2: y0, class: 'eje' }));
+    var lb = el('text', { x: M.l - 28, y: M.t - 9, class: 'ejeLbl', 'text-anchor': 'start' });
+    lb.textContent = yLabel; svg.appendChild(lb);
+    return { sx: sx, sy: sy, y0: y0 };
+  }
+
+  var gPos = document.getElementById('gPos'), gVel = document.getElementById('gVel');
+
+  function pintarGraficas() {
+    var tFin = tLimite(), tAhora = Math.min(est.t, tFin);
+
+    /* — posición-tiempo — */
+    var P = marco(gPos, 0, X_MAX, 'x (m)', 4);
+    var d = '', paso = T_MAX / 240;
+    for (var t = 0; t <= tAhora + 1e-9; t += paso) {
+      var x = Math.max(0, Math.min(X_MAX, xDe(t)));
+      d += (d ? 'L' : 'M') + P.sx(t) + ',' + P.sy(x);
+    }
+    if (d) gPos.appendChild(el('path', { d: d, class: 'curva', stroke: 'var(--pos)' }));
+    // tangente = velocidad instantánea (el corazón de la lección)
+    if (tAhora > 0.05) {
+      var xa = Math.max(0, Math.min(X_MAX, xDe(tAhora))), va = vDe(tAhora);
+      var dt = 1.15, t1 = Math.max(0, tAhora - dt), t2 = Math.min(T_MAX, tAhora + dt);
+      gPos.appendChild(el('line', {
+        x1: P.sx(t1), y1: P.sy(xa + va * (t1 - tAhora)),
+        x2: P.sx(t2), y2: P.sy(xa + va * (t2 - tAhora)),
+        class: 'tangente', stroke: 'var(--vel)' }));
+      gPos.appendChild(el('circle', { cx: P.sx(tAhora), cy: P.sy(xa), class: 'punto', fill: 'var(--pos)' }));
+    }
+
+    /* — velocidad-tiempo — */
+    var vs = [vDe(0), vDe(tFin)], vMin = Math.min(0, Math.min.apply(null, vs)), vMax = Math.max(0, Math.max.apply(null, vs));
+    var pad = Math.max(3, (vMax - vMin) * 0.15); vMin -= pad; vMax += pad;
+    var V = marco(gVel, vMin, vMax, 'v (m/s)', 4);
+    // área bajo la curva = desplazamiento
+    if (tAhora > 0.02) {
+      var ar = 'M' + V.sx(0) + ',' + V.y0;
+      for (var t2b = 0; t2b <= tAhora + 1e-9; t2b += paso) ar += 'L' + V.sx(t2b) + ',' + V.sy(vDe(t2b));
+      ar += 'L' + V.sx(tAhora) + ',' + V.y0 + 'Z';
+      gVel.appendChild(el('path', { d: ar, class: 'area', fill: 'var(--vel)' }));
+    }
+    var dv = '';
+    for (var t3 = 0; t3 <= tAhora + 1e-9; t3 += paso) dv += (dv ? 'L' : 'M') + V.sx(t3) + ',' + V.sy(vDe(t3));
+    if (dv) gVel.appendChild(el('path', { d: dv, class: 'curva', stroke: 'var(--vel)' }));
+    if (tAhora > 0.05) gVel.appendChild(el('circle', { cx: V.sx(tAhora), cy: V.sy(vDe(tAhora)), class: 'punto', fill: 'var(--vel)' }));
+  }
+
+  /* ── lecturas y pistas en palabras ── */
+  function pintarLecturas() {
+    var tFin = tLimite(), t = Math.min(est.t, tFin);
+    var x = Math.max(0, Math.min(X_MAX, xDe(t))), v = vDe(t);
+    document.getElementById('lt').textContent = t.toFixed(1);
+    document.getElementById('lx').textContent = Math.round(x);
+    document.getElementById('lv').textContent = v.toFixed(1);
+
+    var hP = document.getElementById('hintPos'), hV = document.getElementById('hintVel');
+    if (est.a === 0) {
+      hP.innerHTML = 'Velocidad constante → la curva es una <b>recta</b>. Su pendiente vale ' + est.v0.toFixed(1) + ' m/s.';
+      hV.innerHTML = 'Velocidad constante → línea <b>horizontal</b>. El área es un rectángulo.';
+    } else if (est.a > 0) {
+      hP.innerHTML = 'Acelera → la curva se <b>empina</b> (parábola). Cada segundo avanza más.';
+      hV.innerHTML = 'Acelera → recta que <b>sube</b>. Su pendiente es la aceleración: ' + est.a + ' m/s².';
+    } else {
+      hP.innerHTML = 'Frena → la curva se <b>aplana</b>. Cada segundo avanza menos.';
+      hV.innerHTML = 'Frena → recta que <b>baja</b>. Si cruza el cero, el móvil se regresa.';
+    }
+    // desplazamiento = área (se muestra el número para amarrar la idea)
+    var desp = xDe(t) - est.x0;
+    if (t > 0.2) hV.innerHTML += ' Área = <b>' + (desp >= 0 ? '' : '−') + Math.abs(Math.round(desp)) + ' m</b>.';
+  }
+
+  function pintar() { pintarPista(); pintarGraficas(); pintarLecturas(); }
+
+  /* ── animación ── */
+  var raf = null, ultimo = null;
+  function tick(ts) {
+    if (!ultimo) ultimo = ts;
+    var dt = Math.min(0.05, (ts - ultimo) / 1000); ultimo = ts;
+    est.t += dt;
+    var tFin = tLimite();
+    if (est.t >= tFin) { est.t = tFin; parar(); }
+    pintar();
+    if (est.corriendo) raf = requestAnimationFrame(tick);
+  }
+  function correr() {
+    if (est.corriendo) return;
+    if (est.t >= tLimite() - 0.01) est.t = 0;
+    est.corriendo = true; ultimo = null;
+    document.getElementById('play').textContent = '❚❚ Pausa';
+    raf = requestAnimationFrame(tick);
+  }
+  function parar() {
+    est.corriendo = false; if (raf) cancelAnimationFrame(raf);
+    document.getElementById('play').textContent = '▶ Reproducir';
+  }
+  document.getElementById('play').addEventListener('click', function () { est.corriendo ? parar() : correr(); });
+  document.getElementById('reset').addEventListener('click', function () { parar(); est.t = 0; pintar(); });
+
+  /* ── controles ── */
+  function sinc() {
+    document.getElementById('vx0').textContent = est.x0 + ' m';
+    document.getElementById('vv0').textContent = est.v0 + ' m/s';
+    document.getElementById('va').textContent  = est.a + ' m/s²';
+  }
+  [['x0','x0'],['v0','v0'],['a','a']].forEach(function (par) {
+    document.getElementById(par[0]).addEventListener('input', function (e) {
+      est[par[1]] = parseFloat(e.target.value);
+      parar(); est.t = 0; sinc(); pintar();
+    });
+  });
+
+  var PRESETS = {
+    mru:     { x0: 0,  v0: 12, a: 0 },
+    acelera: { x0: 0,  v0: 2,  a: 3 },
+    frena:   { x0: 10, v0: 22, a: -3 },
+    regresa: { x0: 50, v0: 14, a: -4 }
+  };
+  document.querySelectorAll('.preset').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var p = PRESETS[b.dataset.p];
+      est.x0 = p.x0; est.v0 = p.v0; est.a = p.a; est.t = 0; parar();
+      document.getElementById('x0').value = p.x0;
+      document.getElementById('v0').value = p.v0;
+      document.getElementById('a').value = p.a;
+      sinc(); pintar(); correr();
+    });
+  });
+
+  sinc(); pintar();
+</script>
+</body>
+</html>
