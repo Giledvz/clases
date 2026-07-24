@@ -377,11 +377,17 @@
      ═══════════════════════════════════════════════════════════════ */
   var CURSO = {
     inicio: '2026-08-05',                 // 1er día de clase (un miércoles)
-    examen: '2027-02-07',                 // ❓ PENDIENTE: fecha real del examen UNAM
+    examen: '2027-06-01',                 // examen UNAM (aprox. junio · ajustar al oficial)
     receso: ['2026-12-18', '2027-01-05'], // vacaciones (no avanza el temario)
     claseMate:   3,                       // miércoles · 3 h
-    claseFisica: 4                        // jueves · 3 h
+    claseFisica: 4,                       // jueves · 3 h
+    semanasFundamentos: 8                 // ← nivelación antes del temario UNAM
   };
+  /* El año se divide en 3 fases (41 semanas de clase disponibles):
+       1–8    FUNDAMENTOS  · 5 ago → 23 sep   · lo que debieron ver antes (tronco común)
+       9–25   TEMARIO UNAM · 30 sep → 3 feb   · los 17 temas; física arranca aquí
+       26–41  REPASO       · 10 feb → 26 may  · razonamiento y simulacros
+     Grupo parejo a partir del 30 de septiembre (semana 9). */
 
   /* ═══════════════════════════════════════════════════════════════
      2 · TEMARIO REAL · Guía UNAM 2025
@@ -389,6 +395,22 @@
      el peso del examen), así que esta secuencia sirve para las 4.
      `mat: []` = ese tema TODAVÍA no tiene material en el sitio.
      ═══════════════════════════════════════════════════════════════ */
+
+  /* FUNDAMENTOS · 8 semanas (miércoles) — lo que debieron traer de primaria/
+     secundaria/prepa. Es el TRONCO COMÚN (los mismos temas que prepa), y cada
+     uno ya tiene práctica ilimitada en el generador de ejercicios.
+     Base del dato: "para la semana 10 ya dominan la mecánica" (Gil). */
+  var GEN = '/tercial/rediseno/ejercicios.html';
+  var TEMARIO_FUNDAMENTOS = [
+    { n: 'Operaciones con signos',            mat: [{ n: 'Practicar signos',      href: GEN }] },
+    { n: 'Fracciones',                        mat: [{ n: 'Practicar fracciones',  href: GEN }] },
+    { n: 'Potencias y radicales',             mat: [{ n: 'Practicar potencias',   href: GEN }] },
+    { n: 'Expresiones algebraicas',           mat: [{ n: 'Practicar',             href: GEN }] },
+    { n: 'Productos notables',                mat: [{ n: 'Practicar productos',   href: GEN }] },
+    { n: 'Factorización',                     mat: [{ n: 'Practicar factorizar',  href: GEN }] },
+    { n: 'Ecuaciones de 1er grado',           mat: [{ n: 'Practicar ecuaciones',  href: GEN }] },
+    { n: 'Ecuaciones de 2º grado y sistemas', mat: [{ n: 'Practicar',             href: GEN }] }
+  ];
 
   /* Matemáticas · 17 temas · 1 por semana (miércoles) */
   var TEMARIO_MATE = [
@@ -434,7 +456,11 @@
   function d(iso) { var p = iso.split('-'); return new Date(+p[0], p[1] - 1, +p[2]); }
   var INICIO = d(CURSO.inicio), EXAMEN = d(CURSO.examen);
   var REC0 = d(CURSO.receso[0]), REC1 = d(CURSO.receso[1]);
+  var FUND = CURSO.semanasFundamentos;                                       // 8
   var SEMANAS_MATE = TEMARIO_MATE.length;                                    // 17
+  var FIN_TEMARIO = FUND + SEMANAS_MATE;                                     // 25
+  var SEMANAS_CURSO = 41;                                                    // hasta el examen
+  var NOMBRE_FASE = { fundamentos: 'fundamentos', temario: 'temario UNAM', repaso: 'repaso y simulacros' };
 
   function lunesDe(x) { var r = new Date(x); r.setHours(0,0,0,0); r.setDate(r.getDate() - ((r.getDay() + 6) % 7)); return r; }
   var ANCLA = lunesDe(INICIO);
@@ -453,10 +479,18 @@
     return n;
   }
 
+  /* Fase del año: fundamentos (1–8) · temario (9–25) · repaso (26–41). */
+  function faseDe(sem) {
+    if (sem < 1 || sem > SEMANAS_CURSO) return null;
+    if (sem <= FUND) return 'fundamentos';
+    if (sem <= FIN_TEMARIO) return 'temario';
+    return 'repaso';
+  }
+
   function stateOf(x) {
     if (enReceso(x)) return 'receso';
     var s = semanaDe(x);
-    if (s < 1 || s > SEMANAS_MATE) return 'none';   // fuera del curso: preparación libre
+    if (!faseDe(s)) return 'none';                   // fuera del curso: preparación libre
     var dow = x.getDay();
     if (dow === 0 || dow === 6)      return 'finde';
     if (dow === CURSO.claseMate)     return 'mate';
@@ -464,12 +498,21 @@
     return 'taller';                                 // lun/mar/vie · 1 h
   }
 
-  function temaMate(sem) { return (sem >= 1 && sem <= TEMARIO_MATE.length) ? TEMARIO_MATE[sem - 1] : null; }
+  /* Tema de mate según la fase: en fundamentos va el tronco común; en temario,
+     los 17 de la guía UNAM; en repaso ya no hay tema nuevo. */
+  function temaMate(sem) {
+    var f = faseDe(sem);
+    if (f === 'fundamentos') return TEMARIO_FUNDAMENTOS[sem - 1] || null;
+    if (f === 'temario')     return TEMARIO_MATE[sem - FUND - 1] || null;
+    return null;
+  }
+  /* Física arranca DESPUÉS de los fundamentos (cuando mate ya está nivelada). */
   function temaFisica(sem) {
-    var acc = 0;
+    if (sem <= FUND || !faseDe(sem)) return null;
+    var rel = sem - FUND, acc = 0;
     for (var i = 0; i < TEMARIO_FISICA.length; i++) {
       acc += TEMARIO_FISICA[i].semanas;
-      if (sem <= acc) return TEMARIO_FISICA[i];
+      if (rel <= acc) return TEMARIO_FISICA[i];
     }
     return null;
   }
@@ -537,7 +580,7 @@
 
     } else if (st === 'taller') {
       p.badge = 'Sesión de 1 h'; p.badgeClass = 'badge--taller';
-      p.chipPre = 'Semana ' + sem + ' de ' + SEMANAS_MATE;
+      p.chipPre = 'Semana ' + sem + ' · ' + NOMBRE_FASE[faseDe(sem)];
       p.chip = (tm && tf) ? (tm.n + ' · ' + tf.n) : null;
 
       if (dow === 5) {                 // VIERNES · repaso #1 (temas frescos)
@@ -568,7 +611,7 @@
 
     } else if (st === 'finde') {
       p.badge = 'Simulacro'; p.badgeClass = 'badge--finde';
-      p.chipPre = 'Semana ' + sem + ' de ' + SEMANAS_MATE;
+      p.chipPre = 'Semana ' + sem + ' · ' + NOMBRE_FASE[faseDe(sem)];
       p.chip = (tm && tf) ? (tm.n + ' · ' + tf.n) : null;
       p.title = (dow === 6) ? 'Buen día para un simulacro' : 'Repaso tranquilo';
       p.nota  = (dow === 6)
@@ -658,7 +701,7 @@
   var VISTA = new Date();
 
   var sel = document.getElementById('ingreso');
-  for (var i = 1; i <= SEMANAS_MATE; i++) {
+  for (var i = 1; i <= SEMANAS_CURSO; i++) {
     var o = document.createElement('option');
     o.value = i; o.textContent = i + (i === 1 ? ' (desde el inicio)' : '');
     sel.appendChild(o);
