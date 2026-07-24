@@ -16,12 +16,12 @@
      generosos compartidos se iba a 2 páginas. Debe caber en UNA (es hoja de
      lectura óptica). Se le da su propio @page con márgenes más ajustados,
      sin afectar los demás exámenes. */
-  @page { size: letter; margin: 0.55in 0.85in; }
+  @page { size: letter; margin: 0.9in; }
   /* Robustez: si el navegador imprime con márgenes por defecto (~1in) e ignora
      el @page de arriba, el contenido (9.8in) no cabría. Con zoom al imprimir se
      encoge lo suficiente para caber en UNA página aun con margen de 1 pulgada.
      Solo afecta la impresión; en pantalla se ve igual. */
-  @media print { .hr-sheet { zoom: 0.88; } }
+  @media print { .hr-sheet { zoom: 0.90; } }
   /* Prepa (COMIPEMS): el acento de esta hoja es terracota. Se redefine el token
      a nivel de la hoja para que TODO lo que use el acento —incluida la itálica del
      título, cuyo color vive en exam-print.css— quede en terracota. */
@@ -31,7 +31,7 @@
      (lectura óptica). Todo lo cromático sale de tokens.css. */
   .exam-pdf--neutral .exam-pdf__hero { border-top-color: var(--accent-conac); }
 
-  .hr-sheet { position: relative; padding-bottom: 0.3in; }
+  .hr-sheet { position: relative; padding: 0.15in 0.12in; }
   /* Marcas de registro para alinear al calificar con cámara/escáner */
   .hr-reg { position: absolute; width: 9pt; height: 9pt; background: var(--ink-900); }
   .hr-reg--tl { top: 0; left: 0; }

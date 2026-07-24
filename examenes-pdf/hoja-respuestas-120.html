@@ -16,14 +16,14 @@
      @page ajustado y, por robustez (Safari usa márgenes propios y la partía),
      un zoom de impresión que la encoge lo justo para caber con cualquier
      margen. Solo afecta impresión; en pantalla se ve igual. */
-  @page { size: letter; margin: 0.55in 0.85in; }
-  @media print { .hr-sheet { zoom: 0.92; } }
+  @page { size: letter; margin: 0.9in; }
+  @media print { .hr-sheet { zoom: 0.94; } }
   /* ===== Hoja de respuestas (OMR) · componente local =====
      Las clases hr-* viven aquí porque son específicas de esta hoja
      (lectura óptica). Todo lo cromático sale de tokens.css. */
   .exam-pdf--neutral .exam-pdf__hero { border-top-color: var(--accent-conac); }
 
-  .hr-sheet { position: relative; padding-bottom: 0.3in; }
+  .hr-sheet { position: relative; padding: 0.15in 0.12in; }
   /* Marcas de registro para alinear al calificar con cámara/escáner */
   .hr-reg { position: absolute; width: 9pt; height: 9pt; background: var(--ink-900); }
   .hr-reg--tl { top: 0; left: 0; }
