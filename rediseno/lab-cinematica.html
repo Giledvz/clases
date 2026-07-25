@@ -8,15 +8,29 @@
 <meta name="description" content="Gráficas interactivas de cinemática: mira cómo la pendiente de posición-tiempo ES la velocidad, y cómo el área bajo velocidad-tiempo ES el desplazamiento.">
 
 <!-- ══════════════════════════════════════════════════════════════
-     LABORATORIO · pieza interactiva de física (prototipo)
-     Objetivo pedagógico: hacer VISIBLE lo que el examen pregunta y
-     el alumno no ve — que la PENDIENTE de x-t es la velocidad y el
-     ÁREA bajo v-t es el desplazamiento. Se mueve el móvil y las dos
-     gráficas se trazan en vivo, sincronizadas.
-     Diseño: lenguaje Tercial (Fraunces + IBM Plex, crema/coñac,
-     contención editorial). Color como ETIQUETA funcional, no adorno:
-     posición = coñac · velocidad = verdigris · aceleración = polvo.
-     Sin librerías: SVG + requestAnimationFrame.
+     LABORATORIO · cinemática (v2)
+     Objetivo: hacer VISIBLE lo que el examen pregunta con palabras —
+     que la PENDIENTE de x-t es la velocidad y el ÁREA bajo v-t es el
+     desplazamiento.
+
+     Decisiones pedagógicas de esta versión:
+     · RASTRO ESTROBOSCÓPICO — marcas de dónde estaba el auto cada
+       segundo. Equiespaciadas = velocidad constante; separándose =
+       acelera; juntándose = frena. Enseña aceleración SIN palabras
+       (es la foto estroboscópica clásica de los libros de física).
+     · SCRUBBING — se arrastra sobre las gráficas para mover el tiempo:
+       manipulación directa, invita a explorar en vez de solo mirar.
+     · TANGENTE amarrada al vector velocidad del auto (mismo trazo
+       punteado, mismo color) para que se lea que son EL MISMO objeto.
+     · ESCALA DE TIEMPO ADAPTATIVA — si choca a los 3 s, el eje llega
+       a 3 s (antes sobraban 5 s de gráfica vacía).
+     · MARCA DE EVENTO en v=0: el instante exacto en que se regresa.
+
+     Técnica: SVG por CAPAS (los nodos se crean una vez y solo se
+     actualizan atributos — no se reconstruye el DOM en cada frame),
+     rAF, prefers-reduced-motion, teclado y descripción accesible.
+     Diseño: lenguaje Tercial. Acento del NIVEL (coñac uni / terracota
+     prepa). Sin azul, sin librerías.
      ══════════════════════════════════════════════════════════════ -->
 
 <script>
@@ -36,20 +50,20 @@
 <link rel="stylesheet" href="/tercial/assets/css/components.css">
 
 <style>
-  /* etiquetas funcionales de magnitud (no decorativas) */
-  /* El acento sale del NIVEL (nada de azul): universidad = coñac (default de
-     tokens) · prepa = terracota con ?nivel=prepa. Las tres magnitudes se
-     distinguen por INTENSIDAD del mismo acento + la forma (línea sólida,
-     punteada, área), no por colores ajenos a la marca. */
+  /* El acento sale del NIVEL (nada de azul): universidad = coñac ·
+     prepa = terracota (?nivel=prepa). Las magnitudes se distinguen por
+     INTENSIDAD del mismo acento y por la FORMA (sólida / punteada /
+     área), no por colores ajenos a la marca. */
   :root {
     --pos: var(--color-accent);
     --vel: var(--color-accent-soft);
     --ace: var(--ink-500);
-    --rejilla: color-mix(in srgb, var(--color-text-meta) 22%, transparent);
+    --rejilla: color-mix(in srgb, var(--color-text-meta) 20%, transparent);
+    --papel: color-mix(in srgb, var(--color-accent) 3%, transparent);
   }
   :root[data-nivel="prepa"] { --color-accent: var(--accent-terracota); --color-accent-soft: var(--accent-terracota-soft); }
 
-  .wrap { max-width: 940px; margin-inline: auto; padding: 0 var(--space-5) var(--space-9); }
+  .wrap { max-width: 980px; margin-inline: auto; padding: 0 var(--space-5) var(--space-9); }
 
   .top { display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4) 0; }
   .top__brand { font-family: var(--font-family-display); font-style: italic;
@@ -59,87 +73,124 @@
     letter-spacing: .12em; text-transform: uppercase; color: var(--color-text-meta); }
   .top__right { margin-left: auto; display: flex; align-items: center; gap: var(--space-4); }
 
-  .head { margin: var(--space-3) 0 var(--space-6); }
+  .head { margin: var(--space-3) 0 var(--space-6); max-width: 62ch; }
   .head__eyebrow { font-family: var(--font-family-mono); font-size: var(--font-size-11);
-    letter-spacing: .14em; text-transform: uppercase; color: var(--vel); margin: 0 0 var(--space-2); }
+    letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 var(--space-2); }
   .head__t { font-family: var(--font-family-display); font-weight: var(--font-weight-medium);
-    font-size: clamp(26px, 4vw, 34px); line-height: 1.08; margin: 0 0 var(--space-2); color: var(--color-text-primary); }
-  .head__t em { font-style: italic; color: var(--vel); }
-  .head__d { font-size: var(--font-size-14); color: var(--color-text-secondary); margin: 0; max-width: 56ch; line-height: 1.6; }
+    font-size: clamp(28px, 4.4vw, 38px); line-height: 1.06; margin: 0 0 var(--space-3);
+    color: var(--color-text-primary); font-variation-settings: "opsz" 96; }
+  .head__t em { font-style: italic; color: var(--color-accent); }
+  .head__d { font-size: 15px; color: var(--color-text-secondary); margin: 0; line-height: 1.65; }
 
-  /* ── escenario: el móvil ── */
+  /* ── tarjeta del laboratorio ── */
   .lab { border: 1px solid var(--color-border); border-radius: var(--radius-lg);
     background: var(--color-bg-raised); overflow: hidden; }
-  .lab__pista { padding: var(--space-5) var(--space-6) var(--space-3); }
-  .lab__pistaLbl { font-family: var(--font-family-mono); font-size: 10px; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--color-text-meta); margin: 0 0 var(--space-3); }
 
-  /* ── gráficas ── */
-  .graf { display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  /* pista */
+  .pista { padding: var(--space-5) var(--space-6) var(--space-4); background: var(--papel); }
+  .pista__head { display: flex; align-items: baseline; gap: var(--space-3); margin: 0 0 var(--space-2); }
+  .pista__lbl { font-family: var(--font-family-mono); font-size: 10px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--color-text-meta); margin: 0; }
+  .pista__estrobo { margin-left: auto; font-family: var(--font-family-mono); font-size: 10px;
+    letter-spacing: .06em; color: var(--color-text-meta); }
+  .pista__estrobo b { color: var(--pos); font-weight: var(--font-weight-medium); }
+
+  /* gráficas · un solo lienzo apilado con eje de tiempo compartido */
+  .grafPar { padding: var(--space-5) var(--space-6) var(--space-4); position: relative;
     border-top: 1px solid var(--color-border); }
-  @media (max-width: 680px) { .graf { grid-template-columns: 1fr; } }
-  .graf__panel { padding: var(--space-5) var(--space-5) var(--space-4); }
-  .graf__panel + .graf__panel { border-left: 1px solid var(--color-border); }
-  @media (max-width: 680px) { .graf__panel + .graf__panel { border-left: 0; border-top: 1px solid var(--color-border); } }
-  .graf__t { font-family: var(--font-family-display); font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-16); margin: 0 0 2px; color: var(--color-text-primary); }
-  .graf__t em { font-style: italic; color: var(--c); }
-  .graf__hint { font-size: var(--font-size-12); color: var(--color-text-meta); margin: 0 0 var(--space-3); min-height: 2.6em; line-height: 1.45; }
-  .graf__hint b { color: var(--c); font-weight: var(--font-weight-medium); }
+  .grafPar__hints { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5);
+    margin-bottom: var(--space-3); }
+  @media (max-width: 620px) { .grafPar__hints { grid-template-columns: 1fr; gap: var(--space-2); } }
+  .grafLbl { font-family: var(--font-family-display); font-weight: var(--font-weight-medium);
+    font-size: 15px; fill: var(--color-text-primary); }
+  .grafLbl tspan { font-style: italic; }
+  .panel__hint { font-size: var(--font-size-12); color: var(--color-text-meta);
+    margin: 0 0 var(--space-3); min-height: 3.1em; line-height: 1.5; }
+  .panel__hint b { color: var(--c); font-weight: var(--font-weight-medium); }
+  .panel__scrub { position: absolute; top: var(--space-5); right: var(--space-6);
+    font-family: var(--font-family-mono); font-size: 9px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--color-text-meta); opacity: 0;
+    transition: opacity var(--motion-base) ease; pointer-events: none; }
+  .grafPar:hover .panel__scrub { opacity: .7; }
 
-  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  svg { display: block; width: 100%; height: auto; overflow: hidden; }
+  /* base.css aplica stroke:currentColor a TODOS los <svg> (es para los iconos
+     Lucide). Los <text> lo heredaban y se dibujaban con relleno Y contorno:
+     por eso los números se veían con doble trazo. Aquí se anula. */
+  #lienzo text, #svgPista text { stroke: none; paint-order: normal; }
+  #lienzo, #svgPista { stroke-width: 1; }
+  .lienzo { touch-action: pan-y; cursor: ew-resize; }   /* pan-y: no se traga el scroll vertical */
   .eje { stroke: var(--color-text-meta); stroke-width: 1; }
   .rejilla { stroke: var(--rejilla); stroke-width: .5; }
-  .ejeLbl { font-family: var(--font-family-mono); font-size: 9px; fill: var(--color-text-meta); }
-  .curva { fill: none; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
-  .punto { r: 4; }
-  .area { opacity: .17; }
-  .tangente { stroke-width: 1.5; stroke-dasharray: 4 3; opacity: .95; }
+  .ejeLbl { font-family: var(--font-family-mono); font-size: 10px; font-weight: 400;
+    fill: var(--color-text-meta); letter-spacing: .01em; }
+  .ejeTitulo { font-family: var(--font-family-mono); font-size: 9.5px; font-weight: 500;
+    fill: var(--color-text-meta); letter-spacing: .08em; text-transform: uppercase; }
+  .curva { fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .tangente { stroke-width: 1.6; stroke-dasharray: 5 4; }
+  .area { opacity: .16; }
+  .evento { stroke-width: 1; stroke-dasharray: 2 3; opacity: .8; }
+  .eventoLbl { font-family: var(--font-family-mono); font-size: 9.5px; font-weight: 500; fill: var(--vel); }
+  .cursorT { stroke: var(--color-text-meta); stroke-width: 1; opacity: .35; }
 
   /* ── controles ── */
   .ctrl { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-5);
     padding: var(--space-4) var(--space-6); border-top: 1px solid var(--color-border); }
-  .ctrl__grupo { display: flex; flex-direction: column; gap: 5px; min-width: 178px; flex: 1; }
+  .ctrl__grupo { display: flex; flex-direction: column; gap: 6px; min-width: 176px; flex: 1; }
   .ctrl__lbl { font-family: var(--font-family-mono); font-size: 10px; letter-spacing: .1em;
     text-transform: uppercase; color: var(--color-text-meta); display: flex; justify-content: space-between; gap: var(--space-3); }
-  .ctrl__val { color: var(--c); font-weight: 500; }
+  .ctrl__val { color: var(--c); font-weight: 500; font-variant-numeric: tabular-nums; }
   input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 3px;
-    background: var(--color-border); border-radius: var(--radius-pill); outline: none; }
+    background: var(--color-border); border-radius: var(--radius-pill); outline-offset: 4px; }
   input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
-    width: 15px; height: 15px; border-radius: 50%; background: var(--c); cursor: pointer;
+    width: 15px; height: 15px; border-radius: 50%; background: var(--c); cursor: grab;
     border: 2px solid var(--color-bg-raised); box-shadow: 0 0 0 1px var(--c); }
   input[type=range]::-moz-range-thumb { width: 15px; height: 15px; border-radius: 50%;
-    background: var(--c); cursor: pointer; border: 2px solid var(--color-bg-raised); box-shadow: 0 0 0 1px var(--c); }
+    background: var(--c); cursor: grab; border: 2px solid var(--color-bg-raised); box-shadow: 0 0 0 1px var(--c); }
+
+  .presets { display: flex; gap: var(--space-2); flex-wrap: wrap; align-items: center;
+    padding: 0 var(--space-6) var(--space-5); }
+  .presets__lbl { font-family: var(--font-family-mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--color-text-meta); margin-right: 2px; }
+  .preset { font-size: var(--font-size-12); color: var(--color-text-secondary);
+    border: 1px solid var(--color-border); background: var(--color-bg-page);
+    border-radius: var(--radius-pill); padding: 6px 14px; cursor: pointer;
+    transition: border-color var(--motion-fast) ease, color var(--motion-fast) ease; }
+  .preset:hover { border-color: var(--color-accent); color: var(--color-text-primary); }
+  .preset[aria-pressed="true"] { background: var(--color-accent); border-color: var(--color-accent);
+    color: var(--color-bg-raised); font-weight: var(--font-weight-medium); }
 
   .acciones { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;
     padding: var(--space-4) var(--space-6); border-top: 1px solid var(--color-border); }
   .btn { font-size: var(--font-size-14); font-weight: var(--font-weight-medium);
     border-radius: var(--radius-pill); padding: 9px 20px; cursor: pointer; border: 1px solid transparent; }
-  .btn--main { background: var(--vel); color: var(--color-bg-raised); border-color: var(--vel); }
+  .btn--main { background: var(--color-accent); color: var(--color-bg-raised); border-color: var(--color-accent); }
   .btn--main:hover { filter: brightness(1.08); }
   .btn--ghost { background: transparent; color: var(--color-text-secondary); border-color: var(--color-border); }
-  .btn--ghost:hover { border-color: var(--vel); color: var(--color-text-primary); }
+  .btn--ghost:hover { border-color: var(--color-accent); color: var(--color-text-primary); }
   .lectura { margin-left: auto; display: flex; gap: var(--space-4); font-family: var(--font-family-mono);
     font-size: var(--font-size-12); color: var(--color-text-meta); flex-wrap: wrap; }
-  .lectura b { font-weight: var(--font-weight-medium); }
+  .lectura b { font-weight: var(--font-weight-medium); font-variant-numeric: tabular-nums; }
+  .teclas { font-family: var(--font-family-mono); font-size: 10px; color: var(--color-text-meta); }
+  .tecla { border: 1px solid var(--color-border); border-bottom-width: 2px; border-radius: 4px; padding: 2px 5px; }
+  @media (max-width: 620px) { .teclas { display: none; } }
 
-  /* ── nota pedagógica ── */
+  /* ── nota ── */
   .nota { margin-top: var(--space-6); padding: var(--space-5);
-    border: 1px solid var(--color-border); border-left: 3px solid var(--vel);
-    border-radius: var(--radius-md); background: color-mix(in srgb, var(--vel) 4%, transparent); }
+    border: 1px solid var(--color-border); border-left: 3px solid var(--color-accent);
+    border-radius: var(--radius-md); background: var(--papel); }
   .nota__t { font-family: var(--font-family-mono); font-size: var(--font-size-11); letter-spacing: .12em;
-    text-transform: uppercase; color: var(--vel); margin: 0 0 var(--space-2); }
-  .nota p { font-size: var(--font-size-14); color: var(--color-text-secondary); margin: 0 0 var(--space-2); line-height: 1.6; }
+    text-transform: uppercase; color: var(--color-accent); margin: 0 0 var(--space-2); }
+  .nota p { font-size: var(--font-size-14); color: var(--color-text-secondary); margin: 0 0 var(--space-2); line-height: 1.65; }
   .nota p:last-child { margin-bottom: 0; }
   .nota strong { color: var(--color-text-primary); font-weight: var(--font-weight-medium); }
 
-  .presets { display: flex; gap: var(--space-2); flex-wrap: wrap; padding: 0 var(--space-6) var(--space-5); }
-  .preset { font-size: var(--font-size-12); color: var(--color-text-secondary);
-    border: 1px solid var(--color-border); background: var(--color-bg-page);
-    border-radius: var(--radius-pill); padding: 6px 14px; cursor: pointer; }
-  .preset:hover { border-color: var(--vel); color: var(--color-text-primary); }
-  .preset__lbl { font-family: var(--font-family-mono); font-size: 10px; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--color-text-meta); align-self: center; margin-right: 2px; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
 </style>
 <script defer src="/tercial/assets/js/theme.js"></script>
 </head>
@@ -161,33 +212,35 @@
   <div class="head">
     <p class="head__eyebrow">Laboratorio · cinemática</p>
     <h1 class="head__t">La pendiente <em>es</em> la velocidad</h1>
-    <p class="head__d">Mueve el carrito y mira las dos gráficas trazarse al mismo tiempo. Lo que el
-      examen pregunta con palabras, aquí lo ves: la <strong>inclinación</strong> de posición-tiempo
-      dice qué tan rápido va, y el <strong>área</strong> bajo velocidad-tiempo dice cuánto avanzó.</p>
+    <p class="head__d">Mueve el auto y mira las dos gráficas trazarse al mismo tiempo. Las
+      <strong>marcas en la pista</strong> son dónde estaba cada segundo: si están parejas va a
+      velocidad constante; si se van <em>separando</em>, está acelerando. Arrastra sobre
+      cualquier gráfica para explorar el instante que quieras.</p>
   </div>
 
   <section class="lab">
-    <!-- escenario -->
-    <div class="lab__pista">
-      <p class="lab__pistaLbl">La pista · 100 m</p>
-      <svg id="pista" viewBox="0 0 600 76" role="img" aria-label="Carrito moviéndose sobre una pista de 100 metros"></svg>
+    <div class="pista">
+      <div class="pista__head">
+        <p class="pista__lbl">La pista · 100 m</p>
+        <span class="pista__estrobo">marcas cada <b>1 s</b></span>
+      </div>
+      <svg id="svgPista" viewBox="0 0 620 96" role="img" aria-labelledby="descPista"></svg>
+      <p id="descPista" class="visually-hidden">Auto sobre una pista de 100 metros con marcas de su posición cada segundo.</p>
     </div>
 
-    <!-- gráficas -->
-    <div class="graf">
-      <div class="graf__panel" style="--c: var(--pos)">
-        <h2 class="graf__t">Posición — <em>tiempo</em></h2>
-        <p class="graf__hint" id="hintPos">La <b>pendiente</b> de esta curva es la velocidad.</p>
-        <svg id="gPos" viewBox="0 0 300 190" role="img" aria-label="Gráfica de posición contra tiempo"></svg>
+    <!-- UN SOLO lienzo: x-t sobre v-t con EJE DE TIEMPO COMPARTIDO y una
+         regla vertical que cruza ambas. Así "esta inclinación = esta altura"
+         se lee en vertical, sin que el ojo tenga que saltar y recordar. -->
+    <div class="grafPar">
+      <div class="grafPar__hints">
+        <p class="panel__hint" id="hintPos" style="--c: var(--pos)"></p>
+        <p class="panel__hint" id="hintVel" style="--c: var(--vel)"></p>
       </div>
-      <div class="graf__panel" style="--c: var(--vel)">
-        <h2 class="graf__t">Velocidad — <em>tiempo</em></h2>
-        <p class="graf__hint" id="hintVel">El <b>área</b> bajo esta curva es lo que avanzó.</p>
-        <svg id="gVel" viewBox="0 0 300 190" role="img" aria-label="Gráfica de velocidad contra tiempo"></svg>
-      </div>
+      <span class="panel__scrub">arrastra ↔ para mover el tiempo</span>
+      <svg id="lienzo" class="lienzo" viewBox="0 0 620 430" role="img" aria-labelledby="descG"></svg>
+      <p id="descG" class="visually-hidden"></p>
     </div>
 
-    <!-- controles -->
     <div class="ctrl">
       <div class="ctrl__grupo" style="--c: var(--pos)">
         <label class="ctrl__lbl" for="x0">Posición inicial <span class="ctrl__val" id="vx0">0 m</span></label>
@@ -204,32 +257,33 @@
     </div>
 
     <div class="presets">
-      <span class="preset__lbl">Prueba</span>
-      <button class="preset" type="button" data-p="mru">Velocidad constante (MRU)</button>
-      <button class="preset" type="button" data-p="acelera">Acelerando (MRUA)</button>
-      <button class="preset" type="button" data-p="frena">Frenando</button>
-      <button class="preset" type="button" data-p="regresa">Se regresa</button>
+      <span class="presets__lbl">Prueba</span>
+      <button class="preset" type="button" data-p="mru" aria-pressed="false">Velocidad constante</button>
+      <button class="preset" type="button" data-p="acelera" aria-pressed="false">Acelerando</button>
+      <button class="preset" type="button" data-p="frena" aria-pressed="false">Frenando</button>
+      <button class="preset" type="button" data-p="regresa" aria-pressed="false">Se regresa</button>
     </div>
 
     <div class="acciones">
       <button class="btn btn--main" id="play" type="button">▶ Reproducir</button>
       <button class="btn btn--ghost" id="reset" type="button">Reiniciar</button>
+      <span class="teclas"><span class="tecla">espacio</span> reproducir · <span class="tecla">←→</span> mover el tiempo</span>
       <span class="lectura">
         <span>t = <b id="lt">0.0</b> s</span>
         <span style="color: var(--pos)">x = <b id="lx">0</b> m</span>
-        <span style="color: var(--vel)">v = <b id="lv">10</b> m/s</span>
+        <span style="color: var(--vel)">v = <b id="lv">10.0</b> m/s</span>
       </span>
     </div>
   </section>
 
   <div class="nota">
     <p class="nota__t">Por qué esto importa en el examen</p>
-    <p>Muchas preguntas de la UNAM <strong>no piden calcular</strong>: te dan una gráfica y preguntan
-      qué está pasando. Si ves que la curva de posición se <strong>endereza</strong>, la velocidad es
-      constante; si se <strong>curva hacia arriba</strong>, está acelerando; si la velocidad cruza el
-      cero, el objeto <strong>se regresa</strong>.</p>
-    <p>Y es el mismo puente con matemáticas: esa pendiente es <strong>exactamente</strong> la de la
-      recta que ves en geometría analítica. Misma idea, otro nombre.</p>
+    <p>Muchas preguntas de la UNAM <strong>no piden calcular</strong>: te dan una gráfica y
+      preguntan qué está pasando. Si la curva de posición es <strong>recta</strong>, la velocidad
+      es constante; si se <strong>curva hacia arriba</strong>, está acelerando; si la velocidad
+      <strong>cruza el cero</strong>, el objeto se regresa.</p>
+    <p>Y es el mismo puente con matemáticas: esa pendiente es <strong>exactamente</strong> la de
+      la recta que ves en geometría analítica. Misma idea, otro nombre.</p>
   </div>
 </div>
 
@@ -237,185 +291,306 @@
   document.getElementById('themeBtn').addEventListener('click', function () {
     if (window.ClasesTheme) window.ClasesTheme.toggle();
   });
-
-  /* nivel: universidad (coñac, por defecto) o prepa (terracota) vía ?nivel=prepa */
   if (new URLSearchParams(location.search).get('nivel') === 'prepa') {
     document.documentElement.setAttribute('data-nivel', 'prepa');
     document.querySelector('.top__level').textContent = 'prepa · laboratorio';
   }
+  var REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ── modelo físico: MRUA ── */
-  var T_MAX = 8, X_MAX = 100;                        // s, m
+  /* ═══ modelo: MRUA ═══ */
+  var X_MAX = 100, T_TOPE = 12;
   var est = { x0: 0, v0: 10, a: 0, t: 0, corriendo: false };
-  var xDe = function (t) { return est.x0 + est.v0 * t + 0.5 * est.a * t * t; };
-  var vDe = function (t) { return est.v0 + est.a * t; };
+  function xDe(t) { return est.x0 + est.v0 * t + 0.5 * est.a * t * t; }
+  function vDe(t) { return est.v0 + est.a * t; }
 
-  /* el móvil se detiene si sale de la pista (choca con los extremos) */
-  function tLimite() {
-    var t = 0, dt = 0.01;
-    while (t < T_MAX) { var x = xDe(t); if (x < 0 || x > X_MAX) return t; t += dt; }
-    return T_MAX;
+  /* instante en que sale de la pista (o T_TOPE) */
+  function tFin() {
+    for (var t = 0; t < T_TOPE; t += 0.005) { var x = xDe(t); if (x < 0 || x > X_MAX) return t; }
+    return T_TOPE;
   }
+  /* instante en que v = 0 (da la vuelta), si ocurre durante el recorrido */
+  function tVuelta() {
+    if (est.a === 0) return null;
+    var t = -est.v0 / est.a;
+    return (t > 0.05 && t < tFin() - 0.05) ? t : null;
+  }
+  /* escala del eje de tiempo: adaptativa, redondeada a 2 s */
+  function tEje() { return Math.max(2, Math.ceil(tFin() / 2) * 2); }
 
   var NS = 'http://www.w3.org/2000/svg';
-  function el(tag, attrs) {
+  function nodo(tag, attrs, padre) {
     var n = document.createElementNS(NS, tag);
     for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (padre) padre.appendChild(n);
     return n;
   }
+  function set(n, attrs) { for (var k in attrs) n.setAttribute(k, attrs[k]); }
 
-  /* ── escenario ── */
-  var pista = document.getElementById('pista');
-  function pintarPista() {
-    pista.innerHTML = '';
-    var y = 50, x0 = 18, x1 = 582;
-    // marcas cada 10 m
+  /* ═══ PISTA · capas creadas una vez ═══ */
+  var svgPista = document.getElementById('svgPista');
+  var PX0 = 22, PX1 = 598, PY = 66;
+  var capaPista = {};
+  (function construirPista() {
+    var gRegla = nodo('g', {}, svgPista);
     for (var m = 0; m <= 100; m += 10) {
-      var px = x0 + (x1 - x0) * (m / 100);
-      pista.appendChild(el('line', { x1: px, y1: y, x2: px, y2: y + (m % 50 === 0 ? 9 : 5),
-        class: 'rejilla', stroke: 'currentColor', 'stroke-opacity': m % 50 === 0 ? .5 : .28 }));
-      if (m % 50 === 0) {
-        var tx = el('text', { x: px, y: y + 21, class: 'ejeLbl', 'text-anchor': 'middle' });
-        tx.textContent = m; pista.appendChild(tx);
+      var pxm = PX0 + (PX1 - PX0) * (m / 100), mayor = m % 50 === 0;
+      nodo('line', { x1: pxm, y1: PY, x2: pxm, y2: PY + (mayor ? 9 : 5),
+        stroke: 'currentColor', 'stroke-opacity': mayor ? .45 : .22, 'stroke-width': 1 }, gRegla);
+      if (mayor) {
+        var t = nodo('text', { x: pxm, y: PY + 21, class: 'ejeLbl', 'text-anchor': 'middle' }, gRegla);
+        t.textContent = m;
       }
     }
-    pista.appendChild(el('line', { x1: x0, y1: y, x2: x1, y2: y, class: 'eje' }));
+    nodo('line', { x1: PX0, y1: PY, x2: PX1, y2: PY, class: 'eje' }, gRegla);
+    // la unidad ya va en el encabezado ("La pista · 100 m"): repetirla aquí
+    // colisionaba con el rótulo del 100.
 
-    var x = Math.max(0, Math.min(X_MAX, xDe(est.t)));
-    var cx = x0 + (x1 - x0) * (x / X_MAX);
-    // estela
-    var cx0 = x0 + (x1 - x0) * (Math.max(0, Math.min(X_MAX, est.x0)) / X_MAX);
-    pista.appendChild(el('line', { x1: cx0, y1: y - 2, x2: cx, y2: y - 2,
-      stroke: 'var(--pos)', 'stroke-width': 2.5, 'stroke-opacity': .22, 'stroke-linecap': 'round' }));
-    // el auto (ilustración del repo ECOEMS). Mira hacia donde va: si la
-    // velocidad es negativa se voltea — se VE que "se regresó".
-    var vAhora = vDe(est.t), mira = vAhora < 0 ? -1 : 1;
-    var AW = 54, AH = 13.4;                                   // 600×149 px a escala
-    var g = el('g', { transform: 'translate(' + cx + ',' + (y - 7) + ') scale(' + mira + ',1)' });
-    g.appendChild(el('image', { href: '/tercial/assets/img/auto.png',
-      x: -AW / 2, y: -AH, width: AW, height: AH, preserveAspectRatio: 'xMidYMid meet' }));
-    pista.appendChild(g);
-    // vector velocidad
-    var v = vDe(est.t), L = Math.max(-58, Math.min(58, v * 2.6));
+    capaPista.estrobo = nodo('g', {}, svgPista);
+    capaPista.estela  = nodo('line', { y1: PY - 3, y2: PY - 3, stroke: 'var(--pos)',
+      'stroke-width': 2.5, 'stroke-opacity': .18, 'stroke-linecap': 'round' }, svgPista);
+    capaPista.vector  = nodo('g', {}, svgPista);
+    capaPista.auto    = nodo('g', {}, svgPista);
+    nodo('image', { href: '/tercial/assets/img/auto.png', x: -27, y: -13.4,
+      width: 54, height: 13.4, preserveAspectRatio: 'xMidYMid meet' }, capaPista.auto);
+  })();
+
+  function px(x) { return PX0 + (PX1 - PX0) * (Math.max(0, Math.min(X_MAX, x)) / X_MAX); }
+
+  function pintarPista() {
+    var tA = Math.min(est.t, tFin()), x = xDe(tA), v = vDe(tA);
+
+    /* rastro estroboscópico: dónde estaba en cada segundo entero.
+       Equiespaciado → velocidad constante. Separándose → acelera. */
+    capaPista.estrobo.textContent = '';
+    for (var s = 0; s <= Math.floor(tA + 1e-9); s++) {
+      var xs = xDe(s);
+      if (xs < 0 || xs > X_MAX) continue;
+      var edad = tA > 0 ? (tA - s) / tA : 0;                  // 0 = reciente
+      var g = nodo('g', {}, capaPista.estrobo);
+      nodo('line', { x1: px(xs), y1: PY - 11, x2: px(xs), y2: PY - 1,
+        stroke: 'var(--pos)', 'stroke-width': 1.4,
+        'stroke-opacity': (0.24 + 0.5 * (1 - edad)).toFixed(3) }, g);
+      var et = nodo('text', { x: px(xs), y: PY - 15, class: 'ejeLbl',
+        'text-anchor': 'middle', fill: 'var(--pos)',
+        'fill-opacity': (0.3 + 0.55 * (1 - edad)).toFixed(3) }, g);
+      et.textContent = s + 's';
+    }
+
+    set(capaPista.estela, { x1: px(est.x0), x2: px(x) });
+    var mira = v < 0 ? -1 : 1;
+    set(capaPista.auto, { transform: 'translate(' + px(x) + ',' + (PY - 3) + ') scale(' + mira + ',1)' });
+
+    /* vector velocidad — mismo lenguaje visual que la tangente de x-t */
+    capaPista.vector.textContent = '';
+    var L = Math.max(-64, Math.min(64, v * 2.6));
     if (Math.abs(L) > 3) {
-      var yv = y - 26;
-      pista.appendChild(el('line', { x1: cx, y1: yv, x2: cx + L, y2: yv, stroke: 'var(--vel)', 'stroke-width': 2 }));
-      var s = L > 0 ? 1 : -1;
-      pista.appendChild(el('path', { d: 'M' + (cx + L) + ',' + yv + ' l' + (-6 * s) + ',-3.6 l0,7.2 z', fill: 'var(--vel)' }));
+      var yv = PY - 30, cx = px(x);
+      nodo('line', { x1: cx, y1: yv, x2: cx + L, y2: yv, stroke: 'var(--vel)',
+        'stroke-width': 2, 'stroke-linecap': 'round' }, capaPista.vector);
+      var s2 = L > 0 ? 1 : -1;
+      nodo('path', { d: 'M' + (cx + L) + ',' + yv + ' l' + (-6.5 * s2) + ',-3.8 l0,7.6 z',
+        fill: 'var(--vel)' }, capaPista.vector);
+      var vt = nodo('text', { x: cx + L / 2, y: yv - 6, class: 'ejeLbl', 'text-anchor': 'middle',
+        fill: 'var(--vel)' }, capaPista.vector);
+      vt.textContent = 'v';
     }
   }
 
-  /* ── gráficas ── */
-  var M = { l: 34, r: 10, t: 22, b: 24 }, W = 300, H = 190;
-  var IW = W - M.l - M.r, IH = H - M.t - M.b;
+  /* ═══ GRÁFICAS · UN lienzo, dos regiones, EJE DE TIEMPO COMPARTIDO ═══
+     x-t arriba y v-t abajo comparten la misma escala de t, y una regla
+     vertical las cruza de lado a lado. Así "esta inclinación (arriba) es
+     esta altura (abajo)" se lee en VERTICAL, sin saltar ni recordar.    */
+  var LW = 620, LH = 430;
+  var M  = { l: 56, r: 18 };
+  var IW = LW - M.l - M.r;
+  var RP = { t: 30, h: 150 };                 // región posición
+  var RV = { t: 232, h: 140 };                // región velocidad
+  var lienzo = document.getElementById('lienzo');
 
-  function marco(svg, yMin, yMax, yLabel, nY) {
-    svg.innerHTML = '';
-    var sx = function (t) { return M.l + IW * (t / T_MAX); };
-    var sy = function (v) { return M.t + IH * (1 - (v - yMin) / (yMax - yMin)); };
-    // rejilla horizontal
-    for (var i = 0; i <= nY; i++) {
-      var val = yMin + (yMax - yMin) * i / nY, yy = sy(val);
-      svg.appendChild(el('line', { x1: M.l, y1: yy, x2: M.l + IW, y2: yy, class: 'rejilla' }));
-      var tx = el('text', { x: M.l - 6, y: yy + 3, class: 'ejeLbl', 'text-anchor': 'end' });
-      tx.textContent = Math.round(val); svg.appendChild(tx);
+  var capa = {};
+  (function construirLienzo() {
+    capa.marco    = nodo('g', {}, lienzo);
+    capa.areaNeg  = nodo('path', { class: 'area', fill: 'var(--vel)' }, lienzo);
+    capa.area     = nodo('path', { class: 'area', fill: 'var(--vel)' }, lienzo);
+    capa.regla    = nodo('line', { class: 'cursorT' }, lienzo);   // cruza AMBAS regiones
+    capa.curvaP   = nodo('path', { class: 'curva', stroke: 'var(--pos)' }, lienzo);
+    capa.curvaV   = nodo('path', { class: 'curva', stroke: 'var(--vel)' }, lienzo);
+    capa.evento   = nodo('g', {}, lienzo);
+    capa.triangulo= nodo('g', {}, lienzo);                        // triángulo de pendiente
+    capa.tangente = nodo('line', { class: 'tangente', stroke: 'var(--vel)' }, lienzo);
+    capa.barraV   = nodo('line', { stroke: 'var(--vel)', 'stroke-width': 2, 'stroke-linecap': 'round' }, lienzo);
+    capa.puntoP   = nodo('circle', { r: 4.4, fill: 'var(--pos)' }, lienzo);
+    capa.puntoV   = nodo('circle', { r: 4.4, fill: 'var(--vel)' }, lienzo);
+  })();
+
+  var sx, syP, syV, y0V, ESC_T;
+  function pintarMarco(tMax, vMin, vMax) {
+    capa.marco.textContent = '';
+    ESC_T = tMax;
+    sx  = function (t) { return M.l + IW * (t / tMax); };
+    syP = function (x) { return RP.t + RP.h * (1 - x / 100); };
+    syV = function (v) { return RV.t + RV.h * (1 - (v - vMin) / (vMax - vMin)); };
+    y0V = (vMin < 0 && vMax > 0) ? syV(0) : RV.t + RV.h;
+
+    // títulos de cada región
+    var t1 = nodo('text', { x: M.l, y: RP.t - 12, class: 'grafLbl' }, capa.marco);
+    t1.innerHTML = 'Posición — <tspan>tiempo</tspan>';
+    var t2 = nodo('text', { x: M.l, y: RV.t - 12, class: 'grafLbl' }, capa.marco);
+    t2.innerHTML = 'Velocidad — <tspan>tiempo</tspan>';
+
+    // rejilla + ticks de cada región
+    [[RP, 0, 100, syP, 'x (m)'], [RV, vMin, vMax, syV, 'v (m/s)']].forEach(function (R) {
+      var reg = R[0], lo = R[1], hi = R[2], sy = R[3];
+      for (var i = 0; i <= 4; i++) {
+        var val = lo + (hi - lo) * i / 4, yy = sy(val);
+        nodo('line', { x1: M.l, y1: yy, x2: M.l + IW, y2: yy, class: 'rejilla' }, capa.marco);
+        var lb = nodo('text', { x: M.l - 8, y: yy + 3.4, class: 'ejeLbl', 'text-anchor': 'end' }, capa.marco);
+        lb.textContent = Math.round(val);
+      }
+      var ti = nodo('text', { x: 14, y: reg.t + reg.h / 2, class: 'ejeTitulo',
+        'text-anchor': 'middle', transform: 'rotate(-90 14 ' + (reg.t + reg.h / 2) + ')' }, capa.marco);
+      ti.textContent = R[4];
+      nodo('line', { x1: M.l, y1: reg.t, x2: M.l, y2: reg.t + reg.h, class: 'eje' }, capa.marco);
+    });
+    nodo('line', { x1: M.l, y1: RP.t + RP.h, x2: M.l + IW, y2: RP.t + RP.h, class: 'eje' }, capa.marco);
+    nodo('line', { x1: M.l, y1: y0V, x2: M.l + IW, y2: y0V, class: 'eje' }, capa.marco);
+
+    // EJE DE TIEMPO COMPARTIDO: los ticks van una sola vez, abajo
+    var paso = tMax <= 4 ? 1 : 2;
+    for (var t = 0; t <= tMax + 1e-9; t += paso) {
+      nodo('line', { x1: sx(t), y1: RP.t, x2: sx(t), y2: RP.t + RP.h, class: 'rejilla' }, capa.marco);
+      nodo('line', { x1: sx(t), y1: RV.t, x2: sx(t), y2: RV.t + RV.h, class: 'rejilla' }, capa.marco);
+      var tt = nodo('text', { x: sx(t), y: RV.t + RV.h + 16, class: 'ejeLbl', 'text-anchor': 'middle' }, capa.marco);
+      tt.textContent = t + ' s';
     }
-    // rejilla vertical (cada 2 s)
-    for (var t = 0; t <= T_MAX; t += 2) {
-      svg.appendChild(el('line', { x1: sx(t), y1: M.t, x2: sx(t), y2: M.t + IH, class: 'rejilla' }));
-      var tt = el('text', { x: sx(t), y: H - 8, class: 'ejeLbl', 'text-anchor': 'middle' });
-      tt.textContent = t + 's'; svg.appendChild(tt);
-    }
-    // ejes
-    svg.appendChild(el('line', { x1: M.l, y1: M.t, x2: M.l, y2: M.t + IH, class: 'eje' }));
-    var y0 = (yMin < 0 && yMax > 0) ? sy(0) : M.t + IH;
-    svg.appendChild(el('line', { x1: M.l, y1: y0, x2: M.l + IW, y2: y0, class: 'eje' }));
-    var lb = el('text', { x: M.l - 28, y: M.t - 9, class: 'ejeLbl', 'text-anchor': 'start' });
-    lb.textContent = yLabel; svg.appendChild(lb);
-    return { sx: sx, sy: sy, y0: y0 };
+    var tu = nodo('text', { x: M.l + IW, y: RV.t + RV.h + 30, class: 'ejeTitulo', 'text-anchor': 'end' }, capa.marco);
+    tu.textContent = 'tiempo compartido →';
   }
-
-  var gPos = document.getElementById('gPos'), gVel = document.getElementById('gVel');
 
   function pintarGraficas() {
-    var tFin = tLimite(), tAhora = Math.min(est.t, tFin);
+    var tMax = tEje(), tF = tFin(), tA = Math.min(est.t, tF), tv = tVuelta();
+    var vA = vDe(0), vB = vDe(tF);
+    var vMin = Math.min(0, vA, vB), vMax = Math.max(0, vA, vB);
+    var pad = Math.max(3, (vMax - vMin) * 0.18); vMin -= pad; vMax += pad;
+    pintarMarco(tMax, vMin, vMax);
 
-    /* — posición-tiempo — */
-    var P = marco(gPos, 0, X_MAX, 'x (m)', 4);
-    var d = '', paso = T_MAX / 240;
-    for (var t = 0; t <= tAhora + 1e-9; t += paso) {
-      var x = Math.max(0, Math.min(X_MAX, xDe(t)));
-      d += (d ? 'L' : 'M') + P.sx(t) + ',' + P.sy(x);
+    var paso = tMax / 300, dP = '', dV = '', arPos = '', arNeg = '';
+    for (var t = 0; t <= tA + 1e-9; t += paso) {
+      var x = Math.max(0, Math.min(100, xDe(t))), v = vDe(t);
+      dP += (dP ? 'L' : 'M') + sx(t).toFixed(2) + ',' + syP(x).toFixed(2);
+      dV += (dV ? 'L' : 'M') + sx(t).toFixed(2) + ',' + syV(v).toFixed(2);
+      // el área se parte en el cruce por cero: avanzar ≠ regresar
+      var dest = (v >= 0) ? 'pos' : 'neg';
+      var seg = sx(t).toFixed(2) + ',' + syV(v).toFixed(2);
+      if (dest === 'pos') { if (!arPos) arPos = 'M' + sx(t).toFixed(2) + ',' + y0V + 'L' + seg; else arPos += 'L' + seg; }
+      else { if (!arNeg) arNeg = 'M' + sx(t).toFixed(2) + ',' + y0V + 'L' + seg; else arNeg += 'L' + seg; }
     }
-    if (d) gPos.appendChild(el('path', { d: d, class: 'curva', stroke: 'var(--pos)' }));
-    // tangente = velocidad instantánea (el corazón de la lección)
-    if (tAhora > 0.05) {
-      var xa = Math.max(0, Math.min(X_MAX, xDe(tAhora))), va = vDe(tAhora);
-      var dt = 1.15, t1 = Math.max(0, tAhora - dt), t2 = Math.min(T_MAX, tAhora + dt);
-      gPos.appendChild(el('line', {
-        x1: P.sx(t1), y1: P.sy(xa + va * (t1 - tAhora)),
-        x2: P.sx(t2), y2: P.sy(xa + va * (t2 - tAhora)),
-        class: 'tangente', stroke: 'var(--vel)' }));
-      gPos.appendChild(el('circle', { cx: P.sx(tAhora), cy: P.sy(xa), class: 'punto', fill: 'var(--pos)' }));
+    set(capa.curvaP, { d: dP || 'M0,0' });
+    set(capa.curvaV, { d: dV || 'M0,0' });
+    var cierre = function (d) { return d ? d + 'L' + sx(tA).toFixed(2) + ',' + y0V + 'Z' : ''; };
+    set(capa.area,    { d: cierre(arPos), 'fill-opacity': .34 });
+    set(capa.areaNeg, { d: cierre(arNeg), 'fill-opacity': .16 });
+
+    // eventos: v = 0 (da la vuelta)
+    capa.evento.textContent = '';
+    if (tv !== null && tA >= tv) {
+      nodo('line', { x1: sx(tv), y1: RP.t, x2: sx(tv), y2: RV.t + RV.h,
+        class: 'evento', stroke: 'var(--vel)' }, capa.evento);
+      nodo('circle', { cx: sx(tv), cy: syV(0), r: 3.6, fill: 'none', stroke: 'var(--vel)', 'stroke-width': 1.4 }, capa.evento);
+      var e = nodo('text', { x: sx(tv), y: RP.t - 3, class: 'eventoLbl', 'text-anchor': 'middle' }, capa.evento);
+      e.textContent = 'v = 0 · da la vuelta';
     }
 
-    /* — velocidad-tiempo — */
-    var vs = [vDe(0), vDe(tFin)], vMin = Math.min(0, Math.min.apply(null, vs)), vMax = Math.max(0, Math.max.apply(null, vs));
-    var pad = Math.max(3, (vMax - vMin) * 0.15); vMin -= pad; vMax += pad;
-    var V = marco(gVel, vMin, vMax, 'v (m/s)', 4);
-    // área bajo la curva = desplazamiento
-    if (tAhora > 0.02) {
-      var ar = 'M' + V.sx(0) + ',' + V.y0;
-      for (var t2b = 0; t2b <= tAhora + 1e-9; t2b += paso) ar += 'L' + V.sx(t2b) + ',' + V.sy(vDe(t2b));
-      ar += 'L' + V.sx(tAhora) + ',' + V.y0 + 'Z';
-      gVel.appendChild(el('path', { d: ar, class: 'area', fill: 'var(--vel)' }));
+    // REGLA continua que cruza las dos regiones (la sincronía hecha trazo)
+    var vis = tA > 0.04;
+    set(capa.regla, { x1: sx(tA), y1: RP.t - 6, x2: sx(tA), y2: RV.t + RV.h + 6, opacity: vis ? 1 : 0 });
+
+    capa.triangulo.textContent = '';
+    if (vis) {
+      var xa = Math.max(0, Math.min(100, xDe(tA))), va = vDe(tA);
+      // tangente
+      var dt = tMax * 0.14, t1 = Math.max(0, tA - dt), t2 = Math.min(tMax, tA + dt);
+      set(capa.tangente, { x1: sx(t1), y1: syP(xa + va * (t1 - tA)),
+                           x2: sx(t2), y2: syP(xa + va * (t2 - tA)), opacity: 1 });
+      set(capa.puntoP, { cx: sx(tA), cy: syP(xa), opacity: 1 });
+      set(capa.puntoV, { cx: sx(tA), cy: syV(va), opacity: 1 });
+      // barra desde el eje hasta el punto en v-t: la ALTURA es la velocidad
+      set(capa.barraV, { x1: sx(tA), y1: y0V, x2: sx(tA), y2: syV(va), opacity: .85 });
+
+      /* TRIÁNGULO DE PENDIENTE — la figura del libro de física.
+         Cateto horizontal = 1 s exacto, vertical = v·1 metros.
+         OJO con las unidades: el cateto vale "v metros" y la altura de v-t
+         vale "v m/s"; coinciden en el número SOLO porque Δt = 1 s. Por eso
+         se rotulan distinto y el vínculo se dice como RAZÓN. */
+      var haciaAtras = (tA + 1 > tMax) || (xa + va > 100) || (xa + va < 0);
+      var ta = haciaAtras ? tA - 1 : tA, tb = haciaAtras ? tA : tA + 1;
+      if (ta >= 0 && tb <= tMax) {
+        var xA = xa + va * (ta - tA), xB = xa + va * (tb - tA);
+        if (xA >= 0 && xA <= 100 && xB >= 0 && xB <= 100) {
+          var g = capa.triangulo;
+          nodo('path', { d: 'M' + sx(ta) + ',' + syP(xA) + 'L' + sx(tb) + ',' + syP(xA) +
+                              'L' + sx(tb) + ',' + syP(xB) + 'Z',
+            fill: 'var(--vel)', 'fill-opacity': .1, stroke: 'var(--vel)',
+            'stroke-width': 1, 'stroke-opacity': .55 }, g);
+          var lx = nodo('text', { x: (sx(ta) + sx(tb)) / 2, y: syP(xA) + 12, class: 'ejeLbl',
+            'text-anchor': 'middle', fill: 'var(--vel)' }, g);
+          lx.textContent = '1 s';
+          var ly = nodo('text', { x: sx(tb) + 5, y: (syP(xA) + syP(xB)) / 2 + 3, class: 'ejeLbl',
+            fill: 'var(--vel)' }, g);
+          ly.textContent = (va >= 0 ? '+' : '−') + Math.abs(va).toFixed(1) + ' m';
+        }
+      }
+      // rótulo de la altura en v-t, con SU unidad
+      var lv = nodo('text', { x: sx(tA) + 6, y: syV(va) - 6, class: 'ejeLbl', fill: 'var(--vel)' }, capa.triangulo);
+      lv.textContent = va.toFixed(1) + ' m/s';
+    } else {
+      set(capa.tangente, { opacity: 0 }); set(capa.puntoP, { opacity: 0 });
+      set(capa.puntoV, { opacity: 0 }); set(capa.barraV, { opacity: 0 });
     }
-    var dv = '';
-    for (var t3 = 0; t3 <= tAhora + 1e-9; t3 += paso) dv += (dv ? 'L' : 'M') + V.sx(t3) + ',' + V.sy(vDe(t3));
-    if (dv) gVel.appendChild(el('path', { d: dv, class: 'curva', stroke: 'var(--vel)' }));
-    if (tAhora > 0.05) gVel.appendChild(el('circle', { cx: V.sx(tAhora), cy: V.sy(vDe(tAhora)), class: 'punto', fill: 'var(--vel)' }));
   }
 
-  /* ── lecturas y pistas en palabras ── */
+  /* ═══ lecturas y explicación en palabras ═══ */
   function pintarLecturas() {
-    var tFin = tLimite(), t = Math.min(est.t, tFin);
-    var x = Math.max(0, Math.min(X_MAX, xDe(t))), v = vDe(t);
-    document.getElementById('lt').textContent = t.toFixed(1);
+    var tA = Math.min(est.t, tFin()), x = Math.max(0, Math.min(X_MAX, xDe(tA))), v = vDe(tA);
+    document.getElementById('lt').textContent = tA.toFixed(1);
     document.getElementById('lx').textContent = Math.round(x);
     document.getElementById('lv').textContent = v.toFixed(1);
 
     var hP = document.getElementById('hintPos'), hV = document.getElementById('hintVel');
+    var desp = xDe(tA) - est.x0;
     if (est.a === 0) {
-      hP.innerHTML = 'Velocidad constante → la curva es una <b>recta</b>. Su pendiente vale ' + est.v0.toFixed(1) + ' m/s.';
-      hV.innerHTML = 'Velocidad constante → línea <b>horizontal</b>. El área es un rectángulo.';
+      hP.innerHTML = 'Velocidad constante → la curva es una <b>recta</b>. Su pendiente vale ' + est.v0.toFixed(1) + ' m/s: eso <b>es</b> la velocidad.';
+      hV.innerHTML = 'Constante → línea <b>horizontal</b>. El área es un rectángulo: base × altura.';
     } else if (est.a > 0) {
-      hP.innerHTML = 'Acelera → la curva se <b>empina</b> (parábola). Cada segundo avanza más.';
+      hP.innerHTML = 'Acelera → la curva se <b>empina</b> (parábola). Mira las marcas de la pista: se van <b>separando</b>.';
       hV.innerHTML = 'Acelera → recta que <b>sube</b>. Su pendiente es la aceleración: ' + est.a + ' m/s².';
     } else {
-      hP.innerHTML = 'Frena → la curva se <b>aplana</b>. Cada segundo avanza menos.';
-      hV.innerHTML = 'Frena → recta que <b>baja</b>. Si cruza el cero, el móvil se regresa.';
+      hP.innerHTML = 'Frena → la curva se <b>aplana</b>. Las marcas de la pista se van <b>juntando</b>.';
+      hV.innerHTML = 'Frena → recta que <b>baja</b>. Al cruzar el cero, el auto <b>se regresa</b>.';
     }
-    // desplazamiento = área (se muestra el número para amarrar la idea)
-    var desp = xDe(t) - est.x0;
-    if (t > 0.2) hV.innerHTML += ' Área = <b>' + (desp >= 0 ? '' : '−') + Math.abs(Math.round(desp)) + ' m</b>.';
+    if (tA > 0.2) hV.innerHTML += ' Área = <b>' + (desp < 0 ? '−' : '') + Math.abs(Math.round(desp)) + ' m</b>.';
+
+    document.getElementById('descG').textContent =
+      'A los ' + tA.toFixed(1) + ' segundos: posición ' + Math.round(x) + ' metros, velocidad ' +
+      v.toFixed(1) + ' metros por segundo, aceleración ' + est.a + ' metros por segundo al cuadrado.';
   }
 
   function pintar() { pintarPista(); pintarGraficas(); pintarLecturas(); }
 
-  /* ── animación ── */
+  /* ═══ animación ═══ */
   var raf = null, ultimo = null;
   function tick(ts) {
     if (!ultimo) ultimo = ts;
     var dt = Math.min(0.05, (ts - ultimo) / 1000); ultimo = ts;
     est.t += dt;
-    var tFin = tLimite();
-    if (est.t >= tFin) { est.t = tFin; parar(); }
+    if (est.t >= tFin()) { est.t = tFin(); parar(); }
     pintar();
     if (est.corriendo) raf = requestAnimationFrame(tick);
   }
   function correr() {
     if (est.corriendo) return;
-    if (est.t >= tLimite() - 0.01) est.t = 0;
+    if (est.t >= tFin() - 0.01) est.t = 0;
+    if (REDUCE) { est.t = tFin(); pintar(); return; }   // sin animación: muestra el resultado
     est.corriendo = true; ultimo = null;
     document.getElementById('play').textContent = '❚❚ Pausa';
     raf = requestAnimationFrame(tick);
@@ -427,7 +602,38 @@
   document.getElementById('play').addEventListener('click', function () { est.corriendo ? parar() : correr(); });
   document.getElementById('reset').addEventListener('click', function () { parar(); est.t = 0; pintar(); });
 
-  /* ── controles ── */
+  /* ═══ SCRUBBING · arrastrar sobre el lienzo mueve el tiempo ═══
+     Solo sobre las gráficas: en la PISTA el eje es posición, y cuando el
+     auto se regresa la posición no es función del tiempo (pasa dos veces
+     por el mismo punto), así que mapear x→t ahí enseñaría una falsedad. */
+  (function () {
+    var arrastrando = false;
+    function scrub(ev) {
+      var r = lienzo.getBoundingClientRect();
+      var pxv = (ev.clientX - r.left) / r.width * LW;      // a coords del viewBox
+      var t = (pxv - M.l) / IW * ESC_T;
+      est.t = Math.max(0, Math.min(tFin(), t));
+      pintar();
+    }
+    lienzo.addEventListener('pointerdown', function (e) {
+      arrastrando = true; parar(); lienzo.setPointerCapture(e.pointerId); scrub(e);
+    });
+    lienzo.addEventListener('pointermove', function (e) { if (arrastrando) { e.preventDefault(); scrub(e); } });
+    lienzo.addEventListener('pointerup', function (e) {
+      arrastrando = false; try { lienzo.releasePointerCapture(e.pointerId); } catch (x) {}
+    });
+    lienzo.addEventListener('pointercancel', function () { arrastrando = false; });
+  })();
+
+  /* ═══ teclado ═══ */
+  document.addEventListener('keydown', function (e) {
+    if (/^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(document.activeElement.tagName)) return;
+    if (e.key === ' ') { e.preventDefault(); est.corriendo ? parar() : correr(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); parar(); est.t = Math.min(tFin(), est.t + 0.2); pintar(); }
+    else if (e.key === 'ArrowLeft')  { e.preventDefault(); parar(); est.t = Math.max(0, est.t - 0.2); pintar(); }
+  });
+
+  /* ═══ controles ═══ */
   function sinc() {
     document.getElementById('vx0').textContent = est.x0 + ' m';
     document.getElementById('vv0').textContent = est.v0 + ' m/s';
@@ -437,6 +643,7 @@
     document.getElementById(par[0]).addEventListener('input', function (e) {
       est[par[1]] = parseFloat(e.target.value);
       parar(); est.t = 0; sinc(); pintar();
+      document.querySelectorAll('.preset').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
     });
   });
 
@@ -453,6 +660,8 @@
       document.getElementById('x0').value = p.x0;
       document.getElementById('v0').value = p.v0;
       document.getElementById('a').value = p.a;
+      document.querySelectorAll('.preset').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true');
       sinc(); pintar(); correr();
     });
   });
