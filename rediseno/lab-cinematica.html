@@ -107,11 +107,6 @@
   .panel__hint { font-size: var(--font-size-12); color: var(--color-text-meta);
     margin: 0 0 var(--space-3); min-height: 3.1em; line-height: 1.5; }
   .panel__hint b { color: var(--c); font-weight: var(--font-weight-medium); }
-  .panel__scrub { position: absolute; top: var(--space-5); right: var(--space-6);
-    font-family: var(--font-family-mono); font-size: 9px; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--color-text-meta); opacity: 0;
-    transition: opacity var(--motion-base) ease; pointer-events: none; }
-  .grafPar:hover .panel__scrub { opacity: .7; }
 
   svg { display: block; width: 100%; height: auto; overflow: hidden; }
   /* base.css aplica stroke:currentColor a TODOS los <svg> (es para los iconos
@@ -236,7 +231,6 @@
         <p class="panel__hint" id="hintPos" style="--c: var(--pos)"></p>
         <p class="panel__hint" id="hintVel" style="--c: var(--vel)"></p>
       </div>
-      <span class="panel__scrub">arrastra ↔ para mover el tiempo</span>
       <svg id="lienzo" class="lienzo" viewBox="0 0 620 430" role="img" aria-labelledby="descG"></svg>
       <p id="descG" class="visually-hidden"></p>
     </div>
@@ -465,6 +459,11 @@
     }
     var tu = nodo('text', { x: M.l + IW, y: RV.t + RV.h + 30, class: 'ejeTitulo', 'text-anchor': 'end' }, capa.marco);
     tu.textContent = 'tiempo compartido →';
+    // pista de interacción: al pie IZQUIERDO, dentro del lienzo (nunca choca
+    // con los hints, que viven arriba en HTML)
+    var ar = nodo('text', { x: M.l, y: RV.t + RV.h + 30, class: 'ejeTitulo',
+      'fill-opacity': .62 }, capa.marco);
+    ar.textContent = '↔ arrastra para mover el tiempo';
   }
 
   function pintarGraficas() {
