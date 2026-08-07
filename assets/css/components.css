@@ -206,6 +206,31 @@
   --nivel-soft: var(--accent-conac-soft);
 }
 
+/* UNA PÁGINA, UN COLOR (Gil, 07/08: "si estábamos en la página de universidad
+   fuera todo coñac y si estábamos en el de preparatoria fuera todo terracota;
+   ahora es una mezcla de ambas que no me gusta para nada").
+
+   El acento de la página pasa a ser el del nivel, y las franjas de sección
+   dejan de usar su color categórico. Es la "alternativa mínima" que propone
+   AUDITORIA-vicios-diseno § 1 contra el arcoíris de seis colores: se pierde
+   variedad y se gana coherencia total. Los estados (ok/err) sí conservan su
+   color, porque ahí el color SÍ significa algo. */
+[data-nivel] {
+  --color-accent: var(--nivel);
+  --color-accent-soft: var(--nivel-soft);
+  --color-accent-strong: var(--nivel);
+  --color-accent-strong-soft: var(--nivel-soft);
+}
+
+[data-nivel] .section-header[data-cat]:not([data-cat="ok"]):not([data-cat="err"]),
+[data-nivel] .hero[data-cat]:not([data-cat="ok"]):not([data-cat="err"]) {
+  border-top-color: var(--nivel);
+}
+
+[data-nivel] .card--featured[data-cat]:not([data-cat="ok"]):not([data-cat="err"]) {
+  border-left-color: var(--nivel);
+}
+
 .hero__actions {
   margin-top: var(--space-6);
   display: flex;
