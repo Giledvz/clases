@@ -22,7 +22,12 @@ Hay **dos** páginas de aula, una por nivel:
 | Página | Nivel | `data-nivel` | Color del nivel |
 |---|---|---|---|
 | `aula.html` | prepa · ECOEMS/COMIPEMS | `prepa` | terracota |
-| `aula-uni.html` | universidad · UNAM | `uni` | coñac |
+| `aula-uni.html` | universidad (UNAM, IPN, UAM…) | `uni` | coñac |
+
+**No la llames "Aula UNAM"** (Gil, 07/08): en nivel superior también llegan alumnos de
+IPN y de UAM, y nombrar sólo a la UNAM los dejaría fuera. El nivel se nombra por lo que
+es —universidad—, no por un examen. Lo mismo aplica a cualquier página nueva de ese
+nivel.
 
 Los nombres no son simétricos a propósito: `aula.html` ya existía y está enlazada
 desde fuera, así que renombrarla rompería enlaces. La nueva se llama `aula-uni.html`
@@ -30,7 +35,7 @@ para casar con `uni.html`.
 
 ⚠️ **`aula-uni.html` todavía tiene contenido de prepa.** Sus tarjetas, exámenes y
 simulacros son una copia de `aula.html` —material COMIPEMS— puestos como marcador de
-posición hasta que exista el material de UNAM. Está avisado en un comentario al
+posición hasta que exista el material de nivel superior. Está avisado en un comentario al
 principio del archivo. **No es un error de contenido que haya que "corregir" copiando
 más de prepa**; lo que toca es sustituirlo cuando haya material propio.
 
