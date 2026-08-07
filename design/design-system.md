@@ -136,7 +136,7 @@ Notas:
 | `--accent-terracota-soft` | `#dd6638` | Hover de tags accent |
 
 **Color por nivel: prepa = terracota, universidad = coñac.** La lógica es de edad:
-más brillante para los ~15, más profundo para los ~18. `repo-diseno/IMPLEMENTAR-colores-universidad.md`
+más brillante para los ~15, más profundo para los ~18. `repo-diseno/RECHAZADO-colores-universidad.md`
 propone violeta para universidad; **esa propuesta se probó y se rechazó** —el violeta
 frío choca con la paleta cálida editorial— y quedó cerrada en
 `repo-diseno/RESPUESTA-code-niveles-color.md`. No volver a violeta sin decisión de Gil.

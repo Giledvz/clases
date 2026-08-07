@@ -47,10 +47,19 @@ el violeta frío choca con la paleta cálida editorial de Tercial. La decisión 
 —y que está en producción— es terracota para prepa y coñac para universidad, por
 armonía y por lógica de edad (más brillante para los ~15, más profundo para los ~18).
 
-Está cerrado en `repo-diseno/RESPUESTA-code-niveles-color.md`, en la rama `dev` del
-repo de ECOEMS. Ese documento es la **respuesta**; el `IMPLEMENTAR-` es la
-**propuesta**. Cuando se contradigan, manda la respuesta, y si hay duda se le pregunta
-a Gil — no se decide leyendo sólo la propuesta.
+El documento que pedía violeta ya está archivado como
+`repo-diseno/RECHAZADO-colores-universidad.md`, con un bloque de rechazo al principio.
+**No existe `--accent-violeta`.** Lo cerrado está en
+`repo-diseno/RESPUESTA-code-niveles-color.md`.
+
+Dos reglas que salieron de este enredo y que valen para todo el canal de diseño:
+
+- **Precedencia.** Cuando una propuesta (`IMPLEMENTAR-*`) y una respuesta
+  (`RESPUESTA-*`) se contradigan, **manda la respuesta**. La fecha del archivo no
+  decide nada: una propuesta puede actualizarse después de haber sido rechazada.
+- **Sincronía.** Para lo que ya está implementado, la verdad es **el código y los
+  `RESPUESTA-code-*`**. Un zip del canal sólo manda en lo que todavía no se
+  implementa.
 
 ## El nivel se declara en la página, no en el componente
 

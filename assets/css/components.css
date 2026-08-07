@@ -190,13 +190,12 @@
    cuelga --nivel; así el mismo botón sirve en prepa y en universidad sin
    duplicar reglas. **Prepa = terracota, universidad = coñac.**
 
-   OJO: repo-diseno/IMPLEMENTAR-colores-universidad.md pide violeta para
-   universidad. Eso es una PROPUESTA de la IA de diseño que se implementó, se
-   probó y Gil rechazó: el violeta frío choca con la paleta cálida editorial de
-   Tercial. La decisión que quedó —y que está en producción— es coñac, por
-   armonía y por lógica de edad: terracota enérgico para los ~15, coñac sobrio
-   para los ~18. Está cerrado en repo-diseno/RESPUESTA-code-niveles-color.md.
-   No lo "corrijas" a violeta leyendo sólo la propuesta. */
+   Hubo una propuesta de universidad = violeta que se implementó, se probó y Gil
+   rechazó: el violeta frío choca con la paleta cálida editorial de Tercial. La
+   decisión que quedó es coñac, por armonía y por lógica de edad —terracota
+   enérgico para los ~15, coñac sobrio para los ~18—. El documento que la pedía
+   ya está archivado como repo-diseno/RECHAZADO-colores-universidad.md y no
+   existe --accent-violeta. */
 [data-nivel="prepa"] {
   --nivel: var(--accent-terracota);
   --nivel-soft: var(--accent-terracota-soft);
