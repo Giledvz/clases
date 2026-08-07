@@ -186,6 +186,8 @@
   --accent-conac-soft: #8c5240;
   --accent-terracota: #c2410c;
   --accent-terracota-soft: #dd6638;
+  --accent-violeta: #5b4b9e;
+  --accent-violeta-soft: #7566b8;
 
   /* Estados (calibrados al tono cálido del sistema) */
   --state-ok: #4a6b3f;
