@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<!--
+  AULA DE UNIVERSIDAD — PÁGINA PROVISIONAL (07/08/2026)
+
+  Es el equivalente de aula.html para el nivel universidad, creado a petición de
+  Gil para que el botón del panel del profesor exista también de ese lado.
+
+  ⚠️ SU CONTENIDO TODAVÍA ES EL DE PREPA. Las tarjetas, los exámenes, las hojas y
+  los simulacros que se listan abajo son los MISMOS de aula.html, o sea material
+  COMIPEMS. Se dejaron a propósito, como marcador de posición, hasta que se
+  arme el material de UNAM: era eso o una página vacía.
+
+  Lo que sí es de universidad y no hay que tocar:
+    · data-nivel="uni" en <html>  → tiñe de coñac el botón del panel (y cualquier
+      otro componente teñido por nivel que se agregue después).
+    · el <title>, el eyebrow y el <h1>.
+
+  Cuando llegue el material de UNAM, se sustituyen las <section> de abajo y se
+  borra este aviso. No hace falta tocar el hero ni el CSS.
+-->
+<html data-nivel="uni" data-theme="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Aula UNAM · Tercial</title>
+<meta content="El curso en papel: exámenes semanales, hojas de trabajo y simulacros para imprimir y resolver." name="description"/>
+<script>
+  /* Anti-flash · ver design-system § 11 */
+  (function () {
+    var p = localStorage.getItem('tercial-theme-pref') || 'auto';
+    var d = p === 'auto'
+      ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : p;
+    var r = document.documentElement;
+    r.setAttribute('data-theme', d);
+    r.setAttribute('data-theme-pref', p);
+  })();
+</script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/tercial/assets/css/tokens.css" rel="stylesheet"/>
+<link href="/tercial/assets/css/base.css" rel="stylesheet"/>
+<link href="/tercial/assets/css/components.css" rel="stylesheet"/>
+<script defer="" src="/tercial/assets/js/theme.js"></script>
+<script defer="" src="/tercial/assets/js/site-nav.js"></script>
+</head>
+<body>
+<site-nav></site-nav>
+<main class="container container--base">
+<header class="hero">
+<p class="eyebrow">Curso · UNAM · Profe Gil</p>
+<h1 class="hero__title">Aula <em>UNAM</em></h1>
+<p class="hero__lede">
+      Exámenes, apuntes y materiales del curso. Todo aquí, sin tener que entrar a Classroom.
+    </p>
+<p class="hero__actions">
+<a class="btn btn--nivel-solido" href="http://Mac-mini-de-Gil.local:3000/teacher.html">
+<svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path></svg>
+        Panel del profesor
+      </a>
+</p>
+</header>
+<section id="examenes">
+<header class="section-header" data-cat="coral">
+<h2 class="section-header__title">
+<span class="section-header__num">i.</span>
+        Exámenes
+      </h2>
+<span class="section-header__count">16 archivos</span>
+</header>
+<p class="section-intro">
+      Cada fin de semana del curso tiene su propio examen. Abre la versión del alumno para resolverlo; la clave del profesor está marcada por separado.
+    </p>
+<div class="card-grid card-grid--cols-2">
+<a class="card-link" href="/tercial/examenes-pdf/examen-12-mate.html">
+<article class="card">
+<header class="card__header">
+<h3 class="card__title">Examen 12 — <em>Matemáticas</em></h3>
+</header>
+<p class="card__body">
+            Sábado 30 de mayo de 2026 · 32 ejercicios · 36 pts. Álgebra, geometría, probabilidad y porcentajes.
+          </p>
+<footer class="card__footer">
+<span class="card__meta">alumno · html</span>
+<span class="card__cta">Abrir →</span>
+</footer>
+</article>
+</a>
+<a class="card-link" href="/tercial/examenes-pdf/examen-12-fisica.html">
+<article class="card">
+<header class="card__header">
+<h3 class="card__title">Examen 12 — <em>Física</em></h3>
+</header>
+<p class="card__body">
+            Sábado 30 de mayo de 2026 · 27 ejercicios · 35 pts. Cinemática, dinámica, fluidos, calor y electricidad.
+          </p>
+<footer class="card__footer">
+<span class="card__meta">alumno · html</span>
+<span class="card__cta">Abrir →</span>
+</footer>
+</article>
+</a>
+<a class="card-link" href="/tercial/examenes-pdf/examen-1-fisica.html">
+<article class="card">
+<header class="card__header">
+<h3 class="card__title">Examen 1 — <em>Física</em></h3>
+</header>
+<p class="card__body">
+            Primer fin de semana del curso. Repaso inicial de mecánica.
+          </p>
+<footer class="card__footer">
+<span class="card__meta">alumno · html</span>
+<span class="card__cta">Abrir →</span>
+</footer>
+</article>
+</a>
+</div>
+<p class="section-intro" style="margin-top: 1.5rem;">Exámenes por fin de semana (Matemáticas y Física en un solo examen):</p>
+<ul class="topic-list">
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-02.html"><span class="topic-list__name">Examen 2 <span class="topic-list__hint">— matemáticas y física</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-03.html"><span class="topic-list__name">Examen 3 <span class="topic-list__hint">— matemáticas y física</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-04.html"><span class="topic-list__name">Examen 4 <span class="topic-list__hint">— matemáticas y física</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-05.html"><span class="topic-list__name">Examen 5 <span class="topic-list__hint">— matemáticas y física</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-06.html"><span class="topic-list__name">Examen 6 <span class="topic-list__hint">— matemáticas y física</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-07.html"><span class="topic-list__name">Examen 7 <span class="topic-list__hint">— matemáticas y física</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-08.html"><span class="topic-list__name">Examen 8 <span class="topic-list__hint">— matemáticas y física</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-13.html"><span class="topic-list__name">Examen 13 <span class="topic-list__hint">— matemáticas y física</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+</ul>
+<p class="section-intro" style="margin-top: 1.5rem;">Exámenes por materia (una sola asignatura):</p>
+<ul class="topic-list">
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-01-mate.html"><span class="topic-list__name">Examen 1 — Matemáticas <span class="topic-list__hint">— aritmética, álgebra y geometría</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-02-mate.html"><span class="topic-list__name">Examen 2 — Matemáticas <span class="topic-list__hint">— con opción múltiple</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/examen-01-fisica.html"><span class="topic-list__name">Examen 1 — Física <span class="topic-list__hint">— repaso integral con opción múltiple</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+</ul>
+<p class="section-intro" style="margin-top: 1.5rem;">Simulacros COMIPEMS — <em>en revisión</em>. Los estamos corrigiendo (reactivos sin respuesta única, textos faltantes) antes de volver a publicarlos.</p>
+
+</section>
+<section id="clases">
+<header class="section-header" data-cat="purple">
+<h2 class="section-header__title">
+<span class="section-header__num">ii.</span>
+        Materiales de clase
+      </h2>
+<span class="section-header__count">22 hojas</span>
+</header>
+<p class="section-intro">
+      Hojas de trabajo del curso en versión alumno. La clave del profesor de cada hoja está en la lista plegable de abajo.
+    </p>
+<ul class="topic-list">
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/fisica-1.html"><span class="topic-list__name">Física 1 — Preliminares <span class="topic-list__hint">— conversiones de unidades y despejes</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/fisica-2.html"><span class="topic-list__name">Física 2 — MRU y MRUA <span class="topic-list__hint">— cinemática, caída libre y tiro vertical</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/fisica-3.html"><span class="topic-list__name">Física 3 — Vectores <span class="topic-list__hint">— conversión entre formas, escalares y suma</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/fisica-4.html"><span class="topic-list__name">Física 4 — Dinámica <span class="topic-list__hint">— leyes de Newton, fuerza, peso y masa</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/fisica-6.html"><span class="topic-list__name">Física 6 — Trabajo mecánico <span class="topic-list__hint">— trabajo: fuerza por distancia</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/fisica-8.html"><span class="topic-list__name">Física 8 — Energía <span class="topic-list__hint">— energía, potencia, cantidad de movimiento y calor</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/fisica-9.html"><span class="topic-list__name">Física 9 — Ondas <span class="topic-list__hint">— ondas mecánicas y sonido</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/fisica-10.html"><span class="topic-list__name">Física 10 — Electricidad y magnetismo <span class="topic-list__hint">— Coulomb, Ohm, potencia y electromagnetismo</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/fisica-11.html"><span class="topic-list__name">Física 11 — Densidad, presión y óptica <span class="topic-list__hint">— fluidos, Pascal, Arquímedes y luz</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/matematicas-1.html"><span class="topic-list__name">Matemáticas 1 — Uso de los números <span class="topic-list__hint">— enteros, m.c.m., fracciones y decimales</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/matematicas-2.html"><span class="topic-list__name">Matemáticas 2 — Regla de 3 y porcentajes <span class="topic-list__hint">— proporcionalidad directa e inversa</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/matematicas-3.html"><span class="topic-list__name">Matemáticas 3 — Productos notables <span class="topic-list__hint">— multiplicaciones y binomios</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/matematicas-4.html"><span class="topic-list__name">Matemáticas 4 — Factorización <span class="topic-list__hint">— factor común, diferencia de cuadrados y tijera</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/matematicas-5.html"><span class="topic-list__name">Matemáticas 5 — Ecuaciones <span class="topic-list__hint">— primer grado, sistemas y segundo grado</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/matematicas-6.html"><span class="topic-list__name">Matemáticas 6 — Lenguaje algebraico <span class="topic-list__hint">— traducción y problemas con ecuaciones</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/matematicas-7.html"><span class="topic-list__name">Matemáticas 7 — Estadística y probabilidad <span class="topic-list__hint">— tendencia central y probabilidad</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/matematicas-8.html"><span class="topic-list__name">Matemáticas 8 — Repaso <span class="topic-list__hint">— repaso COMIPEMS en seis clases</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/conversiones-despejes.html"><span class="topic-list__name">Conversiones y despejes <span class="topic-list__hint">— unidades y despeje de fórmulas físicas</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/interpretacion-graficas.html"><span class="topic-list__name">Interpretación de gráficas <span class="topic-list__hint">— posición–tiempo y velocidad–tiempo</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/sucesiones.html"><span class="topic-list__name">Sucesiones <span class="topic-list__hint">— patrones numéricos</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+</ul>
+<p class="section-intro" style="margin-top: 1.5rem;">Hojas de respuesta para simulacros (se rellenan a lápiz, lectura óptica):</p>
+<ul class="topic-list">
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/hoja-respuestas-128.html"><span class="topic-list__name">Hoja de respuestas — prepa (COMIPEMS) <span class="topic-list__hint">— 128 reactivos, versiones 1–8</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+<li class="topic-list__item"><a class="topic-list__link" href="/tercial/examenes-pdf/hoja-respuestas-120.html"><span class="topic-list__name">Hoja de respuestas — universidad (UNAM/IPN) <span class="topic-list__hint">— 120 reactivos, versiones 1–4</span></span><span aria-hidden="true" class="topic-list__chevron">→</span></a></li>
+</ul>
+
+</section>
+</main>
+<footer class="site-footer">
+<p class="site-footer__brand"><em>Tercial</em> · curso ECOEMS</p>
+<p class="site-footer__credits">Compuesto en <em>Fraunces</em> e IBM Plex Sans · 2026</p>
+<nav aria-label="enlaces de pie" class="site-footer__links">
+<a href="/tercial/">Inicio</a>
+<a href="#examenes">Exámenes</a>
+<a href="#clases">Materiales</a>
+</nav>
+</footer>
+</body>
+</html>
