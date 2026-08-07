@@ -39,6 +39,19 @@ posición hasta que exista el material de nivel superior. Está avisado en un co
 principio del archivo. **No es un error de contenido que haya que "corregir" copiando
 más de prepa**; lo que toca es sustituirlo cuando haya material propio.
 
+## Color por nivel: prepa terracota, universidad COÑAC
+
+No es violeta. Si te topas con `IMPLEMENTAR-colores-universidad.md` pidiendo violeta
+para universidad, **es una propuesta de la IA de diseño que ya se probó y se rechazó**:
+el violeta frío choca con la paleta cálida editorial de Tercial. La decisión que quedó
+—y que está en producción— es terracota para prepa y coñac para universidad, por
+armonía y por lógica de edad (más brillante para los ~15, más profundo para los ~18).
+
+Está cerrado en `repo-diseno/RESPUESTA-code-niveles-color.md`, en la rama `dev` del
+repo de ECOEMS. Ese documento es la **respuesta**; el `IMPLEMENTAR-` es la
+**propuesta**. Cuando se contradigan, manda la respuesta, y si hay duda se le pregunta
+a Gil — no se decide leyendo sólo la propuesta.
+
 ## El nivel se declara en la página, no en el componente
 
 `data-nivel` va en `<html>` y de ahí cuelga `--nivel`, que tiñe los componentes que lo

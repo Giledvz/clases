@@ -188,19 +188,23 @@
 /* Botón teñido con el color del nivel. El nivel se declara con data-nivel en
    cualquier ancestro (normalmente <html> o el <main> de la página) y de ahí
    cuelga --nivel; así el mismo botón sirve en prepa y en universidad sin
-   duplicar reglas. Prepa = terracota, universidad = VIOLETA
-   (IMPLEMENTAR-colores-universidad.md, 05/08: la regla es cálido para prepa y
-   frío para universidad, para que el nivel se reconozca por temperatura). El
-   coñac dejó de ser color de nivel y volvió a ser el acento neutro de marca,
-   así que NO se usa aquí. Los tokens se invierten solos en tema oscuro. */
+   duplicar reglas. **Prepa = terracota, universidad = coñac.**
+
+   OJO: repo-diseno/IMPLEMENTAR-colores-universidad.md pide violeta para
+   universidad. Eso es una PROPUESTA de la IA de diseño que se implementó, se
+   probó y Gil rechazó: el violeta frío choca con la paleta cálida editorial de
+   Tercial. La decisión que quedó —y que está en producción— es coñac, por
+   armonía y por lógica de edad: terracota enérgico para los ~15, coñac sobrio
+   para los ~18. Está cerrado en repo-diseno/RESPUESTA-code-niveles-color.md.
+   No lo "corrijas" a violeta leyendo sólo la propuesta. */
 [data-nivel="prepa"] {
   --nivel: var(--accent-terracota);
   --nivel-soft: var(--accent-terracota-soft);
 }
 
 [data-nivel="uni"] {
-  --nivel: var(--accent-violeta);
-  --nivel-soft: var(--accent-violeta-soft);
+  --nivel: var(--accent-conac);
+  --nivel-soft: var(--accent-conac-soft);
 }
 
 .hero__actions {

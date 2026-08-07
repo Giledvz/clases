@@ -134,13 +134,12 @@ Notas:
 | `--accent-conac-soft` | `#8c5240` | Hover de links, footer accents |
 | `--accent-terracota` | `#c2410c` | Tags accent, marginalia destacada, énfasis puntual. **Color del nivel prepa** |
 | `--accent-terracota-soft` | `#dd6638` | Hover de tags accent |
-| `--accent-violeta` | `#5b4b9e` | **Color del nivel universidad** (dark `#9a8cd0`) |
-| `--accent-violeta-soft` | `#7566b8` | Su hover (dark `#7d6fb5`) |
 
-**Los niveles se distinguen por temperatura**, no por matiz: prepa cálido
-(terracota), universidad frío (violeta). Así se reconoce el nivel de un vistazo sin
-leer. El coñac **no** es color de nivel: es el acento neutro de marca (documentos,
-comprobante, hoja de respuestas). Ver `repo-diseno/IMPLEMENTAR-colores-universidad.md`.
+**Color por nivel: prepa = terracota, universidad = coñac.** La lógica es de edad:
+más brillante para los ~15, más profundo para los ~18. `repo-diseno/IMPLEMENTAR-colores-universidad.md`
+propone violeta para universidad; **esa propuesta se probó y se rechazó** —el violeta
+frío choca con la paleta cálida editorial— y quedó cerrada en
+`repo-diseno/RESPUESTA-code-niveles-color.md`. No volver a violeta sin decisión de Gil.
 
 **Estados semánticos.** Calibrados al tono cálido del sistema; no son los rojos/verdes saturados de UI tech genérica.
 
@@ -517,7 +516,7 @@ Web component que se renderiza (Light DOM — el elemento `<site-nav>` mismo rec
 
 El nivel se declara con `data-nivel` en un ancestro (normalmente `<html>`, porque es
 propiedad de la página) y de ahí cuelga `--nivel`: **prepa = terracota**, **universidad
-= violeta**. Los tokens ya se invierten solos en tema oscuro, y en el relleno el texto va
+= coñac**. Los tokens ya se invierten solos en tema oscuro, y en el relleno el texto va
 en `--crema-100`, que hace de contraste en los dos temas igual que en `.btn--primary`.
 
 > ⚠️ **`.btn--nivel-solido` va contra la regla de contención de acentos** del § 2.2: el
