@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Comparar · botón del panel del profesor</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/tercial/assets/css/tokens.css" rel="stylesheet"/>
+<link href="/tercial/assets/css/base.css" rel="stylesheet"/>
+<link href="/tercial/assets/css/components.css" rel="stylesheet"/>
+<style>
+  /* Página de laboratorio: no es del sitio, sólo sirve para comparar. */
+  body { padding: var(--space-8) var(--space-6); }
+  .lab__titulo { font-family: var(--font-family-display); font-size: var(--font-size-32);
+                  margin: 0 0 var(--space-2); }
+  .lab__nota { color: var(--color-text-secondary); font-size: var(--font-size-15);
+                margin: 0 0 var(--space-8); max-width: 62ch; }
+  .rejilla { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--space-5); }
+  .v { border: var(--border-thin) solid var(--color-border); border-radius: var(--radius-md);
+        padding: var(--space-5); background: var(--color-bg-raised); }
+  .v__id { font-size: var(--font-size-11); letter-spacing: .08em; text-transform: uppercase;
+            color: var(--color-text-meta); margin: 0 0 var(--space-4); }
+  .v__hero .hero__title { font-size: var(--font-size-32); margin: var(--space-2) 0 0; }
+  .v__hero .hero__lede { font-size: var(--font-size-15); }
+  .filas { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-4); }
+  .fila { display: flex; align-items: center; gap: var(--space-3); }
+  .fila__id { font-size: var(--font-size-11); color: var(--color-text-meta); }
+  @media (max-width: 780px) { .rejilla { grid-template-columns: 1fr; } }
+</style>
+<script>
+  document.addEventListener('keydown', e => {
+    if (e.key === 't') {
+      const r = document.documentElement;
+      r.setAttribute('data-theme', r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    }
+  });
+</script>
+</head>
+<body>
+<h1 class="lab__titulo">Botón del panel del profesor</h1>
+<p class="lab__nota">Seis variantes en el hero real de <code>aula.html</code>, que es de nivel
+prepa (terracota). Presiona la tecla <strong>t</strong> para cambiar entre claro y oscuro.</p>
+<div class="rejilla">
+<section class="v" data-nivel="prepa">
+<p class="v__id">A · Neutral · con símbolo</p>
+<div class="v__hero">
+<p class="eyebrow">Curso · ECOEMS · Profe Gil</p>
+<h1 class="hero__title">Aula <em>ECOEMS</em></h1>
+<p class="hero__lede">Exámenes, apuntes y materiales del curso. Todo aquí, sin tener que entrar a Classroom.</p>
+<p class="hero__actions"><a class="btn btn--secondary" href="http://Mac-mini-de-Gil.local:3000/teacher.html"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path></svg>
+        Panel del profesor</a></p>
+</div>
+</section>
+<section class="v" data-nivel="prepa">
+<p class="v__id">B · Neutral · sin símbolo</p>
+<div class="v__hero">
+<p class="eyebrow">Curso · ECOEMS · Profe Gil</p>
+<h1 class="hero__title">Aula <em>ECOEMS</em></h1>
+<p class="hero__lede">Exámenes, apuntes y materiales del curso. Todo aquí, sin tener que entrar a Classroom.</p>
+<p class="hero__actions"><a class="btn btn--secondary" href="http://Mac-mini-de-Gil.local:3000/teacher.html">Panel del profesor</a></p>
+</div>
+</section>
+<section class="v" data-nivel="prepa">
+<p class="v__id">C · Nivel contorno · con símbolo</p>
+<div class="v__hero">
+<p class="eyebrow">Curso · ECOEMS · Profe Gil</p>
+<h1 class="hero__title">Aula <em>ECOEMS</em></h1>
+<p class="hero__lede">Exámenes, apuntes y materiales del curso. Todo aquí, sin tener que entrar a Classroom.</p>
+<p class="hero__actions"><a class="btn btn--nivel" href="http://Mac-mini-de-Gil.local:3000/teacher.html"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path></svg>
+        Panel del profesor</a></p>
+</div>
+</section>
+<section class="v" data-nivel="prepa">
+<p class="v__id">D · Nivel contorno · sin símbolo</p>
+<div class="v__hero">
+<p class="eyebrow">Curso · ECOEMS · Profe Gil</p>
+<h1 class="hero__title">Aula <em>ECOEMS</em></h1>
+<p class="hero__lede">Exámenes, apuntes y materiales del curso. Todo aquí, sin tener que entrar a Classroom.</p>
+<p class="hero__actions"><a class="btn btn--nivel" href="http://Mac-mini-de-Gil.local:3000/teacher.html">Panel del profesor</a></p>
+</div>
+</section>
+<section class="v" data-nivel="prepa">
+<p class="v__id">E · Nivel relleno · con símbolo</p>
+<div class="v__hero">
+<p class="eyebrow">Curso · ECOEMS · Profe Gil</p>
+<h1 class="hero__title">Aula <em>ECOEMS</em></h1>
+<p class="hero__lede">Exámenes, apuntes y materiales del curso. Todo aquí, sin tener que entrar a Classroom.</p>
+<p class="hero__actions"><a class="btn btn--nivel-solido" href="http://Mac-mini-de-Gil.local:3000/teacher.html"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path></svg>
+        Panel del profesor</a></p>
+</div>
+</section>
+<section class="v" data-nivel="prepa">
+<p class="v__id">F · Nivel relleno · sin símbolo</p>
+<div class="v__hero">
+<p class="eyebrow">Curso · ECOEMS · Profe Gil</p>
+<h1 class="hero__title">Aula <em>ECOEMS</em></h1>
+<p class="hero__lede">Exámenes, apuntes y materiales del curso. Todo aquí, sin tener que entrar a Classroom.</p>
+<p class="hero__actions"><a class="btn btn--nivel-solido" href="http://Mac-mini-de-Gil.local:3000/teacher.html">Panel del profesor</a></p>
+</div>
+</section>
+</div>
+<h2 class="lab__titulo" style="margin-top:var(--space-8);font-size:var(--font-size-24)">El mismo botón en una página de universidad</h2>
+<p class="lab__nota">Mismo marcado; sólo cambia <code>data-nivel</code> a <code>uni</code>, y el color pasa a coñac.</p>
+<div class="filas">
+<div class="fila" data-nivel="uni"><span class="fila__id">C</span><a class="btn btn--nivel" href="http://Mac-mini-de-Gil.local:3000/teacher.html"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path></svg>
+        Panel del profesor</a></div>
+<div class="fila" data-nivel="uni"><span class="fila__id">D</span><a class="btn btn--nivel" href="http://Mac-mini-de-Gil.local:3000/teacher.html">Panel del profesor</a></div>
+<div class="fila" data-nivel="uni"><span class="fila__id">E</span><a class="btn btn--nivel-solido" href="http://Mac-mini-de-Gil.local:3000/teacher.html"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path></svg>
+        Panel del profesor</a></div>
+<div class="fila" data-nivel="uni"><span class="fila__id">F</span><a class="btn btn--nivel-solido" href="http://Mac-mini-de-Gil.local:3000/teacher.html">Panel del profesor</a></div>
+</div>
+</body>
+</html>
