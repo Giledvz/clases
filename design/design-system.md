@@ -500,6 +500,30 @@ Web component que se renderiza (Light DOM — el elemento `<site-nav>` mismo rec
 
 **Qué NO hacer.** Botones gigantes "rounded-full". Tres botones primary en la misma vista (rompe jerarquía).
 
+**Botón teñido por nivel — `--nivel` (excepción a prueba).**
+
+```html
+<html data-nivel="prepa">…
+<a class="btn btn--nivel-solido">Panel del profesor</a>   <!-- relleno -->
+<a class="btn btn--nivel">Panel del profesor</a>          <!-- contorno -->
+```
+
+El nivel se declara con `data-nivel` en un ancestro (normalmente `<html>`, porque es
+propiedad de la página) y de ahí cuelga `--nivel`: **prepa = terracota**, **universidad
+= coñac**. Los tokens ya se invierten solos en tema oscuro, y en el relleno el texto va
+en `--crema-100`, que hace de contraste en los dos temas igual que en `.btn--primary`.
+
+> ⚠️ **`.btn--nivel-solido` va contra la regla de contención de acentos** del § 2.2: el
+> terracota está listado para tags, marginalia y énfasis puntual, no como relleno de
+> botón. Se aprobó **a prueba el 07/08/26** para el botón del panel del profesor en
+> `aula.html`, con un argumento concreto: ese botón existe para que la mamá de Gil lo
+> encuentre sin preguntar, y la variante de contorno (`.btn--nivel`) corría el riesgo
+> de pasar desapercibida — que es justo el problema que el botón resuelve.
+>
+> **No es un descuido: no lo "corrijas" a contorno.** Si al usarlo se decide volver a
+> `.btn--nivel`, hay que quitar también esta nota. Está pendiente de confirmarse con
+> Gil.
+
 ### 4.7 Input, select, textarea
 
 **Markup.**
