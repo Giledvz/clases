@@ -132,8 +132,14 @@ Notas:
 |---|---|---|
 | `--accent-conac` | `#6b3a2e` | Italics en headings, drop caps, numeración, underline current page |
 | `--accent-conac-soft` | `#8c5240` | Hover de links, footer accents |
-| `--accent-terracota` | `#c2410c` | Tags accent, marginalia destacada, énfasis puntual |
+| `--accent-terracota` | `#c2410c` | Tags accent, marginalia destacada, énfasis puntual. **Color del nivel prepa** |
 | `--accent-terracota-soft` | `#dd6638` | Hover de tags accent |
+
+**Color por nivel: prepa = terracota, universidad = coñac.** La lógica es de edad:
+más brillante para los ~15, más profundo para los ~18. `repo-diseno/RECHAZADO-colores-universidad.md`
+propone violeta para universidad; **esa propuesta se probó y se rechazó** —el violeta
+frío choca con la paleta cálida editorial— y quedó cerrada en
+`repo-diseno/RESPUESTA-code-niveles-color.md`. No volver a violeta sin decisión de Gil.
 
 **Estados semánticos.** Calibrados al tono cálido del sistema; no son los rojos/verdes saturados de UI tech genérica.
 

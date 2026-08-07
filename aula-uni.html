@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 
-<html data-nivel="prepa" data-theme="light" lang="es">
+<!--
+  AULA DE UNIVERSIDAD — PÁGINA PROVISIONAL (07/08/2026)
+
+  Es el equivalente de aula.html para el nivel universidad, creado a petición de
+  Gil para que el botón del panel del profesor exista también de ese lado.
+
+  NO SE LLAMA "AULA UNAM" A PROPÓSITO (Gil, 07/08): en educación superior también
+  llegan alumnos de IPN y de UAM, y nombrar sólo a la UNAM los dejaría fuera. Por
+  eso el nivel se nombra por lo que es —universidad— y no por un examen.
+
+  ⚠️ SU CONTENIDO TODAVÍA ES EL DE PREPA. Las tarjetas, los exámenes, las hojas y
+  los simulacros que se listan abajo son los MISMOS de aula.html, o sea material
+  COMIPEMS. Se dejaron a propósito, como marcador de posición, hasta que se
+  arme el material de nivel superior: era eso o una página vacía.
+
+  Lo que sí es de universidad y no hay que tocar:
+    · data-nivel="uni" en <html>  → tiñe de coñac el botón del panel (y cualquier
+      otro componente teñido por nivel que se agregue después).
+    · el <title>, el eyebrow y el <h1>.
+
+  Cuando llegue el material de nivel superior, se sustituyen las <section> de
+  abajo y se borra este aviso. No hace falta tocar el hero ni el CSS.
+-->
+<html data-nivel="uni" data-theme="light" lang="es">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="light dark" name="color-scheme"/>
-<title>Aula ECOEMS · Tercial</title>
-<meta content="El curso en papel: exámenes semanales, hojas de trabajo y simulacros para imprimir y resolver." name="description"/>
+<title>Aula universidad · Tercial</title>
+<meta content="El curso en papel para nivel superior: exámenes, hojas de trabajo y simulacros para imprimir y resolver." name="description"/>
 <script>
   /* Anti-flash · ver design-system § 11 */
   (function () {
@@ -32,8 +55,8 @@
 <site-nav></site-nav>
 <main class="container container--base">
 <header class="hero">
-<p class="eyebrow">Curso · ECOEMS · Profe Gil</p>
-<h1 class="hero__title">Aula <em>ECOEMS</em></h1>
+<p class="eyebrow">Curso · Nivel superior · Profe Gil</p>
+<h1 class="hero__title">Aula <em>universidad</em></h1>
 <p class="hero__lede">
       Exámenes, apuntes y materiales del curso. Todo aquí, sin tener que entrar a Classroom.
     </p>
@@ -161,7 +184,7 @@
 </section>
 </main>
 <footer class="site-footer">
-<p class="site-footer__brand"><em>Tercial</em> · curso ECOEMS</p>
+<p class="site-footer__brand"><em>Tercial</em> · curso de nivel superior</p>
 <p class="site-footer__credits">Compuesto en <em>Fraunces</em> e IBM Plex Sans · 2026</p>
 <nav aria-label="enlaces de pie" class="site-footer__links">
 <a href="/tercial/">Inicio</a>
