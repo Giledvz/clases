@@ -59,6 +59,12 @@ svg {
   stroke-linejoin: round;
 }
 
+/* El trazo base pertenece a iconos y formas, no a las etiquetas de diagramas. */
+svg text {
+  stroke: none;
+  paint-order: normal;
+}
+
 input,
 button,
 textarea,

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-nivel="prepa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Tabla periódica · Química ECOEMS · Tercial</title>
+<meta name="description" content="Tabla periódica interactiva en español para consultar los 118 elementos por nombre, símbolo, número, familia, grupo y periodo.">
+
+<script>
+  (function () {
+    var p = 'auto';
+    try { p = localStorage.getItem('tercial-theme-pref') || 'auto'; } catch (_) {}
+    var d = p === 'auto'
+      ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : p;
+    var r = document.documentElement;
+    r.setAttribute('data-theme', d);
+    r.setAttribute('data-theme-pref', p);
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/tercial/assets/css/tokens.css">
+<link rel="stylesheet" href="/tercial/assets/css/base.css">
+<link rel="stylesheet" href="/tercial/assets/css/components.css?v=20260824-production">
+
+<style>
+  :root {
+    --tabla-width: 1232px;
+    --familia-no-metal: var(--cat-teal);
+    --familia-gas-noble: var(--cat-purple);
+    --familia-metal-alcalino: var(--cat-coral);
+    --familia-alcalinoterreo: var(--cat-amber);
+    --familia-metaloide: var(--cat-blue);
+    --familia-halogeno: var(--accent-terracota);
+    --familia-metal-postransicion: var(--cat-navy);
+    --familia-metal-transicion: var(--ink-500);
+    --familia-lantanido: var(--accent-conac-soft);
+    --familia-actinido: var(--state-warn);
+  }
+
+  .skip-link {
+    position: fixed;
+    inset: var(--space-3) auto auto var(--space-3);
+    z-index: var(--z-modal);
+    padding: var(--space-2) var(--space-3);
+    color: var(--color-bg-raised);
+    background: var(--color-text-primary);
+    border-radius: var(--radius-md);
+    transform: translateY(-160%);
+  }
+  .skip-link:focus { transform: translateY(0); }
+
+  .shell {
+    width: min(92rem, 100%);
+    margin-inline: auto;
+    padding-inline: clamp(var(--space-4), 3vw, var(--space-7));
+  }
+
+  .topbar {
+    border-bottom: var(--border-thin) solid var(--color-border);
+    background: color-mix(in srgb, var(--color-bg-page) 92%, transparent);
+  }
+  .topbar__inner {
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .brand {
+    color: var(--color-text-primary);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-20);
+    font-style: italic;
+    text-decoration: none;
+  }
+  .brand:hover { color: var(--color-accent); text-decoration: none; }
+  .trail {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-meta);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-11);
+    letter-spacing: .07em;
+    text-transform: uppercase;
+  }
+  .trail__divider { color: var(--color-border-strong); }
+  .trail__link { color: inherit; text-decoration: none; }
+  .trail__link:hover { color: var(--color-text-primary); text-decoration: none; }
+  .topbar__actions { margin-left: auto; }
+
+  .periodic-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-7);
+    padding-block: clamp(var(--space-7), 6vw, var(--space-10)) var(--space-7);
+  }
+  .periodic-hero__copy { max-width: 54rem; }
+  .periodic-hero__eyebrow {
+    margin-bottom: var(--space-2);
+    color: var(--color-accent);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-11);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-display-eyebrow);
+    text-transform: uppercase;
+  }
+  .periodic-hero h1 {
+    max-width: 14ch;
+    margin-bottom: var(--space-4);
+    font-size: clamp(2.25rem, 5.4vw, 4.5rem);
+    line-height: .98;
+  }
+  .periodic-hero__lede { max-width: 64ch; font-size: var(--font-size-16); line-height: var(--line-height-loose); }
+  .periodic-hero__note {
+    align-self: end;
+    justify-self: end;
+    width: 100%;
+    max-width: 26rem;
+    padding: var(--space-4) 0 var(--space-1) var(--space-4);
+    border-left: var(--border-thick) solid var(--color-accent);
+  }
+  .periodic-hero__note-label {
+    margin-bottom: var(--space-1);
+    color: var(--color-accent);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-11);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+  }
+  .periodic-hero__note p:last-child { font-size: var(--font-size-13); line-height: 1.55; }
+
+  .tool {
+    overflow: hidden;
+    border: var(--border-thin) solid var(--color-border);
+    border-top: var(--border-thick) solid var(--color-accent);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-raised);
+  }
+
+  .controls {
+    display: grid;
+    gap: var(--space-5);
+    padding: var(--space-5);
+    border-bottom: var(--border-thin) solid var(--color-border);
+  }
+  .search-group { display: grid; gap: var(--space-2); }
+  .search-group label,
+  .legend__title {
+    color: var(--color-text-meta);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-11);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+  }
+  .search-wrap { position: relative; max-width: 38rem; }
+  .search-wrap::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: var(--space-4);
+    width: 13px;
+    height: 13px;
+    border: 1.5px solid var(--color-text-meta);
+    border-radius: 50%;
+    transform: translateY(-58%);
+    pointer-events: none;
+  }
+  .search-wrap::after {
+    content: '';
+    position: absolute;
+    top: calc(50% + 5px);
+    left: 26px;
+    width: 6px;
+    height: 1.5px;
+    background: var(--color-text-meta);
+    transform: rotate(45deg);
+    transform-origin: left center;
+    pointer-events: none;
+  }
+  .search {
+    width: 100%;
+    min-height: 46px;
+    padding: var(--space-3) 44px;
+    border: var(--border-thin) solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-input);
+    color: var(--color-text-primary);
+  }
+  .search::placeholder { color: var(--color-text-placeholder); }
+  .search:focus { border-color: var(--color-border-focus); outline: none; }
+  .search-clear {
+    position: absolute;
+    top: 50%;
+    right: var(--space-2);
+    display: none;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-pill);
+    color: var(--color-text-meta);
+    transform: translateY(-50%);
+  }
+  .search-clear:hover { color: var(--color-text-primary); background: var(--color-bg-hover); }
+  .search-clear.is-visible { display: grid; place-items: center; }
+  .search-status { min-height: 1.2em; font-size: var(--font-size-12); color: var(--color-text-meta); }
+
+  .legend { display: grid; gap: var(--space-3); }
+  .legend__filters { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .filter {
+    --family-color: var(--color-accent);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 34px;
+    padding: 6px 12px;
+    border: var(--border-thin) solid var(--color-border);
+    border-radius: var(--radius-pill);
+    color: var(--color-text-secondary);
+    background: var(--color-bg-page);
+    font-size: var(--font-size-12);
+    transition: border-color var(--motion-fast) var(--motion-ease-standard),
+      background var(--motion-fast) var(--motion-ease-standard);
+  }
+  .filter::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--family-color);
+  }
+  .filter:hover { border-color: var(--family-color); color: var(--color-text-primary); }
+  .filter[aria-pressed="true"] {
+    border-color: var(--family-color);
+    color: var(--color-text-primary);
+    background: color-mix(in srgb, var(--family-color) 10%, var(--color-bg-raised));
+    box-shadow: inset 0 0 0 1px var(--family-color);
+  }
+  .filter--all::before {
+    border: 1px solid var(--color-border-strong);
+    background: linear-gradient(90deg, var(--familia-metal-alcalino) 0 33%, var(--familia-metaloide) 33% 66%, var(--familia-gas-noble) 66%);
+  }
+
+  .table-section { padding: var(--space-5); }
+  .table-section__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+  .table-section__head h2 { font-size: var(--font-size-20); }
+  .table-section__key { color: var(--color-text-meta); font-size: var(--font-size-12); }
+  .scroll-hint { display: none; margin-bottom: var(--space-2); font-size: var(--font-size-12); color: var(--color-text-meta); }
+  .table-scroll {
+    overflow-x: auto;
+    padding: var(--space-2) 0 var(--space-4);
+    overscroll-behavior-inline: contain;
+  }
+  .table-scroll:focus-visible { outline-offset: 2px; }
+  .periodic-grid {
+    width: var(--tabla-width);
+    display: grid;
+    grid-template-columns: 26px repeat(18, 63px);
+    grid-template-rows: 20px repeat(7, 82px) 18px repeat(2, 82px);
+    gap: 4px;
+    align-items: stretch;
+  }
+  .axis-label {
+    display: grid;
+    place-items: center;
+    color: var(--color-text-meta);
+    font-family: var(--font-family-mono);
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+  .series-label {
+    display: flex;
+    align-items: center;
+    color: var(--color-text-meta);
+    font-family: var(--font-family-mono);
+    font-size: 9px;
+    letter-spacing: .04em;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  .element {
+    --family-color: var(--color-accent);
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 15px 29px 14px 14px;
+    align-content: center;
+    padding: 4px 5px;
+    border: var(--border-thin) solid var(--color-border);
+    border-top: var(--border-thick) solid var(--family-color);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--family-color) 5%, var(--color-bg-raised));
+    color: var(--color-text-primary);
+    text-align: left;
+    transition: opacity var(--motion-base) var(--motion-ease-standard),
+      border-color var(--motion-fast) var(--motion-ease-standard),
+      background var(--motion-fast) var(--motion-ease-standard),
+      transform var(--motion-fast) var(--motion-ease-standard);
+  }
+  .element:hover {
+    z-index: 2;
+    border-color: var(--family-color);
+    background: color-mix(in srgb, var(--family-color) 13%, var(--color-bg-raised));
+    transform: translateY(-2px);
+  }
+  .element.is-selected {
+    z-index: 3;
+    border-color: var(--family-color);
+    background: color-mix(in srgb, var(--family-color) 16%, var(--color-bg-raised));
+    box-shadow: 0 0 0 2px var(--color-bg-raised), 0 0 0 4px var(--family-color);
+  }
+  .element.is-muted { opacity: .16; }
+  .element__number {
+    grid-column: 1;
+    color: var(--color-text-meta);
+    font-family: var(--font-family-mono);
+    font-size: 9px;
+    font-variant-numeric: tabular-nums;
+  }
+  .element__symbol {
+    grid-column: 1 / -1;
+    color: var(--color-text-primary);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-20);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+  }
+  .element__name,
+  .element__mass {
+    grid-column: 1 / -1;
+    overflow: hidden;
+    color: var(--color-text-secondary);
+    font-size: 9px;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .element__mass { color: var(--color-text-meta); font-family: var(--font-family-mono); font-size: 8.5px; }
+  .placeholder-cell {
+    display: grid;
+    place-content: center;
+    padding: 4px;
+    border: var(--border-thin) dashed var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-meta);
+    background: var(--color-bg-page);
+    font-family: var(--font-family-mono);
+    font-size: 8px;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  [data-family="no-metal"] { --family-color: var(--familia-no-metal); }
+  [data-family="gas-noble"] { --family-color: var(--familia-gas-noble); }
+  [data-family="metal-alcalino"] { --family-color: var(--familia-metal-alcalino); }
+  [data-family="alcalinoterreo"] { --family-color: var(--familia-alcalinoterreo); }
+  [data-family="metaloide"] { --family-color: var(--familia-metaloide); }
+  [data-family="halogeno"] { --family-color: var(--familia-halogeno); }
+  [data-family="metal-postransicion"] { --family-color: var(--familia-metal-postransicion); }
+  [data-family="metal-transicion"] { --family-color: var(--familia-metal-transicion); }
+  [data-family="lantanido"] { --family-color: var(--familia-lantanido); }
+  [data-family="actinido"] { --family-color: var(--familia-actinido); }
+
+  .detail {
+    --family-color: var(--color-accent);
+    display: grid;
+    grid-template-columns: minmax(150px, 220px) minmax(0, 1fr);
+    border-top: var(--border-thin) solid var(--color-border);
+    background: color-mix(in srgb, var(--family-color) 4%, var(--color-bg-raised));
+  }
+  .detail__identity {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    min-height: 220px;
+    padding: var(--space-5);
+    border-right: var(--border-thin) solid var(--color-border);
+    border-top: 5px solid var(--family-color);
+  }
+  .detail__number {
+    color: var(--color-text-meta);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-13);
+    font-variant-numeric: tabular-nums;
+  }
+  .detail__symbol {
+    grid-column: 1 / -1;
+    align-self: center;
+    color: var(--color-text-primary);
+    font-family: var(--font-family-display);
+    font-size: clamp(4.5rem, 11vw, 7.5rem);
+    font-weight: var(--font-weight-medium);
+    line-height: .8;
+  }
+  .detail__mass {
+    grid-column: 1 / -1;
+    color: var(--color-text-meta);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-13);
+  }
+  .detail__body { display: grid; align-content: center; gap: var(--space-5); padding: var(--space-6); }
+  .detail__eyebrow {
+    margin-bottom: var(--space-1);
+    color: var(--family-color);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-11);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+  }
+  .detail__name { font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1; }
+  .detail__facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
+  .fact { padding-top: var(--space-2); border-top: var(--border-thin) solid var(--color-border); }
+  .fact dt {
+    margin-bottom: 2px;
+    color: var(--color-text-meta);
+    font-family: var(--font-family-mono);
+    font-size: 10px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .fact dd { color: var(--color-text-primary); font-size: var(--font-size-14); }
+  .detail__explanation { max-width: 65ch; font-size: var(--font-size-13); line-height: 1.55; }
+  .detail__nav { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+  .element-nav {
+    min-height: 36px;
+    padding: 7px 13px;
+    border: var(--border-thin) solid var(--color-border);
+    border-radius: var(--radius-pill);
+    color: var(--color-text-secondary);
+    background: var(--color-bg-page);
+    font-size: var(--font-size-12);
+  }
+  .element-nav:hover { border-color: var(--family-color); color: var(--color-text-primary); }
+
+  .method {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(240px, .75fr);
+    gap: var(--space-7);
+    padding-block: var(--space-7) var(--space-10);
+  }
+  .method h2 { margin-bottom: var(--space-3); font-size: var(--font-size-24); }
+  .method p { max-width: 70ch; font-size: var(--font-size-13); line-height: var(--line-height-loose); }
+  .sources {
+    padding-left: var(--space-4);
+    border-left: var(--border-thin) solid var(--color-border);
+  }
+  .sources__title {
+    margin-bottom: var(--space-2);
+    color: var(--color-text-meta);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-11);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+  }
+  .sources ul { display: grid; gap: var(--space-2); }
+  .sources li { color: var(--color-text-secondary); font-size: var(--font-size-12); line-height: 1.5; }
+  .sources a { text-decoration: underline; text-decoration-color: var(--color-border-strong); }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 900px) {
+    .periodic-hero {
+      grid-template-columns: minmax(0, 1fr) 26rem;
+      gap: clamp(var(--space-8), 5vw, var(--space-11));
+      align-items: end;
+    }
+    .controls { grid-template-columns: minmax(280px, 38rem) minmax(0, 1fr); align-items: end; }
+  }
+
+  @media (max-width: 800px) {
+    .trail__optional { display: none; }
+    .scroll-hint { display: block; }
+    .table-section { padding-inline: var(--space-4); }
+    .detail { grid-template-columns: 140px minmax(0, 1fr); }
+    .detail__identity { min-height: 240px; padding: var(--space-4); }
+    .detail__body { padding: var(--space-5); }
+    .detail__facts { grid-template-columns: 1fr 1fr; }
+    .method { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .shell { padding-inline: var(--space-4); }
+    .topbar__inner { min-height: 56px; }
+    .trail { font-size: 9px; }
+    .periodic-hero { padding-top: var(--space-7); }
+    .periodic-hero h1 { font-size: 2.5rem; }
+    .controls { padding: var(--space-4); }
+    .table-section { padding-inline: var(--space-3); }
+    .table-section__head { align-items: start; flex-direction: column; gap: var(--space-1); }
+    .detail { grid-template-columns: 1fr; }
+    .detail__identity {
+      min-height: 144px;
+      grid-template-columns: 54px minmax(0, 1fr) auto;
+      grid-template-rows: auto 1fr;
+      align-items: center;
+      border-right: 0;
+      border-bottom: var(--border-thin) solid var(--color-border);
+    }
+    .detail__number { grid-column: 1; grid-row: 1; }
+    .detail__symbol { grid-column: 1; grid-row: 2; font-size: 3.6rem; }
+    .detail__mass { grid-column: 2 / -1; grid-row: 2; align-self: end; }
+    .detail__body { padding: var(--space-4); }
+    .detail__facts { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<script defer src="/tercial/assets/js/theme.js"></script>
+<script type="module" src="./tabla-periodica.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#tabla">Saltar a la tabla periódica</a>
+
+<header class="topbar">
+  <div class="shell topbar__inner">
+    <a class="brand" href="/tercial/">Tercial</a>
+    <nav class="trail" aria-label="Ubicación">
+      <span>ECOEMS</span>
+      <span class="trail__divider" aria-hidden="true">/</span>
+      <a class="trail__link" href="./index.html">Química</a>
+      <span class="trail__divider trail__optional" aria-hidden="true">/</span>
+      <span class="trail__optional">Consulta</span>
+    </nav>
+    <div class="topbar__actions">
+      <button class="site-nav__theme" type="button" aria-label="Cambiar modo de color">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-sunmoon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 4.9-1.4 1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="shell periodic-hero" aria-labelledby="page-title">
+    <div class="periodic-hero__copy">
+      <p class="periodic-hero__eyebrow">Química · consulta visual</p>
+      <h1 id="page-title">La tabla <em>periódica</em></h1>
+      <p class="periodic-hero__lede">Explora los 118 elementos sin perder su lugar. Busca por nombre,
+        símbolo o número atómico; filtra por familia y abre cada elemento para leer su posición.</p>
+    </div>
+    <aside class="periodic-hero__note" aria-label="Estado de esta pieza">
+      <p class="periodic-hero__note-label">Primera versión</p>
+      <p>Esta pieza abre el espacio de Química ECOEMS. Su clasificación es didáctica: algunas
+        fronteras entre familias pueden variar según la fuente.</p>
+    </aside>
+  </section>
+
+  <section class="shell" aria-label="Herramienta de consulta">
+    <div class="tool">
+      <div class="controls">
+        <div class="search-group">
+          <label for="elementSearch">Encontrar un elemento</label>
+          <div class="search-wrap">
+            <input class="search" id="elementSearch" type="search" autocomplete="off"
+              placeholder="Ej. oxígeno, Fe o 79" aria-describedby="searchStatus">
+            <button class="search-clear" id="searchClear" type="button" aria-label="Limpiar búsqueda">×</button>
+          </div>
+          <p class="search-status" id="searchStatus" aria-live="polite">118 elementos disponibles.</p>
+        </div>
+
+        <div class="legend" aria-labelledby="legendTitle">
+          <p class="legend__title" id="legendTitle">Filtrar por familia</p>
+          <div class="legend__filters" id="familyFilters"></div>
+        </div>
+      </div>
+
+      <section class="table-section" id="tabla" aria-labelledby="tableTitle">
+        <div class="table-section__head">
+          <h2 id="tableTitle">Elementos por grupo y periodo</h2>
+          <p class="table-section__key">Z · símbolo · nombre · masa</p>
+        </div>
+        <p class="scroll-hint">Desliza horizontalmente para recorrer los 18 grupos.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Tabla periódica desplazable">
+          <div class="periodic-grid" id="periodicGrid" aria-label="118 elementos químicos"></div>
+        </div>
+      </section>
+
+      <section class="detail" id="elementDetail" data-family="no-metal" aria-labelledby="detailName" aria-live="polite">
+        <div class="detail__identity">
+          <span class="detail__number" id="detailNumber">1</span>
+          <span class="detail__symbol" id="detailSymbol">H</span>
+          <span class="detail__mass" id="detailMass">1.0080</span>
+        </div>
+        <div class="detail__body">
+          <div>
+            <p class="detail__eyebrow" id="detailFamily">Otros no metales</p>
+            <h2 class="detail__name" id="detailName">Hidrógeno</h2>
+          </div>
+          <dl class="detail__facts">
+            <div class="fact"><dt>Número atómico</dt><dd id="detailAtomicNumber">1</dd></div>
+            <div class="fact"><dt>Periodo</dt><dd id="detailPeriod">1</dd></div>
+            <div class="fact"><dt>Grupo</dt><dd id="detailGroup">1</dd></div>
+          </dl>
+          <p class="detail__explanation" id="detailExplanation">Ocupa el periodo 1 y el grupo 1.</p>
+          <div class="detail__nav" aria-label="Recorrer elementos">
+            <button class="element-nav" id="previousElement" type="button">← Anterior</button>
+            <button class="element-nav" id="nextElement" type="button">Siguiente →</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="shell method" aria-labelledby="readingTitle">
+    <div>
+      <h2 id="readingTitle">Cómo leer esta tabla</h2>
+      <p>Las columnas son <strong>grupos</strong> y las filas son <strong>periodos</strong>. Cada
+        casilla muestra número atómico, símbolo, nombre y peso atómico estándar abreviado. Cuando
+        aparece un valor entre corchetes, no es un peso atómico estándar: es el número de masa del
+        nucleido de vida media más larga usado por IUPAC para representar ese elemento.</p>
+    </div>
+    <aside class="sources" aria-labelledby="sourcesTitle">
+      <p class="sources__title" id="sourcesTitle">Fuentes y criterio</p>
+      <ul>
+        <li><a href="https://iupac.org/what-we-do/periodic-table-of-elements/">IUPAC · tabla periódica, versión 4 mayo 2022</a></li>
+        <li><a href="https://www.ciaaw.org/abridged-atomic-weights.htm">CIAAW · pesos atómicos abreviados 2024</a></li>
+        <li><a href="https://rseq.org/mat-didacticos/nombres-y-simbolos-en-espanol-de-los-elementos-aceptados-por-la-iupac-el-28-de-noviembre-de-2016-acordados-por-la-rac-la-rae-la-rseq-y-la-fundeu/">RSEQ · nombres y símbolos en español</a></li>
+      </ul>
+    </aside>
+  </section>
+</main>
+
+<noscript>
+  <p class="shell">Activa JavaScript para construir la tabla y consultar sus elementos.</p>
+</noscript>
+</body>
+</html>

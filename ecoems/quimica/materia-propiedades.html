@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-nivel="prepa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Materia y sus propiedades · Química ECOEMS · Tercial</title>
+<meta name="description" content="Distingue propiedades físicas, químicas, extensivas e intensivas de la materia.">
+
+<script>
+  (function () {
+    var p = 'auto';
+    try { p = localStorage.getItem('tercial-theme-pref') || 'auto'; } catch (_) {}
+    var d = p === 'auto'
+      ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : p;
+    var r = document.documentElement;
+    r.setAttribute('data-theme', d);
+    r.setAttribute('data-theme-pref', p);
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/tercial/assets/css/tokens.css">
+<link rel="stylesheet" href="/tercial/assets/css/base.css">
+<link rel="stylesheet" href="/tercial/assets/css/components.css">
+<link rel="stylesheet" href="./quimica-material.css?v=20260825-motion">
+<script defer src="/tercial/assets/js/theme.js"></script>
+<script defer src="/tercial/assets/js/site-nav.js"></script>
+</head>
+<body>
+
+<site-nav></site-nav>
+
+<main class="container container--base">
+  <header class="hero">
+    <p class="eyebrow">Tema 01 · 1 de 6 · Aprende</p>
+    <h1 class="hero__title">Materia y sus <em>propiedades</em></h1>
+    <p class="hero__lede">Reconoce qué es la materia y distingue las propiedades que podemos
+      observar o medir de las que describen cómo puede transformarse una sustancia.</p>
+    <nav class="material-meta" aria-label="Navegación y etiquetas del material">
+      <a class="material-meta__back" href="./index.html">← Química</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=materia#courseIndex">materia</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=propiedades%20físicas#courseIndex">propiedades físicas</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=propiedades%20químicas#courseIndex">propiedades químicas</a>
+    </nav>
+  </header>
+
+  <section aria-labelledby="ideaCentral">
+    <header class="section-header">
+      <h2 class="section-header__title" id="ideaCentral">
+        <span class="lesson-section__kicker">Comienza aquí</span> Idea central
+      </h2>
+    </header>
+    <article class="reading-block">
+      <header class="reading-block__header">
+        <p class="reading-block__kicker">Punto de partida</p>
+        <h3 class="reading-block__title">¿Qué es la <em>materia</em>?</h3>
+      </header>
+      <div class="reading-block__body">
+        <p>La materia es todo aquello que ocupa un lugar en el espacio y tiene masa.</p>
+        <p>Para describirla usamos propiedades. Algunas pueden observarse o medirse sin cambiar la
+          identidad de la sustancia; otras sólo se manifiestan cuando la sustancia participa en una
+          transformación química.</p>
+      </div>
+      <footer class="source-line">
+        <span>Fuente QUA-001 · p. 5</span>
+        <span>Lectura · 4 min</span>
+      </footer>
+    </article>
+  </section>
+
+  <section aria-labelledby="tiposPropiedad">
+    <header class="section-header">
+      <h2 class="section-header__title" id="tiposPropiedad">
+        <span class="lesson-section__kicker">Compara</span> Dos maneras de describirla
+      </h2>
+    </header>
+    <div class="comparison-grid">
+      <article class="comparison-item">
+        <header class="comparison-item__header">
+          <p class="comparison-item__kicker">Sin formar otra sustancia</p>
+          <h3 class="comparison-item__title">Propiedades <em>físicas</em></h3>
+        </header>
+        <div class="comparison-item__body">
+          <p>Se observan o miden sin alterar la composición de la materia.</p>
+          <ul class="example-list" aria-label="Ejemplos de propiedades físicas">
+            <li>color</li>
+            <li>olor</li>
+            <li>sabor</li>
+            <li>densidad</li>
+            <li>punto de fusión</li>
+            <li>punto de ebullición</li>
+          </ul>
+        </div>
+      </article>
+      <article class="comparison-item">
+        <header class="comparison-item__header">
+          <p class="comparison-item__kicker">Al poder transformarse</p>
+          <h3 class="comparison-item__title">Propiedades <em>químicas</em></h3>
+        </header>
+        <div class="comparison-item__body">
+          <p>Describen cómo una sustancia puede convertirse en otra al interactuar con otras
+            sustancias o bajo ciertas condiciones.</p>
+          <ul class="example-list" aria-label="Ejemplos de propiedades químicas">
+            <li>oxidación</li>
+            <li>inflamabilidad</li>
+            <li>reacción con ácidos</li>
+            <li>comportamiento ácido o básico</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="cantidadMateria">
+    <header class="section-header">
+      <h2 class="section-header__title" id="cantidadMateria">
+        <span class="lesson-section__kicker">Afina la idea</span> ¿Dependen de la cantidad?
+      </h2>
+    </header>
+    <div class="comparison-grid">
+      <article class="comparison-item">
+        <header class="comparison-item__header"><h3 class="comparison-item__title">Propiedades extensivas</h3></header>
+        <div class="comparison-item__body">
+          <p>Dependen de cuánta materia hay. Si cambia la cantidad de la muestra, también cambia el
+            valor de la propiedad.</p>
+          <ul class="example-list" aria-label="Ejemplos de propiedades extensivas">
+            <li>masa</li><li>peso</li><li>longitud</li><li>volumen</li>
+          </ul>
+        </div>
+      </article>
+      <article class="comparison-item">
+        <header class="comparison-item__header"><h3 class="comparison-item__title">Propiedades intensivas</h3></header>
+        <div class="comparison-item__body">
+          <p>No dependen de la cantidad y por eso ayudan a identificar o comparar sustancias.</p>
+          <ul class="example-list" aria-label="Ejemplos de propiedades intensivas">
+            <li>densidad</li><li>fusión</li><li>ebullición</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="practicaPropiedades">
+    <header class="section-header">
+      <h2 class="section-header__title" id="practicaPropiedades">
+        <span class="lesson-section__kicker">Practica</span> Prueba la clasificación
+      </h2>
+      <span class="section-header__count">12 ejemplos</span>
+    </header>
+    <p class="section-intro">Decide si cada propiedad es física o química; después abre la fila para comprobar.</p>
+    <p class="source-note">Ejercicios del material fuente QUA-001 · p. 5</p>
+    <div class="exercise-list">
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">01</span><div class="exercise__statement"><p class="exercise__text">Maleabilidad</p><p class="exercise__hint">¿Puede observarse al deformar el material sin producir otra sustancia?</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Física. Describe la capacidad de formar láminas sin cambiar la composición.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">02</span><div class="exercise__statement"><p class="exercise__text">Oxidación</p><p class="exercise__hint">Durante el proceso aparecen sustancias distintas.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Química. Indica la capacidad de reaccionar mediante una oxidación.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">03</span><div class="exercise__statement"><p class="exercise__text">Estado de agregación</p><p class="exercise__hint">Sólido, líquido o gas pueden identificarse sin cambiar la identidad.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Física.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">04</span><div class="exercise__statement"><p class="exercise__text">Capacidad de formar bases</p><p class="exercise__hint">Describe el comportamiento de la sustancia en una reacción.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Química.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">05</span><div class="exercise__statement"><p class="exercise__text">Inflamabilidad</p><p class="exercise__hint">La combustión transforma reactivos en productos nuevos.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Química.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">06</span><div class="exercise__statement"><p class="exercise__text">Color</p><p class="exercise__hint">Puede observarse directamente.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Física.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">07</span><div class="exercise__statement"><p class="exercise__text">Porosidad</p><p class="exercise__hint">Describe la estructura observable del material.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Física.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">08</span><div class="exercise__statement"><p class="exercise__text">Olor</p><p class="exercise__hint">Se percibe con los sentidos sin producir otra sustancia.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Física.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">09</span><div class="exercise__statement"><p class="exercise__text">Punto de fusión</p><p class="exercise__hint">Es una temperatura característica de cambio de estado.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Física e intensiva.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">10</span><div class="exercise__statement"><p class="exercise__text">Punto de ebullición</p><p class="exercise__hint">No depende de la cantidad de la muestra a una presión dada.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Física e intensiva.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">11</span><div class="exercise__statement"><p class="exercise__text">Ductilidad</p><p class="exercise__hint">Describe la capacidad de formar hilos.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Física.</p></div></details>
+      <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">12</span><div class="exercise__statement"><p class="exercise__text">Reactividad con ácidos</p><p class="exercise__hint">Sólo se reconoce al observar una interacción química.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__answer"><p class="exercise__answer-label">Respuesta</p><p class="exercise__answer-text">Química.</p></div></details>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer__brand"><em>Tercial</em> · ECOEMS · Química</p>
+  <nav class="site-footer__links" aria-label="Navegación del material">
+    <a href="./index.html">Índice de Química</a>
+    <a href="./cambios-materia.html">Siguiente: cambios →</a>
+  </nav>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-nivel="prepa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Estados de agregación · Química ECOEMS · Tercial</title>
+<meta name="description" content="Compara sólido, líquido, gas y plasma, y reconoce los cambios de estado de la materia.">
+
+<script>
+  (function () {
+    var p = 'auto';
+    try { p = localStorage.getItem('tercial-theme-pref') || 'auto'; } catch (_) {}
+    var d = p === 'auto'
+      ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : p;
+    var r = document.documentElement;
+    r.setAttribute('data-theme', d);
+    r.setAttribute('data-theme-pref', p);
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/tercial/assets/css/tokens.css">
+<link rel="stylesheet" href="/tercial/assets/css/base.css">
+<link rel="stylesheet" href="/tercial/assets/css/components.css">
+<link rel="stylesheet" href="./quimica-material.css?v=20260825-ejemplos-cambios">
+<script defer src="/tercial/assets/js/theme.js"></script>
+<script defer src="/tercial/assets/js/site-nav.js"></script>
+<script defer src="./estados-particulas.js?v=20260825-collisions"></script>
+<script defer src="./estados-practica.js?v=20260825-validacion"></script>
+</head>
+<body>
+
+<site-nav></site-nav>
+
+<main class="container container--base">
+  <header class="hero">
+    <p class="eyebrow">Tema 01 · 3 de 6 · Aprende y practica</p>
+    <h1 class="hero__title">Estados de <em>agregación</em></h1>
+    <p class="hero__lede">La sustancia puede ser la misma y, aun así, verse y comportarse de forma
+      distinta. La clave está en cómo se organizan, se mueven e interactúan sus partículas.</p>
+    <nav class="material-meta" aria-label="Navegación y etiquetas del material">
+      <a class="material-meta__back" href="./index.html">← Química</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=sólido#courseIndex">sólido</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=líquido#courseIndex">líquido</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=gas#courseIndex">gas</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=cambios%20de%20estado#courseIndex">cambios de estado</a>
+    </nav>
+  </header>
+
+  <section aria-labelledby="modeloParticulas">
+    <header class="section-header">
+      <h2 class="section-header__title" id="modeloParticulas">
+        <span class="lesson-section__kicker">Idea central</span> Una sustancia, distintas organizaciones
+      </h2>
+    </header>
+    <article class="reading-block">
+      <header class="reading-block__header">
+        <p class="reading-block__kicker">Modelo de partículas</p>
+        <h3 class="reading-block__title">No cambia la identidad; cambia la <em>disposición</em></h3>
+      </header>
+      <div class="reading-block__body">
+        <p>En un cambio de estado no se forma una sustancia nueva. Las partículas conservan su
+          identidad, pero cambia su separación, su libertad de movimiento y la fuerza con la que se atraen.</p>
+        <p>Por eso el hielo, el agua líquida y el vapor siguen siendo H<sub>2</sub>O.</p>
+      </div>
+      <footer class="source-line">
+        <span>Fuente QUA-001 · pp. 6–7</span>
+        <span>Lectura · 7 min</span>
+      </footer>
+    </article>
+  </section>
+
+  <section aria-labelledby="tresEstados">
+    <header class="section-header">
+      <h2 class="section-header__title" id="tresEstados">
+        <span class="lesson-section__kicker">Compara</span> Estados de agregación de la materia
+      </h2>
+    </header>
+    <div class="reference-table-wrap" role="region" aria-labelledby="tresEstados" tabindex="0">
+      <table class="reference-table">
+        <caption class="visually-hidden">Comparación de las propiedades de sólidos, líquidos y gases</caption>
+        <thead>
+          <tr>
+            <th scope="col">Propiedad</th>
+            <th scope="col">Sólido</th>
+            <th scope="col">Líquido</th>
+            <th scope="col">Gas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Volumen</th>
+            <td>Definido</td>
+            <td>Definido</td>
+            <td>Ocupa el volumen disponible</td>
+          </tr>
+          <tr>
+            <th scope="row">Forma</th>
+            <td>Definida</td>
+            <td>Adopta la forma del recipiente</td>
+            <td>Adopta la forma del recipiente</td>
+          </tr>
+          <tr>
+            <th scope="row">Atracción</th>
+            <td>Intensa</td>
+            <td>Intermedia</td>
+            <td>Muy débil en el modelo escolar</td>
+          </tr>
+          <tr>
+            <th scope="row">Separación</th>
+            <td>Partículas muy próximas</td>
+            <td>Partículas próximas</td>
+            <td>Partículas muy separadas</td>
+          </tr>
+          <tr>
+            <th scope="row">Movimiento</th>
+            <td>Vibran alrededor de posiciones fijas</td>
+            <td>Se deslizan unas sobre otras</td>
+            <td>Se desplazan libremente</td>
+          </tr>
+          <tr>
+            <th scope="row">Compresibilidad</th>
+            <td>Muy baja</td>
+            <td>Muy baja</td>
+            <td>Alta</td>
+          </tr>
+          <tr class="reference-table__models">
+            <th scope="row">Representación</th>
+            <td>
+              <svg class="particle-model particle-model--solid" viewBox="0 0 180 120" role="img" aria-labelledby="solidTitle">
+                <title id="solidTitle">Partículas de un sólido que vibran suavemente sin cambiar de posición</title>
+                <rect class="particle-model__frame" x="12" y="12" width="156" height="96" rx="2"/>
+                <g class="particle-model__particle">
+                  <circle cx="57" cy="38" r="7"/><circle cx="79" cy="38" r="7"/><circle cx="101" cy="38" r="7"/><circle cx="123" cy="38" r="7"/>
+                  <circle cx="57" cy="60" r="7"/><circle cx="79" cy="60" r="7"/><circle cx="101" cy="60" r="7"/><circle cx="123" cy="60" r="7"/>
+                  <circle cx="57" cy="82" r="7"/><circle cx="79" cy="82" r="7"/><circle cx="101" cy="82" r="7"/><circle cx="123" cy="82" r="7"/>
+                </g>
+              </svg>
+            </td>
+            <td>
+              <svg class="particle-model particle-model--liquid" viewBox="0 0 180 120" role="img" aria-labelledby="liquidTitle">
+                <title id="liquidTitle">Partículas de un líquido que permanecen próximas y se deslizan lentamente</title>
+                <rect class="particle-model__frame" x="12" y="12" width="156" height="96" rx="2"/>
+                <g class="particle-model__particle">
+                  <circle cx="38" cy="91" r="7"/><circle cx="66" cy="86" r="7"/><circle cx="94" cy="94" r="7"/><circle cx="123" cy="87" r="7"/><circle cx="147" cy="96" r="7"/>
+                  <circle cx="49" cy="64" r="7"/><circle cx="80" cy="69" r="7"/><circle cx="111" cy="60" r="7"/><circle cx="140" cy="67" r="7"/>
+                  <circle cx="67" cy="39" r="7"/><circle cx="101" cy="42" r="7"/><circle cx="132" cy="35" r="7"/>
+                </g>
+              </svg>
+            </td>
+            <td>
+              <svg class="particle-model particle-model--gas" viewBox="0 0 180 120" role="img" aria-labelledby="gasTitle">
+                <title id="gasTitle">Partículas de un gas que recorren lentamente el recipiente y rebotan cuando sus bordes se tocan</title>
+                <rect class="particle-model__frame" x="12" y="12" width="156" height="96" rx="2"/>
+                <g class="particle-model__particle">
+                  <circle cx="34" cy="32" r="7"/><circle cx="90" cy="25" r="7"/><circle cx="146" cy="35" r="7"/>
+                  <circle cx="54" cy="82" r="7"/><circle cx="110" cy="70" r="7"/><circle cx="150" cy="94" r="7"/>
+                </g>
+              </svg>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="editorial-note">La tabla resume el modelo que se usa en secundaria. Las representaciones
+      están animadas para mostrar cómo cambia la libertad de movimiento de las partículas.</p>
+    <p class="editorial-note">El plasma es un gas ionizado con partículas cargadas; aparece, por
+      ejemplo, en las estrellas y en algunas descargas eléctricas. Se incluye como ampliación del modelo básico.</p>
+  </section>
+
+  <section aria-labelledby="cambiosEstado">
+    <header class="section-header">
+      <h2 class="section-header__title" id="cambiosEstado">
+        <span class="lesson-section__kicker">Sigue el cambio</span> Cómo se llama cada cambio
+      </h2>
+      <span class="section-header__count">6 recorridos · 7 nombres</span>
+    </header>
+    <figure class="phase-change-diagram">
+      <svg class="phase-change-diagram__svg phase-change-diagram__svg--desktop" viewBox="0 0 700 390" role="img" aria-labelledby="phaseChangeTitle phaseChangeDesc">
+        <title id="phaseChangeTitle">Cambios entre sólido, líquido y gaseoso</title>
+        <desc id="phaseChangeDesc">Las letras S, G y L aparecen dentro de círculos y forman un triángulo. Seis flechas continuas muestran los cambios de estado. La deposición también se identifica como sublimación inversa.</desc>
+        <defs>
+          <marker id="phaseChangeArrowAccent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-accent)"/>
+          </marker>
+          <marker id="phaseChangeArrowNeutral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-text-secondary)"/>
+          </marker>
+        </defs>
+
+        <circle class="phase-change-diagram__node" cx="90" cy="90" r="31"/>
+        <text class="phase-change-diagram__node-label" x="90" y="90">S</text>
+        <circle class="phase-change-diagram__node" cx="610" cy="90" r="31"/>
+        <text class="phase-change-diagram__node-label" x="610" y="90">G</text>
+        <circle class="phase-change-diagram__node" cx="350" cy="335" r="31"/>
+        <text class="phase-change-diagram__node-label" x="350" y="335">L</text>
+
+        <path class="phase-change-diagram__line phase-change-diagram__line--neutral" d="M 132 80 L 568 80" marker-end="url(#phaseChangeArrowNeutral)"/>
+        <text class="phase-change-diagram__label phase-change-diagram__label--neutral" x="350" y="70">Sublimación</text>
+        <path class="phase-change-diagram__line" d="M 568 100 L 132 100" marker-end="url(#phaseChangeArrowAccent)"/>
+        <text class="phase-change-diagram__label" x="350" y="119">Deposición (sublimación inversa)</text>
+
+        <path class="phase-change-diagram__line" d="M 117 116 L 324 308" marker-end="url(#phaseChangeArrowAccent)"/>
+        <text class="phase-change-diagram__label" x="226.6" y="205.4" transform="rotate(43 226.6 205.4)">Fusión</text>
+        <path class="phase-change-diagram__line phase-change-diagram__line--neutral" d="M 310.4 322.7 L 103.4 130.7" marker-end="url(#phaseChangeArrowNeutral)"/>
+        <text class="phase-change-diagram__label phase-change-diagram__label--neutral" x="194.8" y="239.9" transform="rotate(43 194.8 239.9)">Solidificación</text>
+
+        <path class="phase-change-diagram__line" d="M 376 308 L 583 116" marker-end="url(#phaseChangeArrowAccent)"/>
+        <text class="phase-change-diagram__label" x="473.4" y="205.4" transform="rotate(-43 473.4 205.4)">Evaporación</text>
+        <path class="phase-change-diagram__line phase-change-diagram__line--neutral" d="M 596.6 130.7 L 389.6 322.7" marker-end="url(#phaseChangeArrowNeutral)"/>
+        <g transform="rotate(-43 493 226.7)">
+          <text class="phase-change-diagram__label phase-change-diagram__label--neutral" x="493" y="244.7">Condensación (T)</text>
+          <text class="phase-change-diagram__label phase-change-diagram__label--neutral" x="493" y="264.7">Licuefacción (P)</text>
+        </g>
+      </svg>
+
+      <svg class="phase-change-diagram__svg phase-change-diagram__svg--mobile" viewBox="0 0 340 400" role="img" aria-label="Cambios entre sólido, líquido y gaseoso adaptados a pantalla estrecha">
+        <defs>
+          <marker id="phaseChangeMobileArrowAccent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-accent)"/>
+          </marker>
+          <marker id="phaseChangeMobileArrowNeutral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--color-text-secondary)"/>
+          </marker>
+        </defs>
+
+        <circle class="phase-change-diagram__node" cx="45" cy="120" r="26"/>
+        <text class="phase-change-diagram__node-label" x="45" y="120">S</text>
+        <circle class="phase-change-diagram__node" cx="295" cy="120" r="26"/>
+        <text class="phase-change-diagram__node-label" x="295" y="120">G</text>
+        <circle class="phase-change-diagram__node" cx="170" cy="360" r="26"/>
+        <text class="phase-change-diagram__node-label" x="170" y="360">L</text>
+
+        <path class="phase-change-diagram__line phase-change-diagram__line--neutral" d="M 82 110 L 258 110" marker-end="url(#phaseChangeMobileArrowNeutral)"/>
+        <text class="phase-change-diagram__label phase-change-diagram__label--neutral" x="170" y="100">Sublimación</text>
+        <path class="phase-change-diagram__line" d="M 258 130 L 82 130" marker-end="url(#phaseChangeMobileArrowAccent)"/>
+        <text class="phase-change-diagram__label" x="170" y="149">Deposición</text>
+        <text class="phase-change-diagram__label" x="170" y="168">(sublimación inversa)</text>
+
+        <path class="phase-change-diagram__line" d="M 72 146 L 155 329" marker-end="url(#phaseChangeMobileArrowAccent)"/>
+        <text class="phase-change-diagram__label" x="121.7" y="233.8" transform="rotate(66 121.7 233.8)">Fusión</text>
+        <path class="phase-change-diagram__line phase-change-diagram__line--neutral" d="M 136.8 337.3 L 53.8 154.3" marker-end="url(#phaseChangeMobileArrowNeutral)"/>
+        <text class="phase-change-diagram__label phase-change-diagram__label--neutral" x="78.9" y="253.2" transform="rotate(66 78.9 253.2)">Solidificación</text>
+
+        <path class="phase-change-diagram__line" d="M 185 329 L 268 146" marker-end="url(#phaseChangeMobileArrowAccent)"/>
+        <text class="phase-change-diagram__label" x="218.3" y="233.8" transform="rotate(-66 218.3 233.8)">Evaporación</text>
+        <path class="phase-change-diagram__line phase-change-diagram__line--neutral" d="M 286.2 154.3 L 203.2 337.3" marker-end="url(#phaseChangeMobileArrowNeutral)"/>
+        <g transform="rotate(-66 244.7 245.8)">
+          <text class="phase-change-diagram__label phase-change-diagram__label--neutral" x="244.7" y="263.8">Condensación (T)</text>
+          <text class="phase-change-diagram__label phase-change-diagram__label--neutral" x="244.7" y="283.8">Licuefacción (P)</text>
+        </g>
+      </svg>
+    </figure>
+    <div class="phase-change-examples" aria-labelledby="phaseChangeExamplesTitle">
+      <h3 class="phase-change-examples__title" id="phaseChangeExamplesTitle">Ejemplos para reconocerlos</h3>
+      <dl class="phase-change-examples__list">
+        <div><dt>Fusión</dt><dd>Un cubo de hielo se derrite.</dd></div>
+        <div><dt>Solidificación</dt><dd>El agua se congela para formar hielo.</dd></div>
+        <div><dt>Evaporación</dt><dd>La ropa mojada se seca al aire.</dd></div>
+        <div><dt>Condensación</dt><dd>Aparecen gotitas de agua sobre una bebida fría.</dd></div>
+        <div><dt>Licuefacción</dt><dd>El gas butano se almacena en tanques como líquido mediante presión.</dd></div>
+        <div><dt>Sublimación</dt><dd>El yodo, la naftalina y el hielo seco pasan directamente de sólido a gas.</dd></div>
+        <div><dt>Deposición</dt><dd>Los vapores de yodo vuelven al estado sólido al enfriarse.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section aria-labelledby="practicaEstados">
+    <header class="section-header">
+      <h2 class="section-header__title" id="practicaEstados">
+        <span class="lesson-section__kicker">Practica</span> Reconoce el estado o el cambio
+      </h2>
+      <span class="section-header__count">20 situaciones</span>
+    </header>
+    <p class="section-intro">Abre cada situación y elige una respuesta. Al terminar podrás validar
+      tu trabajo: la página indicará cuáles debes revisar, pero no mostrará las soluciones.</p>
+    <p class="source-note">Ejercicios del material fuente QUA-001 · pp. 6–7</p>
+    <form data-practice-form autocomplete="off">
+      <h3 class="practice-group__title">Cómo se comporta cada estado</h3>
+      <div class="exercise-list">
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">01</span><div class="exercise__statement"><p class="exercise__text">Las fuerzas de atracción y repulsión están equilibradas.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="estado-01">Tu respuesta</label><select class="select exercise__select" id="estado-01" name="estado-01" data-response><option value="">Elige una opción</option><option>Sólido</option><option>Líquido</option><option>Gas</option><option>Sólido y líquido</option><option>Líquido y gas</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">02</span><div class="exercise__statement"><p class="exercise__text">Tiene volumen propio y forma definida.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="estado-02">Tu respuesta</label><select class="select exercise__select" id="estado-02" name="estado-02" data-response><option value="">Elige una opción</option><option>Sólido</option><option>Líquido</option><option>Gas</option><option>Sólido y líquido</option><option>Líquido y gas</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">03</span><div class="exercise__statement"><p class="exercise__text">Las fuerzas de atracción entre sus moléculas son prácticamente nulas.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="estado-03">Tu respuesta</label><select class="select exercise__select" id="estado-03" name="estado-03" data-response><option value="">Elige una opción</option><option>Sólido</option><option>Líquido</option><option>Gas</option><option>Sólido y líquido</option><option>Líquido y gas</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">04</span><div class="exercise__statement"><p class="exercise__text">La atracción entre sus moléculas es muy alta.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="estado-04">Tu respuesta</label><select class="select exercise__select" id="estado-04" name="estado-04" data-response><option value="">Elige una opción</option><option>Sólido</option><option>Líquido</option><option>Gas</option><option>Sólido y líquido</option><option>Líquido y gas</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">05</span><div class="exercise__statement"><p class="exercise__text">Los espacios intermoleculares son muy grandes.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="estado-05">Tu respuesta</label><select class="select exercise__select" id="estado-05" name="estado-05" data-response><option value="">Elige una opción</option><option>Sólido</option><option>Líquido</option><option>Gas</option><option>Sólido y líquido</option><option>Líquido y gas</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">06</span><div class="exercise__statement"><p class="exercise__text">Tiene volumen propio y adopta la forma del recipiente que lo contiene.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="estado-06">Tu respuesta</label><select class="select exercise__select" id="estado-06" name="estado-06" data-response><option value="">Elige una opción</option><option>Sólido</option><option>Líquido</option><option>Gas</option><option>Sólido y líquido</option><option>Líquido y gas</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">07</span><div class="exercise__statement"><p class="exercise__text">Su volumen se reduce con facilidad: es compresible.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="estado-07">Tu respuesta</label><select class="select exercise__select" id="estado-07" name="estado-07" data-response><option value="">Elige una opción</option><option>Sólido</option><option>Líquido</option><option>Gas</option><option>Sólido y líquido</option><option>Líquido y gas</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">08</span><div class="exercise__statement"><p class="exercise__text">Las distancias intermoleculares son muy pequeñas.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="estado-08">Tu respuesta</label><select class="select exercise__select" id="estado-08" name="estado-08" data-response><option value="">Elige una opción</option><option>Sólido</option><option>Líquido</option><option>Gas</option><option>Sólido y líquido</option><option>Líquido y gas</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">09</span><div class="exercise__statement"><p class="exercise__text">Fluye.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="estado-09">Tu respuesta</label><select class="select exercise__select" id="estado-09" name="estado-09" data-response><option value="">Elige una opción</option><option>Sólido</option><option>Líquido</option><option>Gas</option><option>Sólido y líquido</option><option>Líquido y gas</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">10</span><div class="exercise__statement"><p class="exercise__text">Es prácticamente incompresible.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="estado-10">Tu respuesta</label><select class="select exercise__select" id="estado-10" name="estado-10" data-response><option value="">Elige una opción</option><option>Sólido</option><option>Líquido</option><option>Gas</option><option>Sólido y líquido</option><option>Líquido y gas</option></select></div></details>
+      </div>
+
+      <h3 class="practice-group__title">Qué cambio de estado ocurrió</h3>
+      <div class="exercise-list">
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">01</span><div class="exercise__statement"><p class="exercise__text">Formación de nubes.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="cambio-01">Tu respuesta</label><select class="select exercise__select" id="cambio-01" name="cambio-01" data-response><option value="">Elige una opción</option><option>Fusión</option><option>Solidificación</option><option>Vaporización</option><option>Ebullición</option><option>Condensación</option><option>Licuefacción</option><option>Sublimación</option><option>Deposición</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">02</span><div class="exercise__statement"><p class="exercise__text">El deshielo de un glaciar.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="cambio-02">Tu respuesta</label><select class="select exercise__select" id="cambio-02" name="cambio-02" data-response><option value="">Elige una opción</option><option>Fusión</option><option>Solidificación</option><option>Vaporización</option><option>Ebullición</option><option>Condensación</option><option>Licuefacción</option><option>Sublimación</option><option>Deposición</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">03</span><div class="exercise__statement"><p class="exercise__text">El café hirviendo en una olla.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="cambio-03">Tu respuesta</label><select class="select exercise__select" id="cambio-03" name="cambio-03" data-response><option value="">Elige una opción</option><option>Fusión</option><option>Solidificación</option><option>Vaporización</option><option>Ebullición</option><option>Condensación</option><option>Licuefacción</option><option>Sublimación</option><option>Deposición</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">04</span><div class="exercise__statement"><p class="exercise__text">En un refrigerador sin escarcha, una corriente de aire hace desaparecer el hielo sin dejar rastro líquido.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="cambio-04">Tu respuesta</label><select class="select exercise__select" id="cambio-04" name="cambio-04" data-response><option value="">Elige una opción</option><option>Fusión</option><option>Solidificación</option><option>Vaporización</option><option>Ebullición</option><option>Condensación</option><option>Licuefacción</option><option>Sublimación</option><option>Deposición</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">05</span><div class="exercise__statement"><p class="exercise__text">Aparecen gotitas de rocío sobre las plantas cuando las noches son frías.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="cambio-05">Tu respuesta</label><select class="select exercise__select" id="cambio-05" name="cambio-05" data-response><option value="">Elige una opción</option><option>Fusión</option><option>Solidificación</option><option>Vaporización</option><option>Ebullición</option><option>Condensación</option><option>Licuefacción</option><option>Sublimación</option><option>Deposición</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">06</span><div class="exercise__statement"><p class="exercise__text">La elaboración de una paleta de hielo.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="cambio-06">Tu respuesta</label><select class="select exercise__select" id="cambio-06" name="cambio-06" data-response><option value="">Elige una opción</option><option>Fusión</option><option>Solidificación</option><option>Vaporización</option><option>Ebullición</option><option>Condensación</option><option>Licuefacción</option><option>Sublimación</option><option>Deposición</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">07</span><div class="exercise__statement"><p class="exercise__text">Derretir mantequilla.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="cambio-07">Tu respuesta</label><select class="select exercise__select" id="cambio-07" name="cambio-07" data-response><option value="">Elige una opción</option><option>Fusión</option><option>Solidificación</option><option>Vaporización</option><option>Ebullición</option><option>Condensación</option><option>Licuefacción</option><option>Sublimación</option><option>Deposición</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">08</span><div class="exercise__statement"><p class="exercise__text">Los vapores de yodo, al enfriarse, se transforman nuevamente en yodo sólido.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="cambio-08">Tu respuesta</label><select class="select exercise__select" id="cambio-08" name="cambio-08" data-response><option value="">Elige una opción</option><option>Fusión</option><option>Solidificación</option><option>Vaporización</option><option>Ebullición</option><option>Condensación</option><option>Licuefacción</option><option>Sublimación</option><option>Deposición</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">09</span><div class="exercise__statement"><p class="exercise__text">Gas butano almacenado en tanques en estado líquido por presión.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="cambio-09">Tu respuesta</label><select class="select exercise__select" id="cambio-09" name="cambio-09" data-response><option value="">Elige una opción</option><option>Fusión</option><option>Solidificación</option><option>Vaporización</option><option>Ebullición</option><option>Condensación</option><option>Licuefacción</option><option>Sublimación</option><option>Deposición</option></select></div></details>
+        <details class="exercise"><summary class="exercise__summary"><span class="exercise__num">10</span><div class="exercise__statement"><p class="exercise__text">El hielo seco pasa al estado gaseoso al calentarse.</p></div><svg class="exercise__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="exercise__response"><label class="exercise__response-label" for="cambio-10">Tu respuesta</label><select class="select exercise__select" id="cambio-10" name="cambio-10" data-response><option value="">Elige una opción</option><option>Fusión</option><option>Solidificación</option><option>Vaporización</option><option>Ebullición</option><option>Condensación</option><option>Licuefacción</option><option>Sublimación</option><option>Deposición</option></select></div></details>
+      </div>
+
+      <div class="practice-tools">
+        <p class="practice-progress" data-practice-progress aria-live="polite">0 de 20 respondidas · guardado en este dispositivo</p>
+        <button class="practice-reset" type="button" data-practice-reset disabled>Borrar mis respuestas</button>
+      </div>
+      <div class="practice-actions">
+        <button class="practice-action" type="button" data-practice-check disabled>Validar mis respuestas</button>
+        <a class="practice-action" href="../../output/pdf/tarea-estados-agregacion.pdf?v=20260825-ejercicios" download>Generar tarea en PDF ↓</a>
+      </div>
+      <p class="practice-validation" data-practice-validation aria-live="polite">Completa las 20 situaciones para validar.</p>
+      <noscript><p class="editorial-note">Puedes responder mientras la página esté abierta, pero hace falta JavaScript para conservar el avance al salir.</p></noscript>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer__brand"><em>Tercial</em> · ECOEMS · Química</p>
+  <nav class="site-footer__links" aria-label="Navegación del material">
+    <a href="./cambios-materia.html">← Cambios</a>
+    <a href="./index.html">Índice de Química</a>
+    <a href="./clasificacion-materia.html">Siguiente: clasificación →</a>
+  </nav>
+</footer>
+
+</body>
+</html>

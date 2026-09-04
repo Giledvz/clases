@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-nivel="prepa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Métodos de separación de mezclas · Química ECOEMS · Tercial</title>
+<meta name="description" content="Elige un método de separación a partir del estado y las propiedades físicas de los componentes de una mezcla.">
+
+<script>
+  (function () {
+    var p = 'auto';
+    try { p = localStorage.getItem('tercial-theme-pref') || 'auto'; } catch (_) {}
+    var d = p === 'auto'
+      ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : p;
+    var r = document.documentElement;
+    r.setAttribute('data-theme', d);
+    r.setAttribute('data-theme-pref', p);
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/tercial/assets/css/tokens.css">
+<link rel="stylesheet" href="/tercial/assets/css/base.css?v=20260826-svg-text">
+<link rel="stylesheet" href="/tercial/assets/css/components.css">
+<link rel="stylesheet" href="./quimica-material.css?v=20260826-iman-estable">
+<script defer src="/tercial/assets/js/theme.js"></script>
+<script defer src="/tercial/assets/js/site-nav.js"></script>
+<script defer src="./separacion-practica.js?v=20260826-destilacion"></script>
+</head>
+<body>
+
+<site-nav></site-nav>
+
+<main class="container container--base">
+  <header class="hero">
+    <p class="eyebrow">Tema 01 · 5 de 6 · Aprende y practica</p>
+    <h1 class="hero__title">Separación de <em>mezclas</em></h1>
+    <p class="hero__lede">No existe un método universal. Para elegir bien, primero identifica los
+      componentes y después busca la propiedad física que los hace diferentes.</p>
+    <nav class="material-meta" aria-label="Navegación y etiquetas del material">
+      <a class="material-meta__back" href="./index.html">← Química</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=filtración#courseIndex">filtración</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=decantación#courseIndex">decantación</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=destilación#courseIndex">destilación</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=cromatografía#courseIndex">cromatografía</a>
+    </nav>
+  </header>
+
+  <section aria-labelledby="criterioSeparacion">
+    <header class="section-header">
+      <h2 class="section-header__title" id="criterioSeparacion">
+        <span class="lesson-section__kicker">Idea central</span> Separar sin transformar
+      </h2>
+    </header>
+    <article class="reading-block">
+      <header class="reading-block__header">
+        <p class="reading-block__kicker">Pregunta guía</p>
+        <h3 class="reading-block__title">¿Qué propiedad distingue a los <em>componentes</em>?</h3>
+      </header>
+      <div class="reading-block__body">
+        <p>Los métodos de separación aprovechan diferencias físicas —tamaño de partícula, densidad,
+          solubilidad, magnetismo o punto de ebullición— sin producir sustancias nuevas.</p>
+        <p>Una mezcla puede requerir más de un paso. Agua, arena y sal, por ejemplo, exige filtrar la
+          arena y después evaporar o destilar el agua, según qué componente se quiera recuperar.</p>
+      </div>
+      <footer class="source-line">
+        <span>Fuente QUA-001 · pp. 9–10</span>
+        <span>Lectura · 9 min</span>
+      </footer>
+    </article>
+  </section>
+
+  <section aria-labelledby="rutaMetodo">
+    <header class="section-header">
+      <h2 class="section-header__title" id="rutaMetodo">
+        <span class="lesson-section__kicker">Elige</span> Tres preguntas antes de elegir
+      </h2>
+    </header>
+    <ol class="decision-list">
+      <li><strong>¿Qué estados hay?</strong><br>Reconoce si combinas sólidos, líquidos o sustancias disueltas.</li>
+      <li><strong>¿La mezcla es uniforme?</strong><br>Las fases visibles abren opciones como filtración o decantación.</li>
+      <li><strong>¿Qué propiedad cambia?</strong><br>Elige el método por tamaño, densidad, magnetismo, solubilidad o ebullición.</li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="metodosReferencia">
+    <header class="section-header">
+      <h2 class="section-header__title" id="metodosReferencia">
+        <span class="lesson-section__kicker">Consulta</span> Mapa de métodos
+      </h2>
+      <span class="section-header__count">10 métodos</span>
+    </header>
+    <div class="reference-table-wrap">
+      <table class="reference-table">
+        <thead><tr><th>Método</th><th>Sirve principalmente para</th><th>Propiedad que aprovecha</th><th>Ejemplo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Filtración</strong></td><td>sólido insoluble + líquido</td><td>tamaño de partícula</td><td>café; arena y agua</td></tr>
+          <tr><td><strong>Decantación</strong></td><td>líquidos inmiscibles o sólido sedimentado</td><td>densidad</td><td>aceite y agua; arena y agua</td></tr>
+          <tr><td><strong>Tamizado</strong></td><td>sólidos de tamaños diferentes</td><td>tamaño de partícula</td><td>grumos de harina; grava y arena</td></tr>
+          <tr><td><strong>Imantación</strong></td><td>un componente magnético</td><td>magnetismo</td><td>limaduras de hierro y tierra</td></tr>
+          <tr><td><strong>Centrifugación</strong></td><td>componentes con distinta densidad</td><td>sedimentación acelerada</td><td>componentes de la sangre</td></tr>
+          <tr><td><strong>Evaporación</strong></td><td>sólido disuelto + líquido</td><td>volatilidad</td><td>sal de agua de mar</td></tr>
+          <tr><td><strong>Cristalización</strong></td><td>purificar un sólido disuelto</td><td>solubilidad y temperatura</td><td>cristales de sal al evaporar agua</td></tr>
+          <tr><td><strong>Destilación</strong></td><td>líquidos miscibles o recuperar disolvente</td><td>punto de ebullición</td><td>agua y alcohol; componentes del petróleo</td></tr>
+          <tr><td><strong>Cromatografía</strong></td><td>sustancias disueltas</td><td>afinidad entre fases</td><td>componentes de una tinta</td></tr>
+          <tr><td><strong>Sublimación</strong></td><td>un sólido que pasa directamente a gas</td><td>capacidad de sublimar</td><td>hielo seco; naftalina; yodo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="imantacionVisual">
+    <header class="section-header">
+      <h2 class="section-header__title" id="imantacionVisual">
+        <span class="lesson-section__kicker">Observa</span> Sólo los objetos de hierro responden al imán
+      </h2>
+    </header>
+    <figure class="magnetic-figure">
+      <div class="magnetic-figure__visual">
+        <svg class="magnetic-svg" viewBox="0 0 1100 590" role="img" aria-labelledby="imantacionTitulo imantacionDescripcion">
+          <title id="imantacionTitulo">Separación de clavos, tornillos y arena mediante imantación</title>
+          <desc id="imantacionDescripcion">Un imán se acerca a una mezcla. Los clavos y tornillos vibran, se adhieren a sus polos y salen con él; la arena permanece en la bandeja.</desc>
+          <defs>
+            <g id="magneticNail" class="magnetic-svg__metal-object">
+              <path class="magnetic-svg__metal-solid" d="M-23 -7 H-15 V-3 H14 L23 0 L14 3 H-15 V7 H-23 Z"/>
+            </g>
+            <g id="magneticScrew" class="magnetic-svg__metal-object">
+              <path class="magnetic-svg__metal-solid" d="M-24 -10 H-12 V-6 H14 L23 0 L14 6 H-12 V10 H-24 Z"/>
+              <path class="magnetic-svg__metal-detail" d="M-21 0 H-14 M-8 -6 L-3 6 M1 -6 L6 6 M10 -5 L15 4"/>
+            </g>
+            <path id="magneticRouteA" d="M410 466 C421 382 478 330 534 297"/>
+            <path id="magneticRouteB" d="M480 452 C486 376 518 326 544 299"/>
+            <path id="magneticRouteC" d="M545 470 C550 382 553 327 553 296"/>
+            <path id="magneticRouteD" d="M620 451 C628 376 642 326 647 299"/>
+            <path id="magneticRouteE" d="M690 470 C687 382 666 327 656 296"/>
+            <path id="magneticRouteF" d="M760 461 C754 378 705 329 666 300"/>
+          </defs>
+
+          <g class="magnetic-svg__surface" aria-hidden="true">
+            <path class="magnetic-svg__surface-line" d="M70 500 H1030"/>
+            <path class="magnetic-svg__sand-mound" d="M292 500 C332 481 369 438 419 445 C464 452 500 417 552 432 C600 446 631 414 681 434 C732 454 770 433 813 459 C841 476 858 491 876 500 Z"/>
+            <g class="magnetic-svg__sand-grains">
+              <circle cx="337" cy="483" r="4"/><circle cx="382" cy="461" r="3"/>
+              <circle cx="427" cy="475" r="5"/><circle cx="468" cy="448" r="3"/>
+              <circle cx="518" cy="478" r="4"/><circle cx="568" cy="450" r="3"/>
+              <circle cx="615" cy="476" r="5"/><circle cx="660" cy="446" r="3"/>
+              <circle cx="710" cy="477" r="4"/><circle cx="755" cy="456" r="3"/>
+              <circle cx="808" cy="483" r="4"/>
+            </g>
+          </g>
+
+          <g class="magnetic-svg__metal-source magnetic-svg__metal-source--still" aria-hidden="true">
+            <g transform="translate(410 466)"><use href="#magneticNail"/></g>
+            <g transform="translate(480 452)"><use href="#magneticScrew"/></g>
+            <g transform="translate(545 470)"><use href="#magneticNail"/></g>
+            <g transform="translate(620 451)"><use href="#magneticScrew"/></g>
+            <g transform="translate(690 470)"><use href="#magneticNail"/></g>
+            <g transform="translate(760 461)"><use href="#magneticScrew"/></g>
+          </g>
+
+          <g class="magnetic-svg__metal-source magnetic-svg__metal-source--vibrating" aria-hidden="true">
+            <g transform="translate(410 466)"><use href="#magneticNail"/></g>
+            <g transform="translate(480 452)"><use href="#magneticScrew"/></g>
+            <g transform="translate(545 470)"><use href="#magneticNail"/></g>
+            <g transform="translate(620 451)"><use href="#magneticScrew"/></g>
+            <g transform="translate(690 470)"><use href="#magneticNail"/></g>
+            <g transform="translate(760 461)"><use href="#magneticScrew"/></g>
+          </g>
+
+          <g class="magnetic-svg__magnet-system" aria-hidden="true">
+            <g class="magnetic-svg__magnet">
+              <g transform="translate(600 192) scale(1.55) rotate(180) translate(-95 -99)">
+                <path class="magnetic-svg__magnet-body" d="M44 36 H78 L74 62 C70 77 68 92 68 105 C68 122 80 133 95 133 C110 133 122 122 122 105 C122 92 120 77 116 62 L112 36 H146 L151 63 C154 79 156 94 156 106 C156 140 130 162 95 162 C60 162 34 140 34 106 C34 94 36 79 39 63 Z"/>
+                <path class="magnetic-svg__magnet-pole" d="M44 36 H78 L74 64 H39 Z"/>
+                <path class="magnetic-svg__magnet-pole" d="M112 36 H146 L151 64 H116 Z"/>
+              </g>
+            </g>
+            <g class="magnetic-svg__metal-caught">
+              <g transform="translate(534 297)"><use href="#magneticNail"/></g>
+              <g transform="translate(544 299)"><use href="#magneticScrew"/></g>
+              <g transform="translate(553 296)"><use href="#magneticNail"/></g>
+              <g transform="translate(647 299)"><use href="#magneticScrew"/></g>
+              <g transform="translate(656 296)"><use href="#magneticNail"/></g>
+              <g transform="translate(666 300)"><use href="#magneticScrew"/></g>
+            </g>
+          </g>
+
+          <g class="magnetic-svg__motion" aria-hidden="true">
+            <use href="#magneticNail"><animateMotion dur="10s" repeatCount="indefinite" rotate="0" keyTimes="0;.500;.518;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.82 0 1 1;0 0 1 1"><mpath href="#magneticRouteA"/></animateMotion><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.495;.500;.518;.523;1" calcMode="discrete" dur="10s" repeatCount="indefinite"/></use>
+            <use href="#magneticScrew"><animateMotion dur="10s" repeatCount="indefinite" rotate="0" keyTimes="0;.500;.518;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.82 0 1 1;0 0 1 1"><mpath href="#magneticRouteB"/></animateMotion><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.495;.500;.518;.523;1" calcMode="discrete" dur="10s" repeatCount="indefinite"/></use>
+            <use href="#magneticNail"><animateMotion dur="10s" repeatCount="indefinite" rotate="0" keyTimes="0;.500;.518;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.82 0 1 1;0 0 1 1"><mpath href="#magneticRouteC"/></animateMotion><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.495;.500;.518;.523;1" calcMode="discrete" dur="10s" repeatCount="indefinite"/></use>
+            <use href="#magneticScrew"><animateMotion dur="10s" repeatCount="indefinite" rotate="0" keyTimes="0;.500;.518;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.82 0 1 1;0 0 1 1"><mpath href="#magneticRouteD"/></animateMotion><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.495;.500;.518;.523;1" calcMode="discrete" dur="10s" repeatCount="indefinite"/></use>
+            <use href="#magneticNail"><animateMotion dur="10s" repeatCount="indefinite" rotate="0" keyTimes="0;.500;.518;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.82 0 1 1;0 0 1 1"><mpath href="#magneticRouteE"/></animateMotion><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.495;.500;.518;.523;1" calcMode="discrete" dur="10s" repeatCount="indefinite"/></use>
+            <use href="#magneticScrew"><animateMotion dur="10s" repeatCount="indefinite" rotate="0" keyTimes="0;.500;.518;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.82 0 1 1;0 0 1 1"><mpath href="#magneticRouteF"/></animateMotion><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.495;.500;.518;.523;1" calcMode="discrete" dur="10s" repeatCount="indefinite"/></use>
+          </g>
+        </svg>
+      </div>
+    </figure>
+  </section>
+
+  <section aria-labelledby="practicaSeparacion">
+    <header class="section-header">
+      <h2 class="section-header__title" id="practicaSeparacion">
+        <span class="lesson-section__kicker">Practica</span> Elige el método
+      </h2>
+      <span class="section-header__count">15 mezclas</span>
+    </header>
+    <p class="section-intro">Elige el método que aprovecha la diferencia física indicada.</p>
+    <p class="source-note">Ejercicios del material fuente QUA-001 · p. 10</p>
+    <form data-separation-practice autocomplete="off">
+      <div data-separation-cases hidden>
+        <div class="exercise" data-case-id="separacion-01" data-case-number="01" data-case-title="Hierro y azufre" data-case-goal="Aprovecha que sólo uno de los sólidos responde a un imán."></div>
+        <div class="exercise" data-case-id="separacion-02" data-case-number="02" data-case-title="Agua y sal común" data-case-goal="Recupera la sal en forma de cristales."></div>
+        <div class="exercise" data-case-id="separacion-03" data-case-number="03" data-case-title="Alcohol y agua" data-case-goal="Separa dos líquidos miscibles con distinta temperatura de ebullición."></div>
+        <div class="exercise" data-case-id="separacion-04" data-case-number="04" data-case-title="Agua y aceite" data-case-goal="Separa dos líquidos que forman capas de distinta densidad."></div>
+        <div class="exercise" data-case-id="separacion-05" data-case-number="05" data-case-title="Mezcla de tintas" data-case-goal="Distingue pigmentos por su diferente afinidad con dos fases."></div>
+        <div class="exercise" data-case-id="separacion-06" data-case-number="06" data-case-title="Componentes de la sangre" data-case-goal="Acelera la sedimentación de componentes con distinta densidad."></div>
+        <div class="exercise" data-case-id="separacion-07" data-case-number="07" data-case-title="Arena y grava" data-case-goal="Separa sólidos con tamaños de partícula diferentes."></div>
+        <div class="exercise" data-case-id="separacion-08" data-case-number="08" data-case-title="Hielo seco y tierra" data-case-goal="Haz que uno de los sólidos pase directamente a gas."></div>
+        <div class="exercise" data-case-id="separacion-09" data-case-number="09" data-case-title="Semillas de arroz y agua" data-case-goal="Retén el sólido insoluble por su tamaño."></div>
+        <div class="exercise" data-case-id="separacion-10" data-case-number="10" data-case-title="Colores de los dulces" data-case-goal="Separa los pigmentos disueltos según cuánto avanzan."></div>
+        <div class="exercise" data-case-id="separacion-11" data-case-number="11" data-case-title="Sal del agua de mar" data-case-goal="Recupera el sólido disuelto como cristales."></div>
+        <div class="exercise" data-case-id="separacion-12" data-case-number="12" data-case-title="Oxígeno y nitrógeno del aire" data-case-goal="Separa los gases licuados por sus temperaturas de ebullición."></div>
+        <div class="exercise" data-case-id="separacion-13" data-case-number="13" data-case-title="Una aguja en un pajar" data-case-goal="Aprovecha la respuesta magnética de la aguja."></div>
+        <div class="exercise" data-case-id="separacion-14" data-case-number="14" data-case-title="Yodo y azufre" data-case-goal="Haz que el yodo pase a vapor mientras el azufre permanece."></div>
+        <div class="exercise" data-case-id="separacion-15" data-case-number="15" data-case-title="Agua y harina" data-case-goal="Retén las partículas suspendidas sin evaporar el agua."></div>
+      </div>
+      <div class="practice-tools">
+        <p class="practice-progress" data-separation-progress aria-live="polite">0 de 15 resueltas · guardado en este dispositivo</p>
+        <button class="practice-reset" type="button" data-separation-reset disabled>Borrar mis decisiones</button>
+      </div>
+      <div class="practice-actions">
+        <button class="practice-action" type="button" data-separation-check disabled>Validar mis decisiones</button>
+      </div>
+      <p class="practice-validation" data-separation-validation aria-live="polite">Quedan 15 mezclas por resolver.</p>
+      <noscript><p class="editorial-note">Activa JavaScript para usar la mesa de métodos y conservar tu avance.</p></noscript>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer__brand"><em>Tercial</em> · ECOEMS · Química</p>
+  <nav class="site-footer__links" aria-label="Navegación del material">
+    <a href="./clasificacion-materia.html">← Clasificación</a>
+    <a href="./index.html">Índice de Química</a>
+    <a href="./disoluciones.html">Siguiente: disoluciones →</a>
+  </nav>
+</footer>
+
+</body>
+</html>

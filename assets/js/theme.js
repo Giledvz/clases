@@ -18,8 +18,28 @@
   const VALID = ['light', 'dark', 'auto'];
   const ORDER = ['light', 'dark', 'auto'];
   const mql = window.matchMedia('(prefers-color-scheme: dark)');
+  let memoryPref = 'auto';
   const resolve = (pref) =>
     pref === 'auto' ? (mql.matches ? 'dark' : 'light') : pref;
+
+  function readPref() {
+    try {
+      const stored = localStorage.getItem(KEY);
+      if (VALID.includes(stored)) memoryPref = stored;
+    } catch (_) {
+      // Safari privado, iframes y políticas estrictas pueden bloquear storage.
+    }
+    return memoryPref;
+  }
+
+  function writePref(pref) {
+    memoryPref = pref;
+    try {
+      localStorage.setItem(KEY, pref);
+    } catch (_) {
+      // La preferencia sigue funcionando durante la sesión actual.
+    }
+  }
 
   function apply() {
     const pref = ClasesTheme.get();
@@ -34,12 +54,11 @@
 
   const ClasesTheme = {
     get() {
-      const stored = localStorage.getItem(KEY);
-      return VALID.includes(stored) ? stored : 'auto';
+      return readPref();
     },
     set(pref) {
       if (!VALID.includes(pref)) return;
-      localStorage.setItem(KEY, pref);
+      writePref(pref);
       apply();
     },
     toggle() {
@@ -52,9 +71,11 @@
   };
 
   /* En modo 'auto', reaccionar a cambios del sistema en vivo. */
-  mql.addEventListener('change', () => {
+  const onSystemChange = () => {
     if (ClasesTheme.get() === 'auto') apply();
-  });
+  };
+  if (mql.addEventListener) mql.addEventListener('change', onSystemChange);
+  else if (mql.addListener) mql.addListener(onSystemChange);
 
   /* Al restaurar desde el bfcache (botón atrás/adelante, sobre todo en Safari),
      el DOM vuelve con el data-theme viejo y los scripts no re-corren. Reaplicar

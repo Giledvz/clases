@@ -75,6 +75,17 @@ jobs:
           echo "── se publica ──"
           find _site -maxdepth 1 | sort
 
+      - name: Verificar enlaces y scripts del artefacto
+        run: node design/verify-site.mjs _site
+
+      - name: Verificar paquete público de Química
+        run: |
+          test -f _site/ecoems/quimica/index.html
+          test -f _site/ecoems/quimica/tabla-periodica.html
+          test -f _site/output/pdf/tarea-estados-agregacion.pdf
+          test -f _site/output/pdf/tarea-cambios-fisicos-quimicos.pdf
+          ! grep -RqiE 'borrador editorial|uso docente|clave docente' _site/ecoems/quimica
+
       - name: Verificar que no se cuele nada interno
         run: |
           set -euo pipefail
@@ -90,6 +101,9 @@ jobs:
           fi
           if find _site -name '*-respuestas.html' | grep -q .; then
             echo "❌ FUGA (archivo de respuestas):"; find _site -name '*-respuestas.html'; fugas=1
+          fi
+          if find _site -name '*-docente.html' | grep -q .; then
+            echo "❌ FUGA (archivo docente):"; find _site -name '*-docente.html'; fugas=1
           fi
           [ "$fugas" -eq 0 ] && echo "✅ Sin archivos internos ni claves en _site"
           exit $fugas

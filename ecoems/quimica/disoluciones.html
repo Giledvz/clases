@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light" data-nivel="prepa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Disoluciones: soluto y disolvente · Química ECOEMS · Tercial</title>
+<meta name="description" content="Identifica soluto y disolvente, compara concentraciones y calcula el porcentaje masa a masa de una disolución.">
+
+<script>
+  (function () {
+    var p = 'auto';
+    try { p = localStorage.getItem('tercial-theme-pref') || 'auto'; } catch (_) {}
+    var d = p === 'auto'
+      ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : p;
+    var r = document.documentElement;
+    r.setAttribute('data-theme', d);
+    r.setAttribute('data-theme-pref', p);
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/tercial/assets/css/tokens.css">
+<link rel="stylesheet" href="/tercial/assets/css/base.css?v=20260826-svg-text">
+<link rel="stylesheet" href="/tercial/assets/css/components.css">
+<link rel="stylesheet" href="./quimica-material.css?v=20260826-disoluciones-escala">
+<script defer src="/tercial/assets/js/theme.js"></script>
+<script defer src="/tercial/assets/js/site-nav.js"></script>
+<script defer src="./disoluciones.js?v=20260826-navegacion"></script>
+</head>
+<body>
+
+<site-nav></site-nav>
+
+<main class="container container--base">
+  <header class="hero">
+    <p class="eyebrow">Tema 01 · 6 de 6 · Aprende y practica</p>
+    <h1 class="hero__title">Disoluciones: soluto y <em>disolvente</em></h1>
+    <p class="hero__lede">Aprende a leer una disolución como una mezcla homogénea, reconoce qué se
+      disuelve y en qué medio, y expresa su concentración con una proporción clara.</p>
+    <nav class="material-meta" aria-label="Navegación y etiquetas del material">
+      <a class="material-meta__back" href="./index.html">← Química</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=disolución#courseIndex">disolución</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=soluto#courseIndex">soluto</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=disolvente#courseIndex">disolvente</a>
+      <span class="material-meta__divider" aria-hidden="true">·</span>
+      <a href="./index.html?q=mezcla%20homogénea#courseIndex">mezcla homogénea</a>
+    </nav>
+  </header>
+
+  <section aria-labelledby="queEsDisolucion">
+    <header class="section-header">
+      <h2 class="section-header__title" id="queEsDisolucion">
+        <span class="lesson-section__kicker">Idea central</span> Una sola fase, dos funciones
+      </h2>
+    </header>
+    <article class="reading-block">
+      <header class="reading-block__header">
+        <p class="reading-block__kicker">Definición</p>
+        <h3 class="reading-block__title">Una disolución es una mezcla <em>homogénea</em></h3>
+      </header>
+      <div class="reading-block__body">
+        <p>Sus componentes están distribuidos uniformemente y forman una sola fase. No pueden
+          distinguirse a simple vista, aunque siguen presentes y pueden separarse por métodos físicos.</p>
+        <p>El agua es un disolvente muy común, pero no disuelve todas las sustancias. La solubilidad
+          depende de la naturaleza del soluto, del disolvente y de condiciones como la temperatura.</p>
+      </div>
+      <footer class="source-line">
+        <span>Fuente QUA-001 · p. 33</span>
+        <span>Lectura · 8 min</span>
+      </footer>
+    </article>
+  </section>
+
+  <section aria-labelledby="formacionDisolucion">
+    <header class="section-header">
+      <h2 class="section-header__title" id="formacionDisolucion">
+        <span class="lesson-section__kicker">Observa</span> Disolverse no es desaparecer
+      </h2>
+    </header>
+    <figure class="solution-process">
+      <svg class="solution-process__svg" viewBox="0 0 1000 560" role="img" aria-labelledby="solutionFormationTitle solutionFormationDesc">
+        <title id="solutionFormationTitle">Formación de una disolución homogénea</title>
+        <desc id="solutionFormationDesc">Un cristal de soluto se separa partícula por partícula dentro del disolvente. Una ampliación muestra una partícula de soluto rodeada por partículas del disolvente.</desc>
+
+        <defs>
+          <clipPath id="solutionBeakerClip">
+            <path d="M118 86 H558 L518 472 H158 Z"/>
+          </clipPath>
+          <g id="solutionSolventSmall">
+            <circle class="solution-process__solvent-core" r="6"/>
+            <circle class="solution-process__solvent-side" cx="-9" cy="-5" r="3"/>
+            <circle class="solution-process__solvent-side" cx="9" cy="-5" r="3"/>
+          </g>
+          <g id="solutionSolventLarge">
+            <circle class="solution-process__solvent-core" r="14"/>
+            <circle class="solution-process__solvent-side" cx="-20" cy="-11" r="7"/>
+            <circle class="solution-process__solvent-side" cx="20" cy="-11" r="7"/>
+          </g>
+        </defs>
+
+        <text class="solution-process__label" x="338" y="48">en el recipiente</text>
+        <text class="solution-process__label solution-process__label--zoom" x="792" y="48">a escala de partículas</text>
+
+        <path class="solution-process__zoom-link" d="M520 326 C600 310 628 292 658 280"/>
+        <circle class="solution-process__zoom-target" cx="520" cy="326" r="11"/>
+
+        <g clip-path="url(#solutionBeakerClip)">
+          <path class="solution-process__liquid" d="M104 202 H572 V486 H104 Z"/>
+          <path class="solution-process__surface" d="M106 202 H570"/>
+
+          <g aria-hidden="true">
+            <g transform="translate(196 266) rotate(-12)"><use class="solution-process__solvent-particle" href="#solutionSolventSmall"/></g>
+            <g transform="translate(288 242) rotate(16)"><use class="solution-process__solvent-particle" href="#solutionSolventSmall"/></g>
+            <g transform="translate(395 272) rotate(-24)"><use class="solution-process__solvent-particle" href="#solutionSolventSmall"/></g>
+            <g transform="translate(493 244) rotate(10)"><use class="solution-process__solvent-particle" href="#solutionSolventSmall"/></g>
+            <g transform="translate(232 344) rotate(20)"><use class="solution-process__solvent-particle" href="#solutionSolventSmall"/></g>
+            <g transform="translate(342 330) rotate(-8)"><use class="solution-process__solvent-particle" href="#solutionSolventSmall"/></g>
+            <g transform="translate(466 356) rotate(25)"><use class="solution-process__solvent-particle" href="#solutionSolventSmall"/></g>
+            <g transform="translate(188 422) rotate(-18)"><use class="solution-process__solvent-particle" href="#solutionSolventSmall"/></g>
+            <g transform="translate(388 412) rotate(12)"><use class="solution-process__solvent-particle" href="#solutionSolventSmall"/></g>
+            <g transform="translate(490 430) rotate(-20)"><use class="solution-process__solvent-particle" href="#solutionSolventSmall"/></g>
+          </g>
+
+          <g class="solution-process__solute" aria-hidden="true">
+            <circle r="9"><animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;.16;.31;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.55 0 .18 1;0 0 1 1" path="M300 424 C258 390 218 326 205 278"/></circle>
+            <circle r="9"><animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;.19;.34;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.55 0 .18 1;0 0 1 1" path="M320 424 C330 372 318 300 315 246"/></circle>
+            <circle r="9"><animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;.22;.37;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.55 0 .18 1;0 0 1 1" path="M340 424 C398 382 424 326 445 272"/></circle>
+            <circle r="9"><animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;.25;.40;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.55 0 .18 1;0 0 1 1" path="M300 444 C270 420 248 382 250 348"/></circle>
+            <circle r="9"><animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;.28;.43;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.55 0 .18 1;0 0 1 1" path="M320 444 C332 404 350 360 370 332"/></circle>
+            <circle r="9"><animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;.31;.46;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.55 0 .18 1;0 0 1 1" path="M340 444 C404 430 454 390 486 352"/></circle>
+            <circle r="9"><animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;.34;.49;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.55 0 .18 1;0 0 1 1" path="M300 464 C258 466 226 444 206 420"/></circle>
+            <circle r="9"><animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;.37;.52;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.55 0 .18 1;0 0 1 1" path="M320 464 C326 442 340 424 356 410"/></circle>
+            <circle r="9"><animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;.40;.55;1" keyPoints="0;0;1;1" calcMode="spline" keySplines="0 0 1 1;.55 0 .18 1;0 0 1 1" path="M340 464 C390 468 438 452 472 430"/></circle>
+          </g>
+
+          <g class="solution-process__reduced" aria-hidden="true">
+            <circle cx="205" cy="278" r="9"/><circle cx="315" cy="246" r="9"/>
+            <circle cx="445" cy="272" r="9"/><circle cx="250" cy="348" r="9"/>
+            <circle cx="370" cy="332" r="9"/><circle cx="486" cy="352" r="9"/>
+            <circle cx="206" cy="420" r="9"/><circle cx="356" cy="410" r="9"/>
+            <circle cx="472" cy="430" r="9"/>
+          </g>
+        </g>
+
+        <path class="solution-process__vessel" d="M118 86 H558 L518 472 H158 Z"/>
+
+        <circle class="solution-process__zoom-frame" cx="792" cy="280" r="154"/>
+        <g class="solution-process__zoom-content" aria-hidden="true">
+          <circle class="solution-process__zoom-solute" cx="792" cy="280" r="18"/>
+          <g transform="translate(792 188)"><use class="solution-process__zoom-solvent" href="#solutionSolventLarge"/></g>
+          <g transform="translate(875 232) rotate(62)"><use class="solution-process__zoom-solvent" href="#solutionSolventLarge"/></g>
+          <g transform="translate(875 332) rotate(118)"><use class="solution-process__zoom-solvent" href="#solutionSolventLarge"/></g>
+          <g transform="translate(792 376) rotate(180)"><use class="solution-process__zoom-solvent" href="#solutionSolventLarge"/></g>
+          <g transform="translate(709 332) rotate(242)"><use class="solution-process__zoom-solvent" href="#solutionSolventLarge"/></g>
+          <g transform="translate(709 232) rotate(298)"><use class="solution-process__zoom-solvent" href="#solutionSolventLarge"/></g>
+        </g>
+
+        <g class="solution-process__key" aria-hidden="true">
+          <circle class="solution-process__key-solute" cx="690" cy="506" r="6"/>
+          <text x="704" y="510">soluto</text>
+          <use href="#solutionSolventSmall" transform="translate(802 506) scale(.7)"/>
+          <text x="822" y="510">disolvente</text>
+        </g>
+      </svg>
+      <figcaption class="solution-process__caption">El cristal se separa en partículas que quedan distribuidas y rodeadas por el disolvente.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="partesDisolucion">
+    <header class="section-header">
+      <h2 class="section-header__title" id="partesDisolucion">
+        <span class="lesson-section__kicker">Distingue</span> Qué se disuelve y en qué
+      </h2>
+    </header>
+    <div class="comparison-grid">
+      <article class="comparison-item">
+        <header class="comparison-item__header">
+          <p class="comparison-item__kicker">Componente disperso</p>
+          <h3 class="comparison-item__title"><em>Soluto</em></h3>
+        </header>
+        <div class="comparison-item__body">
+          <p>Es la sustancia que se disuelve. Con frecuencia está en menor proporción, aunque ésta no es la definición decisiva.</p>
+          <ul class="example-list"><li>sal en agua salada</li><li>azúcar en limonada</li><li>CO<sub>2</sub> en refresco</li></ul>
+        </div>
+      </article>
+      <article class="comparison-item">
+        <header class="comparison-item__header">
+          <p class="comparison-item__kicker">Medio que disuelve</p>
+          <h3 class="comparison-item__title"><em>Disolvente</em></h3>
+        </header>
+        <div class="comparison-item__body">
+          <p>Es el componente que disuelve al soluto y normalmente determina el estado físico de la disolución.</p>
+          <ul class="example-list"><li>agua en agua salada</li><li>agua en limonada</li><li>agua en refresco</li></ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="concentracionCualitativa">
+    <header class="section-header">
+      <h2 class="section-header__title" id="concentracionCualitativa">
+        <span class="lesson-section__kicker">Compara</span> Hablar de concentración sin calcular
+      </h2>
+      <span class="section-header__count">4 descripciones</span>
+    </header>
+    <div class="reference-table-wrap">
+      <table class="reference-table">
+        <thead><tr><th>Descripción</th><th>Qué significa</th><th>Clave para distinguirla</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Diluida</strong></td><td>contiene poco soluto respecto al disolvente</td><td>la proporción de soluto es baja</td></tr>
+          <tr><td><strong>Concentrada</strong></td><td>contiene una proporción relativamente alta de soluto</td><td>aún puede admitir más soluto</td></tr>
+          <tr><td><strong>Saturada</strong></td><td>alcanzó la cantidad máxima que puede disolverse en esas condiciones</td><td>depende especialmente de la temperatura</td></tr>
+          <tr><td><strong>Sobresaturada</strong></td><td>contiene más soluto disuelto que una saturada estable</td><td>es inestable y el exceso puede cristalizar</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="porcentajeMasa">
+    <header class="section-header">
+      <h2 class="section-header__title" id="porcentajeMasa">
+        <span class="lesson-section__kicker">Calcula</span> Concentración masa a masa
+      </h2>
+    </header>
+    <div class="formula-block">
+      <p class="formula-block__expression">% m/m = masa del soluto ÷ masa de la disolución × 100</p>
+      <p class="formula-block__note">Primero calcula la masa total: masa de la disolución = masa del soluto + masa del disolvente.</p>
+    </div>
+    <article class="reading-block">
+      <header class="reading-block__header">
+        <p class="reading-block__kicker">Ejemplo resuelto</p>
+        <h3 class="reading-block__title">23 g de KOH en 400 g de agua</h3>
+      </header>
+      <div class="reading-block__body">
+        <p>La disolución completa tiene 23 g + 400 g = 423 g.</p>
+        <p>Entonces: (23 g ÷ 423 g) × 100 = <strong>5.44 % m/m</strong>.</p>
+      </div>
+    </article>
+  </section>
+
+  <section aria-labelledby="calculadoraDisolucion">
+    <header class="section-header">
+      <h2 class="section-header__title" id="calculadoraDisolucion">
+        <span class="lesson-section__kicker">Comprueba</span> Tu procedimiento, paso a paso
+      </h2>
+    </header>
+    <form class="calculator" id="solutionCalculator">
+      <p class="section-intro" id="calculatorHelp">Escribe masas en la misma unidad. El resultado indicará la masa total y el porcentaje m/m.</p>
+      <div class="calculator__fields">
+        <div class="calculator__field">
+          <label for="soluteMass">Masa del soluto</label>
+          <input class="input" id="soluteMass" name="soluteMass" type="number" min="0" step="any" inputmode="decimal" placeholder="Ej. 23" aria-describedby="calculatorHelp" required>
+        </div>
+        <div class="calculator__field">
+          <label for="solventMass">Masa del disolvente</label>
+          <input class="input" id="solventMass" name="solventMass" type="number" min="0" step="any" inputmode="decimal" placeholder="Ej. 400" aria-describedby="calculatorHelp" required>
+        </div>
+      </div>
+      <button class="btn btn--primary" type="submit">Calcular concentración</button>
+      <p class="calculator__result" id="solutionResult" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section aria-labelledby="practicaDisoluciones">
+    <header class="section-header">
+      <h2 class="section-header__title" id="practicaDisoluciones">
+        <span class="lesson-section__kicker">Practica</span> Resuelve sin la calculadora
+      </h2>
+      <span class="section-header__count">5 ejercicios</span>
+    </header>
+    <p class="section-intro">Resuelve un problema a la vez y comprueba cada resultado antes de continuar.</p>
+    <p class="source-note">Ejercicios del material fuente QUA-001 · p. 33</p>
+    <form class="solution-drill" data-solution-practice autocomplete="off">
+      <div class="solution-drill__problem">
+        <p class="solution-drill__index" data-solution-index>Problema 01 de 05</p>
+        <h3 class="solution-drill__prompt" data-solution-prompt tabindex="-1"></h3>
+        <p class="solution-drill__hint">Recuerda comprobar si te dieron la masa del disolvente o la masa total de la disolución.</p>
+      </div>
+      <div class="solution-drill__response">
+        <label for="solutionPracticeAnswer">Tu resultado</label>
+        <div class="solution-drill__input-row">
+          <input class="input" id="solutionPracticeAnswer" data-solution-answer type="text" inputmode="decimal" autocomplete="off" aria-describedby="solutionPracticeUnit solutionPracticeStatus">
+          <span id="solutionPracticeUnit">% m/m</span>
+        </div>
+        <button class="btn btn--primary solution-drill__check" type="button" data-solution-check>Comprobar este resultado</button>
+        <p class="solution-drill__status" id="solutionPracticeStatus" data-solution-status role="status"></p>
+      </div>
+      <nav class="solution-drill__nav" aria-label="Navegación entre problemas">
+        <button type="button" data-solution-prev>← Anterior</button>
+        <button type="submit" data-solution-next>Guardar y continuar →</button>
+      </nav>
+      <nav class="solution-drill__steps" aria-label="Ir directamente a un problema">
+        <button type="button" data-solution-step="0" aria-label="Ir al problema 1">01</button>
+        <button type="button" data-solution-step="1" aria-label="Ir al problema 2">02</button>
+        <button type="button" data-solution-step="2" aria-label="Ir al problema 3">03</button>
+        <button type="button" data-solution-step="3" aria-label="Ir al problema 4">04</button>
+        <button type="button" data-solution-step="4" aria-label="Ir al problema 5">05</button>
+      </nav>
+      <div class="solution-drill__tools">
+        <span class="practice-progress" data-solution-progress>0 de 5 respondidos</span>
+        <button class="btn btn--primary" type="button" data-solution-validate>Validar tus respuestas</button>
+        <button class="practice-reset" type="button" data-solution-reset>Borrar todo</button>
+      </div>
+      <p class="practice-validation" data-solution-validation role="status" aria-live="polite"></p>
+    </form>
+    <noscript><p class="editorial-note">Activa JavaScript para guardar y validar tus resultados en esta práctica.</p></noscript>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer__brand"><em>Tercial</em> · ECOEMS · Química</p>
+  <nav class="site-footer__links" aria-label="Navegación del material">
+    <a href="./separacion-mezclas.html">← Separación</a>
+    <a href="./index.html">Índice de Química</a>
+    <a href="./tabla-periodica.html">Continuar: tabla periódica →</a>
+  </nav>
+</footer>
+
+</body>
+</html>
