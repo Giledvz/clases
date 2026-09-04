@@ -98,6 +98,20 @@
     updateProgress();
   }
 
+  function reportProgress(answered) {
+    if (!window.TercialProgress) return;
+    window.TercialProgress.recordProgress({ completed: answered, total: responses.length });
+  }
+
+  function reportResult(correct, errorIds) {
+    if (!window.TercialProgress) return;
+    window.TercialProgress.recordResult({
+      correct: correct,
+      total: responses.length,
+      errorIds: errorIds
+    });
+  }
+
   function updateProgress() {
     var answered = responses.filter(function (field) { return Boolean(field.value); }).length;
     progress.textContent = answered + ' de ' + responses.length +
@@ -109,10 +123,12 @@
         ? 'Ya puedes validar tus respuestas.'
         : 'Completa las 12 situaciones para validar.';
     }
+    reportProgress(answered);
   }
 
   function validateResponses() {
     var correct = 0;
+    var errorIds = [];
     hasValidated = true;
 
     responses.forEach(function (field) {
@@ -130,11 +146,13 @@
       result.textContent = isCorrect ? '✓ Correcta' : '× Revisa';
       result.classList.toggle('is-review', !isCorrect);
       if (isCorrect) correct += 1;
+      else errorIds.push(field.name);
     });
 
     validation.textContent = correct + ' de ' + responses.length +
       ' correctas. Revisa las marcadas y vuelve a intentarlo.';
     validation.classList.add('has-result');
+    reportResult(correct, errorIds);
   }
 
   var saved = readSavedResponses();
@@ -156,6 +174,7 @@
     });
     validation.classList.remove('has-result');
     try { localStorage.removeItem(storageKey); } catch (_) {}
+    if (window.TercialProgress) window.TercialProgress.resetCurrentAttempt();
     updateProgress();
   });
 

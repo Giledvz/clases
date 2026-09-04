@@ -6,6 +6,8 @@
   "description": "Tercial · materiales y exámenes de preparación UNAM",
   "scripts": {
     "exam": "node tools/build-exam-pdf.mjs",
+    "test": "npm run test:regresiones && npm run test:progress",
+    "test:progress": "node design/verify-progress.mjs",
     "test:regresiones": "node design/verify-calculo.mjs && node design/verify-formulario.mjs"
   },
   "dependencies": {

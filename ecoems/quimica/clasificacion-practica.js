@@ -374,6 +374,20 @@
     });
   }
 
+  function reportProgress(answered) {
+    if (!window.TercialProgress) return;
+    window.TercialProgress.recordProgress({ completed: answered, total: items.length });
+  }
+
+  function reportResult(correct, errorIds) {
+    if (!window.TercialProgress) return;
+    window.TercialProgress.recordResult({
+      correct: correct,
+      total: items.length,
+      errorIds: errorIds
+    });
+  }
+
   function updateProgress() {
     var answered = Object.keys(assignments).length;
     progress.textContent = answered + ' de ' + items.length +
@@ -388,10 +402,12 @@
           ? 'Queda 1 situación por clasificar.'
           : 'Quedan ' + remaining + ' situaciones por clasificar.';
     }
+    reportProgress(answered);
   }
 
   function validateResponses() {
     var correct = 0;
+    var errorIds = [];
     hasValidated = true;
 
     items.forEach(function (item) {
@@ -409,11 +425,13 @@
       item.classList.toggle('is-correct', isCorrect);
       item.classList.toggle('is-review', !isCorrect);
       if (isCorrect) correct += 1;
+      else errorIds.push(id);
     });
 
     validation.textContent = correct + ' de ' + items.length +
       ' correctas. Toca las marcadas para volver a colocarlas.';
     validation.classList.add('has-result');
+    reportResult(correct, errorIds);
   }
 
   function restoreAssignments() {
@@ -446,6 +464,7 @@
       source.appendChild(item);
     });
     try { localStorage.removeItem(storageKey); } catch (_) {}
+    if (window.TercialProgress) window.TercialProgress.resetCurrentAttempt();
     showNextItem();
     updateBuckets();
     updateProgress();

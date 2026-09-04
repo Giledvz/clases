@@ -105,10 +105,25 @@ if (practice) {
     updateProgress();
   }
 
+  function reportProgress(answered) {
+    if (!window.TercialProgress) return;
+    window.TercialProgress.recordProgress({ completed: answered, total: problems.length });
+  }
+
+  function reportResult(correct, errorIds) {
+    if (!window.TercialProgress) return;
+    window.TercialProgress.recordResult({
+      correct,
+      total: problems.length,
+      errorIds
+    });
+  }
+
   function updateProgress() {
     const answered = answers.filter((value) => parseAnswer(value) !== null).length;
     progress.textContent = `${answered} de ${problems.length} respondidos`;
     resetButton.disabled = answers.every((value) => value === '');
+    reportProgress(answered);
   }
 
   function renderStatus() {
@@ -237,6 +252,7 @@ if (practice) {
     const missingIndices = reviewed.flatMap((state, index) => state === 'missing' ? [index] : []);
     const reviewIndices = reviewed.flatMap((state, index) => state === 'review' ? [index] : []);
     const correct = reviewed.filter((state) => state === 'correct').length;
+    const errorIds = reviewed.flatMap((state, index) => state === 'review' ? [`disolucion-${index + 1}`] : []);
     renderStatus();
     updateSteps();
 
@@ -248,6 +264,7 @@ if (practice) {
     } else {
       validation.textContent = `Revisa ${reviewIndices.length === 1 ? 'el problema' : 'los problemas'} ${formatProblemList(reviewIndices)}.`;
     }
+    if (missingIndices.length === 0) reportResult(correct, errorIds);
   });
 
   resetButton.addEventListener('click', () => {
@@ -255,6 +272,7 @@ if (practice) {
     reviewed = problems.map(() => null);
     currentIndex = 0;
     try { localStorage.removeItem(storageKey); } catch (_) {}
+    if (window.TercialProgress) window.TercialProgress.resetCurrentAttempt();
     validation.textContent = '';
     validation.classList.remove('has-result');
     renderProblem(true);

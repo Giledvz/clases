@@ -222,6 +222,20 @@
     historyCount.textContent = answered + ' de ' + cases.length;
   }
 
+  function reportProgress(answered) {
+    if (!window.TercialProgress) return;
+    window.TercialProgress.recordProgress({ completed: answered, total: cases.length });
+  }
+
+  function reportResult(correct, errorIds) {
+    if (!window.TercialProgress) return;
+    window.TercialProgress.recordResult({
+      correct: correct,
+      total: cases.length,
+      errorIds: errorIds
+    });
+  }
+
   function updateProgress() {
     var answered = Object.keys(assignments).length;
     var remaining = cases.length - answered;
@@ -237,10 +251,12 @@
           ? 'Queda 1 mezcla por resolver.'
           : 'Quedan ' + remaining + ' mezclas por resolver.';
     }
+    reportProgress(answered);
   }
 
   function validateResponses() {
     var correct = 0;
+    var errorIds = [];
     hasValidated = true;
     validationResults = {};
 
@@ -248,12 +264,14 @@
       var isCorrect = answerKey[item.id] === assignments[item.id];
       validationResults[item.id] = isCorrect;
       if (isCorrect) correct += 1;
+      else errorIds.push(item.id);
     });
 
     renderHistory();
     validation.textContent = correct + ' de ' + cases.length +
       ' correctas. Toca las marcadas para cambiar el método.';
     validation.classList.add('has-result');
+    reportResult(correct, errorIds);
   }
 
   function restoreAssignments() {
@@ -275,6 +293,7 @@
     hasValidated = false;
     validation.classList.remove('has-result');
     try { localStorage.removeItem(storageKey); } catch (_) {}
+    if (window.TercialProgress) window.TercialProgress.resetCurrentAttempt();
     showNextCase();
     renderHistory();
     updateProgress();
